@@ -40,14 +40,13 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => '💎تورنومنت ها💎', 'callback_data' => 'مدیریت سرویس']),
             ],
             [
-                Keyboard::inlineButton(['text' => 'کانال ما', 'callback_data' => 'پشتیبانی وی پی ان']),
-                Keyboard::inlineButton(['text' => 'گروه ما', 'callback_data' => 'درباره ما']),
-            ],
-            [
-                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'callback_data' => 'دریافت سرویس تست']),
                 Keyboard::inlineButton(['text' => 'حساب کاربری من', 'callback_data' => 'دریافت سرویس تست']),
             ],
-
+            [
+                Keyboard::inlineButton(['text' => 'کانال ما', 'callback_data' => 'پشتیبانی وی پی ان']),
+                Keyboard::inlineButton(['text' => 'گروه ما', 'callback_data' => 'درباره ما']),
+                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'callback_data' => 'دریافت سرویس تست']),
+            ],
             [
                 Keyboard::inlineButton(['text' => '🆘پشتیبانی🆘', 'callback_data' => 'پشتیبانی وی پی ان']),
                 Keyboard::inlineButton(['text' => '🔐 درباره ما 🔐', 'callback_data' => 'درباره ما']),
