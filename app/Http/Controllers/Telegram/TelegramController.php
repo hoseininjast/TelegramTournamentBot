@@ -273,7 +273,7 @@ class TelegramController extends Controller
     protected function ResponseWithPhoto($Message , $Keyboard = null , $PhotoAddress = null ){
         $this->SendChatAction('UPLOAD_PHOTO');
         if ($PhotoAddress == null){
-            $PhotoAddress = 'https://vpn.ai1polaris.com/images/0.png';
+            $PhotoAddress = InputFile::create(public_path('images/0.png'));
         }
         Telegram::sendPhoto([
             'chat_id' => $this->ChatID,
