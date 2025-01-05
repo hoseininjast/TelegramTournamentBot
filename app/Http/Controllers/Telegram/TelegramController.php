@@ -64,7 +64,7 @@ class TelegramController extends Controller
         elseif ($updates->isType('message') ){
             if (isset($this->Data['message']['text'])){
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
-                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard);
+                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://vpn.ai1polaris.com/images/New/Pages/Emergency.png');
                 }
             }
         }
