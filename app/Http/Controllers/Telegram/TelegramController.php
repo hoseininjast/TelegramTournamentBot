@@ -34,6 +34,7 @@ class TelegramController extends Controller
 
         $this->User = $this->SaveTelegramUser();
 
+        Log::info('kos');
 
         $MainMenuKeyboard = [
             [
