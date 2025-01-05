@@ -32,7 +32,7 @@ class TelegramController extends Controller
         $this->ChatID = $updates->getChat()->getId();
         $this->Data = json_decode($updates , true);
 
-        $this->User = $this->SaveTelegramUser();
+//        $this->User = $this->SaveTelegramUser();
 
         Log::info('kos');
 
