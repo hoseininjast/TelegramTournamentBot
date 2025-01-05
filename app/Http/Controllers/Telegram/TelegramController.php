@@ -56,7 +56,11 @@ class TelegramController extends Controller
         ];
 
         if ($updates->isType('callback_query') ){
+            if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
 
+                $this->EditMessage("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+
+            }
         }
         elseif ($updates->isType('message') ){
             if (isset($this->Data['message']['text'])){
