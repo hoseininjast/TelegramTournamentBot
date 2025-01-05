@@ -32,13 +32,7 @@ class TelegramController extends Controller
         $this->ChatID = $updates->getChat()->getId();
         $this->Data = json_decode($updates , true);
 
-        Telegram::sendMessage([
-            'chat_id' => $this->ChatID,
-            'text' => 'kos',
-            'parse_mode' => 'html',
-        ]);
-        return 'ok';
-//        $this->User = $this->SaveTelegramUser();
+        $this->User = $this->SaveTelegramUser();
 
 
         $MainMenuKeyboard = [
@@ -74,6 +68,9 @@ class TelegramController extends Controller
                 }
             }
         }
+
+        return 'ok';
+
 
     }
 
