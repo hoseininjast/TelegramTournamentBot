@@ -164,7 +164,7 @@ class TelegramController extends Controller
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$Tournaments->Start}
 تعداد برندگان : {$Tournaments->Winners}
-جوایز : {$adwards}
+جوایز : \n {$adwards}
 وضعیت : {$Status}
                 ";
                 if($Tournaments->Mode == 'Free'){
