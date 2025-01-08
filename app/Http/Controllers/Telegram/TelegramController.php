@@ -90,7 +90,9 @@ class TelegramController extends Controller
 لطفا آیدی پلاتو خود را برای ربات ارسال کنید
 مانند : PlatoID-Username
 اگر آیدی شما مثلا arezoo92 هستش باید برای ربات به صورت زیر ارسالش کنید
-PlatoID-arezoo92
+<code>PlatoID-</code>arezoo92
+باز زدن روی نوشته پایین میتونید متن را کپی کنید
+<code>PlatoID-</code>
 پس از ارسال آیدی اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
