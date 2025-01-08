@@ -117,7 +117,7 @@ class TelegramController extends Controller
         elseif ($updates->isType('message') ){
             if (isset($this->Data['message']['text'])){
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
-                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
                 }
                 if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
                     $inlineLayout = [
