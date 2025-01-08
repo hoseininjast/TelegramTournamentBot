@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Telegram;
 use App\Http\Controllers\Controller;
 use App\Models\Games;
 use App\Models\TelegramUsers;
+use App\Models\Tournaments;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
@@ -58,7 +59,7 @@ class TelegramController extends Controller
 
 
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
-                $this->EditMessage("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+                $this->EditMessage("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت ها'){
@@ -82,7 +83,7 @@ class TelegramController extends Controller
 
                 $inlineLayout = [];
                 foreach (Games::all() as $game) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'Game-' . $game->id ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'FreeTournamentList-' . $game->id ]);
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
 
@@ -92,13 +93,46 @@ class TelegramController extends Controller
             }
 
 
+            if (preg_match('/^FreeTournamentList-/' , $this->Data['callback_query']['data'])){
+                $GameID = preg_replace("/^FreeTournamentList-/", "", $this->Data['callback_query']['data']);
+
+                $inlineLayout = [];
+                $Tournaments = Tournaments::where('GameID' , $GameID)->where('Mode' , 'Free')->get();
+                foreach ($Tournaments as $tournament) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
+                }
+
+                $text = "
+لطفا تورنومنت مد نظر خود را انتخاب کنید.
+                ";
+                $this->EditMessage($text , $inlineLayout );
+
+            }
+
+
+
 
 
         }
         elseif ($updates->isType('message') ){
             if (isset($this->Data['message']['text'])){
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
-                    $this->Response("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+                }
+                if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
+                    $inlineLayout = [
+                        [
+                            Keyboard::inlineButton(['text' => 'رایگان', 'callback_data' => 'Free']),
+                        ],
+                        [
+                            Keyboard::inlineButton(['text' => 'پولی', 'callback_data' => 'null']),
+                        ],
+                    ];
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                    $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
+
+                    $this->ResponseWithPhoto($text , $inlineLayout  , 'https://platotournament.ai1polaris.com/images/MainLogo.png');
                 }
             }
         }
