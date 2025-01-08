@@ -66,11 +66,12 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'حساب کاربری من'){
                 $inlineLayout = [
                     [
-                        Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
-                    ],
-                    [
                         Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']),
                     ],
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
+                    ],
+
                 ];
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
@@ -254,7 +255,7 @@ PlatoID-arezoo92
 اکانت پلات شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
-                    $this->EditMessage($text , $inlineLayout );
+                    $this->ResponseWithPhoto($text , $inlineLayout );
 
                 }
 
