@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -9,12 +10,12 @@ class UserController extends Controller
 {
     public function index()
     {
-        $Games = Games::all();
-        return view('Dashboard.Games.index')->with(['Games' => $Games]);
+        $Users = User::all();
+        return view('Dashboard.Users.index')->with(['Users' => $Users]);
     }
     public function Add()
     {
-        return view('Dashboard.Games.Add');
+        return view('Dashboard.Users.Add');
 
     }
     public function Create(Request $request)
