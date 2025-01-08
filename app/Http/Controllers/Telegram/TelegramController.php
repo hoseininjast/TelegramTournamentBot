@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Telegram;
 
 use App\Http\Controllers\Controller;
+use App\Models\Games;
 use App\Models\TelegramUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -62,7 +63,32 @@ class TelegramController extends Controller
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت ها'){
 
-                $this->EditMessage("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+                $inlineLayout = [
+                    [
+                        Keyboard::inlineButton(['text' => 'رایگان', 'callback_data' => 'Free']),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'پولی', 'callback_data' => 'null']),
+                    ],
+                ];
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
+
+                $this->EditMessage($text , $inlineLayout );
+            }
+
+            if ($this->Data['callback_query']['data'] == 'Free'){
+
+                $inlineLayout = [];
+                foreach (Games::all() as $game) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'Game-' . $game->id ]);
+                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
+
+                $text = 'لطفا بازی را انتخاب کنید.';
+
+                $this->EditMessage($text , $inlineLayout );
             }
 
 
@@ -151,7 +177,7 @@ class TelegramController extends Controller
             $MessageID =  $this->Data['callback_query']['message']['message_id'];
         }
         if ($PhotoAddress == null){
-            $PhotoAddress = 'https://vpn.ai1polaris.com/images/New/0.png';
+            $PhotoAddress = 'https://platotournament.ai1polaris.com/images/MainLogo.png';
         }
         if ($Keyboard){
             if ($MediaType == 'photo'){
