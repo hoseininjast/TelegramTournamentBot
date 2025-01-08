@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('Image')->nullable();
+            $table->enum('Role' , ['Owner' , 'Admin' ,'Supervisor']);
+            $table->string('TelegramUserID')->nullable();
+            $table->string('TelegramChatID')->nullable();
+            $table->string('PlatoID')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

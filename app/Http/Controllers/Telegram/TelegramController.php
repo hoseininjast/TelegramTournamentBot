@@ -37,7 +37,7 @@ class TelegramController extends Controller
 
         $MainMenuKeyboard = [
             [
-                Keyboard::inlineButton(['text' => '💎تورنومنت ها💎', 'callback_data' => 'مدیریت سرویس']),
+                Keyboard::inlineButton(['text' => '💎تورنومنت ها💎', 'callback_data' => 'تورنومنت ها']),
             ],
             [
                 Keyboard::inlineButton(['text' => 'حساب کاربری من', 'callback_data' => 'دریافت سرویس تست']),
@@ -54,11 +54,20 @@ class TelegramController extends Controller
         ];
 
         if ($updates->isType('callback_query') ){
+
+
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
+                $this->EditMessage("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+            }
+
+            if ($this->Data['callback_query']['data'] == 'تورنومنت ها'){
 
                 $this->EditMessage("🌠💸🤝سلام به ربات Polaris خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
-
             }
+
+
+
+
         }
         elseif ($updates->isType('message') ){
             if (isset($this->Data['message']['text'])){
@@ -272,7 +281,7 @@ class TelegramController extends Controller
     protected function ResponseWithPhoto($Message , $Keyboard = null , $PhotoAddress = null ){
         $this->SendChatAction('UPLOAD_PHOTO');
         if ($PhotoAddress == null){
-            $PhotoAddress = InputFile::create(public_path('images/0.png'));
+            $PhotoAddress = InputFile::create(public_path('images/MainLogo.png'));
         }
         Telegram::sendPhoto([
             'chat_id' => $this->ChatID,

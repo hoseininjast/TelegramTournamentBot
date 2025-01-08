@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4be18eb7c0db6a597bea4957d685d624",
+    "content-hash": "a7e64ffb7c6465e4709efa2824e8545e",
     "packages": [
         {
             "name": "brick/math",
@@ -2671,6 +2671,74 @@
             "time": "2024-07-20T21:41:07+00:00"
         },
         {
+            "name": "prevailexcel/laravel-nowpayments",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PrevailExcel/laravel-nowpayments.git",
+                "reference": "814630d97b0deef66c9f26e456e1d2d3b7ce788d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PrevailExcel/laravel-nowpayments/zipball/814630d97b0deef66c9f26e456e1d2d3b7ce788d",
+                "reference": "814630d97b0deef66c9f26e456e1d2d3b7ce788d",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Nowpayments": "PrevailExcel\\Nowpayments\\Facades\\Nowpayments"
+                    },
+                    "providers": [
+                        "PrevailExcel\\Nowpayments\\NowpaymentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "utils/helpers/nowpayments.php"
+                ],
+                "psr-4": {
+                    "PrevailExcel\\Nowpayments\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PrevailExcel",
+                    "email": "prevailexcellent@gmail.com"
+                }
+            ],
+            "description": "A Laravel Package for NOWPayments",
+            "keywords": [
+                "crypto",
+                "crypto payments",
+                "github",
+                "laravel",
+                "laravel 6",
+                "laravel 7",
+                "laravel 8",
+                "laravel 9",
+                "nowpayments",
+                "open source",
+                "payments",
+                "php",
+                "subscription"
+            ],
+            "support": {
+                "issues": "https://github.com/PrevailExcel/laravel-nowpayments/issues",
+                "source": "https://github.com/PrevailExcel/laravel-nowpayments/tree/1.0.2"
+            },
+            "time": "2024-01-08T12:59:14+00:00"
+        },
+        {
             "name": "psr/clock",
             "version": "1.0.0",
             "source": {
@@ -3385,6 +3453,96 @@
                 }
             ],
             "time": "2024-04-27T21:32:50+00:00"
+        },
+        {
+            "name": "realrashid/sweet-alert",
+            "version": "v7.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/realrashid/sweet-alert.git",
+                "reference": "7890f3d3a0f45ea65b90300a823681a99a1d2dd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/realrashid/sweet-alert/zipball/7890f3d3a0f45ea65b90300a823681a99a1d2dd6",
+                "reference": "7890f3d3a0f45ea65b90300a823681a99a1d2dd6",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^5.6|^6.0|^7.0|^8.0|^9.0|^9.11|9.14.*|^10.0|^11.0",
+                "php": "^7.2|^8.0|^8.1|^8.2|^8.3"
+            },
+            "require-dev": {
+                "symfony/thanks": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "Alert": "RealRashid\\SweetAlert\\Facades\\Alert"
+                    },
+                    "providers": [
+                        "RealRashid\\SweetAlert\\SweetAlertServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "RealRashid\\SweetAlert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rashid Ali",
+                    "email": "realrashid05@gmail.com",
+                    "homepage": "https://realrashid.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Sweet Alert Is A Package For Laravel Provides An Easy Way To Display Alert Messages Using The SweetAlert2 Library.",
+            "homepage": "https://github.com/realrashid/sweet-alert",
+            "keywords": [
+                "alert",
+                "laravel",
+                "laravel-package",
+                "notifier",
+                "noty",
+                "sweet-alert",
+                "sweet-alert2",
+                "toast"
+            ],
+            "support": {
+                "docs": "https://realrashid.github.io/sweet-alert/",
+                "email": "realrashid05@gmail.com",
+                "issues": "https://github.com/realrashid/sweet-alert/issues",
+                "source": "https://github.com/realrashid/sweet-alert"
+            },
+            "funding": [
+                {
+                    "url": "https://ko-fi.com/realrashid",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.buymeacoffee.com/realrashid",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://issuehunt.io/r/realrashid",
+                    "type": "issuehunt"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/realrashid/sweet-alert",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2024-06-15T16:17:23+00:00"
         },
         {
             "name": "symfony/console",
