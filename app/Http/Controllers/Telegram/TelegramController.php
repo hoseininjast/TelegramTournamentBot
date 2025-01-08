@@ -64,22 +64,36 @@ class TelegramController extends Controller
             }
 
             if ($this->Data['callback_query']['data'] == 'حساب کاربری من'){
-                $inlineLayout = [
-                    [
-                        Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']),
-                    ],
-                    [
-                        Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
-                    ],
+                $User = $this->SaveTelegramUser();
 
-                ];
+                if($User->PlatoID){
+                    $inlineLayout = [
+                        [
+                            Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
+                        ],
+
+                    ];
+                }else{
+                    $inlineLayout = [
+                        [
+                            Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']),
+                        ],
+                        [
+                            Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
+                        ],
+
+                    ];
+                }
+
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
 شارژ کیف پول : $0
 تعداد بازی ها : 0
-تعداد برد ها : 0";
+تعداد برد ها : 0
+آیدی پلاتو : {$User->PlatoID ?? 'ثبت نشده'}
+";
                 $this->EditMessage($text , $inlineLayout );
             }
             if ($this->Data['callback_query']['data'] == 'احراز هویت پلاتو'){
@@ -254,7 +268,7 @@ class TelegramController extends Controller
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'حساب کاربری من' , 'callback_data' => 'حساب کاربری من' ]);
 
                     $text = "
-اکانت پلات شما ثبت شد.
+اکانت پلاتو شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
                     $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
