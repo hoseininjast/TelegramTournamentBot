@@ -25,6 +25,14 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        .cursor-pointer {
+            cursor: pointer;
+        }
+        .swal2-modal{
+            background: rgb(49 56 67) !important;
+        }
+    </style>
     @yield('Head')
 </head>
 

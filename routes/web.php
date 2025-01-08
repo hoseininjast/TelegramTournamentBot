@@ -28,7 +28,13 @@ Route::group(['as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
         Route::get('index' , [\App\Http\Controllers\UserController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\UserController::class , 'Add'])->name('Add');
         Route::post('Create' , [\App\Http\Controllers\UserController::class , 'Create'])->name('Create');
+        Route::delete('Delete/{id}' , [\App\Http\Controllers\UserController::class , 'Delete'])->name('Delete');
     });
+    Route::group( ['prefix' => 'Profile' , 'as' => 'Profile.' ] ,function (){
+        Route::get('Setting' , [\App\Http\Controllers\UserController::class , 'Setting'])->name('Setting');
+        Route::post('Update' , [\App\Http\Controllers\UserController::class , 'Update'])->name('Update');
+    });
+
 
     Route::group( ['prefix' => 'Games' , 'as' => 'Games.' ] ,function (){
         Route::get('index' , [\App\Http\Controllers\GamesController::class , 'index'])->name('index');
@@ -36,12 +42,14 @@ Route::group(['as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
         Route::post('Create' , [\App\Http\Controllers\GamesController::class , 'Create'])->name('Create');
     });
 
+
     Route::group( ['prefix' => 'Tournaments' , 'as' => 'Tournaments.' ] ,function (){
         Route::get('index' , [\App\Http\Controllers\TournamentsController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\TournamentsController::class , 'Add'])->name('Add');
+        Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Manage'])->name('Manage');
         Route::post('Create' , [\App\Http\Controllers\TournamentsController::class , 'Create'])->name('Create');
+        Route::delete('Delete/{id}' , [\App\Http\Controllers\TournamentsController::class , 'Delete'])->name('Delete');
     });
-
 
 
 });

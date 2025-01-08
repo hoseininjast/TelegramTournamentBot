@@ -47,6 +47,24 @@
                     </div>
                 </li>
 
+                <li>
+                    <a href="#Tournaments" data-bs-toggle="collapse">
+                        <i class="mdi mdi-tournament"></i>
+                        <span> Tournaments </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="Tournaments">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{route('Dashboard.Tournaments.index')}}">All</a>
+                            </li>
+                            <li>
+                                <a href="{{route('Dashboard.Tournaments.Add')}}">Add</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
 
                 <li>
                     <a href="#Users" data-bs-toggle="collapse">
@@ -66,12 +84,33 @@
                     </div>
                 </li>
 
-                <li>
-                    <a href="">
-                        <i class="mdi mdi-cog-sync"></i>
-                        <span> Settings </span>
-                    </a>
-                </li>
+                @if(Auth::user()->Role == 'Owner')
+                    <li>
+                        <a href="#Settings" data-bs-toggle="collapse">
+                            <i class="mdi mdi-cog-sync"></i>
+                            <span> Settings </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="Settings">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="#">Site Setting</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('Dashboard.Profile.Setting')}}">User Setting</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    @else
+                    <li>
+                        <a href="{{route('Dashboard.Profile.Setting')}}">
+                            <i class="mdi mdi-cog-sync"></i>
+                            <span> Settings </span>
+                        </a>
+                    </li>
+                    @endif
+
 
             {{--    <li>
                     <a href="#Package" data-bs-toggle="collapse">

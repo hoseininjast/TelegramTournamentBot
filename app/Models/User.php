@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'Image',
         'Role',
+        'WalletAddress',
         'TelegramUserID',
         'TelegramChatID',
         'PlatoID',
