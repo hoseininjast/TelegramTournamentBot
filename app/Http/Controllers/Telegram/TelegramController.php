@@ -151,7 +151,7 @@ class TelegramController extends Controller
                 $Type = __('messages.Type.' . $Tournaments->pe);
                 $adwards = '';
                 foreach ($Tournaments->Awards as $key => $award) {
-                    $adwards .= 'نفر ' . $key + 1 . ' = $' .$award .'<br>';
+                    $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
                 }
 
                 $text = "
