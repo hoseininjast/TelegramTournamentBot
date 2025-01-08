@@ -255,7 +255,7 @@ PlatoID-arezoo92
 اکانت پلات شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
 
                 }
 
