@@ -69,14 +69,30 @@ class TelegramController extends Controller
                         Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
                     ],
                     [
-                        Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'null']),
+                        Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']),
                     ],
                 ];
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
 شارژ کیف پول : $0
 تعداد بازی ها : 0
 تعداد برد ها : 0";
+                $this->EditMessage($text , $inlineLayout );
+            }
+            if ($this->Data['callback_query']['data'] == 'احراز هویت پلاتو'){
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                $text = "
+لطفا آیدی پلاتو خود را برای ربات ارسال کنید
+مانند : PlatoID-Username
+اگر آیدی شما مثلا arezoo92 هستش باید برای ربات به صورت زیر ارسالش کنید
+PlatoID-arezoo92
+پس از ارسال آیدی اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
+";
+
                 $this->EditMessage($text , $inlineLayout );
             }
 
@@ -202,9 +218,11 @@ class TelegramController extends Controller
         }
         elseif ($updates->isType('message') ){
             if (isset($this->Data['message']['text'])){
+
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
                     $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
                 }
+
                 if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
                     $inlineLayout = [
                         [
@@ -220,6 +238,27 @@ class TelegramController extends Controller
 
                     $this->ResponseWithPhoto($text , $inlineLayout  , 'https://platotournament.ai1polaris.com/images/MainLogo.png');
                 }
+
+                if (preg_match('/^PlatoID-/' , $this->Data['message']['text'])){
+                    $PlatoID = preg_replace("/^PlatoID-/", "", $this->Data['message']['text']);
+
+                    $inlineLayout = [];
+
+                    $User = $this->SaveTelegramUser();
+                    $User->update([
+                        'PlatoID' => $PlatoID
+                    ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'حساب کاربری من' , 'callback_data' => 'حساب کاربری من' ]);
+
+                    $text = "
+اکانت پلات شما ثبت شد.
+هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
+                ";
+                    $this->EditMessage($text , $inlineLayout );
+
+                }
+
+
             }
         }
 
