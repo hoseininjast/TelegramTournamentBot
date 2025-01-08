@@ -148,7 +148,7 @@ class TelegramController extends Controller
                 $Tournaments = Tournaments::find($TournamentID);
                 $Status = __('messages.Status.' . $Tournaments->Status);
                 $Mode = __('messages.Mode.' . $Tournaments->Mode);
-                $Type = __('messages.Type.' . $Tournaments->pe);
+                $Type = __('messages.Type.' . $Tournaments->Type);
                 $adwards = '';
                 foreach ($Tournaments->Awards as $key => $award) {
                     $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
@@ -159,9 +159,9 @@ class TelegramController extends Controller
 توضیحات : {$Tournaments->Description}
 نوع : {$Type}
 حالت : {$Mode}
-مبلغ ورودی : {$Tournaments->Price}
+ مبلغ ورودی : $ {$Tournaments->Price}
 تعداد بازیکن : {$Tournaments->PlayerCount}
-زمان بازی : {$Tournaments->Time}
+زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$Tournaments->Start}
 تعداد برندگان : {$Tournaments->Winners}
 جوایز : {$adwards}
