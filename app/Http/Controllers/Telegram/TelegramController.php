@@ -187,7 +187,7 @@ class TelegramController extends Controller
                     'message_id' => $MessageID,
                     'media' => json_encode([
                         'type' => 'photo',
-                        'media' => $PhotoAddress . '?version=1.0.3',
+                        'media' => $PhotoAddress . '?version=1.0.4',
                         'caption' => $Message,
                         'parse_mode' => 'html',
                     ]),
@@ -311,7 +311,7 @@ class TelegramController extends Controller
         }
         Telegram::sendPhoto([
             'chat_id' => $this->ChatID,
-            'photo' => $PhotoAddress,
+            'photo' => $PhotoAddress  . '?version=1.0.4',
             'caption' => $Message,
             'parse_mode' => 'html',
             'reply_markup' => json_encode([
