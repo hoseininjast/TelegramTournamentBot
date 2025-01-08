@@ -69,7 +69,7 @@ class TelegramController extends Controller
                         Keyboard::inlineButton(['text' => 'رایگان', 'callback_data' => 'Free']),
                     ],
                     [
-                        Keyboard::inlineButton(['text' => 'پولی', 'callback_data' => 'null']),
+                        Keyboard::inlineButton(['text' => 'پولی', 'callback_data' => 'Paid']),
                     ],
                 ];
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
@@ -92,6 +92,19 @@ class TelegramController extends Controller
                 $this->EditMessage($text , $inlineLayout );
             }
 
+            if ($this->Data['callback_query']['data'] == 'Paid'){
+
+                $inlineLayout = [];
+                foreach (Games::all() as $game) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'PaidTournamentList-' . $game->id ]);
+                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
+
+                $text = 'لطفا بازی را انتخاب کنید.';
+
+                $this->EditMessage($text , $inlineLayout );
+            }
+
 
             if (preg_match('/^FreeTournamentList-/' , $this->Data['callback_query']['data'])){
                 $GameID = preg_replace("/^FreeTournamentList-/", "", $this->Data['callback_query']['data']);
@@ -101,10 +114,65 @@ class TelegramController extends Controller
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
                 }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Free' ]);
 
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
                 ";
+                $this->EditMessage($text , $inlineLayout );
+
+            }
+
+            if (preg_match('/^PaidTournamentList-/' , $this->Data['callback_query']['data'])){
+                $GameID = preg_replace("/^PaidTournamentList-/", "", $this->Data['callback_query']['data']);
+
+                $inlineLayout = [];
+                $Tournaments = Tournaments::where('GameID' , $GameID)->where('Mode' , 'Paid')->get();
+                foreach ($Tournaments as $tournament) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
+                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Paid' ]);
+
+                $text = "
+لطفا تورنومنت مد نظر خود را انتخاب کنید.
+                ";
+                $this->EditMessage($text , $inlineLayout );
+
+            }
+
+
+            if (preg_match('/^Tournament-/' , $this->Data['callback_query']['data'])){
+                $TournamentID = preg_replace("/^Tournament-/", "", $this->Data['callback_query']['data']);
+
+                $inlineLayout = [];
+                $Tournaments = Tournaments::find($TournamentID);
+                $Status = __('messages.Status.' . $Tournaments->Status);
+                $Mode = __('messages.Mode.' . $Tournaments->Mode);
+                $Type = __('messages.Type.' . $Tournaments->pe);
+                $adwards = '';
+                foreach ($Tournaments->Awards as $key => $award) {
+                    $adwards .= 'نفر ' . $key + 1 . ' = $' .$award .'<br>';
+                }
+
+                $text = "
+نام : {$Tournaments->Name}
+توضیحات : {$Tournaments->Description}
+نوع : {$Type}
+حالت : {$Mode}
+مبلغ ورودی : {$Tournaments->Price}
+تعداد بازیکن : {$Tournaments->PlayerCount}
+زمان بازی : {$Tournaments->Time}
+تاریخ شروع : {$Tournaments->Start}
+تعداد برندگان : {$Tournaments->Winners}
+جوایز : {$adwards}
+وضعیت : {$Status}
+                ";
+                if($Tournaments->Mode == 'Free'){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
+                }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'PaidTournamentList-' . $Tournaments->Game->id ]);
+                }
+
                 $this->EditMessage($text , $inlineLayout );
 
             }
