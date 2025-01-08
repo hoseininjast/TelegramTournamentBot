@@ -86,13 +86,13 @@ class TelegramController extends Controller
                 }
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
-
+                $PlatoID = $User->PlatoID ? $User->PlatoID : 'ثبت نشده';
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
 شارژ کیف پول : $0
 تعداد بازی ها : 0
 تعداد برد ها : 0
-آیدی پلاتو : {$User->PlatoID ?? 'ثبت نشده'}
+آیدی پلاتو : {$PlatoID}
 ";
                 $this->EditMessage($text , $inlineLayout );
             }
