@@ -220,6 +220,8 @@ class TelegramController extends Controller
                 ";
                 if($this->User->PlatoID){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'null' ]);
+                }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
                 }
                 if($Tournaments->Mode == 'Free'){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
