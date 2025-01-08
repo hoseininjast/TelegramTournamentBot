@@ -218,6 +218,9 @@ class TelegramController extends Controller
 جوایز : \n {$adwards}
 وضعیت : {$Status}
                 ";
+                if($this->User->PlatoID){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'null' ]);
+                }
                 if($Tournaments->Mode == 'Free'){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
                 }else{
