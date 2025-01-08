@@ -40,6 +40,7 @@ class TelegramController extends Controller
         $MainMenuKeyboard = [
             [
                 Keyboard::inlineButton(['text' => '💎تورنومنت ها💎', 'callback_data' => 'تورنومنت ها']),
+                Keyboard::inlineButton(['text' => '💎تاریخچه تورنومنت ها💎', 'callback_data' => 'تورنومنت ها']),
             ],
             [
                 Keyboard::inlineButton(['text' => 'حساب کاربری من', 'callback_data' => 'دریافت سرویس تست']),
