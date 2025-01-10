@@ -102,11 +102,17 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="row ">
-                                            @if($Tournament->PlayerCount == $Tournament->Players()->count())
+                                            @if($Tournament->PlayerCount == $Tournament->Players()->count() && $Tournament->LastStage == 0)
                                                 <div class="col-6 d-flex justify-content-around" >
                                                     <a href="{{route('Dashboard.Tournaments.StartStage1' , $Tournament->id)}}" class="btn btn-primary waves-effect waves-light">Start Stage 1</a>
                                                 </div>
+                                                @else
+                                                <div class="col-6 d-flex justify-content-around" >
+                                                    <button  class="btn btn-primary waves-effect waves-light disabled"  disabled>Start Stage 1</button>
+                                                </div>
                                             @endif
+
+
 
                                         </div>
                                     </div>

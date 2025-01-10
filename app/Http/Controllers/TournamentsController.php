@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\Games;
+use App\Models\TelegramUsers;
 use App\Models\TournamentPlans;
 use App\Models\Tournaments;
 use App\Models\User;
@@ -51,6 +53,23 @@ class TournamentsController extends Controller
                 'Time' => $Stage1Time,
             ]);
             $Group++;
+
+            $User1 = TelegramUsers::find($PlayerIDs[$i]);
+            $User2 = TelegramUsers::find($PlayerIDs[$i+1]);
+
+            $text = "
+برنامه بازی های شما مشخص شد
+گروه : {$Group}
+مرحله : اول
+ بازیکن ها :
+ {$User1->PlatoID} در برابر {$User2->PlatoID}
+ زمان بازی به زودی اعلام میشود.
+@krypto_arena_bot
+";
+
+            NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
+            NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+
         }
         $Tournament->update([
             'LastStage' => 1

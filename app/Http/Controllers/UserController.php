@@ -22,7 +22,6 @@ class UserController extends Controller
     {
         $Users = TelegramUsers::all();
         confirmDelete('Delete User!', 'Are you sure you want to delete this user?');
-        
         return view('Dashboard.Users.Telegram')->with(['Users' => $Users]);
     }
     public function Add()

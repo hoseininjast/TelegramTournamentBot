@@ -14,6 +14,11 @@ return [
         'Running' => 'در حال اجرا',
         'Finished' => 'پایان یافته',
     ],
+    'Notifications' => [
+        'Tournaments' => [
+            'Stage1First' => '',
+        ],
+    ],
 
 
 ];

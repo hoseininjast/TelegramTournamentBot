@@ -58,6 +58,7 @@ Route::group(['as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
     Route::group( ['prefix' => 'TournamentPlan' , 'as' => 'TournamentPlan.' ] ,function (){
         Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentPlansController::class , 'Manage'])->name('Manage');
         Route::post('Update/{ID}' , [\App\Http\Controllers\TournamentPlansController::class , 'Update'])->name('Update');
+        Route::post('SetTime/{ID}' , [\App\Http\Controllers\TournamentPlansController::class , 'SetTime'])->name('SetTime');
     });
 
 
