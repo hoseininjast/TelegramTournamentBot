@@ -21,7 +21,7 @@ class UserController extends Controller
     public function Telegram()
     {
         $Users = TelegramUsers::all();
-        return view('Dashboard.Users.index')->with(['Users' => $Users]);
+        return view('Dashboard.Users.Telegram')->with(['Users' => $Users]);
     }
     public function Add()
     {
