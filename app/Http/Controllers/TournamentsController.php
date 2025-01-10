@@ -37,6 +37,7 @@ class TournamentsController extends Controller
             'GameID' => 'required|integer|exists:games,id',
             'Winners' => 'required|integer',
             'Awards' => 'required|array',
+            'StagesDate' => 'required|array',
         ]);
 
         $Tournament = Tournaments::create([
@@ -54,6 +55,7 @@ class TournamentsController extends Controller
             'GameID' => $request->GameID,
             'Winners' => $request->Winners,
             'Awards' => $request->Awards,
+            'StagesDate' => $request->StagesDate,
             'Status' => 'Pending',
         ]);
 

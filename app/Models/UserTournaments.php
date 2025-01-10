@@ -12,4 +12,13 @@ class UserTournaments extends Model
         'TournamentID',
     ];
     use HasFactory;
+
+    public function Tournament()
+    {
+        return $this->hasOne(Tournaments::class , 'id' , 'TournamentID');
+    }
+    public function Player()
+    {
+        return $this->hasOne(TelegramUsers::class , 'id' , 'UserID');
+    }
 }

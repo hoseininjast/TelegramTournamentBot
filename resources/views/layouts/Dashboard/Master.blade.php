@@ -32,6 +32,12 @@
         .swal2-modal{
             background: rgb(49 56 67) !important;
         }
+        .swal2-toast{
+            background: rgb(49 56 67) !important;
+        }
+        .swal2-html-container{
+            color: white;
+        }
     </style>
     @yield('Head')
 </head>
@@ -91,9 +97,10 @@
 
 <!-- Dashboar init js-->
 <script src="{{asset('Dashboard/assets/js/pages/dashboard.init.js')}}"></script>
-<script src="{{asset('js/Functions.js')}}"></script>
 {{--<script src="{{asset('Assets/Libs/SweetAlert2/sweetalert2.all.min.js')}}" type="module"></script>--}}
-@include('sweetalert::alert' , ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@11"])
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@include('sweetalert::alert' )
+<script src="{{asset('js/Functions.js')}}"></script>
 <!-- App js-->
 <script src="{{asset('Dashboard/assets/js/app.min.js')}}"></script>
 

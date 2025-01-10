@@ -53,11 +53,21 @@
                                                 </div>
 
                                                 <div class="mb-3 col-6">
-                                                    <label for="TotalStage" class="form-label">Total Stage</label>
-                                                    <input type="number" id="TotalStage" name="TotalStage" class="form-control" value="{{old('TotalStage')}}">
+                                                    <label for="GameID"  class="form-label">Game</label>
+                                                    <select class="form-select" id="GameID" name="GameID">
+                                                        <option selected>Select tournament Game</option>
+                                                        @foreach($Games as $game)
+                                                            <option @if(old('GameID') == $game->id) selected @endif value="{{$game->id}}">{{$game->Name}}</option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
 
+
+
                                             </div>
+
+
+
 
 
                                             <div class="row">
@@ -94,7 +104,7 @@
 
                                                 <div class="mb-3 col-6">
                                                     <label for="Time" class="form-label">Time</label>
-                                                    <input type="number" id="Time" name="Time" class="form-control">
+                                                    <input type="number" id="Time" name="Time" class="form-control" onchange="SetEndDate(this.value)">
                                                 </div>
 
 
@@ -104,26 +114,23 @@
                                             <div class="row">
                                                 <div class="mb-3 col-6">
                                                     <label for="Start" class="form-label">Start Date</label>
-                                                    <input type="text" id="Start" name="Start" class="form-control" placeholder="Start Date">
+                                                    <input type="text" id="Start" name="Start" class="form-control" placeholder="Start Date" onchange="SetValue(this.value , 'Start')">
                                                 </div>
 
 
                                                 <div class="mb-3 col-6">
                                                     <label for="End" class="form-label">End Date</label>
-                                                    <input type="text" id="End" name="End" class="form-control" placeholder="End Date">
+                                                    <input type="text" id="End" name="End" class="form-control" placeholder="End Date" onchange="SetValue(this.value , 'End')">
                                                 </div>
 
                                             </div>
 
                                             <div class="row">
+
+
                                                 <div class="mb-3 col-6">
-                                                    <label for="GameID"  class="form-label">Game</label>
-                                                    <select class="form-select" id="GameID" name="GameID">
-                                                        <option selected>Select tournament Game</option>
-                                                        @foreach($Games as $game)
-                                                            <option @if(old('GameID') == $game->id) selected @endif value="{{$game->id}}">{{$game->Name}}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <label for="TotalStage" class="form-label">Total Stage</label>
+                                                    <input type="number" id="TotalStage" name="TotalStage" class="form-control" value="{{old('TotalStage')}}" onkeyup="CreateStagesDate(this.value)">
                                                 </div>
 
 
@@ -133,12 +140,17 @@
                                                 </div>
 
                                             </div>
+                                            <div class="row" id="StagesDiv">
+
+
+                                            </div>
 
                                             <div class="row" id="AwardsDiv">
 
 
 
                                             </div>
+
 
 
 
@@ -175,9 +187,10 @@
 @section('js')
     <script src="{{asset('Dashboard/assets/libs/flatpickr/flatpickr.min.js')}}"></script>
     <script>
+        var StartDate , EndDate, Time;
         $(document).ready(function() {
-            $("#Start").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i:ss"});
-            $("#End").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i:ss"});
+            $("#Start").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i:ss",minDate: "today"});
+            $("#End").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i:ss",minDate: "today"});
         });
 
         function CreateAdwards(AdwardCount) {
@@ -188,9 +201,49 @@
             }
         }
 
+
+        function CreateStagesDate(StageCount) {
+            if (StartDate && EndDate){
+                $('#StagesDiv').empty()
+                for(var i = 1 ; i <= StageCount ; i++){
+                    var row = '<div class="mb-3 col-auto"><label for="Stage'+i+'" class="form-label">Stage '+i+'</label><input type="text" id="Stage'+i+'" name="StagesDate[]" class="form-control StagesDate"></div>';
+                    $('#StagesDiv').append(row)
+                }
+                $(".StagesDate").flatpickr({
+                    enableTime:!0,
+                    dateFormat:"Y-m-d H:i:ss",
+                    minDate: StartDate,
+                    maxDate: EndDate
+                });
+            }else{
+                $('#TotalStage').val(null)
+                ShowToast('warning' , 'Please select start date and end date first' );
+            }
+
+
+        }
+
+        function SetEndDate(EndDate ) {
+            if(StartDate){
+                $("#End").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i:ss",minDate: StartDate , maxDate: new Date(StartDate).fp_incr(EndDate)});
+            }else{
+                $("#End").flatpickr({enableTime:!0,dateFormat:"Y-m-d H:i:ss",minDate: "today" , maxDate: new Date().fp_incr(EndDate)});
+            }
+
+        }
+
         function SetMode(Mode) {
             if(Mode == 'Free'){
                 $('#Price').val(0)
+            }
+        }
+
+        function SetValue(SelectedDate , varname) {
+            if(varname == 'Start'){
+                StartDate = SelectedDate;
+                SetEndDate( $('#Time').val() ,SelectedDate);
+            }else if(varname == 'End'){
+                EndDate = SelectedDate;
             }
         }
     </script>

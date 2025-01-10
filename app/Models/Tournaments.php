@@ -13,6 +13,7 @@ class Tournaments extends Model
         'PlayerCount',
         'TotalStage',
         'LastStage',
+        'StagesDate',
         'Type',
         'Mode',
         'Price',
@@ -28,11 +29,17 @@ class Tournaments extends Model
 
     protected $casts = [
         'Awards' => 'array',
+        'StagesDate' => 'array',
     ];
 
 
     public function Game()
     {
         return $this->hasOne(Games::class , 'id' , 'GameID');
+    }
+
+    public function Players()
+    {
+        return $this->hasMany(UserTournaments::class , 'TournamentID' , 'id');
     }
 }

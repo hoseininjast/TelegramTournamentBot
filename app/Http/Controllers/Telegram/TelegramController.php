@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Games;
 use App\Models\TelegramUsers;
 use App\Models\Tournaments;
+use App\Models\UserTournaments;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
@@ -51,7 +52,7 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => 'گروه پلاتو', 'callback_data' => 'دریافت سرویس تست']),
             ],
             [
-                Keyboard::inlineButton(['text' => '🆘پشتیبانی🆘', 'callback_data' => 'پشتیبانی وی پی ان']),
+                Keyboard::inlineButton(['text' => '🆘پشتیبانی🆘', 'callback_data' => 'پشتیبانی']),
                 Keyboard::inlineButton(['text' => '🔐 درباره ما 🔐', 'callback_data' => 'درباره ما']),
             ],
         ];
@@ -60,7 +61,7 @@ class TelegramController extends Controller
 
 
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
-                $this->EditMessage("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard );
+                $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard );
             }
 
             if ($this->Data['callback_query']['data'] == 'حساب کاربری من'){
@@ -212,6 +213,7 @@ class TelegramController extends Controller
 حالت : {$Mode}
  مبلغ ورودی : $ {$Tournaments->Price}
 تعداد بازیکن : {$Tournaments->PlayerCount}
+جایگاه های باقی مانده : {$Tournaments->Players()->count()} عدد
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$Tournaments->Start}
 تعداد برندگان : {$Tournaments->Winners}
@@ -219,7 +221,7 @@ class TelegramController extends Controller
 وضعیت : {$Status}
                 ";
                 if($this->User->PlatoID){
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'null' ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'JoinTournament-'.$Tournaments->id ]);
                 }else{
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
                 }
@@ -228,6 +230,35 @@ class TelegramController extends Controller
                 }else{
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'PaidTournamentList-' . $Tournaments->Game->id ]);
                 }
+
+                $this->EditMessage($text , $inlineLayout );
+
+            }
+
+
+            if (preg_match('/^JoinTournament-/' , $this->Data['callback_query']['data'])){
+                $TournamentID = preg_replace("/^JoinTournament-/", "", $this->Data['callback_query']['data']);
+
+                $inlineLayout = [];
+                $Tournaments = Tournaments::find($TournamentID);
+
+                if($this->User->PlatoID){
+                    $UserCount = $Tournaments->Players()->count();
+                    if($UserCount < $Tournaments->PlayerCount){
+                        UserTournaments::create([
+                            'UserID' => $this->User->id,
+                            'TournamentID' => $Tournaments->id,
+                        ]);
+                        $text = "شما با موفقیت وارد تورنومنت شدید. پس از قرعه کشی و مشخص شدن ترتیب بازی ها ، برنامه بازی ها به شما اطلاعات داده خواهد شد.";
+                    }else{
+                        $text = "متاسفانه تعداد بازی کنان این مسابفه تکیل شده است و شما نمیتوانید در آن شرکت کنید ، لطفا از منوی تورنومنت ها ،‌مسابقه دیگری را انتخاب کنید.";
+                    }
+                }else{
+                    $text = "شما هنوز آیدی پلاتو خود را احراز نکرده اید ،‌پس از احراز هویت مجددا برای عضویت تلاش کنید.";
+                }
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'صفحه اصلی' , 'callback_data' => 'صفحه اصلی'  ]);
+
 
                 $this->EditMessage($text , $inlineLayout );
 
