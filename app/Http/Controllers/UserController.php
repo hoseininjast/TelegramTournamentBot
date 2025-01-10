@@ -65,6 +65,15 @@ class UserController extends Controller
 
     }
 
+    public function TelegramDelete(int $ID)
+    {
+        $User = TelegramUsers::find($ID);
+        $User->delete();
+        Alert::success('User Deleted successfully');
+        return redirect()->route('Dashboard.Users.Telegram');
+
+    }
+
 
     public function Setting()
     {

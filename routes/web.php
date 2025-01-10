@@ -30,6 +30,7 @@ Route::group(['as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
         Route::get('Add' , [\App\Http\Controllers\UserController::class , 'Add'])->name('Add');
         Route::post('Create' , [\App\Http\Controllers\UserController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\UserController::class , 'Delete'])->name('Delete');
+        Route::delete('TelegramDelete/{id}' , [\App\Http\Controllers\UserController::class , 'TelegramDelete'])->name('TelegramDelete');
     });
     Route::group( ['prefix' => 'Profile' , 'as' => 'Profile.' ] ,function (){
         Route::get('Setting' , [\App\Http\Controllers\UserController::class , 'Setting'])->name('Setting');

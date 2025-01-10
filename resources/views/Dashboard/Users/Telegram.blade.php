@@ -31,7 +31,7 @@
                                                 <td>{{$user->UserName}}</td>
                                                 <td>{{$user->PlatoID}}</td>
                                                 <td>
-                                                    <a class="row" href="{{route('Dashboard.Users.Delete' , $user->id)}}" data-confirm-delete="true" >Delete</a>
+                                                    <a class="row" href="{{route('Dashboard.Users.TelegramDelete' , $user->id)}}" data-confirm-delete="true" >Delete</a>
 
                                                 </td>
                                             </tr>
