@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Games;
+use App\Models\TournamentPlans;
 use App\Models\Tournaments;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,6 +21,44 @@ class TournamentsController extends Controller
     {
         $Games = Games::all();
         return view('Dashboard.Tournaments.Add')->with(['Games' => $Games]);
+    }
+    public function Manage(int $ID)
+    {
+        $Tournament = Tournaments::find($ID);
+        return view('Dashboard.Tournaments.Manage')->with(['Tournament' => $Tournament]);
+    }
+    public function StartStage1(int $ID)
+    {
+        $Tournament = Tournaments::find($ID);
+
+        $Stages = $Tournament->StagesDate;
+        $Stage1Time = $Stages[0];
+        $PlayerList = $Tournament->Players;
+        $PlayerIDs = null;
+        foreach ( $PlayerList as $playerID) {
+            $PlayerIDs[] =  $playerID->UserID;
+        }
+
+        shuffle($PlayerIDs);
+        $Group = 1;
+        for ($i = 0; $i < count($PlayerIDs) ; $i += 2) {
+            TournamentPlans::create([
+                'TournamentID' => $Tournament->id,
+                'Stage' => 1,
+                'Group' => $Group,
+                'Player1ID' => $PlayerIDs[$i],
+                'Player2ID' => $PlayerIDs[$i+1],
+                'Time' => $Stage1Time,
+            ]);
+            $Group++;
+        }
+        $Tournament->update([
+            'LastStage' => 1
+        ]);
+
+        Alert::success('Tournament Plan created successfully');
+
+        return redirect()->route('Dashboard.Tournaments.Manage' ,$Tournament->id );
     }
     public function Create(Request $request)
     {

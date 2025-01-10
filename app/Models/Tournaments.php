@@ -42,4 +42,8 @@ class Tournaments extends Model
     {
         return $this->hasMany(UserTournaments::class , 'TournamentID' , 'id');
     }
+    public function Plans()
+    {
+        return $this->hasMany(TournamentPlans::class , 'TournamentID' , 'id');
+    }
 }

@@ -48,8 +48,15 @@ Route::group(['as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
         Route::get('index' , [\App\Http\Controllers\TournamentsController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\TournamentsController::class , 'Add'])->name('Add');
         Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Manage'])->name('Manage');
+        Route::get('StartStage1/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartStage1'])->name('StartStage1');
         Route::post('Create' , [\App\Http\Controllers\TournamentsController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\TournamentsController::class , 'Delete'])->name('Delete');
+    });
+
+
+    Route::group( ['prefix' => 'TournamentPlan' , 'as' => 'TournamentPlan.' ] ,function (){
+        Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentPlansController::class , 'Manage'])->name('Manage');
+        Route::post('Update/{ID}' , [\App\Http\Controllers\TournamentPlansController::class , 'Update'])->name('Update');
     });
 
 

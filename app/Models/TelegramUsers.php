@@ -25,4 +25,6 @@ class TelegramUsers extends Model
     {
         return $this->hasMany(UserTournaments::class , 'UserID' , 'id');
     }
+
+
 }
