@@ -206,6 +206,7 @@ class TelegramController extends Controller
                     $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
                 }
 
+                $RemainingCount = $Tournaments->PlayerCount - $Tournaments->Players()->count();
                 $text = "
 نام : {$Tournaments->Name}
 توضیحات : {$Tournaments->Description}
@@ -213,7 +214,7 @@ class TelegramController extends Controller
 حالت : {$Mode}
  مبلغ ورودی : $ {$Tournaments->Price}
 تعداد بازیکن : {$Tournaments->PlayerCount}
-جایگاه های باقی مانده : {$Tournaments->PlayerCount - $Tournaments->Players()->count()} عدد
+جایگاه های باقی مانده : {$RemainingCount} عدد
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$Tournaments->Start}
 تعداد برندگان : {$Tournaments->Winners}
