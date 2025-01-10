@@ -20,4 +20,9 @@ class TelegramUsers extends Model
     ];
 
     use HasFactory;
+
+    public function Tournaments()
+    {
+        return $this->hasMany(UserTournaments::class , 'UserID' , 'id');
+    }
 }

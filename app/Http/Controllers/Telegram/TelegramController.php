@@ -44,7 +44,8 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => '💎تورنومنت ها💎', 'callback_data' => 'تورنومنت ها']),
             ],
             [
-                Keyboard::inlineButton(['text' => 'حساب کاربری من', 'callback_data' => 'حساب کاربری من']),
+                Keyboard::inlineButton(['text' => 'تورنومنت های من', 'callback_data' => 'تورنومنت های من']),
+                Keyboard::inlineButton(['text' => 'حساب کاربری', 'callback_data' => 'حساب کاربری من']),
             ],
             [
                 Keyboard::inlineButton(['text' => 'کانال ما', 'callback_data' => 'پشتیبانی وی پی ان']),
@@ -62,6 +63,21 @@ class TelegramController extends Controller
 
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
                 $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard );
+            }
+
+
+            if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
+                $Tournaments = $this->User->Tournaments;
+                foreach ($Tournaments as $tournament) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Tournament->Name , 'callback_data' => 'Tournament-' . $tournament->Tournament->id ]);
+                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                $text = "
+لطفا تورنومنت مد نظر خود را انتخاب کنید.
+                ";
+                $this->EditMessage($text , $inlineLayout );
+
             }
 
             if ($this->Data['callback_query']['data'] == 'حساب کاربری من'){
