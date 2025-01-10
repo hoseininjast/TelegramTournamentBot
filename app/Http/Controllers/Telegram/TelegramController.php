@@ -213,7 +213,7 @@ class TelegramController extends Controller
 حالت : {$Mode}
  مبلغ ورودی : $ {$Tournaments->Price}
 تعداد بازیکن : {$Tournaments->PlayerCount}
-جایگاه های باقی مانده : {$Tournaments->Players()->count()} عدد
+جایگاه های باقی مانده : {$Tournaments->PlayerCount - $Tournaments->Players()->count()} عدد
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$Tournaments->Start}
 تعداد برندگان : {$Tournaments->Winners}
