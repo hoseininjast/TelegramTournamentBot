@@ -26,6 +26,7 @@ Route::group(['as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
 
     Route::group( ['prefix' => 'Users' , 'as' => 'Users.' ] ,function (){
         Route::get('index' , [\App\Http\Controllers\UserController::class , 'index'])->name('index');
+        Route::get('Telegram' , [\App\Http\Controllers\UserController::class , 'Telegram'])->name('Telegram');
         Route::get('Add' , [\App\Http\Controllers\UserController::class , 'Add'])->name('Add');
         Route::post('Create' , [\App\Http\Controllers\UserController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\UserController::class , 'Delete'])->name('Delete');

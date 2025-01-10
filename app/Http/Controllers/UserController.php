@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\Uploader;
+use App\Models\TelegramUsers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -15,6 +16,11 @@ class UserController extends Controller
     {
         $Users = User::all();
         confirmDelete('Delete User!', 'Are you sure you want to delete this user?');
+        return view('Dashboard.Users.index')->with(['Users' => $Users]);
+    }
+    public function Telegram()
+    {
+        $Users = TelegramUsers::all();
         return view('Dashboard.Users.index')->with(['Users' => $Users]);
     }
     public function Add()

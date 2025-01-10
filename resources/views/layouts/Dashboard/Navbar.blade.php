@@ -69,7 +69,7 @@
                 <li>
                     <a href="#Users" data-bs-toggle="collapse">
                         <i class="mdi mdi-account-multiple"></i>
-                        <span> Users </span>
+                        <span> Panel Users </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <div class="collapse" id="Users">
@@ -82,6 +82,13 @@
                             </li>
                         </ul>
                     </div>
+                </li>
+
+                <li>
+                    <a href="{{route('Dashboard.Users.Telegram')}}">
+                        <i class="mdi mdi-card-account-details"></i>
+                        <span> Telegram Users </span>
+                    </a>
                 </li>
 
                 @if(Auth::user()->Role == 'Owner')
