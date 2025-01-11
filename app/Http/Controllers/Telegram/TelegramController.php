@@ -48,9 +48,9 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => 'حساب کاربری', 'callback_data' => 'حساب کاربری من']),
             ],
             [
-                Keyboard::inlineButton(['text' => 'کانال ما', 'callback_data' => 'پشتیبانی وی پی ان']),
-                Keyboard::inlineButton(['text' => 'گروه ما', 'callback_data' => 'درباره ما']),
-                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'callback_data' => 'دریافت سرویس تست']),
+                Keyboard::inlineButton(['text' => 'کانال ما', 'url' => '']),
+                Keyboard::inlineButton(['text' => 'گروه ما', 'url' => '']),
+                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'url' => '']),
             ],
             [
                 Keyboard::inlineButton(['text' => '🆘پشتیبانی🆘', 'callback_data' => 'پشتیبانی']),
@@ -76,7 +76,7 @@ class TelegramController extends Controller
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
                 ";
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/MyTournaments.png');
 
             }
 
@@ -105,7 +105,7 @@ class TelegramController extends Controller
 آدرس والت : {$WalletAddress}
 برای مدیریت حساب خود از دکمه های زیر استفاده کنید.
 ";
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/MyAccount.png');
             }
             if ($this->Data['callback_query']['data'] == 'احراز هویت پلاتو'){
 
@@ -121,7 +121,7 @@ class TelegramController extends Controller
 پس از ارسال آیدی اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Plato.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'اضافه کردن آدرس والت'){
@@ -133,7 +133,7 @@ class TelegramController extends Controller
 پس از ثبت آدرس والت اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/WalletAddress.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت ها'){
@@ -150,7 +150,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Tournaments.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'Free'){
@@ -163,7 +163,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا بازی را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/FreeTournaments.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'Paid'){
@@ -176,7 +176,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا بازی را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/PaidTournaments.png');
             }
 
 
@@ -184,7 +184,8 @@ class TelegramController extends Controller
                 $GameID = preg_replace("/^FreeTournamentList-/", "", $this->Data['callback_query']['data']);
 
                 $inlineLayout = [];
-                $Tournaments = Tournaments::where('GameID' , $GameID)->where('Mode' , 'Free')->get();
+                $Game = Games::find($GameID);
+                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , 'Free')->get();
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
                 }
@@ -193,7 +194,7 @@ class TelegramController extends Controller
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
                 ";
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , $Game->Image);
 
             }
 
@@ -201,7 +202,8 @@ class TelegramController extends Controller
                 $GameID = preg_replace("/^PaidTournamentList-/", "", $this->Data['callback_query']['data']);
 
                 $inlineLayout = [];
-                $Tournaments = Tournaments::where('GameID' , $GameID)->where('Mode' , 'Paid')->get();
+                $Game = Games::find($GameID);
+                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , 'Paid')->get();
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
                 }
@@ -210,7 +212,7 @@ class TelegramController extends Controller
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
                 ";
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , $Game->Image);
 
             }
 
@@ -254,7 +256,7 @@ class TelegramController extends Controller
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'PaidTournamentList-' . $Tournaments->Game->id ]);
                 }
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
 
             }
 
@@ -283,7 +285,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'صفحه اصلی' , 'callback_data' => 'صفحه اصلی'  ]);
 
 
-                $this->EditMessage($text , $inlineLayout );
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/JoinedTheTournament.png');
 
             }
 
@@ -312,7 +314,7 @@ class TelegramController extends Controller
 
                     $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
 
-                    $this->ResponseWithPhoto($text , $inlineLayout  , 'https://platotournament.ai1polaris.com/images/MainLogo.png');
+                    $this->ResponseWithPhoto($text , $inlineLayout  , 'https://platotournament.ai1polaris.com/images/Robot/Tournaments.png');
                 }
 
                 if (preg_match('/^PlatoID-/' , $this->Data['message']['text'])){
@@ -330,7 +332,7 @@ class TelegramController extends Controller
 اکانت پلاتو شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/Robot/Plato.png' );
 
                 }
 
@@ -346,7 +348,7 @@ class TelegramController extends Controller
 آدرس ولت شما با موفقیت ثبت شد
 هم اکنون میتوانید در مسابقات شرکت کنید و جوایز خود را دریافت کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/Robot/WalledAddress.png' );
 
                 }
 
