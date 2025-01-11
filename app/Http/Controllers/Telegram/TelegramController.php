@@ -40,7 +40,7 @@ class TelegramController extends Controller
 
         $MainMenuKeyboard = [
             [
-                Keyboard::inlineButton(['text' => '💎تاریخچه💎', 'callback_data' => 'تورنومنت ها']),
+                Keyboard::inlineButton(['text' => '💎تاریخچه💎', 'callback_data' => 'تاریخچه']),
                 Keyboard::inlineButton(['text' => '💎تورنومنت ها💎', 'callback_data' => 'تورنومنت ها']),
             ],
             [
@@ -134,6 +134,23 @@ class TelegramController extends Controller
 ";
 
                 $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/WalletAddress.png');
+            }
+
+            if ($this->Data['callback_query']['data'] == 'تاریخچه'){
+
+                $inlineLayout = [
+                    [
+                        Keyboard::inlineButton(['text' => 'رایگان', 'callback_data' => 'Free']),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'پولی', 'callback_data' => 'Paid']),
+                    ],
+                ];
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
+
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/TournamentHistory.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت ها'){
