@@ -48,9 +48,9 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => 'حساب کاربری', 'callback_data' => 'حساب کاربری من']),
             ],
             [
-                Keyboard::inlineButton(['text' => 'کانال ما', 'url' => '']),
-                Keyboard::inlineButton(['text' => 'گروه ما', 'url' => '']),
-                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'url' => '']),
+                Keyboard::inlineButton(['text' => 'کانال ما', 'url' => 'https://t.me/+ilnte2oSnXszNjY0']),
+                Keyboard::inlineButton(['text' => 'گروه ما', 'url' => 'https://t.me/+NsO_zelnt5o1NjU0']),
+                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'url' => 'https://plato.app/26kv7e2hoah2z']),
             ],
             [
                 Keyboard::inlineButton(['text' => '🆘پشتیبانی🆘', 'callback_data' => 'پشتیبانی']),
