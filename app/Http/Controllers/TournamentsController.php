@@ -35,6 +35,7 @@ class TournamentsController extends Controller
 
         $Stages = $Tournament->StagesDate;
         $Stage1Time = $Stages[0];
+        $Stage2Time = $Stages[1];
         $PlayerList = $Tournament->Players;
         $PlayerIDs = null;
         foreach ( $PlayerList as $playerID) {
@@ -63,6 +64,7 @@ class TournamentsController extends Controller
 مرحله : اول
  بازیکن ها :
  {$User1->PlatoID} در برابر {$User2->PlatoID}
+ زمان شروع : {$Stage1Time} الی {$Stage2Time} میباشد لطفا توی این زمان با ناظر خود هماهنگ کنید
  زمان بازی به زودی اعلام میشود.
 @krypto_arena_bot
 ";

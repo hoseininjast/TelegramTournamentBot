@@ -25,8 +25,32 @@ class TournamentPlansController extends Controller
 
         $TournamentPlan = TournamentPlans::find($ID);
         $TournamentPlan->update([
-            'Time' => $request->Time
+            'Player1Score' => $request->Player1Score,
+            'Player2Score' => $request->Player2Score,
+            'WinnerID' => $request->WinnerID,
         ]);
+        $User1 = $TournamentPlan->Player1->TelegramUserID;
+        $User2 = $TournamentPlan->Player2->TelegramUserID;
+
+        $Stage = $TournamentPlan->Stage == 1 ? 'اول' : ( $TournamentPlan->Stage == 2 ? 'دوم' : ( $TournamentPlan->Stage == 3 ? 'سوم' : ( $TournamentPlan->Stage == 4 ? 'چهارم' : ( $TournamentPlan->Stage == 5 ? 'پنجم' : 'ششم' ))));
+
+        $text = "
+نتیجه بازی شما مشخص شد
+گروه : {$TournamentPlan->Group}
+مرحله : {$Stage}
+ بازیکن ها :
+ {$TournamentPlan->Player1->PlatoID} در برابر {$TournamentPlan->Player2->PlatoID}
+ زمان بازی : {$TournamentPlan->Time}
+ امتیاز ها : {$request->Player1Score} : {$request->Player2Score}
+ برنده : {$TournamentPlan->Winner->PlatoID}
+ پس از مشخص شدن برنامه بازی های بعدی در ربات به شما اطلاع رسانی میشود.
+@krypto_arena_bot
+        ";
+
+        NotifyTelegramUsersJob::dispatch($User1 ,$text);
+        NotifyTelegramUsersJob::dispatch($User2 ,$text);
+
+
         \Alert::success('Tournament created successfully');
 
         return redirect()->back();

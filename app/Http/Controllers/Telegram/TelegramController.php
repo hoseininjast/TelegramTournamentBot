@@ -82,34 +82,28 @@ class TelegramController extends Controller
 
             if ($this->Data['callback_query']['data'] == 'حساب کاربری من'){
                 $User = $this->SaveTelegramUser();
-
-                if($User->PlatoID){
-                    $inlineLayout = [
-                        [
-                            Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
-                        ],
-
-                    ];
+                $inlineLayout = [];
+                if($User->PlatoID == null){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
+                }if($User->WalletAddress == null){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'اضافه کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
                 }else{
-                    $inlineLayout = [
-                        [
-                            Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']),
-                        ],
-                        [
-                            Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']),
-                        ],
-
-                    ];
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
                 }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']);
+
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
                 $PlatoID = $User->PlatoID ? $User->PlatoID : 'ثبت نشده';
+                $WalletAddress = $User->WalletAddress ? $User->WalletAddress : 'ثبت نشده';
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
 شارژ کیف پول : $0
 تعداد بازی ها : 0
 تعداد برد ها : 0
 آیدی پلاتو : {$PlatoID}
+آدرس والت : {$WalletAddress}
+برای مدیریت حساب خود از دکمه های زیر استفاده کنید.
 ";
                 $this->EditMessage($text , $inlineLayout );
             }
@@ -125,6 +119,18 @@ class TelegramController extends Controller
 باز زدن روی نوشته پایین میتونید متن را کپی کنید
 <code>PlatoID-</code>
 پس از ارسال آیدی اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
+";
+
+                $this->EditMessage($text , $inlineLayout );
+            }
+
+            if ($this->Data['callback_query']['data'] == 'اضافه کردن آدرس والت'){
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'حساب کاربری من' ]);
+
+                $text = "
+لطفا آدرس والت شبکه polygon خود را برای ربات ارسال کنید
+پس از ثبت آدرس والت اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
                 $this->EditMessage($text , $inlineLayout );
@@ -328,6 +334,21 @@ class TelegramController extends Controller
 
                 }
 
+                if (preg_match('/^(0x)?[0-9a-fA-F]{40}$/' , $this->Data['message']['text'])){
+                    $WalletAddress = $this->Data['message']['text'];
+                    $User = $this->SaveTelegramUser();
+                    $User->update([
+                        'WalletAddress' => $WalletAddress
+                    ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'حساب کاربری من' , 'callback_data' => 'حساب کاربری من' ]);
+
+                    $text = "
+آدرس ولت شما با موفقیت ثبت شد
+هم اکنون میتوانید در مسابقات شرکت کنید و جوایز خود را دریافت کنید.
+                ";
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
+
+                }
 
             }
         }
