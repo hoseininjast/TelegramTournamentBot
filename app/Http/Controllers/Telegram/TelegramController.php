@@ -218,7 +218,7 @@ class TelegramController extends Controller
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'TournamentHistory-' . $tournament->id ]);
                 }
-                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Free' ]);
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تاریخچه' ]);
 
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
