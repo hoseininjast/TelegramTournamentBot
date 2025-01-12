@@ -59,7 +59,8 @@ class TournamentPlansController extends Controller
 
         \Alert::success('Tournament created successfully');
 
-        return redirect()->back();
+        return redirect()->route('Dashboard.Tournaments.Manage' , $TournamentPlan->TournamentID);
+
 
     }
     public function SetTime(int $ID , Request $request)
@@ -95,7 +96,7 @@ class TournamentPlansController extends Controller
 
         \Alert::success('Tournament created successfully');
 
-        return redirect()->back();
+        return redirect()->route('Dashboard.Tournaments.Manage' , $TournamentPlan->TournamentID);
     }
 
 
