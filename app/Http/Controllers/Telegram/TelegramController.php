@@ -300,15 +300,12 @@ class TelegramController extends Controller
                 $Mode = __('messages.Mode.' . $Tournaments->Mode);
                 $Type = __('messages.Type.' . $Tournaments->Type);
 
-                $key = 1;
                 $Winners = '';
-                foreach ($History->Winner as $key => $playerid) {
+                foreach ($History->Winners as $key => $playerid) {
                     $User = TelegramUsers::find($playerid);
                     $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
-                    $key++;
                 }
 
-                $RemainingCount = $Tournaments->PlayerCount - $Tournaments->Players()->count();
                 $text = "
 نام : {$Tournaments->Name}
 توضیحات : {$Tournaments->Description}
