@@ -220,7 +220,7 @@ class TournamentsController extends Controller
             foreach ($request->Winner as $player) {
                 $User = TelegramUsers::find($player);
                 $Players[$key] = $User->id;
-                $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => ". $Tournament->Awards[$key - 1 ] ." دلار \n";
+                $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1 ] ." \n";
                 $key++;
             }
             TournamentHistory::create([

@@ -304,7 +304,7 @@ class TelegramController extends Controller
                 $Winners = '';
                 foreach ($History->Winner as $key => $playerid) {
                     $User = TelegramUsers::find($playerid);
-                    $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => ". $Tournaments->Awards[$key - 1 ] ." دلار \n";
+                    $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
                     $key++;
                 }
 
