@@ -260,6 +260,8 @@ class TelegramController extends Controller
                 }
 
                 $RemainingCount = $Tournaments->PlayerCount - $Tournaments->Players()->count();
+                $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
+
                 $text = "
 نام : {$Tournaments->Name}
 توضیحات : {$Tournaments->Description}
@@ -269,7 +271,7 @@ class TelegramController extends Controller
 تعداد بازیکن : {$Tournaments->PlayerCount}
 جایگاه های باقی مانده : {$RemainingCount} عدد
 زمان بازی : {$Tournaments->Time} روز
-تاریخ شروع : {$Tournaments->Start}
+تاریخ شروع : {$JalaliDate1}
 تعداد برندگان : {$Tournaments->Winners}
 جوایز : \n {$adwards}
 وضعیت : {$Status}
@@ -300,6 +302,9 @@ class TelegramController extends Controller
                 $Mode = __('messages.Mode.' . $Tournaments->Mode);
                 $Type = __('messages.Type.' . $Tournaments->Type);
 
+                $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
+                $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+
                 $Winners = '';
                 foreach ($Tournaments->History->Winners as $key => $playerid) {
                     $User = TelegramUsers::find($playerid);
@@ -314,8 +319,8 @@ class TelegramController extends Controller
  مبلغ ورودی : $ {$Tournaments->Price}
 تعداد بازیکن : {$Tournaments->PlayerCount}
 زمان بازی : {$Tournaments->Time} روز
-تاریخ شروع : {$Tournaments->Start}
-تاریخ پایان : {$Tournaments->End}
+تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
 نتیجه بازی :
 {$Winners}
 وضعیت : {$Status}
