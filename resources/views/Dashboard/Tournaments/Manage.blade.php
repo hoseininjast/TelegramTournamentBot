@@ -53,9 +53,13 @@
                                 </div>
                             </div>
 
-                            @if($Tournament->LastStage == 1)
+
+
+
+                            @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
+
                                 <div class="card-body">
-                                    <h4 class="header-title">Stage 1 Game plans</h4>
+                                    <h4 class="header-title">Stage {{$i}} Game plans</h4>
 
                                     <div class="table-responsive">
                                         <table class="table table-dark mb-0">
@@ -71,16 +75,21 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($Tournament->Plans()->where('Stage' , 1)->get() as $plan)
+                                            @foreach($Tournament->Plans()->where('Stage' , $i)->get() as $plan)
                                                 <tr>
                                                     <td>{{$plan->Group}}</td>
                                                     <td>{{$plan->Player1->UserName}} => {{$plan->Player1->PlatoID}} </td>
                                                     <td>{{$plan->Player2->UserName}} => {{$plan->Player2->PlatoID}} </td>
                                                     <td>{{$plan->Time}}</td>
                                                     <td>{{$plan->Player1Score ?? 0}} / {{$plan->Player2Score ?? 0}}</td>
-                                                    <td>{{$plan->WinnerID ?? 'not know'}}</td>
+                                                    <td>{{$plan->WinnerID ? $plan->Winner->PlatoID :'not know'}}</td>
                                                     <td>
-                                                        <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}">Manage</a>
+                                                        @if($plan->Status == 'Pending')
+                                                            <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}" class="btn btn-sm btn-success waves-effect waves-light">Manage</a>
+                                                        @else
+                                                            <a href="#" class="btn btn-sm btn-outline-dark waves-effect waves-light disabled">Manage</a>
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -90,8 +99,8 @@
                                         </table>
                                     </div>
                                 </div>
-                            @endif
 
+                            @endfor
 
                         </div>
                         <div class="card">
@@ -101,16 +110,35 @@
 
                                 <div class="row">
                                     <div class="col-lg-12">
-                                        <div class="row ">
-                                            @if($Tournament->PlayerCount == $Tournament->Players()->count() && $Tournament->LastStage == 0)
-                                                <div class="col-6 d-flex justify-content-around" >
-                                                    <a href="{{route('Dashboard.Tournaments.StartStage1' , $Tournament->id)}}" class="btn btn-primary waves-effect waves-light">Start Stage 1</a>
-                                                </div>
+                                        <div class="row justify-content-around">
+                                            @if($Tournament->Status != 'Finished')
+                                                @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
+                                                    @if($i == 1)
+                                                        <div class="col-auto " >
+                                                            <a @if($Tournament->LastStage == 0 && $Tournament->PlayerCount == $Tournament->Players()->count()) href="{{route('Dashboard.Tournaments.StartStage1' , $Tournament->id)}}" class="btn btn-success waves-effect waves-light" @else href="#" class="btn btn-outline-dark waves-effect waves-light disabled" @endif  >Start Stage 1</a>
+                                                        </div>
+                                                    @else
+                                                        <div class="col-auto " >
+                                                            <a @if($Tournament->LastStage == $i - 1  && $Tournament->Plans()->where('Stage' , $i - 1)->count() == $Tournament->Plans()->where('Stage' , $i - 1)->where('Status' , 'Finished')->count()) href="{{route('Dashboard.Tournaments.StartNextStage' , $Tournament->id)}}" class="btn btn-success waves-effect waves-light" @else href="#" class="btn btn-outline-dark waves-effect waves-light disabled" @endif >Start Stage {{$i}}</a>
+                                                        </div>
+                                                    @endif
+
+                                                @endfor
+                                                @if($Tournament->LastStage == $Tournament->TotalStage && $Tournament->Plans()->where('Stage' , $Tournament->TotalStage)->count() == $Tournament->Plans()->where('Stage' , $Tournament->TotalStage)->where('Status' , 'Finished')->count() && $Tournament->Status != 'Finished')
+                                                    <div class="col-auto " >
+                                                        <a href="{{route('Dashboard.Tournaments.ClosePage' , $Tournament->id)}}" class="btn btn-danger waves-effect waves-light" >Finish Tournament</a>
+                                                    </div>
                                                 @else
-                                                <div class="col-6 d-flex justify-content-around" >
-                                                    <button  class="btn btn-primary waves-effect waves-light disabled"  disabled>Start Stage 1</button>
-                                                </div>
+                                                    <div class="col-auto " >
+                                                        <a href="#" class="btn btn-outline-dark waves-effect waves-light disabled" >Finish Tournament</a>
+                                                    </div>
+                                                @endif
+
+                                                @else
+                                                <h3 class="text-center">this tournament finished</h3>
                                             @endif
+
+
 
 
 

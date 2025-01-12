@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Number2Word;
 use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\TournamentPlans;
 use App\Models\Tournaments;
@@ -28,27 +29,32 @@ class TournamentPlansController extends Controller
             'Player1Score' => $request->Player1Score,
             'Player2Score' => $request->Player2Score,
             'WinnerID' => $request->WinnerID,
+            'Status' => 'Finished',
         ]);
         $User1 = $TournamentPlan->Player1->TelegramUserID;
         $User2 = $TournamentPlan->Player2->TelegramUserID;
 
-        $Stage = $TournamentPlan->Stage == 1 ? 'اول' : ( $TournamentPlan->Stage == 2 ? 'دوم' : ( $TournamentPlan->Stage == 3 ? 'سوم' : ( $TournamentPlan->Stage == 4 ? 'چهارم' : ( $TournamentPlan->Stage == 5 ? 'پنجم' : 'ششم' ))));
+
+        $JalaliDate = Verta($TournamentPlan->Time)->format('%A, %d %B  H:i ');
 
         $text = "
 نتیجه بازی شما مشخص شد
-گروه : {$TournamentPlan->Group}
-مرحله : {$Stage}
+گروه : {$this->numToWords($TournamentPlan->Group)}
+مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
  {$TournamentPlan->Player1->PlatoID} در برابر {$TournamentPlan->Player2->PlatoID}
- زمان بازی : {$TournamentPlan->Time}
+ زمان بازی : {$JalaliDate}
  امتیاز ها : {$request->Player1Score} : {$request->Player2Score}
  برنده : {$TournamentPlan->Winner->PlatoID}
  پس از مشخص شدن برنامه بازی های بعدی در ربات به شما اطلاع رسانی میشود.
 @krypto_arena_bot
         ";
 
-        NotifyTelegramUsersJob::dispatch($User1 ,$text);
-        NotifyTelegramUsersJob::dispatch($User2 ,$text);
+        if(env('APP_ENV') == 'production'){
+            NotifyTelegramUsersJob::dispatch($User1 ,$text);
+            NotifyTelegramUsersJob::dispatch($User2 ,$text);
+        }
+
 
 
         \Alert::success('Tournament created successfully');
@@ -68,25 +74,44 @@ class TournamentPlansController extends Controller
         $User1 = $TournamentPlan->Player1->TelegramUserID;
         $User2 = $TournamentPlan->Player2->TelegramUserID;
 
-        $Stage = $TournamentPlan->Stage == 1 ? 'اول' : ( $TournamentPlan->Stage == 2 ? 'دوم' : ( $TournamentPlan->Stage == 3 ? 'سوم' : ( $TournamentPlan->Stage == 4 ? 'چهارم' : ( $TournamentPlan->Stage == 5 ? 'پنجم' : 'ششم' ))));
+        $JalaliDate = Verta($TournamentPlan->Time)->format('%A, %d %B  H:i ');
 
         $text = "
 زمان مسابقه شما مشخص شد
-گروه : {$TournamentPlan->Group}
-مرحله : {$Stage}
+گروه : {$this->numToWords($TournamentPlan->Group)}
+مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
  {$TournamentPlan->Player1->PlatoID} در برابر {$TournamentPlan->Player2->PlatoID}
- زمان بازی : {$request->Time}
+ زمان بازی : {$JalaliDate}
  لطفا 1 ساعت قبل از شروع مسابقه با ناظر بازی هماهنگ کنید.
 @krypto_arena_bot
 ";
 
-        NotifyTelegramUsersJob::dispatch($User1 ,$text);
-        NotifyTelegramUsersJob::dispatch($User2 ,$text);
+        if(env('APP_ENV') == 'production'){
+            NotifyTelegramUsersJob::dispatch($User1 ,$text);
+            NotifyTelegramUsersJob::dispatch($User2 ,$text);
+        }
 
 
         \Alert::success('Tournament created successfully');
 
         return redirect()->back();
     }
+
+
+
+
+    private function numToWords($number) {
+        $N2W = new Number2Word();
+        return $N2W->numberToWords($number);
+    }
+    private function numToWordForStages($number) {
+
+        $N2W = new Number2Word();
+        return $N2W->numToWordForStages($number);
+    }
+
+
+
+
 }

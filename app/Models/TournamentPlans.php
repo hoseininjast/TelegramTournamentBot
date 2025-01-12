@@ -17,6 +17,7 @@ class TournamentPlans extends Model
         'Player2Score',
         'Time',
         'WinnerID',
+        'Status',
     ];
     use HasFactory;
 
