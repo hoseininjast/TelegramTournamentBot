@@ -46,4 +46,8 @@ class Tournaments extends Model
     {
         return $this->hasMany(TournamentPlans::class , 'TournamentID' , 'id');
     }
+    public function History()
+    {
+        return $this->hasMany(TournamentHistory::class , 'TournamentID' , 'id');
+    }
 }
