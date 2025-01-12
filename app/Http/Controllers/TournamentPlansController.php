@@ -42,9 +42,9 @@ class TournamentPlansController extends Controller
 گروه : {$this->numToWords($TournamentPlan->Group)}
 مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
- {$TournamentPlan->Player1->PlatoID} : {$TournamentPlan->Player2->PlatoID}
- زمان بازی : {$JalaliDate}
+ {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
  امتیاز ها : {$request->Player1Score} : {$request->Player2Score}
+ زمان بازی : {$JalaliDate}
  برنده : {$TournamentPlan->Winner->PlatoID}
  پس از مشخص شدن برنامه بازی های بعدی در ربات به شما اطلاع رسانی میشود.
 @krypto_arena_bot
@@ -81,7 +81,7 @@ class TournamentPlansController extends Controller
 گروه : {$this->numToWords($TournamentPlan->Group)}
 مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
- {$TournamentPlan->Player1->PlatoID} : {$TournamentPlan->Player2->PlatoID}
+ {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
  زمان بازی : {$JalaliDate}
  لطفا 1 ساعت قبل از شروع مسابقه با ناظر بازی هماهنگ کنید.
 @krypto_arena_bot
