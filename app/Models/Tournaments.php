@@ -48,6 +48,6 @@ class Tournaments extends Model
     }
     public function History()
     {
-        return $this->hasMany(TournamentHistory::class , 'TournamentID' , 'id');
+        return $this->hasOne(TournamentHistory::class , 'TournamentID' , 'id');
     }
 }
