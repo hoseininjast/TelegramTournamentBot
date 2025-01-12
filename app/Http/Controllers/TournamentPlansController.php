@@ -42,7 +42,7 @@ class TournamentPlansController extends Controller
 گروه : {$this->numToWords($TournamentPlan->Group)}
 مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
- {$TournamentPlan->Player1->PlatoID} در برابر {$TournamentPlan->Player2->PlatoID}
+ {$TournamentPlan->Player1->PlatoID} : {$TournamentPlan->Player2->PlatoID}
  زمان بازی : {$JalaliDate}
  امتیاز ها : {$request->Player1Score} : {$request->Player2Score}
  برنده : {$TournamentPlan->Winner->PlatoID}
@@ -81,7 +81,7 @@ class TournamentPlansController extends Controller
 گروه : {$this->numToWords($TournamentPlan->Group)}
 مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
- {$TournamentPlan->Player1->PlatoID} در برابر {$TournamentPlan->Player2->PlatoID}
+ {$TournamentPlan->Player1->PlatoID} : {$TournamentPlan->Player2->PlatoID}
  زمان بازی : {$JalaliDate}
  لطفا 1 ساعت قبل از شروع مسابقه با ناظر بازی هماهنگ کنید.
 @krypto_arena_bot
