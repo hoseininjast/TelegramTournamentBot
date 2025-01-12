@@ -33,7 +33,7 @@ class NotifyAllTelegramUsersJob implements ShouldQueue
 
         $Users = TelegramUsers::all();
         foreach ($Users as $user) {
-            $this->telegram->sendMessage([
+            $telegram->sendMessage([
                 'chat_id' => $user->TelegramUserID,
                 'text' => $this->Message,
                 'parse_mode' => 'html',

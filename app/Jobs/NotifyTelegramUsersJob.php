@@ -31,7 +31,7 @@ class NotifyTelegramUsersJob implements ShouldQueue
     {
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
-        $this->telegram->sendMessage([
+        $telegram->sendMessage([
             'chat_id' => $this->UserID,
             'text' => $this->Message,
             'parse_mode' => 'html',
