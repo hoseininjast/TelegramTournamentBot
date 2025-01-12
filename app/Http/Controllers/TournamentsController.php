@@ -50,7 +50,7 @@ class TournamentsController extends Controller
             shuffle($PlayerIDs);
             $Group = 1;
             $NextStage = $Tournament->LastStage + 1;
-            for ($i = 0; $i < count($PlayerIDs) ; $i += 2) {
+            for ($i = 0; $i < count($PlayerIDs) ; $i += 2 , $Group++) {
                 TournamentPlans::create([
                     'TournamentID' => $Tournament->id,
                     'Stage' => $NextStage,
@@ -59,7 +59,7 @@ class TournamentsController extends Controller
                     'Player2ID' => $PlayerIDs[$i+1],
                     'Time' => $Stage1Time,
                 ]);
-                $Group++;
+
 
                 $User1 = TelegramUsers::find($PlayerIDs[$i]);
                 $User2 = TelegramUsers::find($PlayerIDs[$i+1]);
@@ -126,7 +126,7 @@ class TournamentsController extends Controller
             $JalaliDate2 = Verta($NextStageTime)->format('%A, %d %B  H:i ');
 
 
-            for ($i = 0; $i <= $TotalGroup ; $i += 2) {
+            for ($i = 0; $i <= $TotalGroup ; $i += 2 ,$CurrentGroup++) {
 
                 TournamentPlans::create([
                     'TournamentID' => $Tournament->id,
@@ -136,7 +136,7 @@ class TournamentsController extends Controller
                     'Player2ID' => $GameGroups[$i+1]->WinnerID,
                     'Time' => $CurrentStageTime,
                 ]);
-                $CurrentGroup++;
+
 
                 $User1 = TelegramUsers::find($GameGroups[$i]->WinnerID);
                 $User2 = TelegramUsers::find($GameGroups[$i+1]->WinnerID);
