@@ -33,6 +33,7 @@
                                             <th>name</th>
                                             <th>Username</th>
                                             <th>PlatoID</th>
+                                            <th>Wallet Address</th>
                                             <th>Date</th>
                                         </tr>
                                         </thead>
@@ -43,6 +44,7 @@
                                                 <td>{{$user->Player->FirstName . ' ' . $user->Player->LastName}}</td>
                                                 <td>{{$user->Player->UserName}}</td>
                                                 <td>{{$user->Player->PlatoID}}</td>
+                                                <td class="cursor-pointer" onclick="CopyTextWithToast('{{$user->Player->WalletAddress}}' , 'Wallet Address')">{{$user->Player->WalletAddress}}</td>
                                                 <td>{{$user->created_at}}</td>
                                             </tr>
                                         @endforeach
