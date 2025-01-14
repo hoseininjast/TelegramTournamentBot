@@ -387,7 +387,7 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'CheckMembership'){
 
                 $JoinInfo = Telegram::getChatMember([
-                    'chat_id' => '2452640944',
+                    'chat_id' => '-2452640944',
                     'user_id' => $this->GetUserInfo('id'),
                 ]);
                 if($JoinInfo['status'] == 'member' || $JoinInfo['status'] == 'creator' || $JoinInfo['status'] == 'administrator' ){
