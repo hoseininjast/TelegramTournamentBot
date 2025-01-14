@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Telegram;
 use App\Classes\Number2Word;
 use App\Http\Controllers\Controller;
 use App\Models\Games;
+use App\Models\TelegramUserRewards;
 use App\Models\TelegramUsers;
 use App\Models\TournamentHistory;
 use App\Models\Tournaments;
@@ -417,6 +418,52 @@ class TelegramController extends Controller
                     $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
                 }
 
+
+                if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
+                    $ReferralID = preg_replace("/\/start\s/", "", $this->Data['message']['text']);
+                    $RefferalUser = TelegramUsers::where('TelegramUserID' , $ReferralID)->first();
+
+                    $inlineLayout = [
+                        [
+                            Keyboard::inlineButton(['text' => 'ورود به صفحه اصلی' , 'callback_data' => 'صفحه اصلی' ])
+                        ],
+                    ];
+
+                    if ($RefferalUser) {
+                        $User = $this->SaveTelegramUser($RefferalUser->id);
+
+                        if($User->ReferralID == null){
+
+                            $User->update([
+                                'ReferralID' => $RefferalUser->id
+                            ]);
+
+
+                            TelegramUserRewards::create([
+                                'UserID' => $RefferalUser->id,
+                                'FromID' => $User->id,
+                                'Amount' => 0.01 ,
+                            ]);
+
+                            $RefferalUser->update([
+                                'Charge' => $RefferalUser->Charge + 0.01
+                            ]);
+
+                            $this->ResponseWithPhoto("بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار " ,$inlineLayout , 'https://platotournament.ai1polaris.com/images/MainLogo.png' ,$RefferalUser->TelegramUserID);
+                            $text = "معرف شما ثبت شد و هم اکنون تمام امکانات ربات برای شما در دسترس میباشد. ";
+
+                        }else{
+                            $text = "شما قبلا معرف خود را وارد کرده اید.";
+                        }
+                    }else{
+                        $text = "لینک معرفی شما درست نمیباشد. لطفا مجدد تلاش کنید.";
+                    }
+
+
+
+                    $this->ResponseWithPhoto($text , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
+                }
+
                 if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
                     $inlineLayout = [
                         [
@@ -479,7 +526,7 @@ class TelegramController extends Controller
 
 
 
-    protected function SaveTelegramUser(){
+    protected function SaveTelegramUser($ReferralID = 1){
 
         if (TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->count() > 0){
             $User = TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->first();
@@ -487,6 +534,7 @@ class TelegramController extends Controller
             $User = TelegramUsers::create([
                 'TelegramUserID' => $this->GetUserInfo('id'),
                 'TelegramChatID' => $this->ChatID,
+                'ReferralID' => $ReferralID,
                 'FirstName' => $this->GetUserInfo('first_name') ,
                 'LastName' => $this->GetUserInfo('last_name') ,
                 'UserName' => $this->GetUserInfo('username') ,
@@ -672,13 +720,13 @@ class TelegramController extends Controller
         }
 
     }
-    protected function ResponseWithPhoto($Message , $Keyboard = null , $PhotoAddress = null ){
+    protected function ResponseWithPhoto($Message , $Keyboard = null , $PhotoAddress = null , $ChatID = null){
         $this->SendChatAction('UPLOAD_PHOTO');
         if ($PhotoAddress == null){
             $PhotoAddress = InputFile::create(public_path('images/MainLogo.png'));
         }
         Telegram::sendPhoto([
-            'chat_id' => $this->ChatID,
+            'chat_id' => $ChatID != null ? $ChatID :  $this->ChatID,
             'photo' => InputFile::create($PhotoAddress  . '?version=1.0.4'),
             'caption' => $Message,
             'parse_mode' => 'html',
@@ -688,8 +736,6 @@ class TelegramController extends Controller
                 'one_time_keyboard' => true
             ])
         ]);
-
-
 
     }
     protected function ResponseWithDocument($Message , $Keyboard = null , $FileName = null , $Text = null){
