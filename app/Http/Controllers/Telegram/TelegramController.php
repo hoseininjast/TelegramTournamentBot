@@ -120,6 +120,7 @@ class TelegramController extends Controller
 تعداد برد ها : 0
 آیدی پلاتو : {$PlatoID}
 آدرس والت : {$WalletAddress}
+لینک معرفی شما : https://t.me/krypto_arena_bot?start={$User->TelegramUserID}
 برای مدیریت حساب خود از دکمه های زیر استفاده کنید.
 ";
                 $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/MyAccount.png');
