@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('telegram_user_rewards', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('UserID');
+            $table->foreign('UserID')->references('id')->on('telegram_users')->cascadeOnDelete();
+            $table->unsignedBigInteger('FromID');
+            $table->foreign('FromID')->references('id')->on('telegram_users')->cascadeOnDelete();
+            $table->float('Amount')->default(0);
             $table->timestamps();
         });
     }
