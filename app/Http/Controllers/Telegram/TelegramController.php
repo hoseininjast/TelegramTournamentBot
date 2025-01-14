@@ -39,6 +39,25 @@ class TelegramController extends Controller
 
         $this->User = $this->SaveTelegramUser();
 
+        Log::info($this->Data);
+
+        $JoinInfo = Telegram::getChatMember([
+            'chat_id' => '2452640944',
+            'user_id' => $this->GetUserInfo('id'),
+        ]);
+        if($JoinInfo['status'] != 'member' || $JoinInfo['status'] != 'creator' || $JoinInfo['status'] != 'administrator' ){
+            $inlineLayout = [
+                [
+                    Keyboard::inlineButton(['text' => 'عضویت در کانال', 'url' => 'https://t.me/+ilnte2oSnXszNjY0']),
+                ],
+                [
+                    Keyboard::inlineButton(['text' => 'بررسی عضویت', 'callback_data' => 'CheckMembership']),
+                ],
+            ];
+            $text = 'برای استفاده از این ربات باید در کانال ما عضو شوید ، بعد از عضویت میتوانید از تمام امکانات ربات استفاده کنید.';
+            $this->ResponseWithPhoto($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
+            return 'ok';
+        }
 
         $MainMenuKeyboard = [
             [
@@ -105,6 +124,7 @@ class TelegramController extends Controller
 ";
                 $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/MyAccount.png');
             }
+
             if ($this->Data['callback_query']['data'] == 'احراز هویت پلاتو'){
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
@@ -363,6 +383,30 @@ class TelegramController extends Controller
             }
 
 
+
+
+            if ($this->Data['callback_query']['data'] == 'CheckMembership'){
+
+                $JoinInfo = Telegram::getChatMember([
+                    'chat_id' => '2452640944',
+                    'user_id' => $this->GetUserInfo('id'),
+                ]);
+                if($JoinInfo['status'] == 'member' || $JoinInfo['status'] == 'creator' || $JoinInfo['status'] == 'administrator' ){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'صفحه اصلی' , 'callback_data' => 'صفحه اصلی' ]);
+
+                    $text = 'با تشکر از عضویت شما در کانال ما ، ثبت نام شما با موفقیت انجام شد و هم اکنون میتوانید از تمام امکانات ربات استفاده کنید.';
+
+                }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بررسی مجدد' , 'callback_data' => 'CheckMembership' ]);
+
+                    $text = 'شما در کانال ما عضو نیستید ، لطفا پس از عوضیت مجدد تلاش کنید.';
+
+                }
+
+
+
+                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
+            }
 
 
 

@@ -11,10 +11,12 @@ class TelegramUsers extends Model
     protected $fillable = [
         'TelegramUserID',
         'TelegramChatID',
+        'ReferralID',
         'FirstName',
         'LastName',
         'UserName',
         'WalletAddress',
+        'Charge',
         'PlatoID',
         'PlatoScreenShot',
         'Status',
@@ -25,6 +27,11 @@ class TelegramUsers extends Model
     public function Tournaments()
     {
         return $this->hasMany(UserTournaments::class , 'UserID' , 'id');
+    }
+
+    public function Referral()
+    {
+        return $this->hasMany(TelegramUsers::class , 'ReferralID' , 'id');
     }
 
 
