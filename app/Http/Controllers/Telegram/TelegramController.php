@@ -115,7 +115,7 @@ class TelegramController extends Controller
                 $WalletAddress = $User->WalletAddress ? $User->WalletAddress : 'ثبت نشده';
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
-شارژ کیف پول : $0
+شارژ کیف پول : \${$User->Charge}
 تعداد بازی ها : 0
 تعداد برد ها : 0
 آیدی پلاتو : {$PlatoID}
