@@ -41,7 +41,7 @@ class TelegramController extends Controller
         $this->User = $this->SaveTelegramUser();
 
 
-        $JoinInfo = Telegram::getChatMember([
+       /* $JoinInfo = Telegram::getChatMember([
             'chat_id' => '2452640944',
             'user_id' => $this->GetUserInfo('id'),
         ]);
@@ -57,7 +57,7 @@ class TelegramController extends Controller
             $text = 'برای استفاده از این ربات باید در کانال ما عضو شوید ، بعد از عضویت میتوانید از تمام امکانات ربات استفاده کنید.';
             $this->ResponseWithPhoto($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
             return 'ok';
-        }
+        }*/
 
         $MainMenuKeyboard = [
             [
