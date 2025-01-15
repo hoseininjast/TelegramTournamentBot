@@ -361,20 +361,26 @@ class TelegramController extends Controller
                 $inlineLayout = [];
                 $Tournaments = Tournaments::find($TournamentID);
 
-                if($this->User->PlatoID){
-                    $UserCount = $Tournaments->Players()->count();
-                    if($UserCount < $Tournaments->PlayerCount){
-                        UserTournaments::create([
-                            'UserID' => $this->User->id,
-                            'TournamentID' => $Tournaments->id,
-                        ]);
-                        $text = "شما با موفقیت وارد تورنومنت شدید. پس از قرعه کشی و مشخص شدن ترتیب بازی ها ، برنامه بازی ها به شما اطلاعات داده خواهد شد.";
+
+                if(!$Tournaments->isJoined($this->User->id)){
+                    if($this->User->PlatoID){
+                        $UserCount = $Tournaments->Players()->count();
+                        if($UserCount < $Tournaments->PlayerCount){
+                            UserTournaments::create([
+                                'UserID' => $this->User->id,
+                                'TournamentID' => $Tournaments->id,
+                            ]);
+                            $text = "شما با موفقیت وارد تورنومنت شدید. پس از قرعه کشی و مشخص شدن ترتیب بازی ها ، برنامه بازی ها به شما اطلاعات داده خواهد شد.";
+                        }else{
+                            $text = "متاسفانه تعداد بازی کنان این مسابفه تکیل شده است و شما نمیتوانید در آن شرکت کنید ، لطفا از منوی تورنومنت ها ،‌مسابقه دیگری را انتخاب کنید.";
+                        }
                     }else{
-                        $text = "متاسفانه تعداد بازی کنان این مسابفه تکیل شده است و شما نمیتوانید در آن شرکت کنید ، لطفا از منوی تورنومنت ها ،‌مسابقه دیگری را انتخاب کنید.";
+                        $text = "شما هنوز آیدی پلاتو خود را احراز نکرده اید ،‌پس از احراز هویت مجددا برای عضویت تلاش کنید.";
                     }
                 }else{
-                    $text = "شما هنوز آیدی پلاتو خود را احراز نکرده اید ،‌پس از احراز هویت مجددا برای عضویت تلاش کنید.";
+                    $text = "شما قبلا در این تورنومنت شرکت کرده اید.";
                 }
+
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'صفحه اصلی' , 'callback_data' => 'صفحه اصلی'  ]);
 
