@@ -6,7 +6,8 @@
 
             <!-- Start Content-->
 
-            <div class="container-fluid">
+            <h3>Welcome to dashboard</h3>
+          {{--  <div class="container-fluid">
 
                 <div class="row">
 
@@ -502,7 +503,7 @@
                 </div>
                 <!-- end row -->
 
-            </div>
+            </div>--}}
             <!-- container-fluid -->
 
         </div> <!-- content -->
