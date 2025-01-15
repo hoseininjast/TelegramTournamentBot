@@ -45,6 +45,7 @@ class TelegramController extends Controller
             'chat_id' => $ChanelID['id'],
             'user_id' => $this->GetUserInfo('id'),
         ]);
+        Log::info($JoinInfo);
         if($JoinInfo['status'] != 'member' || $JoinInfo['status'] != 'creator' || $JoinInfo['status'] != 'administrator' ){
             $inlineLayout = [
                 [
