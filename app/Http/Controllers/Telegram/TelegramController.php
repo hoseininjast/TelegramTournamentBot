@@ -40,9 +40,9 @@ class TelegramController extends Controller
 
         $this->User = $this->SaveTelegramUser();
 
-
-       /* $JoinInfo = Telegram::getChatMember([
-            'chat_id' => '2452640944',
+        $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
+        $JoinInfo = Telegram::getChatMember([
+            'chat_id' => $ChanelID['id'],
             'user_id' => $this->GetUserInfo('id'),
         ]);
         if($JoinInfo['status'] != 'member' || $JoinInfo['status'] != 'creator' || $JoinInfo['status'] != 'administrator' ){
@@ -57,7 +57,7 @@ class TelegramController extends Controller
             $text = 'برای استفاده از این ربات باید در کانال ما عضو شوید ، بعد از عضویت میتوانید از تمام امکانات ربات استفاده کنید.';
             $this->ResponseWithPhoto($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
             return 'ok';
-        }*/
+        }
 
         $MainMenuKeyboard = [
             [
@@ -388,8 +388,9 @@ class TelegramController extends Controller
 
             if ($this->Data['callback_query']['data'] == 'CheckMembership'){
 
+                $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
                 $JoinInfo = Telegram::getChatMember([
-                    'chat_id' => '-2452640944',
+                    'chat_id' => $ChanelID['id'],
                     'user_id' => $this->GetUserInfo('id'),
                 ]);
                 if($JoinInfo['status'] == 'member' || $JoinInfo['status'] == 'creator' || $JoinInfo['status'] == 'administrator' ){
