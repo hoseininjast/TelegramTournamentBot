@@ -45,8 +45,7 @@ class TelegramController extends Controller
             'chat_id' => $ChanelID['id'],
             'user_id' => $this->GetUserInfo('id'),
         ]);
-        Log::info($this->GetUserInfo('id'));
-        if($JoinInfo['status'] != 'member' || $JoinInfo['status'] != 'creator' || $JoinInfo['status'] != 'administrator' ){
+        if($JoinInfo['status'] == 'left' ){
             $inlineLayout = [
                 [
                     Keyboard::inlineButton(['text' => 'عضویت در کانال', 'url' => 'https://t.me/+ilnte2oSnXszNjY0']),
