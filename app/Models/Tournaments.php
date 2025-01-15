@@ -50,4 +50,8 @@ class Tournaments extends Model
     {
         return $this->hasOne(TournamentHistory::class , 'TournamentID' , 'id');
     }
+    public function isJoined(int $UserID)
+    {
+        return $this->Players()->where('UserID' , $UserID)->count() > 0 ? true : false ;
+    }
 }
