@@ -297,11 +297,13 @@ class TelegramController extends Controller
 جوایز : \n {$adwards}
 وضعیت : {$Status}
                 ";
-                if($this->User->PlatoID){
+
+                if($this->User->PlatoID && !$Tournaments->isJoined($this->User->id)){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'JoinTournament-'.$Tournaments->id ]);
                 }else{
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
                 }
+
                 if($Tournaments->Mode == 'Free'){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
                 }else{
@@ -377,12 +379,15 @@ class TelegramController extends Controller
                     }else{
                         $text = "شما هنوز آیدی پلاتو خود را احراز نکرده اید ،‌پس از احراز هویت مجددا برای عضویت تلاش کنید.";
                     }
+
                 }else{
                     $text = "شما قبلا در این تورنومنت شرکت کرده اید.";
+
                 }
 
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'صفحه اصلی' , 'callback_data' => 'صفحه اصلی'  ]);
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Tournament-' . $Tournaments->id  ]);
 
 
                 $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/JoinedTheTournament.png');

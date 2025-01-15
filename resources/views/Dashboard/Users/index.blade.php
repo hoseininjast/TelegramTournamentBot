@@ -20,6 +20,7 @@
                                             <th>Name</th>
                                             <th>Email</th>
                                             <th>Role</th>
+                                            <th>Admin</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -30,6 +31,7 @@
                                                 <td>{{$user->name}}</td>
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->Role}}</td>
+                                                <td>{{$user->Admin->Username}}</td>
                                                 <td>
                                                     <a class="row" href="{{route('Dashboard.Users.Delete' , $user->id)}}" data-confirm-delete="true" >Delete</a>
 

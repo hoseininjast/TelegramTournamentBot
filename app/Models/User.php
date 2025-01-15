@@ -25,6 +25,7 @@ class User extends Authenticatable
         'password',
         'Image',
         'Role',
+        'AdminID',
         'WalletAddress',
         'TelegramUserID',
         'TelegramChatID',
@@ -50,4 +51,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    public function Admin()
+    {
+        return $this->hasOne(User::class , 'id' , 'AdminID');
+    }
+
 }

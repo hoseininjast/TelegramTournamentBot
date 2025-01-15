@@ -30,34 +30,57 @@
                                         <form method="POST" action="{{route('Dashboard.Users.Create')}}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
-                                                <div class="mb-3 col-6">
+                                                <div class="mb-3 col-4">
                                                     <label for="name" class="form-label">Name</label>
                                                     <input type="text" id="name" name="name" class="form-control" required>
                                                 </div>
 
-                                                <div class="mb-3 col-6">
+                                                <div class="mb-3 col-4">
                                                     <label for="Username" class="form-label">Username</label>
                                                     <input type="text" id="Username" name="Username" class="form-control" required>
                                                 </div>
-                                            </div>
 
-
-                                            <div class="row">
-                                                <div class="mb-3 col-6">
+                                                <div class="mb-3 col-4">
                                                     <label for="email" class="form-label">Email</label>
                                                     <input type="email" id="email" name="email" class="form-control" required>
                                                 </div>
-
-                                                <div class="mb-3 col-6">
-                                                    <label for="Role"  class="form-label">Role</label>
-                                                    <select class="form-select" id="Role" name="Role">
-                                                        <option selected>Select User Role</option>
-                                                        <option value="Admin">Admin</option>
-                                                        <option value="Supervisor">Supervisor</option>
-                                                        <option value="User">User</option>
-                                                    </select>
-                                                </div>
                                             </div>
+
+
+                                            @if(\Auth::user()->Role == 'Owner')
+                                                <div class="row">
+
+
+
+                                                    <div class="mb-3 col-6">
+                                                        <label for="Role"  class="form-label">Role</label>
+                                                        <select class="form-select" id="Role" name="Role">
+                                                            <option selected>Select User Role</option>
+                                                            <option value="Admin">Admin</option>
+                                                            <option value="Supervisor">Supervisor</option>
+                                                            <option value="User">User</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="mb-3 col-6">
+                                                        <label for="AdminID"  class="form-label">Admin</label>
+                                                        <select class="form-select" id="AdminID" name="AdminID">
+                                                            <option selected>Select User admin</option>
+                                                            @foreach($Admins as $admin)
+                                                                <option value="{{$admin->id}}">{{$admin->Username}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+
+                                                </div>
+                                            @else
+
+                                                <input type="hidden" name="Role" value="Supervisor">
+                                                <input type="hidden" name="AdminID" value="{{Auth::id()}}">
+                                            @endif
+
+
 
 
                                             <div class="row">

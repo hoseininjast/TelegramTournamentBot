@@ -32,7 +32,13 @@ class TournamentsController extends Controller
     public function Manage(int $ID)
     {
         $Tournament = Tournaments::find($ID);
-        return view('Dashboard.Tournaments.Manage')->with(['Tournament' => $Tournament]);
+        $TournamentPlans = TournamentPlans::where('TournamentID' , $Tournament->id)->where('SupervisorID' , '!=' , null)->get('SupervisorID');
+        $Supervisorids = [];
+        foreach ($TournamentPlans as $tournamentPlan) {
+            $Supervisorids[] = $tournamentPlan->SupervisorID;
+        }
+        $Supervisors = User::whereIn('id' , $Supervisorids)->get();
+        return view('Dashboard.Tournaments.Manage')->with(['Tournament' => $Tournament , 'Supervisors' => $Supervisors]);
     }
     public function StartStage1(int $ID)
     {

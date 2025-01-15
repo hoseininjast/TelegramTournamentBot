@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tournament_supervisors', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('SupervisorID');
+        Schema::table('tournament_plans', function (Blueprint $table) {
+            $table->unsignedBigInteger('SupervisorID')->nullable()->after('WinnerID');
             $table->foreign('SupervisorID')->references('id')->on('users')->cascadeOnDelete();
-            $table->unsignedBigInteger('TournamentID');
-            $table->foreign('TournamentID')->references('id')->on('tournaments')->cascadeOnDelete();
-            $table->timestamps();
         });
     }
 
@@ -27,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tournament_supervisors');
+        Schema::table('tournament_plans', function (Blueprint $table) {
+            $table->dropForeign(['SupervisorID']);
+            $table->dropColumn(['SupervisorID']);
+        });
     }
 };

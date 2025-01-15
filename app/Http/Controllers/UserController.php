@@ -14,7 +14,11 @@ class UserController extends Controller
 
     public function index()
     {
-        $Users = User::all();
+        if(\Auth::user()->Role == 'Owner'){
+            $Users = User::all();
+        }else{
+            $Users = User::where('AdminID' , \Auth::id())->get();
+        }
         confirmDelete('Delete User!', 'Are you sure you want to delete this user?');
         return view('Dashboard.Users.index')->with(['Users' => $Users]);
     }
@@ -26,7 +30,8 @@ class UserController extends Controller
     }
     public function Add()
     {
-        return view('Dashboard.Users.Add');
+        $Admins = User::whereIn('Role' ,['Owner' , 'Admin'] )->get(['id' , 'Username']);
+        return view('Dashboard.Users.Add')->with(['Admins' => $Admins]);
 
     }
     public function Create(Request $request)
@@ -36,6 +41,7 @@ class UserController extends Controller
             'Username' => 'required|string|unique:users',
             'email' => 'required|email|unique:users',
             'Role' => 'required|string|in:Admin,Supervisor,User',
+            'AdminID' => 'required|integer|exists:users,id',
             'password' => 'required|string',
             'WalletAddress' => 'nullable|string|regex:/^(0x)?(?i:[0-9a-f]){40}$/',
         ]);
@@ -45,6 +51,7 @@ class UserController extends Controller
             'Username' => $request->Username,
             'email' => $request->email,
             'Role' => $request->Role,
+            'AdminID' => $request->AdminID,
             'password' => \Hash::make($request->password),
             'WalletAddress' => $request->WalletAddress,
             'Image' => 'https://platotournament.ai1polaris.com/images/Users/DefaultProfile.png',

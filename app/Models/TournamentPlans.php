@@ -17,6 +17,7 @@ class TournamentPlans extends Model
         'Player2Score',
         'Time',
         'WinnerID',
+        'SupervisorID',
         'Status',
     ];
     use HasFactory;
@@ -43,5 +44,9 @@ class TournamentPlans extends Model
     public function Winner()
     {
         return $this->belongsTo(TelegramUsers::class , 'WinnerID' , 'id');
+    }
+    public function Supervisor()
+    {
+        return $this->hasOne(User::class , 'id' , 'SupervisorID');
     }
 }

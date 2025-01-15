@@ -13,7 +13,22 @@ class TournamentPlansController extends Controller
     public function Manage(int $ID)
     {
         $TournamentPlan = TournamentPlans::find($ID);
+        if($TournamentPlan->SupervisorID != \Auth::id()){
+            \Alert::error('you dont have access to this game plan');
+            return redirect()->back();
+        }
         return view('Dashboard.TournamentPlan.Manage')->with(['TournamentPlan' => $TournamentPlan]);
+
+    }
+    public function JoinAsSupervisor(int $ID)
+    {
+        $TournamentPlan = TournamentPlans::find($ID);
+        $TournamentPlan->update([
+            'SupervisorID' => \Auth::id()
+        ]);
+        \Alert::success('Tournament joined successfully');
+
+        return redirect()->route('Dashboard.Tournaments.Manage' , $TournamentPlan->TournamentID);
 
     }
     public function Update(int $ID , Request $request)
@@ -25,6 +40,10 @@ class TournamentPlansController extends Controller
         ]);
 
         $TournamentPlan = TournamentPlans::find($ID);
+        if($TournamentPlan->SupervisorID != \Auth::id()){
+            \Alert::error('you dont have access to this game plan');
+            return redirect()->back();
+        }
         $TournamentPlan->update([
             'Player1Score' => $request->Player1Score,
             'Player2Score' => $request->Player2Score,
@@ -69,6 +88,10 @@ class TournamentPlansController extends Controller
             'Time' => 'required|date_format:Y-m-d H:i:s',
         ]);
         $TournamentPlan = TournamentPlans::find($ID);
+        if($TournamentPlan->SupervisorID != \Auth::id()){
+            \Alert::error('you dont have access to this game plan');
+            return redirect()->back();
+        }
         $TournamentPlan->update([
             'Time' => $request->Time
         ]);
