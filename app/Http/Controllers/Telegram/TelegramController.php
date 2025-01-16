@@ -191,6 +191,7 @@ class TelegramController extends Controller
                 foreach (Games::all() as $game) {
                     if($key == 3){
                         $Line++;
+                        $key = 0;
                     }
                     $inlineLayout[][$Line] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'FreeTournamentList-' . $game->id ]);
                 }
