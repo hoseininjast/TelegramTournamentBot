@@ -303,7 +303,7 @@ class TelegramController extends Controller
                         $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
                     }
                 }else{
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'دیدن برنامه بازی ها' , 'callback_data' => 'TournamentPlans-'.$Tournaments->id ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'دیدن برنامه بازی ها' , 'callback_data' => 'MyTournament-'.$Tournaments->id ]);
                 }
 
 
@@ -331,6 +331,12 @@ class TelegramController extends Controller
                 $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
                 $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
 
+
+                for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
+                }
+
+                
                 $Winners = '';
                 foreach ($Tournaments->History->Winners as $key => $playerid) {
                     $User = TelegramUsers::find($playerid);
@@ -443,6 +449,7 @@ class TelegramController extends Controller
                 $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
 
             }
+
             if(preg_match('/^ShowTournamentPlan\d+\sStage\d+$/' , $this->Data['callback_query']['data'])){
 
 
