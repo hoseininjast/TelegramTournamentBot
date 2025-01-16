@@ -133,7 +133,7 @@ class TournamentsController extends Controller
             $JalaliDate2 = Verta($NextStageTime)->format('%A, %d %B  H:i ');
 
 
-            for ($i = 0 , $o = 0 ; $o <= $TotalGroup ; $i += 2 ,$o++ , $CurrentGroup++) {
+            for ($i = 0 , $o = 0 ; $o < $TotalGroup ; $i += 2 ,$o++ , $CurrentGroup++) {
 
                 TournamentPlans::create([
                     'TournamentID' => $Tournament->id,
