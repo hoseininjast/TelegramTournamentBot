@@ -86,7 +86,7 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
                 $Tournaments = $this->User->Tournaments;
                 foreach ($Tournaments as $tournament) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Tournament->Name , 'callback_data' => 'Tournament-' . $tournament->Tournament->id ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Tournament->Name , 'callback_data' => 'MyTournament-' . $tournament->Tournament->id ]);
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
@@ -298,11 +298,16 @@ class TelegramController extends Controller
 وضعیت : {$Status}
                 ";
 
-                if($this->User->PlatoID && !$Tournaments->isJoined($this->User->id)){
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'JoinTournament-'.$Tournaments->id ]);
+                if(!$Tournaments->isJoined($this->User->id)){
+                    if($this->User->PlatoID){
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'JoinTournament-'.$Tournaments->id ]);
+                    }else{
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
+                    }
                 }else{
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'دیدن برنامه بازی ها' , 'callback_data' => 'TournamentPlans-'.$Tournaments->id ]);
                 }
+
 
                 if($Tournaments->Mode == 'Free'){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
@@ -321,6 +326,50 @@ class TelegramController extends Controller
                 $inlineLayout = [];
                 $Tournaments = Tournaments::find($TournamentID);
                 $History = $Tournaments->History;
+                $Status = __('messages.Status.' . $Tournaments->Status);
+                $Mode = __('messages.Mode.' . $Tournaments->Mode);
+                $Type = __('messages.Type.' . $Tournaments->Type);
+
+                $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
+                $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+
+                $Winners = '';
+                foreach ($Tournaments->History->Winners as $key => $playerid) {
+                    $User = TelegramUsers::find($playerid);
+                    $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
+                }
+
+                $text = "
+نام : {$Tournaments->Name}
+توضیحات : {$Tournaments->Description}
+نوع : {$Type}
+حالت : {$Mode}
+ مبلغ ورودی : $ {$Tournaments->Price}
+تعداد بازیکن : {$Tournaments->PlayerCount}
+زمان بازی : {$Tournaments->Time} روز
+تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
+نتیجه بازی :
+{$Winners}
+وضعیت : {$Status}
+                ";
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FinishedTournamentList-' . $Tournaments->Game->id ]);
+
+
+                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
+
+            }
+
+
+            if (preg_match('/^MyTournament-/' , $this->Data['callback_query']['data'])){
+                $TournamentID = preg_replace("/^MyTournament-/", "", $this->Data['callback_query']['data']);
+
+                $inlineLayout = [];
+                $Tournaments = Tournaments::find($TournamentID);
+                for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
+                }
                 $Status = __('messages.Status.' . $Tournaments->Status);
                 $Mode = __('messages.Mode.' . $Tournaments->Mode);
                 $Type = __('messages.Type.' . $Tournaments->Type);
