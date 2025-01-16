@@ -70,8 +70,6 @@ class TelegramController extends Controller
             ],
             [
                 Keyboard::inlineButton(['text' => 'کانال ما', 'url' => 'https://t.me/+ilnte2oSnXszNjY0']),
-                Keyboard::inlineButton(['text' => 'گروه ما', 'url' => 'https://t.me/+NsO_zelnt5o1NjU0']),
-                Keyboard::inlineButton(['text' => 'گروه پلاتو', 'url' => 'https://plato.app/26kv7e2hoah2z']),
             ],
         ];
 
@@ -367,9 +365,7 @@ class TelegramController extends Controller
 
                 $inlineLayout = [];
                 $Tournaments = Tournaments::find($TournamentID);
-                for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
-                }
+
                 $Status = __('messages.Status.' . $Tournaments->Status);
                 $Mode = __('messages.Mode.' . $Tournaments->Mode);
                 $Type = __('messages.Type.' . $Tournaments->Type);
@@ -377,13 +373,48 @@ class TelegramController extends Controller
                 $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
                 $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
 
-                $Winners = '';
-                foreach ($Tournaments->History->Winners as $key => $playerid) {
-                    $User = TelegramUsers::find($playerid);
-                    $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
-                }
 
-                $text = "
+                if ($Tournaments->Status == 'Pending'){
+                    $text = "
+نام : {$Tournaments->Name}
+توضیحات : {$Tournaments->Description}
+نوع : {$Type}
+حالت : {$Mode}
+ مبلغ ورودی : $ {$Tournaments->Price}
+تعداد بازیکن : {$Tournaments->PlayerCount}
+زمان بازی : {$Tournaments->Time} روز
+تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
+وضعیت : {$Status}
+";
+                }elseif($Tournaments->Status == 'Running'){
+                    for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
+                    }
+                    $text = "
+نام : {$Tournaments->Name}
+توضیحات : {$Tournaments->Description}
+نوع : {$Type}
+حالت : {$Mode}
+ مبلغ ورودی : $ {$Tournaments->Price}
+تعداد بازیکن : {$Tournaments->PlayerCount}
+زمان بازی : {$Tournaments->Time} روز
+تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
+وضعیت : {$Status}
+";
+
+                }elseif($Tournaments->Status == 'Finished'){
+                    for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
+                    }
+                    $Winners = '';
+                    foreach ($Tournaments->History->Winners as $key => $playerid) {
+                        $User = TelegramUsers::find($playerid);
+                        $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
+                    }
+
+                    $text = "
 نام : {$Tournaments->Name}
 توضیحات : {$Tournaments->Description}
 نوع : {$Type}
@@ -396,12 +427,24 @@ class TelegramController extends Controller
 نتیجه بازی :
 {$Winners}
 وضعیت : {$Status}
-                ";
+";
 
-                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FinishedTournamentList-' . $Tournaments->Game->id ]);
+
+
+                }
+
+
+
+
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت های من']);
 
 
                 $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
+
+            }
+            if(preg_match('/^ShowTournamentPlan\d+\sStage\d+$/' , $this->Data['callback_query']['data'])){
+
 
             }
 
@@ -443,9 +486,6 @@ class TelegramController extends Controller
 
             }
 
-
-
-
             if ($this->Data['callback_query']['data'] == 'CheckMembership'){
 
                 $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
@@ -479,7 +519,6 @@ class TelegramController extends Controller
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
                     $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
                 }
-
 
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
                     $ReferralID = preg_replace("/\/start\s/", "", $this->Data['message']['text']);
