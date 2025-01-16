@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Number2Word;
+use App\Jobs\NotifyTelegramUsersAboutTournamentJob;
 use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\TournamentPlans;
 use App\Models\Tournaments;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TournamentPlansController extends Controller
@@ -26,6 +29,26 @@ class TournamentPlansController extends Controller
         $TournamentPlan->update([
             'SupervisorID' => \Auth::id()
         ]);
+        $User1 = $TournamentPlan->Player1;
+        $User2 = $TournamentPlan->Player2;
+        $Supervisor = \Auth::user();
+
+        $text = "
+ناظر بازی شما مشخص شد.
+لطفا برای هماهنگی ساعت با او در ارتباط باشید.
+آیدی پلاتو ناظر : {$Supervisor->PlatoID}
+آیدی پلاتو بازیکن اول : {$User1->PlatoID}
+آیدی پلاتو بازیکن دوم : {$User2->PlatoID}
+@krypto_arena_bot
+";
+
+        if(env('APP_ENV') == 'production'){
+            NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
+            NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+            NotifyTelegramUsersJob::dispatch($Supervisor->TelegramUserID ,$text);
+        }
+
+
         \Alert::success('Tournament joined successfully');
 
         return redirect()->route('Dashboard.Tournaments.Manage' , $TournamentPlan->TournamentID);
@@ -111,9 +134,14 @@ class TournamentPlansController extends Controller
 @krypto_arena_bot
 ";
 
+
+
         if(env('APP_ENV') == 'production'){
             NotifyTelegramUsersJob::dispatch($User1 ,$text);
             NotifyTelegramUsersJob::dispatch($User2 ,$text);
+
+            NotifyTelegramUsersAboutTournamentJob::dispatch($TournamentPlan)->delay(Carbon::parse($TournamentPlan->Time)->subMinutes(15));
+
         }
 
 
