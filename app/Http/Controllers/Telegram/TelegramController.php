@@ -80,7 +80,6 @@ class TelegramController extends Controller
                 $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard );
             }
 
-
             if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
                 $Tournaments = $this->User->Tournaments;
                 foreach ($Tournaments as $tournament) {
@@ -156,8 +155,13 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'تاریخچه'){
 
                 $inlineLayout = [];
-                foreach (Games::all() as $game) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'FinishedTournamentList-' . $game->id ]);
+                $Games = Games::all();
+                for ($i = 0; $i < $Games->count(); $i+= 3) {
+                    $inlineLayout[] = [
+                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i + 1]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 2]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i + 2]->id ]),
+                    ];
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
@@ -205,8 +209,13 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'Paid'){
 
                 $inlineLayout = [];
-                foreach (Games::all() as $game) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'PaidTournamentList-' . $game->id ]);
+                $Games = Games::all();
+                for ($i = 0; $i < $Games->count(); $i+= 3) {
+                    $inlineLayout[] = [
+                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i + 1]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 2]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i + 2]->id ]),
+                    ];
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
 
@@ -221,11 +230,29 @@ class TelegramController extends Controller
 
                 $inlineLayout = [];
                 $Game = Games::find($GameID);
-                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , 'Free')->get();
+                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , 'Free')->where('Status' , 'Pending')->get();
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Free' ]);
+
+                $text = "
+لطفا تورنومنت مد نظر خود را انتخاب کنید.
+                ";
+                $this->EditMessage($text , $inlineLayout , $Game->Image);
+
+            }
+
+            if (preg_match('/^PaidTournamentList-/' , $this->Data['callback_query']['data'])){
+                $GameID = preg_replace("/^PaidTournamentList-/", "", $this->Data['callback_query']['data']);
+
+                $inlineLayout = [];
+                $Game = Games::find($GameID);
+                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , 'Paid')->where('Status' , 'Pending')->get();
+                foreach ($Tournaments as $tournament) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
+                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Paid' ]);
 
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
@@ -251,25 +278,6 @@ class TelegramController extends Controller
                 $this->EditMessage($text , $inlineLayout , $Game->Image);
 
             }
-
-            if (preg_match('/^PaidTournamentList-/' , $this->Data['callback_query']['data'])){
-                $GameID = preg_replace("/^PaidTournamentList-/", "", $this->Data['callback_query']['data']);
-
-                $inlineLayout = [];
-                $Game = Games::find($GameID);
-                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , 'Paid')->get();
-                foreach ($Tournaments as $tournament) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'Tournament-' . $tournament->id ]);
-                }
-                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Paid' ]);
-
-                $text = "
-لطفا تورنومنت مد نظر خود را انتخاب کنید.
-                ";
-                $this->EditMessage($text , $inlineLayout , $Game->Image);
-
-            }
-
 
             if (preg_match('/^Tournament-/' , $this->Data['callback_query']['data'])){
                 $TournamentID = preg_replace("/^Tournament-/", "", $this->Data['callback_query']['data']);
@@ -323,7 +331,6 @@ class TelegramController extends Controller
 
             }
 
-
             if (preg_match('/^TournamentHistory-/' , $this->Data['callback_query']['data'])){
                 $TournamentID = preg_replace("/^TournamentHistory-/", "", $this->Data['callback_query']['data']);
 
@@ -370,7 +377,6 @@ class TelegramController extends Controller
                 $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
 
             }
-
 
             if (preg_match('/^MyTournament-/' , $this->Data['callback_query']['data'])){
                 $TournamentID = preg_replace("/^MyTournament-/", "", $this->Data['callback_query']['data']);
@@ -509,7 +515,6 @@ class TelegramController extends Controller
 
 
             }
-
 
             if (preg_match('/^JoinTournament-/' , $this->Data['callback_query']['data'])){
                 $TournamentID = preg_replace("/^JoinTournament-/", "", $this->Data['callback_query']['data']);
