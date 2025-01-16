@@ -387,7 +387,8 @@ class TelegramController extends Controller
 تاریخ پایان : {$JalaliDate2}
 وضعیت : {$Status}
 ";
-                }elseif($Tournaments->Status == 'Running'){
+                }
+                elseif($Tournaments->Status == 'Running'){
                     for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
                         $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
                     }
@@ -404,7 +405,8 @@ class TelegramController extends Controller
 وضعیت : {$Status}
 ";
 
-                }elseif($Tournaments->Status == 'Finished'){
+                }
+                elseif($Tournaments->Status == 'Finished'){
                     for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
                         $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
                     }
@@ -429,8 +431,6 @@ class TelegramController extends Controller
 وضعیت : {$Status}
 ";
 
-
-
                 }
 
 
@@ -444,6 +444,55 @@ class TelegramController extends Controller
 
             }
             if(preg_match('/^ShowTournamentPlan\d+\sStage\d+$/' , $this->Data['callback_query']['data'])){
+
+
+                $exp = explode(' ' , $this->Data['callback_query']['data']);
+                $TournamentID = preg_replace("/^ShowTournamentPlan/", "", $exp[0]);
+                $Stage = preg_replace("/^Stage/", "", $exp[1]);
+
+                $inlineLayout = [];
+                $Tournaments = Tournaments::find($TournamentID);
+
+                $TournamentPlan = $Tournaments->Plans()->where('Stage' , $Stage)->get();
+                $Stages = $Tournaments->StagesDate;
+                $CurrentStageTime = $Stages[$Stage - 1 ];
+                $CurrentStageTime = Verta($CurrentStageTime)->format('%A, %d %B  H:i ');
+
+                $Games = '';
+                foreach ($TournamentPlan as $plan) {
+                    $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
+                    $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
+                    $Games .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
+
+                }
+
+
+                if($TournamentPlan->count() > 0){
+
+                    $text = "
+برنامه بازی مرحله {$this->numToWordForStages($Stage)}
+زمان شروع مرحله : {$CurrentStageTime}
+\nلیست بازی ها :
+{$Games}
+@krypto_arena_bot
+";
+
+                }else{
+
+                    $text = "
+برنامه بازی مرحله {$this->numToWordForStages($Stage)}
+زمان شروع مرحله : {$CurrentStageTime}
+هنوز لیست بازی ها مشخص نشده ، بعد از مشخص شدن میتوانید در همین صفحه ببینید.
+@krypto_arena_bot
+";
+
+                }
+
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'MyTournament-' . $TournamentID]);
+
+
+                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
 
 
             }
