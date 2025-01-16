@@ -186,13 +186,12 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'Free'){
 
                 $inlineLayout = [];
-                $Line = 1;
-                $key = 0;
                 $Games = Games::all();
-                for ($i = 0; $i < $Games->count(); $i++) {
-                    $inlineLayout[][] = [
+                for ($i = 0; $i < $Games->count(); $i+= 3) {
+                    $inlineLayout[] = [
                         Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i]->id ]),
-
+                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i + 1]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 2]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i + 2]->id ]),
                     ];
                 }
 
