@@ -77,7 +77,7 @@ class TelegramController extends Controller
 
 
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
-                $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard );
+                $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
