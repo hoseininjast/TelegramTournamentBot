@@ -188,13 +188,14 @@ class TelegramController extends Controller
                 $inlineLayout = [];
                 $Line = 1;
                 $key = 0;
-                foreach (Games::all() as $game) {
-                    if($key == 3){
-                        $Line++;
-                        $key = 0;
-                    }
-                    $inlineLayout[][$Line] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'FreeTournamentList-' . $game->id ]);
+                $Games = Games::all();
+                for ($i = 0; $i < $Games->count(); $i++) {
+                    $inlineLayout[][] = [
+                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i]->id ]),
+
+                    ];
                 }
+
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
 
                 $text = 'لطفا بازی را انتخاب کنید.';
