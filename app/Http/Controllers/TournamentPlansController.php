@@ -51,7 +51,7 @@ class TournamentPlansController extends Controller
 
         \Alert::success('Tournament joined successfully');
 
-        return redirect()->route('Dashboard.Tournaments.Manage' , $TournamentPlan->TournamentID);
+        return redirect()->route('Dashboard.TournamentPlan.Manage' , $TournamentPlan->id);
 
     }
     public function Update(int $ID , Request $request)

@@ -20,6 +20,9 @@
                                     </div>
                                 @endif
 
+                                <div class="row d-flex justify-content-around">
+                                    <img style="max-width: 300px;max-height: fit-content;" src="{{$Tournament->Image != null ? $Tournament->Image : 'https://platotournament.ai1polaris.com/images/MainLogo.png'}}"  alt="Tournament image"/>
+                                </div>
 
                             </div>
                             {{-- Users and supervisors table--}}

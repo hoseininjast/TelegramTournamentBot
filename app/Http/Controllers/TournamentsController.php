@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Number2Word;
+use App\Http\Traits\Uploader;
 use App\Jobs\NotifyAllTelegramUsersJob;
 use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\Games;
@@ -18,6 +19,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class TournamentsController extends Controller
 {
+    use Uploader;
+
     public function index()
     {
         $Tournaments = Tournaments::all();
@@ -268,6 +271,7 @@ class TournamentsController extends Controller
         $request->validate([
             'Name' => 'required|string',
             'Description' => 'required|string',
+            'Image' => 'required|file|image',
             'PlayerCount' => 'required|integer',
             'TotalStage' => 'required|integer',
             'Type' => 'required|string|in:Knockout,WorldCup,League',
@@ -281,10 +285,17 @@ class TournamentsController extends Controller
             'Awards' => 'required|array',
             'StagesDate' => 'required|array',
         ]);
+        if($request->hasFile('Image')){
+            $AttachmentAddress = $this->UploadImage($request->Image , 'Tournaments');
+        }else{
+            $AttachmentAddress = 'https://platotournament.ai1polaris.com/images/MainLogo.png';
+        }
+
 
         $Tournament = Tournaments::create([
             'Name' => $request->Name,
             'Description' => $request->Description,
+            'Image' => $AttachmentAddress,
             'PlayerCount' => $request->PlayerCount,
             'TotalStage' => $request->TotalStage,
             'LastStage' => 0,

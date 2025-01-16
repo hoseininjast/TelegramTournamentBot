@@ -33,15 +33,23 @@
                                         <form method="POST" action="{{route('Dashboard.Tournaments.Create')}}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row">
-                                                <div class="mb-3 col-6">
+                                                <div class="mb-3 col-4">
                                                     <label for="Name" class="form-label">Name</label>
                                                     <input type="text" id="Name" name="Name" class="form-control" value="{{old('Name')}}">
                                                 </div>
 
-                                                <div class="mb-3 col-6">
+                                                <div class="mb-3 col-4">
                                                     <label for="Description" class="form-label">Description</label>
                                                     <textarea name="Description" id="Description" class="form-control"  rows="1">{{old('Description')}}</textarea>
                                                 </div>
+
+
+                                                <div class="mb-3 col-4">
+                                                    <label for="Image" class="form-label">Image</label>
+                                                    <input type="file" id="Image" name="Image" accept="image/*" class="form-control">
+
+                                                </div>
+
                                             </div>
 
 

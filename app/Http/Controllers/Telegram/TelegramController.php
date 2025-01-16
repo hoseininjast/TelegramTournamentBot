@@ -679,7 +679,7 @@ class TelegramController extends Controller
 آدرس ولت شما با موفقیت ثبت شد
 هم اکنون میتوانید در مسابقات شرکت کنید و جوایز خود را دریافت کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/Robot/WalledAddress.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/Robot/WalletAddress.png' );
 
                 }
 

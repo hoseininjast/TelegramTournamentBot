@@ -10,6 +10,7 @@ class Tournaments extends Model
     protected $fillable = [
         'Name',
         'Description',
+        'Image',
         'PlayerCount',
         'TotalStage',
         'LastStage',
