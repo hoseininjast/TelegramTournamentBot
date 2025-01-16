@@ -327,7 +327,7 @@ class TelegramController extends Controller
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'PaidTournamentList-' . $Tournaments->Game->id ]);
                 }
 
-                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
+                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
 
             }
 
@@ -374,7 +374,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FinishedTournamentList-' . $Tournaments->Game->id ]);
 
 
-                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
+                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
 
             }
 
@@ -458,7 +458,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت های من']);
 
 
-                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
+                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
 
             }
 
@@ -511,7 +511,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'MyTournament-' . $TournamentID]);
 
 
-                $this->EditMessage($text , $inlineLayout , $Tournaments->Game->Image);
+                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
 
 
             }
@@ -549,7 +549,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'Tournament-' . $Tournaments->id  ]);
 
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/JoinedTheTournament.png');
+                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
 
             }
 

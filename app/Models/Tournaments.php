@@ -55,4 +55,8 @@ class Tournaments extends Model
     {
         return $this->Players()->where('UserID' , $UserID)->count() > 0 ? true : false ;
     }
+    public function GetImage()
+    {
+        return $this->Image != null ? $this->Image : $this->Game->Image ;
+    }
 }
