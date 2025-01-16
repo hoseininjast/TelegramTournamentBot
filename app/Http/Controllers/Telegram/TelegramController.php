@@ -186,8 +186,13 @@ class TelegramController extends Controller
             if ($this->Data['callback_query']['data'] == 'Free'){
 
                 $inlineLayout = [];
+                $Line = 1;
+                $key = 0;
                 foreach (Games::all() as $game) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'FreeTournamentList-' . $game->id ]);
+                    if($key == 3){
+                        $Line++;
+                    }
+                    $inlineLayout[][$Line] = Keyboard::inlineButton(['text' => $game->Name , 'callback_data' => 'FreeTournamentList-' . $game->id ]);
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
 
@@ -336,7 +341,7 @@ class TelegramController extends Controller
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
                 }
 
-                
+
                 $Winners = '';
                 foreach ($Tournaments->History->Winners as $key => $playerid) {
                     $User = TelegramUsers::find($playerid);
