@@ -584,7 +584,7 @@ class TelegramController extends Controller
             if (isset($this->Data['message']['text'])){
 
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
-                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
+                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/Robot/Main.png' );
                 }
 
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
@@ -617,7 +617,7 @@ class TelegramController extends Controller
                                 'Charge' => $RefferalUser->Charge + 0.01
                             ]);
 
-                            $this->ResponseWithPhoto("بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار " ,$inlineLayout , 'https://platotournament.ai1polaris.com/images/MainLogo.png' ,$RefferalUser->TelegramUserID);
+                            $this->ResponseWithPhoto("بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار " ,$inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png' ,$RefferalUser->TelegramUserID);
                             $text = "معرف شما ثبت شد و هم اکنون تمام امکانات ربات برای شما در دسترس میباشد. ";
 
                         }else{
@@ -629,7 +629,7 @@ class TelegramController extends Controller
 
 
 
-                    $this->ResponseWithPhoto($text , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/MainLogo.png' );
+                    $this->ResponseWithPhoto($text , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/Robot/Main.png' );
                 }
 
                 if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
