@@ -22,6 +22,7 @@
 
 
                             </div>
+                            {{-- Users and supervisors table--}}
                             @if(\Auth::user()->Role == 'Owner')
                                 <div class="card-body ">
                                     <h4 class="header-title">Users</h4>
@@ -120,71 +121,89 @@
                                         </table>
                                     </div>
                                 </div>
-
-
                             @endif
 
 
 
 
+                            {{--Stage plans--}}
+                            @if(\Auth::user()->isOwner() || \Auth::user()->isAdmin())
 
-                            @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
+                                @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
 
-                                <div class="card-body border-top border-primary">
-                                    <h4 class="header-title">Stage {{$i}} Game plans</h4>
+                                    <div class="card-body border-top border-primary">
+                                        <h4 class="header-title">Stage {{$i}} Game plans</h4>
 
-                                    <div class="table-responsive">
-                                        <table class="table table-dark mb-0">
-                                            <thead>
-                                            <tr>
-                                                <th>Group</th>
-                                                <th>Player 1</th>
-                                                <th>Player 2</th>
-                                                <th>Time</th>
-                                                <th>Score</th>
-                                                <th>Winner</th>
-                                                <th>action</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            @foreach($Tournament->Plans()->where('Stage' , $i)->get() as $plan)
+                                        <div class="table-responsive">
+                                            <table class="table table-dark mb-0">
+                                                <thead>
                                                 <tr>
-                                                    <td>{{$plan->Group}}</td>
-                                                    <td>{{$plan->Player1->UserName}} => {{$plan->Player1->PlatoID}} </td>
-                                                    <td>{{$plan->Player2->UserName}} => {{$plan->Player2->PlatoID}} </td>
-                                                    <td>{{$plan->Time}}</td>
-                                                    <td>{{$plan->Player1Score ?? 0}} / {{$plan->Player2Score ?? 0}}</td>
-                                                    <td>{{$plan->WinnerID ? $plan->Winner->PlatoID :'not know'}}</td>
-                                                    <td>
-                                                        @if($plan->SupervisorID == null)
-                                                            <a href="{{route('Dashboard.TournamentPlan.JoinAsSupervisor' , $plan->id)}}" class="btn btn-sm btn-info waves-effect waves-light">Join as supervisor</a>
-                                                            @else
-                                                            @if($plan->SupervisorID == \Auth::id())
-                                                                @if($plan->Status == 'Pending')
-                                                                    <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}" class="btn btn-sm btn-success waves-effect waves-light">Manage</a>
-                                                                @else
-                                                                    <a href="#" class="btn btn-sm btn-outline-dark waves-effect waves-light disabled">Manage</a>
-                                                                @endif
-                                                            @else
-                                                                <button class="btn btn-sm btn-outline-danger disabled" style="cursor: not-allowed">not allowed</button>
-                                                            @endif
-                                                        @endif
-
-
-
-
-
-                                                    </td>
+                                                    <th>Group</th>
+                                                    <th>Player 1</th>
+                                                    <th>Player 2</th>
+                                                    <th>Time</th>
+                                                    <th>Score</th>
+                                                    <th>Winner</th>
+                                                    <th>Supervisor</th>
+                                                    <th>action</th>
                                                 </tr>
-                                            @endforeach
+                                                </thead>
+                                                <tbody>
+                                                @foreach($Tournament->Plans()->where('Stage' , $i)->get() as $plan)
+                                                    <tr>
+                                                        <td>{{$plan->Group}}</td>
+                                                        <td>{{$plan->Player1->UserName}} => {{$plan->Player1->PlatoID}} </td>
+                                                        <td>{{$plan->Player2->UserName}} => {{$plan->Player2->PlatoID}} </td>
+                                                        <td>{{$plan->Time}}</td>
+                                                        <td>{{$plan->Player1Score ?? 0}} / {{$plan->Player2Score ?? 0}}</td>
+                                                        <td>{{$plan->WinnerID ? $plan->Winner->PlatoID :'not know'}}</td>
+                                                        <td>
+                                                            @if(\Auth::user()->isAdmin())
+                                                                    @if($plan->Supervisor->AdminID == \Auth::id() || $plan->SupervisorID == \Auth::id())
+                                                                        {{$plan->SupervisorID ? $plan->Supervisor->Username :'not know'}}
+                                                                    @else
+                                                                        {{$plan->SupervisorID ? $plan->Supervisor->Admin->Username :'not know'}}
+                                                                    @endif
+                                                                @else
+                                                                {{$plan->SupervisorID ? $plan->Supervisor->Username :'not know'}}
+                                                                @endif
+                                                        </td>
+                                                        <td>
+                                                            @if($plan->SupervisorID == null)
+                                                                <a href="{{route('Dashboard.TournamentPlan.JoinAsSupervisor' , $plan->id)}}" class="btn btn-sm btn-info waves-effect waves-light">Join as supervisor</a>
+                                                            @else
+                                                                @if($plan->SupervisorID == \Auth::id())
+                                                                    @if($plan->Status == 'Pending')
+                                                                        <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}" class="btn btn-sm btn-success waves-effect waves-light">Manage</a>
+                                                                    @else
+                                                                        <a href="#" class="btn btn-sm btn-outline-dark waves-effect waves-light disabled">Manage</a>
+                                                                    @endif
+                                                                @else
+                                                                    <button class="btn btn-sm btn-outline-danger disabled" style="cursor: not-allowed">not allowed</button>
+                                                                @endif
+                                                            @endif
 
 
-                                            </tbody>
-                                        </table>
+
+
+
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
-                                </div>
 
-                            @endfor
+                                @endfor
+
+
+                            @else
+
+                            @endif
+
 
                         </div>
                         @if(Auth::user()->Role == 'Owner')

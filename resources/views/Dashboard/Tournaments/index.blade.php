@@ -34,7 +34,9 @@
                                                 <td>{{$tournament->Status}}</td>
                                                 <td>
                                                     <a class="row" href="{{route('Dashboard.Tournaments.Manage' , $tournament->id)}}">Manage</a>
-                                                    <a class="row" href="{{route('Dashboard.Tournaments.Delete' , $tournament->id)}}"  data-confirm-delete="true" >Delete</a>
+                                                    @if(Auth::user()->isOwner())
+                                                        <a class="row" href="{{route('Dashboard.Tournaments.Delete' , $tournament->id)}}"  data-confirm-delete="true" >Delete</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
