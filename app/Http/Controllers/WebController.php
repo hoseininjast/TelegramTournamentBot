@@ -8,4 +8,8 @@ class WebController extends Controller
     {
         return view('Dashboard.index');
     }
+    public function GotoDashboard()
+    {
+        return redirect()->route('Dashboard.index');
+    }
 }

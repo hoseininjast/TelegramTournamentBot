@@ -158,9 +158,9 @@ class TelegramController extends Controller
                 $Games = Games::all();
                 for ($i = 0; $i < $Games->count(); $i+= 3) {
                     $inlineLayout[] = [
-                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i]->id ]),
-                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i + 1]->id ]),
                         Keyboard::inlineButton(['text' => $Games[$i + 2]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i + 2]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i + 1]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FinishedTournamentList-' . $Games[$i]->id ]),
                     ];
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
@@ -193,9 +193,9 @@ class TelegramController extends Controller
                 $Games = Games::all();
                 for ($i = 0; $i < $Games->count(); $i+= 3) {
                     $inlineLayout[] = [
-                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i]->id ]),
-                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i + 1]->id ]),
                         Keyboard::inlineButton(['text' => $Games[$i + 2]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i + 2]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i + 1]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'FreeTournamentList-' . $Games[$i]->id ]),
                     ];
                 }
 
@@ -212,9 +212,9 @@ class TelegramController extends Controller
                 $Games = Games::all();
                 for ($i = 0; $i < $Games->count(); $i+= 3) {
                     $inlineLayout[] = [
-                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i]->id ]),
-                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i + 1]->id ]),
                         Keyboard::inlineButton(['text' => $Games[$i + 2]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i + 2]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i + 1]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i + 1]->id ]),
+                        Keyboard::inlineButton(['text' => $Games[$i]->Name , 'callback_data' => 'PaidTournamentList-' . $Games[$i]->id ]),
                     ];
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت ها' ]);
