@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('OrderID');
             $table->string('PaymentID');
-            $table->float('FiatAmount' , 8 , 8);
-            $table->float('CryptoAmount' , 8 , 8);
+            $table->float('FiatAmount' , 15 , 8);
+            $table->float('CryptoAmount' , 15 , 8);
             $table->string('PaymentMethod');
             $table->string('PayingAddress');
             $table->string('UserTransactionHash')->nullable();
