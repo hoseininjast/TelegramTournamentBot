@@ -13,7 +13,7 @@
                                 <h4 class="header-title">Games</h4>
 
                                 <div class="table-responsive">
-                                    <table class="table table-dark mb-0">
+                                    <table class="table table-dark table-striped table-bordered text-center mb-0">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -28,7 +28,9 @@
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$game->Name}}</td>
                                                 <td>{{$game->Description}}</td>
-                                                <td>nothing</td>
+                                                <td>
+                                                    <a class="btn btn-sm btn-danger waves-effect waves-light" href="{{route('Dashboard.Games.Delete' , $game->id)}}"  data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
+                                                </td>
                                             </tr>
                                         @endforeach
 

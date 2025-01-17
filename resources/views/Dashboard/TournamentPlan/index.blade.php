@@ -13,7 +13,7 @@
                                 <h4 class="header-title">Tournaments</h4>
 
                                 <div class="table-responsive">
-                                    <table class="table table-dark mb-0">
+                                    <table class="table table-dark table-striped table-bordered text-center mb-0">
                                         <thead>
                                         <tr>
                                             <th>#</th>

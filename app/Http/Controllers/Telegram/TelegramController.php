@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Telegram;
 
 use App\Classes\Number2Word;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\CryptoTools;
 use App\Models\Games;
+use App\Models\Payments;
 use App\Models\TelegramUserRewards;
 use App\Models\TelegramUsers;
 use App\Models\TournamentHistory;
@@ -23,6 +25,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 class TelegramController extends Controller
 {
 
+    use CryptoTools;
     protected  $Data ;
     protected $ChatID;
     protected $MessageID;
@@ -55,7 +58,7 @@ class TelegramController extends Controller
                 ],
             ];
             $text = 'برای استفاده از این ربات باید در کانال ما عضو شوید ، بعد از عضویت میتوانید از تمام امکانات ربات استفاده کنید.';
-            $this->ResponseWithPhoto($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
+            $this->ResponseWithPhoto($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
             return 'ok';
         }
 
@@ -77,7 +80,7 @@ class TelegramController extends Controller
 
 
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
-                $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
+                $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
@@ -90,7 +93,7 @@ class TelegramController extends Controller
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
                 ";
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/MyTournaments.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/MyTournaments.png');
 
             }
 
@@ -104,7 +107,7 @@ class TelegramController extends Controller
                 }else{
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
                 }
-                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'null']);
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'شارژ کیف پول']);
 
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
@@ -120,7 +123,30 @@ class TelegramController extends Controller
 لینک معرفی شما : https://t.me/krypto_arena_bot?start={$User->TelegramUserID}
 برای مدیریت حساب خود از دکمه های زیر استفاده کنید.
 ";
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/MyAccount.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/MyAccount.png');
+            }
+
+            if ($this->Data['callback_query']['data'] == 'شارژ کیف پول'){
+
+                $inlineLayout = [
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ با Polygon' , 'callback_data' => 'ChargeWith-Polygon' ]),
+                        Keyboard::inlineButton(['text' => 'شارژ با Ton' , 'callback_data' => 'ChargeWith-Ton' ])
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ با USDT(POS)' , 'callback_data' => 'ChargeWith-USDTPOS' ]),
+                        Keyboard::inlineButton(['text' => 'شارژ با USDT(TON)' , 'callback_data' => 'ChargeWith-USDTTON' ])
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'حساب کاربری من' ])
+                    ]
+                ];
+
+                $text = "
+لطفا ارز مورد نظر خود را انتخاب کنید.
+";
+
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/ChargeWallet.jpg');
             }
 
             if ($this->Data['callback_query']['data'] == 'احراز هویت پلاتو'){
@@ -137,7 +163,7 @@ class TelegramController extends Controller
 پس از ارسال آیدی اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Plato.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Plato.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'اضافه کردن آدرس والت'){
@@ -149,7 +175,7 @@ class TelegramController extends Controller
 پس از ثبت آدرس والت اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/WalletAddress.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/WalletAddress.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'تاریخچه'){
@@ -167,7 +193,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/TournamentHistory.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/TournamentHistory.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت ها'){
@@ -184,7 +210,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Tournaments.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Tournaments.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'Free'){
@@ -203,7 +229,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا بازی را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/FreeTournaments.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/FreeTournaments.png');
             }
 
             if ($this->Data['callback_query']['data'] == 'Paid'){
@@ -221,7 +247,7 @@ class TelegramController extends Controller
 
                 $text = 'لطفا بازی را انتخاب کنید.';
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/PaidTournaments.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/PaidTournaments.png');
             }
 
 
@@ -553,6 +579,199 @@ class TelegramController extends Controller
 
             }
 
+            if (preg_match('/^ChargeWith-/' , $this->Data['callback_query']['data'])){
+                $TokenName = preg_replace("/^ChargeWith-/", "", $this->Data['callback_query']['data']);
+                $inlineLayout = [
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ 1 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount1'   ]),
+                        Keyboard::inlineButton(['text' => 'شارژ 2 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount2'   ]),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ 5 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount5'   ]),
+                        Keyboard::inlineButton(['text' => 'شارژ 10 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount10'   ]),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ 20 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount20'   ]),
+                        Keyboard::inlineButton(['text' => 'شارژ 50 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount50'   ]),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'شارژ 100 دلار' , 'callback_data' => 'ChargeWith'. $TokenName .' Amount100'   ]),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'مبالغ دیگر(به زودی)' , 'callback_data' => 'null'   ]),
+                    ],
+                    [
+                        Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'شارژ کیف پول'  ])
+                    ],
+                ];
+
+                $text = "
+شارژ کیف پول
+ارز انتخاب شده : {$TokenName}
+لطفا مبلغ موردنظر خود را انتخاب کنید.
+";
+
+                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
+
+            }
+
+            if(preg_match('/^ChargeWith(Polygon|Ton|USDTPOS|USDTTON)\sAmount\d+$/' , $this->Data['callback_query']['data']) == 1){
+
+                $exp = explode(' ' , $this->Data['callback_query']['data']);
+                $PaymentMethod = preg_replace("/^ChargeWith/", "", $exp[0]);
+                $Amount = preg_replace("/^Amount/", "", $exp[1]);
+
+                $inlineLayout = [];
+
+                $PaymentDetail = $this->CreatePaymentOrder($PaymentMethod , $Amount);
+
+                $User = $this->SaveTelegramUser();
+
+                if($PaymentDetail){
+
+                    $Payment = Payments::create([
+                        'OrderID' => $PaymentDetail['order_id'],
+                        'PaymentID' => $PaymentDetail['payment_id'],
+                        'FiatAmount' => $Amount,
+                        'CryptoAmount' => $PaymentDetail['pay_amount'],
+                        'PaymentMethod' => $PaymentMethod,
+                        'PayingAddress' => $PaymentDetail['pay_address'],
+                        'Status' => 'Pending',
+                        'UserID' => $User->id,
+                    ]);
+
+                    $PaymentID = $PaymentDetail['payment_id'];
+                    $WalletAddress = $pay_address = $PaymentDetail['pay_address'];
+                    $pay_amount = $PaymentDetail['pay_amount'];
+
+                    if ($PaymentMethod == 'Polygon'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
+                        $PaymentAddress = "https://metamask.app.link/send/{$WalletAddress}@137?value=" . $pay_amount ."e18";
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id ]);
+                    }
+                    elseif ($PaymentMethod == 'USDTPOS'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
+                        $PayAmountForUSDT = preg_replace("/\./", "", round($pay_amount, 6 ,PHP_ROUND_HALF_UP) );
+                        $PaymentAddress = "https://metamask.app.link/send/0xc2132D05D31c914a87C6611C10748AEb04B58e8F@137/transfer?address={$pay_address}&uint256={$PayAmountForUSDT}";
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id]);
+                    }
+                    elseif ($PaymentMethod == 'Ton'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/Ton.png';
+                        $PayAmountForTon = preg_replace("/\./", "", $pay_amount);
+                        $pay_amount_button = $PayAmountForTon . 0;
+                        $PaymentAddress = "https://app.tonkeeper.com/transfer/{$WalletAddress}?amount={$pay_amount_button}";
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id  ]);
+                    }
+                    elseif ($PaymentMethod == 'USDTTON'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDTTON.png';
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id ]);
+                    }
+
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'ChargeWith-' . $PaymentMethod  ]);
+
+                    $text = "
+شارژ کیف پول
+‼️پیش از‌ پرداخت ، لطفا تمامی بند ها را مطالعه کنید‼️
+1⃣ مبلغ فاكتور شما به شرح زير ميباشد. لطفا در صورت تاييد روى دكمه پرداخت كليک كنيد.
+2⃣ پس از پرداخت توسط والت به همين صفحه برگرديد و هر ٣٠ ثانيه روى دكمه بروزرسانى كليک كنيد تا سرويس مورد نظر براى شما ارسال شود.
+3⃣ در صورتي كه ديوايس شما اپديت نباشد، ميتوانيد مبلغ و ادرس مقصد را به صورت دستى و دقيق در والتتان وارد كرده و انتقال را انجام دهيد سپس به همين صفحه برگرديد و روي دكمه بروزرسانى كليک كنيد.
+" . PHP_EOL . "
+💲 روش پرداخت :". $PaymentMethod . "
+💲 مبلغ شارژ :". number_format($Amount ,2 ,'.' , ',') . " $
+💸 مبلغ نهایی : 📑" . "<code><b>" . number_format($pay_amount ,6 ,'.' , ',') . "</b></code> " . $PaymentMethod ."📑
+آدرس ولت : 📑<code>{$WalletAddress}</code>📑
+";
+
+                    $this->EditMessage($text ,$inlineLayout , $Pic);
+
+
+
+                }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'ChargeWith-' . $PaymentMethod  ]);
+                    $text = "مشکلی در ساخت فاکتور پیش آمده لطفا بعدا دوباره تلاش کنید.";
+                    $this->EditMessage($text ,$inlineLayout);
+
+                }
+
+
+            }
+
+            if (preg_match('/^CheckPaymentStatus-/' , $this->Data['callback_query']['data']) == 1){
+
+                $inlineLayout = [];
+
+                $PaymentID = preg_replace("/^CheckPaymentStatus-/", "", $this->Data['callback_query']['data']);
+                $Payment = Payments::find($PaymentID);
+
+                $WalletAddress = $pay_address = $Payment->PayingAddress;
+                $pay_amount = $Payment->CryptoAmount;
+                $Amount = $Payment->FiatAmount;
+                $PaymentMethod = $Payment->PaymentMethod;
+
+
+
+                $Status = $this->CheckPaymentStatus($Payment);
+                $Code = $Status['Code'];
+                $Message = $Status['Message'];
+
+                if ($Code == 4){
+                    $text = "
+{$Message}
+با تشکر از خرید شما.";
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'حساب کاربری' , 'callback_data' => 'حساب کاربری' ]);
+
+                    $this->EditMessage($text ,$inlineLayout , 'https://kryptoarena.fun/images/Robot/WalletAddress.png' );
+
+                }else{
+
+                    if ($PaymentMethod == 'Polygon'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
+                    }
+                    elseif ($PaymentMethod == 'USDTPOS'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
+                    }
+                    elseif ($PaymentMethod == 'Ton'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/Ton.png';
+                    }
+                    elseif ($PaymentMethod == 'USDTTON'){
+                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDTTON.png';
+                    }
+
+                    $text = "
+شارژ کیف پول
+‼️پیش از‌ پرداخت ، لطفا تمامی بند ها را مطالعه کنید‼️
+1⃣ مبلغ فاكتور شما به شرح زير ميباشد. لطفا در صورت تاييد روى دكمه پرداخت كليک كنيد.
+2⃣ پس از پرداخت توسط والت به همين صفحه برگرديد و هر ٣٠ ثانيه روى دكمه بروزرسانى كليک كنيد تا سرويس مورد نظر براى شما ارسال شود.
+3⃣ در صورتي كه ديوايس شما اپديت نباشد، ميتوانيد مبلغ و ادرس مقصد را به صورت دستى و دقيق در والتتان وارد كرده و انتقال را انجام دهيد سپس به همين صفحه برگرديد و روي دكمه بروزرسانى كليک كنيد.
+" . PHP_EOL . "
+💲 روش پرداخت :". $PaymentMethod . "
+💲 مبلغ شارژ :". number_format($Amount ,2 ,'.' , ',') . " $
+💸 مبلغ نهایی : 📑" . "<code><b>" . number_format($pay_amount ,6 ,'.' , ',') . "</b></code> " . $PaymentMethod ."📑
+آدرس ولت : 📑<code>{$WalletAddress}</code>📑
+
+
+وضعیت فاکتور :
+{$Message}
+";
+
+
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'ChargeWith-' . $PaymentMethod  ]);
+                    $this->EditMessage($text ,$inlineLayout , $Pic , 'photo');
+
+
+                }
+
+
+
+
+
+
+            }
+
             if ($this->Data['callback_query']['data'] == 'CheckMembership'){
 
                 $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
@@ -574,7 +793,7 @@ class TelegramController extends Controller
 
 
 
-                $this->EditMessage($text , $inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png');
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
             }
 
 
@@ -584,7 +803,7 @@ class TelegramController extends Controller
             if (isset($this->Data['message']['text'])){
 
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
-                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/Robot/Main.png' );
+                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
@@ -617,7 +836,7 @@ class TelegramController extends Controller
                                 'Charge' => $RefferalUser->Charge + 0.01
                             ]);
 
-                            $this->ResponseWithPhoto("بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار " ,$inlineLayout , 'https://platotournament.ai1polaris.com/images/Robot/Main.png' ,$RefferalUser->TelegramUserID);
+                            $this->ResponseWithPhoto("بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار " ,$inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png' ,$RefferalUser->TelegramUserID);
                             $text = "معرف شما ثبت شد و هم اکنون تمام امکانات ربات برای شما در دسترس میباشد. ";
 
                         }else{
@@ -629,7 +848,7 @@ class TelegramController extends Controller
 
 
 
-                    $this->ResponseWithPhoto($text , $MainMenuKeyboard , 'https://platotournament.ai1polaris.com/images/Robot/Main.png' );
+                    $this->ResponseWithPhoto($text , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
                 if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
@@ -645,7 +864,7 @@ class TelegramController extends Controller
 
                     $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
 
-                    $this->ResponseWithPhoto($text , $inlineLayout  , 'https://platotournament.ai1polaris.com/images/Robot/Tournaments.png');
+                    $this->ResponseWithPhoto($text , $inlineLayout  , 'https://kryptoarena.fun/images/Robot/Tournaments.png');
                 }
 
                 if (preg_match('/^PlatoID-/' , $this->Data['message']['text'])){
@@ -663,7 +882,7 @@ class TelegramController extends Controller
 اکانت پلاتو شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/Robot/Plato.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/Plato.png' );
 
                 }
 
@@ -679,7 +898,7 @@ class TelegramController extends Controller
 آدرس ولت شما با موفقیت ثبت شد
 هم اکنون میتوانید در مسابقات شرکت کنید و جوایز خود را دریافت کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://platotournament.ai1polaris.com/images/Robot/WalletAddress.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/WalletAddress.png' );
 
                 }
 
@@ -761,7 +980,7 @@ class TelegramController extends Controller
             $MessageID =  $this->Data['callback_query']['message']['message_id'];
         }
         if ($PhotoAddress == null){
-            $PhotoAddress = 'https://platotournament.ai1polaris.com/images/MainLogo.png';
+            $PhotoAddress = 'https://kryptoarena.fun/images/MainLogo.png';
         }
         if ($Keyboard){
             if ($MediaType == 'photo'){
@@ -818,6 +1037,15 @@ class TelegramController extends Controller
                         'resize_keyboard' => true,
                         'one_time_keyboard' => true
                     ])
+                ]);
+            }
+            else{
+                $this->SendChatAction('SendText');
+                Telegram::editMessageCaption([
+                    'chat_id' => $this->ChatID,
+                    'message_id' => $MessageID,
+                    'caption' => $Message,
+                    'parse_mode' => 'html'
                 ]);
             }
 

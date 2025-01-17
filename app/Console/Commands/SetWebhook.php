@@ -27,7 +27,7 @@ class SetWebhook extends Command
     {
         $client = new \GuzzleHttp\Client();
         $botToken = env('TELEGRAM_BOT_TOKEN');
-        $address = "https://api.telegram.org/bot{$botToken}/setWebhook?url=https://platotournament.ai1polaris.com/telegram/webhook&drop_pending_updates=True";
+        $address = "https://api.telegram.org/bot{$botToken}/setWebhook?url=https://kryptoarena.fun/telegram/webhook&drop_pending_updates=True";
         $response = $client->request('POST', $address );
         $Response = json_decode($response->getBody(), true);
         if($Response['result'] == true){

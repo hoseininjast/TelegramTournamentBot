@@ -29,6 +29,16 @@ class TelegramUsers extends Model
         return $this->hasMany(UserTournaments::class , 'UserID' , 'id');
     }
 
+    public function TournamentsWon()
+    {
+        /*        // get player position in the game
+        $D = TournamentHistory::find(6);
+        dd(array_keys($D->Winners, $PlayerID));*/
+        return TournamentHistory::all()->filter(function($tournament) {
+            return in_array($this->id, $tournament->Winners) ? $tournament : null;
+        });
+    }
+
     public function Referral()
     {
         return $this->hasMany(TelegramUsers::class , 'ReferralID' , 'id');

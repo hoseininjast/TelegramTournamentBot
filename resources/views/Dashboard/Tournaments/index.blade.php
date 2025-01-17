@@ -13,7 +13,7 @@
                                 <h4 class="header-title">Tournaments</h4>
 
                                 <div class="table-responsive">
-                                    <table class="table table-dark mb-0">
+                                    <table class="table table-dark table-striped table-bordered text-center mb-0">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -33,9 +33,9 @@
                                                 <td>{{$tournament->PlayerCount}}</td>
                                                 <td>{{$tournament->Status}}</td>
                                                 <td>
-                                                    <a class="row" href="{{route('Dashboard.Tournaments.Manage' , $tournament->id)}}">Manage</a>
+                                                    <a class="btn btn-sm btn-primary waves-effect waves-light" href="{{route('Dashboard.Tournaments.Manage' , $tournament->id)}}">Manage <i class="mdi mdi-eye"></i> </a>
                                                     @if(Auth::user()->isOwner())
-                                                        <a class="row" href="{{route('Dashboard.Tournaments.Delete' , $tournament->id)}}"  data-confirm-delete="true" >Delete</a>
+                                                        <a class="btn btn-sm btn-danger waves-effect waves-light" href="{{route('Dashboard.Tournaments.Delete' , $tournament->id)}}"  data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
                                                     @endif
                                                 </td>
                                             </tr>

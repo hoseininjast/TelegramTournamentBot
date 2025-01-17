@@ -27,11 +27,11 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
 
     Route::group( ['prefix' => 'Users' , 'as' => 'Users.' ] ,function (){
         Route::get('index' , [\App\Http\Controllers\UserController::class , 'index'])->name('index');
-        Route::get('Telegram' , [\App\Http\Controllers\UserController::class , 'Telegram'])->name('Telegram');
+        Route::get('Telegram' , [\App\Http\Controllers\UserController::class , 'Telegram'])->name('Telegram')->middleware('isOwner');
         Route::get('Add' , [\App\Http\Controllers\UserController::class , 'Add'])->name('Add');
         Route::post('Create' , [\App\Http\Controllers\UserController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\UserController::class , 'Delete'])->name('Delete');
-        Route::delete('TelegramDelete/{id}' , [\App\Http\Controllers\UserController::class , 'TelegramDelete'])->name('TelegramDelete');
+        Route::delete('TelegramDelete/{id}' , [\App\Http\Controllers\UserController::class , 'TelegramDelete'])->name('TelegramDelete')->middleware('isOwner');
     });
     Route::group( ['prefix' => 'Profile' , 'as' => 'Profile.' ] ,function (){
         Route::get('Setting' , [\App\Http\Controllers\UserController::class , 'Setting'])->name('Setting');
@@ -39,23 +39,25 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
     });
 
 
-    Route::group( ['prefix' => 'Games' , 'as' => 'Games.' ] ,function (){
+    Route::group( ['prefix' => 'Games' , 'as' => 'Games.' , 'middleware' => 'isOwner'] ,function (){
         Route::get('index' , [\App\Http\Controllers\GamesController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\GamesController::class , 'Add'])->name('Add');
         Route::post('Create' , [\App\Http\Controllers\GamesController::class , 'Create'])->name('Create');
+        Route::delete('Delete/{id}' , [\App\Http\Controllers\GamesController::class , 'Delete'])->name('Delete')->middleware('isOwner');
+
     });
 
 
     Route::group( ['prefix' => 'Tournaments' , 'as' => 'Tournaments.' ] ,function (){
         Route::get('index' , [\App\Http\Controllers\TournamentsController::class , 'index'])->name('index');
-        Route::get('Add' , [\App\Http\Controllers\TournamentsController::class , 'Add'])->name('Add');
+        Route::get('Add' , [\App\Http\Controllers\TournamentsController::class , 'Add'])->name('Add')->middleware('isOwner');
         Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Manage'])->name('Manage');
-        Route::get('StartStage1/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartStage1'])->name('StartStage1');
-        Route::get('StartNextStage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartNextStage'])->name('StartNextStage');
-        Route::post('Close/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Close'])->name('Close');
-        Route::get('ClosePage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'ClosePage'])->name('ClosePage');
-        Route::post('Create' , [\App\Http\Controllers\TournamentsController::class , 'Create'])->name('Create');
-        Route::delete('Delete/{id}' , [\App\Http\Controllers\TournamentsController::class , 'Delete'])->name('Delete');
+        Route::get('StartStage1/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartStage1'])->name('StartStage1')->middleware('isOwner');
+        Route::get('StartNextStage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartNextStage'])->name('StartNextStage')->middleware('isOwner');
+        Route::post('Close/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Close'])->name('Close')->middleware('isOwner');
+        Route::get('ClosePage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'ClosePage'])->name('ClosePage')->middleware('isOwner');
+        Route::post('Create' , [\App\Http\Controllers\TournamentsController::class , 'Create'])->name('Create')->middleware('isOwner');
+        Route::delete('Delete/{id}' , [\App\Http\Controllers\TournamentsController::class , 'Delete'])->name('Delete')->middleware('isOwner');
     });
 
 

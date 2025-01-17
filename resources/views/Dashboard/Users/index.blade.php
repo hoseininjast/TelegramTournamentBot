@@ -13,7 +13,7 @@
                                 <h4 class="header-title">Users</h4>
 
                                 <div class="table-responsive">
-                                    <table class="table table-dark mb-0">
+                                    <table class="table table-dark table-striped table-bordered text-center mb-0">
                                         <thead>
                                         <tr>
                                             <th>#</th>
@@ -33,7 +33,7 @@
                                                 <td>{{$user->Role}}</td>
                                                 <td>{{$user->Admin->Username}}</td>
                                                 <td>
-                                                    <a class="row" href="{{route('Dashboard.Users.Delete' , $user->id)}}" data-confirm-delete="true" >Delete</a>
+                                                    <a class="btn btn-sm btn-danger waves-effect waves-light" href="{{route('Dashboard.Users.Delete' , $user->id)}}" data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
 
                                                 </td>
                                             </tr>

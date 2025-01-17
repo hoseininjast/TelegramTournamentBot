@@ -31,7 +31,7 @@
                                     <h4 class="header-title">Users</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-dark mb-0">
+                                        <table class="table table-dark table-striped table-bordered text-center mb-0">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
@@ -63,7 +63,7 @@
                                     <h4 class="header-title">Supervisors</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-dark mb-0">
+                                        <table class="table table-dark table-striped table-bordered text-center mb-0">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
@@ -98,7 +98,7 @@
                                     <h4 class="header-title">Users</h4>
 
                                     <div class="table-responsive">
-                                        <table class="table table-dark mb-0">
+                                        <table class="table table-dark table-striped table-bordered text-center mb-0">
                                             <thead>
                                             <tr>
                                                 <th>#</th>
@@ -138,7 +138,7 @@
                                         <h4 class="header-title">Stage {{$i}} Game plans</h4>
 
                                         <div class="table-responsive">
-                                            <table class="table table-dark mb-0">
+                                            <table class="table table-dark table-striped table-bordered text-center mb-0">
                                                 <thead>
                                                 <tr>
                                                     <th>Group</th>

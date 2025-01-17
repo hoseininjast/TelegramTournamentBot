@@ -13,13 +13,15 @@
                                 <h4 class="header-title">Telegram Users</h4>
 
                                 <div class="table-responsive">
-                                    <table class="table table-dark mb-0">
+                                    <table class="table table-dark table-striped table-bordered text-center mb-0">
                                         <thead>
                                         <tr>
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Username</th>
                                             <th>PlatoID</th>
+                                            <th>Wallet</th>
+                                            <th>Tournaments</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -31,7 +33,27 @@
                                                 <td>{{$user->UserName}}</td>
                                                 <td>{{$user->PlatoID}}</td>
                                                 <td>
-                                                    <a class="row" href="{{route('Dashboard.Users.TelegramDelete' , $user->id)}}" data-confirm-delete="true" >Delete</a>
+                                                    <div class="">
+                                                        Wallet address : {{$user->WalletAddress ?? 'not set'}}
+                                                    </div>
+                                                    <div class="">
+                                                        Charge :${{$user->Charge}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="">
+                                                        total : {{$user->Tournaments()->count()}}
+                                                    </div>
+                                                    <div class="">
+                                                        win's : {{$user->TournamentsWon()->count()}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    @if($user->Tournaments()->count() > 0 )
+                                                        <a class="btn btn-sm btn-outline-dark waves-effect waves-light disabled" disabled href="#" >Delete <i class="mdi mdi-trash-can"></i> </a>
+                                                    @else
+                                                        <a class="btn btn-sm btn-danger waves-effect waves-light"  href="{{route('Dashboard.Users.TelegramDelete' , $user->id)}}" data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
+                                                    @endif
 
                                                 </td>
                                             </tr>
