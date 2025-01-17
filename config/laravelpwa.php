@@ -2,13 +2,14 @@
 
 return [
     'name' => 'Krypto Arena',
+    "description" => "Weather forecast information",
     'manifest' => [
         'name' => 'Krypto Arena',
         'short_name' => 'Krypto Arena',
         'start_url' => '/Dashboard/index',
         'background_color' => '#000000',
         'theme_color' => '#000000',
-        'display' => '',
+        'display' => 'standalone',
         'orientation'=> 'any',
         'status_bar'=> 'black',
         'icons' => [
@@ -57,13 +58,7 @@ return [
             '1668x2388' => '/images/icons/1668x2388.png',
             '2048x2732' => '/images/icons/2048x2732.png',
         ],
-        'shortcuts' => [
-            [
-                'name' => 'Dashboard',
-                'description' => 'Dashboard',
-                'url' => '/Dashboard/index'
-            ]
-        ],
+        'shortcuts' => [],
         'custom' => []
     ]
 ];
