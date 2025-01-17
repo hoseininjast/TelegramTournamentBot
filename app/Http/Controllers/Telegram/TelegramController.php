@@ -632,7 +632,7 @@ class TelegramController extends Controller
                     $Payment = Payments::create([
                         'OrderID' => $PaymentDetail['order_id'],
                         'PaymentID' => $PaymentDetail['payment_id'],
-                        'FiatAmount' => $Amount,
+                        'FiatAmount' => $PaymentDetail['price_amount'],
                         'CryptoAmount' => $PaymentDetail['pay_amount'],
                         'PaymentMethod' => $PaymentMethod,
                         'PayingAddress' => $PaymentDetail['pay_address'],

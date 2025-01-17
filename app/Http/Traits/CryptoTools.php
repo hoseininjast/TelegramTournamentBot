@@ -101,6 +101,7 @@ trait CryptoTools
             'payment_id' => $paymentDetails['payment_id'],
             'pay_address' => $paymentDetails['pay_address'],
             'pay_amount' => $paymentDetails['pay_amount'],
+            'price_amount' => $paymentDetails['price_amount'],
             'order_id' => $paymentDetails['order_id'],
         ];
 
