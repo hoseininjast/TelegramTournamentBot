@@ -611,7 +611,7 @@ class TelegramController extends Controller
 لطفا مبلغ موردنظر خود را انتخاب کنید.
 ";
 
-                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/WalletAddress.png');
 
             }
 

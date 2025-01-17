@@ -2,7 +2,7 @@
 
 return [
     'name' => 'Krypto Arena',
-    "description" => "Weather forecast information",
+    "description" => 'Earn Money & Have Fun',
     'manifest' => [
         'name' => 'Krypto Arena',
         'short_name' => 'Krypto Arena',
