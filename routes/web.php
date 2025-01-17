@@ -22,7 +22,7 @@ Route::get('/' , [\App\Http\Controllers\WebController::class , 'GotoDashboard'])
 
 
 Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
-    Route::get('/' , [\App\Http\Controllers\WebController::class , 'index'])->name('index');
+    Route::get('index' , [\App\Http\Controllers\WebController::class , 'index'])->name('index');
 
 
     Route::group( ['prefix' => 'Users' , 'as' => 'Users.' ] ,function (){
