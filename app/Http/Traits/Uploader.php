@@ -49,7 +49,7 @@ trait Uploader
         //Upload File
         $file->storeAs( $path , $filenametostore , ['disk' => 'publichtml']);
 
-        return 'https://platotournament.ai1polaris.com/Uploads/' . $path . $filenametostore;
+        return 'https://kryptoarena.fun/Uploads/' . $path . $filenametostore;
     }
     public function SiteIcon(Request $request){
         $request->validate([
