@@ -113,11 +113,13 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
                 $PlatoID = $User->PlatoID ? $User->PlatoID : 'ثبت نشده';
                 $WalletAddress = $User->WalletAddress ? $User->WalletAddress : 'ثبت نشده';
+                $TotalGame = $User->Tournaments()->count();
+                $Wins = $User->TournamentsWon()->count();
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
-شارژ کیف پول : \${$User->Charge}
-تعداد بازی ها : 0
-تعداد برد ها : 0
+شارژ کیف پول : $ {$User->Charge}
+تعداد بازی ها : {$TotalGame}
+تعداد برد ها : {$Wins}
 آیدی پلاتو : {$PlatoID}
 آدرس والت : {$WalletAddress}
 لینک معرفی شما : https://t.me/krypto_arena_bot?start={$User->TelegramUserID}
