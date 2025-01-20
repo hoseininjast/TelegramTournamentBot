@@ -102,7 +102,10 @@ class TelegramController extends Controller
                 $inlineLayout = [];
                 if($User->PlatoID == null){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
-                }if($User->WalletAddress == null){
+                }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آیدی پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
+                }
+                if($User->WalletAddress == null){
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'اضافه کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
                 }else{
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
@@ -115,6 +118,7 @@ class TelegramController extends Controller
                 $WalletAddress = $User->WalletAddress ? $User->WalletAddress : 'ثبت نشده';
                 $TotalGame = $User->Tournaments()->count();
                 $Wins = $User->TournamentsWon()->count();
+                $ReferralCount = TelegramUsers::where('ReferralID' , $User->id)->count();
                 $text = "
 در این صفحه شما میتوانید اکانت خود را مدیریت کنید
 شارژ کیف پول : $ {$User->Charge}
@@ -122,6 +126,7 @@ class TelegramController extends Controller
 تعداد قهرمانی ها : {$Wins}
 آیدی پلاتو : {$PlatoID}
 آدرس والت : {$WalletAddress}
+تعداد افراد معرفی شده : {$ReferralCount} نفر
 لینک معرفی شما : https://t.me/krypto_arena_bot?start={$User->TelegramUserID}
 برای مدیریت حساب خود از دکمه های زیر استفاده کنید.
 ";
@@ -322,6 +327,8 @@ class TelegramController extends Controller
 
                 $RemainingCount = $Tournaments->PlayerCount - $Tournaments->Players()->count();
                 $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
+                $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+                $GamesCount = $Tournaments->PlayerCount - 1;
 
                 $text = "
 نام : {$Tournaments->Name}
@@ -333,6 +340,9 @@ class TelegramController extends Controller
 جایگاه های باقی مانده : {$RemainingCount} عدد
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
+مراحل : {$Tournaments->TotalStage} مرحله
+تعداد بازی : {$GamesCount} بازی
 تعداد برندگان : {$Tournaments->Winners}
 جوایز : \n {$adwards}
 وضعیت : {$Status}
@@ -371,6 +381,7 @@ class TelegramController extends Controller
 
                 $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
                 $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+                $GamesCount = $Tournaments->PlayerCount - 1;
 
 
                 for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
@@ -384,6 +395,7 @@ class TelegramController extends Controller
                     $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
                 }
 
+
                 $text = "
 نام : {$Tournaments->Name}
 توضیحات : {$Tournaments->Description}
@@ -394,6 +406,8 @@ class TelegramController extends Controller
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$JalaliDate1}
 تاریخ پایان : {$JalaliDate2}
+مراحل : {$Tournaments->TotalStage} مرحله
+تعداد بازی : {$GamesCount} بازی
 نتیجه بازی :
 {$Winners}
 وضعیت : {$Status}
@@ -418,6 +432,7 @@ class TelegramController extends Controller
 
                 $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
                 $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+                $GamesCount = $Tournaments->PlayerCount - 1;
 
 
                 if ($Tournaments->Status == 'Pending'){
@@ -431,6 +446,8 @@ class TelegramController extends Controller
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$JalaliDate1}
 تاریخ پایان : {$JalaliDate2}
+مراحل : {$Tournaments->TotalStage} مرحله
+تعداد بازی : {$GamesCount} بازی
 وضعیت : {$Status}
 ";
                 }
