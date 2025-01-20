@@ -837,9 +837,9 @@ class TelegramController extends Controller
                     ];
 
                     if ($RefferalUser) {
-                        $User = $this->SaveTelegramUser($RefferalUser->id);
+                        $User = $this->SaveTelegramUser();
 
-                        if($User->ReferralID == null || $User->ReferralID == 1){
+                        if($User->ReferralID == null ){
 
                             $User->update([
                                 'ReferralID' => $RefferalUser->id
@@ -868,7 +868,7 @@ class TelegramController extends Controller
 
 
 
-                    $this->ResponseWithPhoto($text , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
                 if ($this->Data['message']['text'] == '/tournaments' || $this->Data['message']['text'] == 'tournaments'){
@@ -933,7 +933,7 @@ class TelegramController extends Controller
 
 
 
-    protected function SaveTelegramUser($ReferralID = 1){
+    protected function SaveTelegramUser($ReferralID = null){
 
         if (TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->count() > 0){
             $User = TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->first();
