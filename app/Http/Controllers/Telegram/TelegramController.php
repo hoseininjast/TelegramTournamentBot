@@ -839,7 +839,7 @@ class TelegramController extends Controller
                     if ($RefferalUser) {
                         $User = $this->SaveTelegramUser($RefferalUser->id);
 
-                        if($User->ReferralID == null){
+                        if($User->ReferralID == null || $User->ReferralID == 1){
 
                             $User->update([
                                 'ReferralID' => $RefferalUser->id
