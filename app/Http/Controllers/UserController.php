@@ -25,7 +25,7 @@ class UserController extends Controller
     }
     public function Telegram()
     {
-        $Users = TelegramUsers::paginate(5);
+        $Users = TelegramUsers::paginate(15);
         confirmDelete('Delete User!', 'Are you sure you want to delete this user?');
         return view('Dashboard.Users.Telegram')->with(['Users' => $Users]);
     }

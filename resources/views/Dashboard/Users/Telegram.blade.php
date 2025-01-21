@@ -39,7 +39,10 @@
                                                 <td>{{$user->PlatoID}}</td>
                                                 <td>
                                                     <div class="">
-                                                        Wallet address : {{$user->WalletAddress ?? 'not set'}}
+                                                        Polygon Wallet address : {{$user->WalletAddress ?? 'not set'}}
+                                                    </div>
+                                                    <div class="">
+                                                        Ton Wallet address : {{$user->TonWalletAddress ?? 'not set'}}
                                                     </div>
                                                     <div class="">
                                                         Charge :${{$user->Charge}}
