@@ -994,7 +994,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 آدرس والت شبکه تون شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
-                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/Plato.png' );
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/WalletAddress.png' );
 
                 }
 
