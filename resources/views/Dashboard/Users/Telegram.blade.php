@@ -33,7 +33,7 @@
                                                 <td>
                                                     <div>
                                                         {{$user->UserName}}
-                                                        Referral : {{$user->Referral->UserName ?? 'not set'}}
+                                                        Referral : {{$user->ReferralID ? $user->Referral->UserName : 'not set'}}
                                                     </div>
                                                 </td>
                                                 <td>{{$user->PlatoID}}</td>

@@ -325,7 +325,6 @@ class TelegramController extends Controller
                     $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
                 }
 
-                $RemainingCount = $Tournaments->PlayerCount - $Tournaments->Players()->count();
                 $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
                 $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
                 $GamesCount = $Tournaments->PlayerCount - 1;
@@ -337,7 +336,6 @@ class TelegramController extends Controller
 حالت : {$Mode}
  مبلغ ورودی : $ {$Tournaments->Price}
 تعداد بازیکن : {$Tournaments->PlayerCount}
-جایگاه های باقی مانده : {$RemainingCount} عدد
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$JalaliDate1}
 تاریخ پایان : {$JalaliDate2}
