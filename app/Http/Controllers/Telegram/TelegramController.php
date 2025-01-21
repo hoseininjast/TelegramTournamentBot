@@ -824,6 +824,60 @@ class TelegramController extends Controller
                     $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
+                if (preg_match('/\/Tournament\s([0-9]+)/' , $this->Data['message']['text']) ){
+                    $TournamentID = preg_replace("/\/Tournament\s/", "", $this->Data['message']['text']);
+                    $inlineLayout = [];
+                    $Tournaments = Tournaments::find($TournamentID);
+                    $Status = __('messages.Status.' . $Tournaments->Status);
+                    $Mode = __('messages.Mode.' . $Tournaments->Mode);
+                    $Type = __('messages.Type.' . $Tournaments->Type);
+                    $adwards = '';
+                    foreach ($Tournaments->Awards as $key => $award) {
+                        $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
+                    }
+
+                    $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
+                    $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+                    $GamesCount = $Tournaments->PlayerCount - 1;
+
+                    $text = "
+نام : {$Tournaments->Name}
+توضیحات : {$Tournaments->Description}
+نوع : {$Type}
+حالت : {$Mode}
+ مبلغ ورودی : $ {$Tournaments->Price}
+تعداد بازیکن : {$Tournaments->PlayerCount}
+زمان بازی : {$Tournaments->Time} روز
+تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
+مراحل : {$Tournaments->TotalStage} مرحله
+تعداد بازی : {$GamesCount} بازی
+تعداد برندگان : {$Tournaments->Winners}
+جوایز : \n {$adwards}
+وضعیت : {$Status}
+                ";
+
+                    if(!$Tournaments->isJoined($this->User->id)){
+                        if($this->User->PlatoID){
+                            $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'JoinTournament-'.$Tournaments->id ]);
+                        }else{
+                            $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
+                        }
+                    }else{
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'دیدن برنامه بازی ها' , 'callback_data' => 'MyTournament-'.$Tournaments->id ]);
+                    }
+
+
+                    if($Tournaments->Mode == 'Free'){
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
+                    }else{
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'PaidTournamentList-' . $Tournaments->Game->id ]);
+                    }
+
+                    $this->ResponseWithPhoto($text , $inlineLayout , $Tournaments->GetImage());
+
+                }
+
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
                     $ReferralID = preg_replace("/\/start\s/", "", $this->Data['message']['text']);
                     $RefferalUser = TelegramUsers::where('TelegramUserID' , $ReferralID)->first();

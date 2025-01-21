@@ -41,7 +41,7 @@ class TelegramUsers extends Model
 
     public function Referral()
     {
-        return $this->hasMany(TelegramUsers::class , 'id' , 'ReferralID');
+        return $this->hasOne(TelegramUsers::class , 'id' , 'ReferralID');
     }
 
 

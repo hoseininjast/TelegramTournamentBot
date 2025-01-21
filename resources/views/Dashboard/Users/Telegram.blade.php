@@ -32,8 +32,8 @@
                                                 <td>{{$user->FirstName .' ' . $user->LastName}}</td>
                                                 <td>
                                                     <div>
-                                                        {{$user->UserName}}
-                                                        Referral : {{$user->ReferralID ? $user->Referral->UserName : 'not set'}}
+                                                        <p>{{$user->UserName}}</p>
+                                                        <span>Referral : {{$user->ReferralID ? $user->Referral->UserName : 'not set'}}</span>
                                                     </div>
                                                 </td>
                                                 <td>{{$user->PlatoID}}</td>
@@ -68,12 +68,19 @@
                                         </tbody>
                                     </table>
                                 </div>
+                                <div class="row d-flex justify-content-center mt-3">
+                                    {!! $Users->links('pagination::bootstrap-4') !!}
+
+                                </div>
+
                             </div>
 
                         </div>
 
                     </div>
                 </div>
+
+
 
 
             </div> <!-- container-fluid -->

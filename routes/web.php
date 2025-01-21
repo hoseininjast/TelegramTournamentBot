@@ -38,6 +38,12 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
         Route::post('Update' , [\App\Http\Controllers\UserController::class , 'Update'])->name('Update');
     });
 
+    Route::group( ['prefix' => 'Settings' , 'as' => 'Settings.' ] ,function (){
+        Route::get('index' , [\App\Http\Controllers\SettingsController::class , 'Setting'])->name('Setting');
+        Route::post('Update' , [\App\Http\Controllers\SettingsController::class , 'Update'])->name('Update');
+        Route::post('SetWebhook' , [\App\Http\Controllers\SettingsController::class , 'SetWebhook'])->name('SetWebhook');
+    });
+
 
     Route::group( ['prefix' => 'Games' , 'as' => 'Games.' , 'middleware' => 'isOwner'] ,function (){
         Route::get('index' , [\App\Http\Controllers\GamesController::class , 'index'])->name('index');
@@ -52,6 +58,7 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
         Route::get('index' , [\App\Http\Controllers\TournamentsController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\TournamentsController::class , 'Add'])->name('Add')->middleware('isOwner');
         Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Manage'])->name('Manage');
+        Route::get('Fill/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Fill'])->name('Fill');
         Route::get('StartStage1/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartStage1'])->name('StartStage1')->middleware('isOwner');
         Route::get('StartNextStage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartNextStage'])->name('StartNextStage')->middleware('isOwner');
         Route::post('Close/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Close'])->name('Close')->middleware('isOwner');

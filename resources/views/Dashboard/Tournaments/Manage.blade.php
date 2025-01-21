@@ -30,6 +30,13 @@
                                 <div class="card-body ">
                                     <h4 class="header-title">Users</h4>
 
+                                    @if($Tournament->Players->count() < $Tournament->PlayerCount)
+                                        <div class=" d-flex justify-content-end mb-3">
+                                            <a class="btn btn-sm btn-success waves-effect waves-light"  href="{{route('Dashboard.Tournaments.Fill' , $Tournament->id)}}" data-confirm-delete="true" >Fill Tournament <i class="mdi mdi-account-multiple-plus"></i> </a>
+                                        </div>
+                                    @endif
+
+
                                     <div class="table-responsive">
                                         <table class="table table-dark table-striped table-bordered text-center mb-0">
                                             <thead>

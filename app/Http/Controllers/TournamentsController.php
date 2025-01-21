@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\Number2Word;
 use App\Http\Traits\Uploader;
 use App\Jobs\NotifyAllTelegramUsersJob;
+use App\Jobs\NotifyAllUsersAboutNewTournamentJob;
 use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\Games;
 use App\Models\TelegramUsers;
@@ -12,6 +13,7 @@ use App\Models\TournamentHistory;
 use App\Models\TournamentPlans;
 use App\Models\Tournaments;
 use App\Models\User;
+use App\Models\UserTournaments;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
 use Illuminate\Http\Request;
@@ -42,6 +44,35 @@ class TournamentsController extends Controller
         }
         $Supervisors = User::whereIn('id' , $Supervisorids)->get();
         return view('Dashboard.Tournaments.Manage')->with(['Tournament' => $Tournament , 'Supervisors' => $Supervisors]);
+    }
+    public function Fill(int $ID)
+    {
+        $Tournament = Tournaments::find($ID);
+        if($Tournament->Players->count() < $Tournament->PlayerCount){
+            $RemainingCount = $Tournament->PlayerCount - $Tournament->Players->count();
+            $LastFakeUser = TelegramUsers::where('UserName' , 'like' , '%KryptoArenaFreePosition%')->orderBy('id', 'DESC')->first();
+            $LastID = preg_replace('/KryptoArenaFreePosition/' , '' , $LastFakeUser->UserName);
+            for($i = 0; $i < $RemainingCount; $i++){
+                $LastID++;
+                $User = TelegramUsers::create([
+                    'TelegramUserID' => $LastID,
+                    'TelegramChatID' => $LastID,
+                    'UserName' => 'KryptoArenaFreePosition' . $LastID,
+                    'PlatoID' => 'KryptoArenaFreePosition' . $LastID,
+                ]);
+                UserTournaments::create([
+                    'UserID' => $User->id,
+                    'TournamentID' => $Tournament->id,
+                ]);
+            }
+            Alert::success('tournament filled with user and now you can start it.');
+        }else{
+            Alert::error('this tournament has been filled with user');
+        }
+
+
+        return redirect()->route('Dashboard.Tournaments.Manage' ,$Tournament->id );
+
     }
     public function StartStage1(int $ID)
     {
@@ -311,6 +342,9 @@ class TournamentsController extends Controller
             'StagesDate' => $request->StagesDate,
             'Status' => 'Pending',
         ]);
+
+        NotifyAllUsersAboutNewTournamentJob::dispatch($Tournament);
+
 
         \Alert::success('Tournament created successfully');
 
