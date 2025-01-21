@@ -32,7 +32,10 @@
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$user->FirstName .' ' . $user->LastName}}</td>
                                                 <td>{{$user->UserName}}</td>
-                                                <td>{{$user->ReferralID ? $user->Referral->UserName : 'not set'}}</td>
+                                                <td>
+                                                    <p>{{$user->ReferralID ? $user->Referral->UserName : 'not set'}}</p>
+                                                    <span>RC : {{$user->Referrals->count()}}</span>
+                                                </td>
                                                 <td>{{$user->PlatoID}}</td>
                                                 <td>
                                                     <div class="">
