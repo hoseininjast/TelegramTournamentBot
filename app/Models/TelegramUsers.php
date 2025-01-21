@@ -16,6 +16,7 @@ class TelegramUsers extends Model
         'LastName',
         'UserName',
         'WalletAddress',
+        'TonWalletAddress',
         'Charge',
         'PlatoID',
         'PlatoScreenShot',

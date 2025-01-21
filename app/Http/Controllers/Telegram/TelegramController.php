@@ -106,9 +106,14 @@ class TelegramController extends Controller
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آیدی پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
                 }
                 if($User->WalletAddress == null){
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'اضافه کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'اضافه کردن آدرس والت Polygon', 'callback_data' => 'اضافه کردن آدرس والت']);
                 }else{
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آدرس والت', 'callback_data' => 'اضافه کردن آدرس والت']);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آدرس والت Polygon', 'callback_data' => 'اضافه کردن آدرس والت']);
+                }
+                if($User->TonWalletAddress == null){
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'اضافه کردن آدرس والت Ton', 'callback_data' => 'اضافه کردن آدرس والت TON']);
+                }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عوض کردن آدرس والت Ton', 'callback_data' => 'اضافه کردن آدرس والت TON']);
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'شارژ کیف پول', 'callback_data' => 'شارژ کیف پول']);
 
@@ -179,6 +184,22 @@ class TelegramController extends Controller
 
                 $text = "
 لطفا آدرس والت شبکه polygon خود را برای ربات ارسال کنید
+پس از ثبت آدرس والت اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
+";
+
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/WalletAddress.png');
+            }
+
+            if ($this->Data['callback_query']['data'] == 'اضافه کردن آدرس والت TON'){
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'حساب کاربری من' ]);
+
+                $text = "
+لطفا آدرس والت شبکه Ton خود را برای ربات ارسال کنید
+اول کلمه ی  زیر را بنویسید سپس ادرس والت را به ان اضافه کنید
+Ton-{WalletAddress}
+برای مثال
+Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 پس از ثبت آدرس والت اکانت شما ثبت میشود و میتوانید در مسابقات شرکت کنید.
 ";
 
@@ -952,6 +973,25 @@ class TelegramController extends Controller
 
                     $text = "
 اکانت پلاتو شما ثبت شد.
+هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
+                ";
+                    $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/Plato.png' );
+
+                }
+
+                if (preg_match('/^Ton-/' , $this->Data['message']['text'])){
+                    $WalletAddress = preg_replace("/^Ton-/", "", $this->Data['message']['text']);
+
+                    $inlineLayout = [];
+
+                    $User = $this->SaveTelegramUser();
+                    $User->update([
+                        'TonWalletAddress' => $WalletAddress
+                    ]);
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'حساب کاربری من' , 'callback_data' => 'حساب کاربری من' ]);
+
+                    $text = "
+آدرس والت شبکه تون شما ثبت شد.
 هم اکنون میتوانید در مسابقات شرکت کنید و کیف پول خود را شارژ کنید.
                 ";
                     $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/Plato.png' );
