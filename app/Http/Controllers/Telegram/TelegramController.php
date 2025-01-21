@@ -51,7 +51,7 @@ class TelegramController extends Controller
         if($JoinInfo['status'] == 'left' ){
             $inlineLayout = [
                 [
-                    Keyboard::inlineButton(['text' => 'عضویت در کانال', 'url' => 'https://t.me/+ilnte2oSnXszNjY0']),
+                    Keyboard::inlineButton(['text' => 'عضویت در کانال', 'url' => 'https://t.me/krypto_arena']),
                 ],
                 [
                     Keyboard::inlineButton(['text' => 'بررسی عضویت', 'callback_data' => 'CheckMembership']),
@@ -72,7 +72,7 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => 'حساب کاربری', 'callback_data' => 'حساب کاربری من']),
             ],
             [
-                Keyboard::inlineButton(['text' => 'کانال ما', 'url' => 'https://t.me/+ilnte2oSnXszNjY0']),
+                Keyboard::inlineButton(['text' => 'کانال ما', 'url' => 'https://t.me/krypto_arena']),
             ],
         ];
 
@@ -826,6 +826,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $text = 'با تشکر از عضویت شما در کانال ما ، ثبت نام شما با موفقیت انجام شد و هم اکنون میتوانید از تمام امکانات ربات استفاده کنید.';
 
                 }else{
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'عضویت در کانال' , 'url' => 'https://t.me/krypto_arena' ]);
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بررسی مجدد' , 'callback_data' => 'CheckMembership' ]);
 
                     $text = 'شما در کانال ما عضو نیستید ، لطفا پس از عوضیت مجدد تلاش کنید.';
