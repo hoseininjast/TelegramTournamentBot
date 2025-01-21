@@ -121,6 +121,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
                 $PlatoID = $User->PlatoID ? $User->PlatoID : 'ثبت نشده';
                 $WalletAddress = $User->WalletAddress ? $User->WalletAddress : 'ثبت نشده';
+                $TonWalletAddress = $User->TonWalletAddress ? $User->TonWalletAddress : 'ثبت نشده';
                 $TotalGame = $User->Tournaments()->count();
                 $Wins = $User->TournamentsWon()->count();
                 $ReferralCount = TelegramUsers::where('ReferralID' , $User->id)->count();
@@ -130,7 +131,8 @@ class TelegramController extends Controller
 تعداد تورنومنت های شرکت کرده : {$TotalGame}
 تعداد قهرمانی ها : {$Wins}
 آیدی پلاتو : {$PlatoID}
-آدرس والت : {$WalletAddress}
+آدرس والت شبکه Polygon : {$WalletAddress}
+آدرس والت شبکه Ton : {$TonWalletAddress}
 تعداد افراد معرفی شده : {$ReferralCount} نفر
 لینک معرفی شما : https://t.me/krypto_arena_bot?start={$User->TelegramUserID}
 برای مدیریت حساب خود از دکمه های زیر استفاده کنید.
