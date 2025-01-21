@@ -19,6 +19,7 @@
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Username</th>
+                                            <th>Referral</th>
                                             <th>PlatoID</th>
                                             <th>Wallet</th>
                                             <th>Tournaments</th>
@@ -30,12 +31,8 @@
                                             <tr>
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$user->FirstName .' ' . $user->LastName}}</td>
-                                                <td>
-                                                    <div>
-                                                        <p>{{$user->UserName}}</p>
-                                                        <span>Referral : {{$user->ReferralID ? $user->Referral->UserName : 'not set'}}</span>
-                                                    </div>
-                                                </td>
+                                                <td>{{$user->UserName}}</td>
+                                                <td>{{$user->ReferralID ? $user->Referral->UserName : 'not set'}}</td>
                                                 <td>{{$user->PlatoID}}</td>
                                                 <td>
                                                     <div class="">
