@@ -405,19 +405,13 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $GamesCount = $Tournaments->PlayerCount - 1;
 
 
-                for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
-                }
 
 
-                $Winners = '';
-                foreach ($Tournaments->History->Winners as $key => $playerid) {
-                    $User = TelegramUsers::find($playerid);
-                    $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
-                }
-
-
-                $text = "
+                if($Tournaments->Status == 'Running'){
+                    for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
+                    }
+                    $text = "
 نام : {$Tournaments->Name}
 توضیحات : {$Tournaments->Description}
 نوع : {$Type}
@@ -427,13 +421,39 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 زمان بازی : {$Tournaments->Time} روز
 تاریخ شروع : {$JalaliDate1}
 تاریخ پایان : {$JalaliDate2}
-مراحل : {$Tournaments->TotalStage} مرحله
-تعداد بازی : {$GamesCount} بازی
+وضعیت : {$Status}
+";
+
+                }
+                elseif($Tournaments->Status == 'Finished'){
+                    for ($i = 1 ; $i <= $Tournaments->TotalStage ; $i++){
+                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله ' . $this->numToWordForStages($i) , 'callback_data' => 'ShowTournamentPlan' . $Tournaments->id . ' Stage'.$i ]);
+                    }
+                    $Winners = '';
+                    foreach ($Tournaments->History->Winners as $key => $playerid) {
+                        $User = TelegramUsers::find($playerid);
+                        $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournaments->Awards[$key - 1 ] ." \n";
+                    }
+
+                    $text = "
+نام : {$Tournaments->Name}
+توضیحات : {$Tournaments->Description}
+نوع : {$Type}
+حالت : {$Mode}
+ مبلغ ورودی : $ {$Tournaments->Price}
+تعداد بازیکن : {$Tournaments->PlayerCount}
+زمان بازی : {$Tournaments->Time} روز
+تاریخ شروع : {$JalaliDate1}
+تاریخ پایان : {$JalaliDate2}
 نتیجه بازی :
 {$Winners}
 وضعیت : {$Status}
-                ";
+";
 
+                }
+
+
+                
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FinishedTournamentList-' . $Tournaments->Game->id ]);
 
 
