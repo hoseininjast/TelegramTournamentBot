@@ -1034,7 +1034,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
             $User = TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->first();
         }else{
             $User = TelegramUsers::create([
-                'TelegramUserID' => $this->GetUserInfo('id'),
+                'TelegramUserID' => $this->ChatID,
                 'TelegramChatID' => $this->ChatID,
                 'ReferralID' => $ReferralID,
                 'FirstName' => $this->GetUserInfo('first_name') ,

@@ -56,12 +56,10 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
 وضعیت : {$Status}
 برای شرکت در تورنومنت وارد ربات شوید.
 ";
-        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ورود به صفحه تورنومنت' , 'url' => 'https://t.me/krypto_arena_bot?Tournament=' . $Tournament->id ]);
-
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
-        $Users = TelegramUsers::all();
+        $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
         foreach ($Users as $user) {
             $telegram->sendMessage([
                 'chat_id' => $Users->TelegramUserID,

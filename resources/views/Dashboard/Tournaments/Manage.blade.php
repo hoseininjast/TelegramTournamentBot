@@ -169,7 +169,7 @@
                                                         <td>{{$plan->WinnerID ? $plan->Winner->PlatoID :'not know'}}</td>
                                                         <td>
                                                             @if(\Auth::user()->isAdmin())
-                                                                    @if($plan->Supervisor->AdminID == \Auth::id() || $plan->SupervisorID == \Auth::id())
+                                                                    @if($plan->SupervisorID && $plan->Supervisor->AdminID == \Auth::id() || $plan->SupervisorID == \Auth::id())
                                                                         {{$plan->SupervisorID ? $plan->Supervisor->Username :'not know'}}
                                                                     @else
                                                                         {{$plan->SupervisorID ? $plan->Supervisor->Admin->Username :'not know'}}
