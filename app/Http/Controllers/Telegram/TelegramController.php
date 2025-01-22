@@ -453,7 +453,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 }
 
 
-                
+
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FinishedTournamentList-' . $Tournaments->Game->id ]);
 
 
@@ -564,11 +564,56 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $CurrentStageTime = Verta($CurrentStageTime)->format('%A, %d %B  H:i ');
 
                 $Games = '';
-                foreach ($TournamentPlan as $plan) {
-                    $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
-                    $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
-                    $Games .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
+                $Games2 = '';
+                if($TournamentPlan->count() <= 8){
+                    foreach ($TournamentPlan as $plan) {
+                        $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
+                        $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
+                        $Games .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
+                    }
 
+                    if($TournamentPlan->count() > 0){
+
+                        $text = "
+برنامه بازی مرحله {$this->numToWordForStages($Stage)}
+زمان شروع مرحله : {$CurrentStageTime}
+\nلیست بازی ها :
+{$Games}
+@krypto_arena_bot
+";
+
+                    }else{
+
+                        $text = "
+برنامه بازی مرحله {$this->numToWordForStages($Stage)}
+زمان شروع مرحله : {$CurrentStageTime}
+هنوز لیست بازی ها مشخص نشده ، بعد از مشخص شدن میتوانید در همین صفحه ببینید.
+@krypto_arena_bot
+";
+
+                    }
+
+
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'MyTournament-' . $TournamentID]);
+
+
+                    $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
+
+
+                }else{
+                    for ($i = 0; $i <= 8; $i++) {
+                        $plan = $TournamentPlan[$i];
+                        $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
+                        $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
+                        $Games .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
+                    }
+
+                    for ($i = 8; $i <= 16; $i++) {
+                        $plan = $TournamentPlan[$i];
+                        $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
+                        $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
+                        $Games2 .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
+                    }
                 }
 
 
@@ -579,8 +624,11 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 زمان شروع مرحله : {$CurrentStageTime}
 \nلیست بازی ها :
 {$Games}
-@krypto_arena_bot
 ";
+                    $text2 = "
+{$Games2}
+@krypto_arena_bot
+                    ";
 
                 }else{
 
@@ -590,14 +638,17 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 هنوز لیست بازی ها مشخص نشده ، بعد از مشخص شدن میتوانید در همین صفحه ببینید.
 @krypto_arena_bot
 ";
-
                 }
 
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'MyTournament-' . $TournamentID]);
 
 
-                $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
+                $this->EditMessage($text , null , $Tournaments->GetImage());
+                $this->Response($text2 , $inlineLayout );
+
+
+
 
 
             }
