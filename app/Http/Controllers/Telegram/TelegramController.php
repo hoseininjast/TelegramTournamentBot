@@ -565,7 +565,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
                 $Games = '';
                 $Games2 = '';
-                if($TournamentPlan->count() <= 8){
+                if($TournamentPlan->count() < 9){
                     foreach ($TournamentPlan as $plan) {
                         $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
                         $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
