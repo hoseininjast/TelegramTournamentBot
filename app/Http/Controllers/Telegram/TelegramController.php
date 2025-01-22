@@ -601,14 +601,14 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
 
                 }else{
-                    for ($i = 0; $i <= 8; $i++) {
+                    for ($i = 0; $i < 8; $i++) {
                         $plan = $TournamentPlan[$i];
                         $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
                         $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
                         $Games .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
                     }
 
-                    for ($i = 8; $i <= $TournamentPlan->count() - 8; $i++) {
+                    for ($i = 8; $i <= $TournamentPlan->count(); $i++) {
                         $plan = $TournamentPlan[$i];
                         $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
                         $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
@@ -645,7 +645,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $this->EditMessage($text , null , $Tournaments->GetImage());
                     $this->Response($text2 , $inlineLayout );
 
-                    
+
                 }
 
 
