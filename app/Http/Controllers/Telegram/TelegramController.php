@@ -322,7 +322,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
                 $inlineLayout = [];
                 $Game = Games::find($GameID);
-                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Status' , 'Finished')->get();
+                $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Status' , '!=' ,'Pending')->get();
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'TournamentHistory-' . $tournament->id ]);
                 }
