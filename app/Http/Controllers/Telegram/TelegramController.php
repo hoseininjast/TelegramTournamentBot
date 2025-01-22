@@ -608,7 +608,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                         $Games .= "گروه {$this->numToWords($plan->Group)} : {$plan->Player1->PlatoID} --- {$plan->Player2->PlatoID} \n زمان : {$Time} \n برنده : {$Winner} \n";
                     }
 
-                    for ($i = 8; $i <= 16; $i++) {
+                    for ($i = 8; $i <= $TournamentPlan->count() - 8; $i++) {
                         $plan = $TournamentPlan[$i];
                         $Winner = $plan->WinnerID ? $plan->Winner->PlatoID : 'مشخص نشده';
                         $Time = Verta($plan->Time)->format('%A, %d %B  H:i ');
