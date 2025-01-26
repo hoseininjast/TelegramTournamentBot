@@ -32,7 +32,13 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
         Route::post('Create' , [\App\Http\Controllers\UserController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\UserController::class , 'Delete'])->name('Delete');
         Route::delete('TelegramDelete/{id}' , [\App\Http\Controllers\UserController::class , 'TelegramDelete'])->name('TelegramDelete')->middleware('isOwner');
+        Route::get('SendMessageToAllUsers' , [\App\Http\Controllers\UserController::class , 'SendMessageToAllUsersPage'])->name('SendMessageToAllUsersPage');
+        Route::post('SendMessageToAllUsers' , [\App\Http\Controllers\UserController::class , 'SendMessageToAllUsers'])->name('SendMessageToAllUsers');
+
     });
+
+
+
     Route::group( ['prefix' => 'Profile' , 'as' => 'Profile.' ] ,function (){
         Route::get('Setting' , [\App\Http\Controllers\UserController::class , 'Setting'])->name('Setting');
         Route::post('Update' , [\App\Http\Controllers\UserController::class , 'Update'])->name('Update');

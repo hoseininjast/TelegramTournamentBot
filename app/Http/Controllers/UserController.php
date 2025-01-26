@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\Uploader;
+use App\Jobs\NotifyAllTelegramUsersJob;
 use App\Models\TelegramUsers;
 use App\Models\TournamentHistory;
 use App\Models\User;
@@ -28,6 +29,23 @@ class UserController extends Controller
         $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->paginate(50);
         confirmDelete('Delete User!', 'Are you sure you want to delete this user?');
         return view('Dashboard.Users.Telegram')->with(['Users' => $Users]);
+    }
+
+    public function SendMessageToAllUsersPage()
+    {
+
+        return view('Dashboard.Users.SendMessage');
+    }
+
+    public function SendMessageToAllUsers(Request $request)
+    {
+        $request->validate([
+            'Message' => 'required|string',
+        ]);
+        NotifyAllTelegramUsersJob::dispatch($request->Message);
+        Alert::success('Message sended successfully');
+
+        return redirect()->route('Dashboard.index');
     }
     public function Add()
     {

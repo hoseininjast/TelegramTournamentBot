@@ -89,11 +89,24 @@
                     </li>
 
                     <li>
-                        <a href="{{route('Dashboard.Users.Telegram')}}">
+                        <a href="#Users" data-bs-toggle="collapse">
                             <i class="mdi mdi-card-account-details"></i>
-                            <span> Telegram Users </span>
+                            <span> Telegram </span>
+                            <span class="menu-arrow"></span>
                         </a>
+                        <div class="collapse" id="Users">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{route('Dashboard.Users.Telegram')}}">Users</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('Dashboard.Users.SendMessageToAllUsersPage')}}">Send Message</a>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
+
+
                     <li>
                         <a href="#Settings" data-bs-toggle="collapse">
                             <i class="mdi mdi-cog-sync"></i>

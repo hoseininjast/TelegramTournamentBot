@@ -31,7 +31,8 @@ class NotifyAllTelegramUsersJob implements ShouldQueue
     {
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
-        $Users = TelegramUsers::all();
+        $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
+
         foreach ($Users as $user) {
             $telegram->sendMessage([
                 'chat_id' => $user->TelegramUserID,
