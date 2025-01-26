@@ -89,12 +89,12 @@
                     </li>
 
                     <li>
-                        <a href="#Users" data-bs-toggle="collapse">
+                        <a href="#Telegram" data-bs-toggle="collapse">
                             <i class="mdi mdi-card-account-details"></i>
                             <span> Telegram </span>
                             <span class="menu-arrow"></span>
                         </a>
-                        <div class="collapse" id="Users">
+                        <div class="collapse" id="Telegram">
                             <ul class="nav-second-level">
                                 <li>
                                     <a href="{{route('Dashboard.Users.Telegram')}}">Users</a>
