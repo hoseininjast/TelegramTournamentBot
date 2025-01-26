@@ -990,7 +990,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     if ($RefferalUser) {
                         $User = $this->SaveTelegramUser();
 
-                        if($User->ReferralID == null ){
+                        if($User->ReferralID == null && $RefferalUser->id != $User->id){
 
                             $User->update([
                                 'ReferralID' => $RefferalUser->id
