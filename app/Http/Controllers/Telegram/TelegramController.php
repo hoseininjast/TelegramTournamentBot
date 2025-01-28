@@ -11,6 +11,7 @@ use App\Models\TelegramUserRewards;
 use App\Models\TelegramUsers;
 use App\Models\TournamentHistory;
 use App\Models\Tournaments;
+use App\Models\UserPaymentHistory;
 use App\Models\UserTournaments;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -43,24 +44,6 @@ class TelegramController extends Controller
 
         $this->User = $this->SaveTelegramUser();
 
-        $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
-        $JoinInfo = Telegram::getChatMember([
-            'chat_id' => $ChanelID['id'],
-            'user_id' => $this->GetUserInfo('id'),
-        ]);
-        if($JoinInfo['status'] == 'left' ){
-            $inlineLayout = [
-                [
-                    Keyboard::inlineButton(['text' => 'عضویت در کانال', 'url' => 'https://t.me/krypto_arena']),
-                ],
-                [
-                    Keyboard::inlineButton(['text' => 'بررسی عضویت', 'callback_data' => 'CheckMembership']),
-                ],
-            ];
-            $text = 'برای استفاده از این ربات باید در کانال ما عضو شوید ، بعد از عضویت میتوانید از تمام امکانات ربات استفاده کنید.';
-            $this->ResponseWithPhoto($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
-            return 'ok';
-        }
 
         $MainMenuKeyboard = [
             [
@@ -663,27 +646,70 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $inlineLayout = [];
                 $Tournaments = Tournaments::find($TournamentID);
 
+                $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
+                $JoinInfo = Telegram::getChatMember([
+                    'chat_id' => $ChanelID['id'],
+                    'user_id' => $this->GetUserInfo('id'),
+                ]);
+                if($JoinInfo['status'] == 'left' ){
+                    $inlineLayout = [
+                        [
+                            Keyboard::inlineButton(['text' => 'عضویت در کانال', 'url' => 'https://t.me/krypto_arena']),
+                        ],
+                        [
+                            Keyboard::inlineButton(['text' => 'بررسی عضویت', 'callback_data' => 'CheckMembership']),
+                        ],
+                    ];
+                    $text = 'برای استفاده از این ربات باید در کانال ما عضو شوید ، بعد از عضویت میتوانید از تمام امکانات ربات استفاده کنید.';
+                    $this->ResponseWithPhoto($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
+                }else{
+                    if ($Tournaments->Players()->count() < $Tournaments->PlayerCount){
+                        if(!$Tournaments->isJoined($this->User->id)){
+                            if($this->User->PlatoID){
+                                if($Tournaments->Mode == 'Free'){
+                                    UserTournaments::create([
+                                        'UserID' => $this->User->id,
+                                        'TournamentID' => $Tournaments->id,
+                                    ]);
+                                    $text = "شما با موفقیت وارد تورنومنت شدید. پس از قرعه کشی و مشخص شدن ترتیب بازی ها ، برنامه بازی ها به شما اطلاعات داده خواهد شد.";
+                                }elseif($Tournaments->Mode == 'Paid'){
 
-                if(!$Tournaments->isJoined($this->User->id)){
-                    if($this->User->PlatoID){
-                        $UserCount = $Tournaments->Players()->count();
-                        if($UserCount < $Tournaments->PlayerCount){
-                            UserTournaments::create([
-                                'UserID' => $this->User->id,
-                                'TournamentID' => $Tournaments->id,
-                            ]);
-                            $text = "شما با موفقیت وارد تورنومنت شدید. پس از قرعه کشی و مشخص شدن ترتیب بازی ها ، برنامه بازی ها به شما اطلاعات داده خواهد شد.";
-                        }else{
-                            $text = "متاسفانه تعداد بازی کنان این مسابفه تکیل شده است و شما نمیتوانید در آن شرکت کنید ، لطفا از منوی تورنومنت ها ،‌مسابقه دیگری را انتخاب کنید.";
+                                    if ($this->User->Charge >= $Tournaments->Price){
+                                        $this->User->update([
+                                            'Charge' => $this->User->Charge - $Tournaments->Price
+                                        ]);
+                                        UserPaymentHistory::create([
+                                            'UserID' => $this->User->id,
+                                            'Description' => 'Tournament joined',
+                                            'Amount' => $Tournaments->Price,
+                                            'Type' => 'Out',
+                                        ]);
+                                        UserTournaments::create([
+                                            'UserID' => $this->User->id,
+                                            'TournamentID' => $Tournaments->id,
+                                        ]);
+                                        $text = "شما با موفقیت وارد تورنومنت شدید. پس از قرعه کشی و مشخص شدن ترتیب بازی ها ، برنامه بازی ها به شما اطلاعات داده خواهد شد.";
+                                    }else{
+                                        $text = "کیف پول شما شارژ کافی برای عضو شدن در تورنومنت را ندارد ،‌لطفا کیف پول خود را شراژ کرده و سپس اقدام به عضویت کنید.";
+                                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'شارژ کیف پول' , 'callback_data' => 'شارژ کیف پول'  ]);
+
+                                    }
+                                }
+                            }else{
+                                $text = "شما هنوز آیدی پلاتو خود را احراز نکرده اید ،‌پس از احراز هویت مجددا برای عضویت تلاش کنید.";
+                            }
+
+                        }
+                        else{
+                            $text = "شما قبلا در این تورنومنت شرکت کرده اید.";
+
                         }
                     }else{
-                        $text = "شما هنوز آیدی پلاتو خود را احراز نکرده اید ،‌پس از احراز هویت مجددا برای عضویت تلاش کنید.";
+                        $text = "متاسفانه تعداد بازی کنان این مسابفه تکیل شده است و شما نمیتوانید در آن شرکت کنید ، لطفا از منوی تورنومنت ها ،‌مسابقه دیگری را انتخاب کنید.";
                     }
-
-                }else{
-                    $text = "شما قبلا در این تورنومنت شرکت کرده اید.";
-
                 }
+
+
 
 
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'صفحه اصلی' , 'callback_data' => 'صفحه اصلی'  ]);
@@ -921,60 +947,6 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
                     $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
-                }
-
-                if (preg_match('/\/Tournament\s([0-9]+)/' , $this->Data['message']['text']) ){
-                    $TournamentID = preg_replace("/\/Tournament\s/", "", $this->Data['message']['text']);
-                    $inlineLayout = [];
-                    $Tournaments = Tournaments::find($TournamentID);
-                    $Status = __('messages.Status.' . $Tournaments->Status);
-                    $Mode = __('messages.Mode.' . $Tournaments->Mode);
-                    $Type = __('messages.Type.' . $Tournaments->Type);
-                    $adwards = '';
-                    foreach ($Tournaments->Awards as $key => $award) {
-                        $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
-                    }
-
-                    $JalaliDate1 = Verta($Tournaments->Start)->format('%A, %d %B  H:i ');
-                    $JalaliDate2 = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
-                    $GamesCount = $Tournaments->PlayerCount - 1;
-
-                    $text = "
-نام : {$Tournaments->Name}
-توضیحات : {$Tournaments->Description}
-نوع : {$Type}
-حالت : {$Mode}
- مبلغ ورودی : $ {$Tournaments->Price}
-تعداد بازیکن : {$Tournaments->PlayerCount}
-زمان بازی : {$Tournaments->Time} روز
-تاریخ شروع : {$JalaliDate1}
-تاریخ پایان : {$JalaliDate2}
-مراحل : {$Tournaments->TotalStage} مرحله
-تعداد بازی : {$GamesCount} بازی
-تعداد برندگان : {$Tournaments->Winners}
-جوایز : \n {$adwards}
-وضعیت : {$Status}
-                ";
-
-                    if(!$Tournaments->isJoined($this->User->id)){
-                        if($this->User->PlatoID){
-                            $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ثبت نام در تورنومنت' , 'callback_data' => 'JoinTournament-'.$Tournaments->id ]);
-                        }else{
-                            $inlineLayout[][] = Keyboard::inlineButton(['text' => 'احراز هویت پلاتو', 'callback_data' => 'احراز هویت پلاتو']);
-                        }
-                    }else{
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'دیدن برنامه بازی ها' , 'callback_data' => 'MyTournament-'.$Tournaments->id ]);
-                    }
-
-
-                    if($Tournaments->Mode == 'Free'){
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'FreeTournamentList-' . $Tournaments->Game->id ]);
-                    }else{
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'PaidTournamentList-' . $Tournaments->Game->id ]);
-                    }
-
-                    $this->ResponseWithPhoto($text , $inlineLayout , $Tournaments->GetImage());
-
                 }
 
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
