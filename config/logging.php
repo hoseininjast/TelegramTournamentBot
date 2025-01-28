@@ -54,7 +54,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['single' , 'Telegram'],
             'ignore_exceptions' => false,
         ],
 
@@ -126,6 +126,16 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+
+        'Telegram' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/telegram.log'),
+            'level' => 'info',
+            'replace_placeholders' => true,
+        ],
+
+
     ],
 
 ];

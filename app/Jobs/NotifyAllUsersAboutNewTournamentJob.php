@@ -9,7 +9,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
+use Telegram\Bot\Exceptions\TelegramOtherException;
+use Telegram\Bot\Exceptions\TelegramResponseException;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -59,21 +62,33 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
-        $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
-        foreach ($Users as $user) {
+        try {
+            $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
+            foreach ($Users as $user) {
+                $telegram->sendMessage([
+                    'chat_id' => $user->TelegramUserID,
+                    'text' => $text,
+                    'parse_mode' => 'html',
+                ]);
+            }
+        }catch (TelegramOtherException | TelegramResponseException $exception){
+            Log::channel("Telegram")->error($exception->getMessage());
+        }
+
+        
+        try {
+            $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
             $telegram->sendMessage([
-                'chat_id' => $Users->TelegramUserID,
+                'chat_id' => $ChanelID['id'],
                 'text' => $text,
                 'parse_mode' => 'html',
             ]);
+        }catch (TelegramOtherException | TelegramResponseException $exception){
+            Log::channel("Telegram")->error($exception->getMessage());
         }
 
-        $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
-        $telegram->sendMessage([
-            'chat_id' => $ChanelID['id'],
-            'text' => $text,
-            'parse_mode' => 'html',
-        ]);
+
+
 
     }
 }
