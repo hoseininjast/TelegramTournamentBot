@@ -545,6 +545,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $Stages = $Tournaments->StagesDate;
                 $CurrentStageTime = $Stages[$Stage - 1 ];
                 $CurrentStageTime = Verta($CurrentStageTime)->format('%A, %d %B  H:i ');
+                $NextStageTime = Verta($Stages[$Stage])->format('%A, %d %B  H:i ');
 
                 $Games = '';
                 $Games2 = '';
@@ -560,6 +561,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                         $text = "
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
+زمان پایان مرحله : {$NextStageTime}
 \nلیست بازی ها :
 {$Games}
 @krypto_arena_bot
@@ -570,6 +572,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                         $text = "
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
+زمان پایان مرحله : {$NextStageTime}
 هنوز لیست بازی ها مشخص نشده ، بعد از مشخص شدن میتوانید در همین صفحه ببینید.
 @krypto_arena_bot
 ";
@@ -603,6 +606,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                         $text = "
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
+زمان پایان مرحله : {$NextStageTime}
 \nلیست بازی ها :
 {$Games}
 ";
@@ -616,6 +620,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                         $text = "
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
+زمان پایان مرحله : {$NextStageTime}
 هنوز لیست بازی ها مشخص نشده ، بعد از مشخص شدن میتوانید در همین صفحه ببینید.
 @krypto_arena_bot
 ";

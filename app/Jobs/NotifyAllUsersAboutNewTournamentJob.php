@@ -75,7 +75,7 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
             Log::channel("Telegram")->error($exception->getMessage());
         }
 
-        
+
         try {
             $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
             $telegram->sendMessage([
