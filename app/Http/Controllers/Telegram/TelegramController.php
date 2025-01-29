@@ -545,7 +545,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $Stages = $Tournaments->StagesDate;
                 $CurrentStageTime = $Stages[$Stage - 1 ];
                 $CurrentStageTime = Verta($CurrentStageTime)->format('%A, %d %B  H:i ');
-                if($Stage > $Tournaments->TotalStage){
+                if($Stage < $Tournaments->TotalStage){
                     $NextStageTime = Verta($Stages[$Stage])->format('%A, %d %B  H:i ');
                 }else{
                     $NextStageTime = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
