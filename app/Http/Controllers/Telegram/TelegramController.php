@@ -992,6 +992,13 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                                 'Charge' => $RefferalUser->Charge + 0.01
                             ]);
 
+                            UserPaymentHistory::create([
+                                'UserID' => $RefferalUser->id,
+                                'Description' => 'Referral Bonus',
+                                'Amount' => 0.01,
+                                'Type' => 'In',
+                            ]);
+
                             $this->ResponseWithPhoto("بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار " ,$inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png' ,$RefferalUser->TelegramUserID);
                             $text = "معرف شما ثبت شد و هم اکنون تمام امکانات ربات برای شما در دسترس میباشد. ";
 

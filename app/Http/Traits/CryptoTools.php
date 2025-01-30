@@ -9,6 +9,7 @@ use App\Classes\CoinMarketCap;
 use App\Classes\NowPayment;
 use App\Models\Payments;
 use App\Models\TelegramUsers;
+use App\Models\UserPaymentHistory;
 
 trait CryptoTools
 {
@@ -158,6 +159,12 @@ trait CryptoTools
                 $User = TelegramUsers::find($payments->UserID);
                 $User->update([
                     'Charge' => $User->Charge + $payments->FiatAmount,
+                ]);
+                UserPaymentHistory::create([
+                    'UserID' => $User->id,
+                    'Description' => 'Wallet charged',
+                    'Amount' => $payments->FiatAmount,
+                    'Type' => 'In',
                 ]);
 
                 $payments->update([
