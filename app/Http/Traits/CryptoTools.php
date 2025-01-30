@@ -122,6 +122,12 @@ trait CryptoTools
 
             $paymentDetails = json_decode($paymentDetails , true);
 
+            if($payments->Status == 'Finished'){
+                return [
+                    'Message' => 'ایک فاکتور قبلا پرداخت شده است.',
+                    'Code' => 5
+                ];
+            }
 
             if ($paymentDetails['payment_status'] == 'confirming' || $paymentDetails['payment_status'] == 'confirmed' || $paymentDetails['payment_status'] == 'sending'){
                 return [

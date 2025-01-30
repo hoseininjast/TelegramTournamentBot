@@ -222,25 +222,31 @@ class TournamentsController extends Controller
     {
         $Tournament = Tournaments::find($ID);
         $CurrentStage = $Tournament->LastStage;
+        if($Tournament->TotalStage == $Tournament->LastStage){
+            if($Tournament->Plans()->where('Stage' , $CurrentStage)->count() == $Tournament->Plans()->where('Stage' , $CurrentStage)->where('Status' , 'Finished')->count()){
 
-        if($Tournament->Plans()->where('Stage' , $CurrentStage)->count() == $Tournament->Plans()->where('Stage' , $CurrentStage)->where('Status' , 'Finished')->count()){
+                $NumberOne = $Tournament->Plans()->where('Stage' , $CurrentStage)->where('Status' , 'Finished')->first()->Winner;
 
-            $NumberOne = $Tournament->Plans()->where('Stage' , $CurrentStage)->where('Status' , 'Finished')->first()->Winner;
+                $Numbers = $Tournament->Plans()->where('Stage' , $CurrentStage - 1)->where('Status' , 'Finished')->get();
 
-            $Numbers = $Tournament->Plans()->where('Stage' , $CurrentStage - 1)->where('Status' , 'Finished')->get();
-
-            $Players[] = $Numbers[0]->Player1 ;
-            $Players[] = $Numbers[0]->Player2 ;
-            $Players[] = $Numbers[1]->Player1 ;
-            $Players[] = $Numbers[1]->Player2 ;
+                $Players[] = $Numbers[0]->Player1 ;
+                $Players[] = $Numbers[0]->Player2 ;
+                $Players[] = $Numbers[1]->Player1 ;
+                $Players[] = $Numbers[1]->Player2 ;
 
 
-            return view('Dashboard.Tournaments.Close')->with(['Tournament' => $Tournament , 'Players' => $Players]);
+                return view('Dashboard.Tournaments.Close')->with(['Tournament' => $Tournament , 'Players' => $Players]);
 
+            }else{
+                Alert::error('this tournament has been played stage 1');
+                return redirect()->back();
+            }
         }else{
-            Alert::error('this tournament has been played stage 1');
+            Alert::error('all stages must play and end for closing tournament');
             return redirect()->back();
         }
+
+
 
 
     }
@@ -249,6 +255,7 @@ class TournamentsController extends Controller
     {
         $request->validate([
             'Winner' => 'required|array',
+            'Image' => 'nullable|file|image',
         ]);
 
         $Tournament = Tournaments::find($ID);
@@ -264,9 +271,16 @@ class TournamentsController extends Controller
                 $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1 ] ." \n";
                 $key++;
             }
+            if($request->hasFile('Image')){
+                $AttachmentAddress = $this->UploadImage($request->Image , 'TournamentsHistory');
+            }else{
+                $AttachmentAddress = null;
+            }
+
             TournamentHistory::create([
                 'TournamentID' => $Tournament->id,
                 'Winners' => $Players,
+                'Image' => $AttachmentAddress,
             ]);
             $Tournament->update([
                 'Status' => 'Finished'
@@ -319,7 +333,7 @@ class TournamentsController extends Controller
         if($request->hasFile('Image')){
             $AttachmentAddress = $this->UploadImage($request->Image , 'Tournaments');
         }else{
-            $AttachmentAddress = 'https://platotournament.ai1polaris.com/images/MainLogo.png';
+            $AttachmentAddress = 'https://kryptoarena.fun/images/MainLogo.png';
         }
 
 

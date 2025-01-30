@@ -11,6 +11,7 @@ class TournamentHistory extends Model
         'TournamentID',
         'Winners',
         'AwardsProof',
+        'Image',
     ];
     use HasFactory;
 

@@ -378,7 +378,6 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
                 $inlineLayout = [];
                 $Tournaments = Tournaments::find($TournamentID);
-                $History = $Tournaments->History;
                 $Status = __('messages.Status.' . $Tournaments->Status);
                 $Mode = __('messages.Mode.' . $Tournaments->Mode);
                 $Type = __('messages.Type.' . $Tournaments->Type);
@@ -547,8 +546,14 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $CurrentStageTime = Verta($CurrentStageTime)->format('%A, %d %B  H:i ');
                 if($Stage < $Tournaments->TotalStage){
                     $NextStageTime = Verta($Stages[$Stage])->format('%A, %d %B  H:i ');
+                    $Pic = $Tournaments->GetImage();
                 }else{
                     $NextStageTime = Verta($Tournaments->End)->format('%A, %d %B  H:i ');
+                    if($Tournaments->History->Image != null){
+                        $Pic = $Tournaments->History->Image;
+                    }else{
+                        $Pic = $Tournaments->GetImage();
+                    }
                 }
 
                 $Games = '';
@@ -587,7 +592,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'MyTournament-' . $TournamentID]);
 
 
-                    $this->EditMessage($text , $inlineLayout , $Tournaments->GetImage());
+                    $this->EditMessage($text , $inlineLayout , $Pic);
 
 
                 }else{
@@ -634,7 +639,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'MyTournament-' . $TournamentID]);
 
 
-                    $this->EditMessage($text , null , $Tournaments->GetImage());
+                    $this->EditMessage($text , null , $Pic);
                     $this->Response($text2 , $inlineLayout );
 
 
@@ -862,13 +867,25 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $Amount = $Payment->FiatAmount;
                 $PaymentMethod = $Payment->PaymentMethod;
 
+                if ($PaymentMethod == 'Polygon'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
+                }
+                elseif ($PaymentMethod == 'USDTPOS'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
+                }
+                elseif ($PaymentMethod == 'Ton'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/Ton.png';
+                }
+                elseif ($PaymentMethod == 'USDTTON'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/USDTTON.png';
+                }
 
 
                 $Status = $this->CheckPaymentStatus($Payment);
                 $Code = $Status['Code'];
                 $Message = $Status['Message'];
 
-                if ($Code == 4){
+                if ($Code == 4 || $Code == 5){
                     $text = "
 {$Message}
 با تشکر از خرید شما.";
@@ -877,19 +894,6 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $this->EditMessage($text ,$inlineLayout , 'https://kryptoarena.fun/images/Robot/WalletAddress.png' );
 
                 }else{
-
-                    if ($PaymentMethod == 'Polygon'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
-                    }
-                    elseif ($PaymentMethod == 'USDTPOS'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
-                    }
-                    elseif ($PaymentMethod == 'Ton'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/Ton.png';
-                    }
-                    elseif ($PaymentMethod == 'USDTTON'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDTTON.png';
-                    }
 
                     $text = "
 ‼️پیش از‌ پرداخت ، لطفا تمامی بند ها را مطالعه کنید‼️

@@ -20,7 +20,7 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{route('Dashboard.Tournaments.Close' , $Tournament->id)}}">
+                                <form method="POST" action="{{route('Dashboard.Tournaments.Close' , $Tournament->id)}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row d-flex justify-content-around">
 
@@ -37,6 +37,10 @@
                                             </div>
                                         @endfor
 
+                                            <div class="mb-3 ">
+                                                <label for="Image" class="form-label">Image</label>
+                                                <input type="file" id="Image" name="Image" accept="image/*" class="form-control">
+                                            </div>
 
                                             <div class="col-12 d-flex justify-content-around">
                                                 <button type="submit" class="btn btn-success waves-effect waves-light col-4">Submit</button>
