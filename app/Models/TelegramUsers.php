@@ -29,6 +29,20 @@ class TelegramUsers extends Model
     {
         return $this->hasMany(UserTournaments::class , 'UserID' , 'id');
     }
+    public function MyTournament($Mode)
+    {
+        $JoinedTournaments = UserTournaments::where('UserID' , $this->id)->get();
+
+        $Tournaments = [];
+        foreach ($JoinedTournaments as $jt) {
+            if($jt->Tournament->Status == $Mode){
+                $Tournaments[] = $jt->Tournament;
+            }
+        }
+
+        return $Tournaments;
+
+    }
 
     public function TournamentsWon()
     {

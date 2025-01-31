@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\NowPayment;
+use App\Models\TelegramUsers;
 
 class WebController extends Controller
 {

@@ -67,14 +67,13 @@ class TelegramController extends Controller
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
-                $Tournaments = $this->User->Tournaments;
-                foreach ($Tournaments as $tournament) {
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Tournament->Name , 'callback_data' => 'MyTournament-' . $tournament->Tournament->id ]);
-                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'درحال اجرا' , 'callback_data' => 'MyTournaments-Running' ]);
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'به اتمام رسیده' , 'callback_data' => 'MyTournaments-Finished' ]);
+
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
                 $text = "
-لطفا تورنومنت مد نظر خود را انتخاب کنید.
+لطفا دسته بندی تورنومنت مد نظر خود را انتخاب کنید.
                 ";
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/MyTournaments.png');
 
@@ -443,6 +442,23 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
             }
 
+            if (preg_match('/^MyTournaments-/' , $this->Data['callback_query']['data'])){
+                $Type = preg_replace("/^MyTournaments-/", "", $this->Data['callback_query']['data']);
+
+                $Tournaments = $this->User->MyTournament($Type);
+                foreach ($Tournaments as $tournament) {
+                    $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'MyTournament-' . $tournament->id ]);
+                }
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                $text = "
+لطفا تورنومنت مد نظر خود را انتخاب کنید.
+                ";
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/MyTournaments.png');
+                
+
+            }
+
             if (preg_match('/^MyTournament-/' , $this->Data['callback_query']['data'])){
                 $TournamentID = preg_replace("/^MyTournament-/", "", $this->Data['callback_query']['data']);
 
@@ -568,6 +584,8 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     if($TournamentPlan->count() > 0){
 
                         $text = "
+نام تورنومنت : {$Tournaments->Name}
+بازی : {$Tournaments->Game->Name}
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
 زمان پایان مرحله : {$NextStageTime}
@@ -579,6 +597,8 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     }else{
 
                         $text = "
+نام تورنومنت : {$Tournaments->Name}
+بازی : {$Tournaments->Game->Name}
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
 زمان پایان مرحله : {$NextStageTime}
@@ -613,6 +633,8 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     if($TournamentPlan->count() > 0){
 
                         $text = "
+نام تورنومنت : {$Tournaments->Name}
+بازی : {$Tournaments->Game->Name}
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
 زمان پایان مرحله : {$NextStageTime}
@@ -627,6 +649,8 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     }else{
 
                         $text = "
+نام تورنومنت : {$Tournaments->Name}
+بازی : {$Tournaments->Game->Name}
 برنامه بازی مرحله {$this->numToWordForStages($Stage)}
 زمان شروع مرحله : {$CurrentStageTime}
 زمان پایان مرحله : {$NextStageTime}
