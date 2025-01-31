@@ -67,6 +67,7 @@ class TelegramController extends Controller
             }
 
             if ($this->Data['callback_query']['data'] == 'تورنومنت های من'){
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'شروع نشده' , 'callback_data' => 'MyTournaments-Pending' ]);
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'درحال اجرا' , 'callback_data' => 'MyTournaments-Running' ]);
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'به اتمام رسیده' , 'callback_data' => 'MyTournaments-Finished' ]);
 
