@@ -449,13 +449,13 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 foreach ($Tournaments as $tournament) {
                     $inlineLayout[][] = Keyboard::inlineButton(['text' => $tournament->Name , 'callback_data' => 'MyTournament-' . $tournament->id ]);
                 }
-                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'تورنومنت های من' ]);
 
                 $text = "
 لطفا تورنومنت مد نظر خود را انتخاب کنید.
                 ";
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/MyTournaments.png');
-                
+
 
             }
 
