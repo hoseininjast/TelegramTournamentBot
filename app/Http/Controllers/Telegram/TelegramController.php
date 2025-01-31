@@ -130,7 +130,7 @@ class TelegramController extends Controller
                         Keyboard::inlineButton(['text' => 'شارژ با Ton' , 'callback_data' => 'ChargeWith-Ton' ])
                     ],
                     [
-                        Keyboard::inlineButton(['text' => 'شارژ با USDT(POS)' , 'callback_data' => 'ChargeWith-USDTPOS' ]),
+                        Keyboard::inlineButton(['text' => 'شارژ با USDT(POL)' , 'callback_data' => 'ChargeWith-USDTPOS' ]),
                         Keyboard::inlineButton(['text' => 'شارژ با USDT(TON)' , 'callback_data' => 'ChargeWith-USDTTON' ])
                     ],
                     [
