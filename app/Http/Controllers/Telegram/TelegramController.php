@@ -204,7 +204,9 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 }
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
-                $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
+                $text = '
+در این قسمت شما تورنومنت هایی را مشاهده میکنید که در حال اجرا هستند و یا به پایان رسیده اند.
+لطفا نوع بازی تورنومنت را انتخاب کنید.';
 
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/TournamentHistory.png');
             }
@@ -221,7 +223,9 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 ];
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
-                $text = 'لطفا نوع تورنومنت را انتخاب کنید.';
+                $text = '
+در این قسمت تورنومنت هایی را مشاهده میکنید که هنوز شروع نشده اند.
+لطفا نوع تورنومنت را انتخاب کنید.';
 
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Tournaments.png');
             }
