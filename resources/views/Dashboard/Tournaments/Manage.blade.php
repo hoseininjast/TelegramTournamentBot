@@ -26,7 +26,7 @@
 
                             </div>
                             {{-- Users and supervisors table--}}
-                            @if(\Auth::user()->Role == 'Owner')
+                            @if(\Auth::user()->isOwner())
                                 <div class="card-body ">
                                     <h4 class="header-title">Users</h4>
 
@@ -100,7 +100,7 @@
                                         </table>
                                     </div>
                                 </div>
-                            @else
+                            @elseif(\Auth::user()->isAdmin())
                                 <div class="card-body">
                                     <h4 class="header-title">Users</h4>
 
@@ -137,7 +137,7 @@
 
 
                             {{--Stage plans--}}
-                            @if(\Auth::user()->isOwner() || \Auth::user()->isAdmin())
+                            @if(\Auth::user()->isOwner() || \Auth::user()->isAdmin() || \Auth::user()->isSupervisor() )
 
                                 @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
 
