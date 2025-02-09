@@ -58,7 +58,7 @@ trait CryptoTools
                 'pay_currency' => 'TON',
                 'payout_currency' => 'TON',
             ];
-        }elseif ($PaymentMethod == 'USDTPOS'){
+        }elseif ($PaymentMethod == 'USDTPOL'){
             $data = [
                 'price_amount' => $Price,
                 'price_currency' => 'usd',

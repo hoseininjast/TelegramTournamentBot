@@ -149,7 +149,7 @@ class TelegramController extends Controller
                         Keyboard::inlineButton(['text' => 'شارژ با Ton' , 'callback_data' => 'ChargeWith-Ton' ])
                     ],
                     [
-                        Keyboard::inlineButton(['text' => 'شارژ با USDT(POL)' , 'callback_data' => 'ChargeWith-USDTPOS' ]),
+                        Keyboard::inlineButton(['text' => 'شارژ با USDT(POL)' , 'callback_data' => 'ChargeWith-USDTPOL' ]),
                         Keyboard::inlineButton(['text' => 'شارژ با USDT(TON)' , 'callback_data' => 'ChargeWith-USDTTON' ])
                     ],
                     [
@@ -817,7 +817,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
             }
 
-            if(preg_match('/^ChargeWith(Polygon|Ton|USDTPOS|USDTTON)\sAmount\d+$/' , $this->Data['callback_query']['data']) == 1){
+            if(preg_match('/^ChargeWith(Polygon|Ton|USDTPOL|USDTTON)\sAmount\d+$/' , $this->Data['callback_query']['data']) == 1){
 
                 $exp = explode(' ' , $this->Data['callback_query']['data']);
                 $PaymentMethod = preg_replace("/^ChargeWith/", "", $exp[0]);
@@ -832,7 +832,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $CryptoPrice = $this->GetMaticPrice();
                     $WalletAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
                 }
-                elseif ($PaymentMethod == 'USDTPOS'){
+                elseif ($PaymentMethod == 'USDTPOL'){
                     $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
                     $CryptoPrice = 1;
                     $WalletAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
@@ -898,7 +898,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                         $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
                         $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id ]);
                     }
-                    elseif ($PaymentMethod == 'USDTPOS'){
+                    elseif ($PaymentMethod == 'USDTPOL'){
                         $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
                         $PayAmountForUSDT = preg_replace("/\./", "", round($pay_amount, 6 ,PHP_ROUND_HALF_UP) );
                         $PaymentAddress = "https://metamask.app.link/send/0xc2132D05D31c914a87C6611C10748AEb04B58e8F@137/transfer?address={$pay_address}&uint256={$PayAmountForUSDT}";
@@ -963,7 +963,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 if ($PaymentMethod == 'Polygon'){
                     $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
                 }
-                elseif ($PaymentMethod == 'USDTPOS'){
+                elseif ($PaymentMethod == 'USDTPOL'){
                     $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
                 }
                 elseif ($PaymentMethod == 'Ton'){
