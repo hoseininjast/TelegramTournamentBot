@@ -55,6 +55,10 @@ class TelegramController extends Controller
                 Keyboard::inlineButton(['text' => 'حساب کاربری', 'callback_data' => 'حساب کاربری من']),
             ],
             [
+                Keyboard::inlineButton(['text' => 'ارتباط با پشتیبان', 'callback_data' => 'ارتباط با پشتیبان']),
+                Keyboard::inlineButton(['text' => 'برگذاری تورنومنت شما', 'callback_data' => 'ارتباط با پشتیبان']),
+            ],
+            [
                 Keyboard::inlineButton(['text' => 'کانال ما', 'url' => 'https://t.me/krypto_arena']),
             ],
         ];
@@ -77,6 +81,20 @@ class TelegramController extends Controller
 لطفا دسته بندی تورنومنت مد نظر خود را انتخاب کنید.
                 ";
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/MyTournaments.png');
+
+            }
+
+
+            if ($this->Data['callback_query']['data'] == 'ارتباط با پشتیبان'){
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ارتباط به پشتیبانی' , 'url' =>  'https://t.me/supervisor_admin369']);
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
+
+                $text = "
+شما میتوانید از طریف آیدی زیر با پشتیبانی کریپتو آرنا در تماس باشید.
+                ";
+                $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
 
             }
 
