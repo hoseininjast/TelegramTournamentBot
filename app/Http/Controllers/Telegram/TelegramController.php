@@ -806,8 +806,54 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 $Amount = preg_replace("/^Amount/", "", $exp[1]);
 
                 $inlineLayout = [];
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'ارتباط به پشتیبانی' , 'url' =>  'https://t.me/supervisor_admin369']);
 
-                $PaymentDetail = $this->CreatePaymentOrder($PaymentMethod , $Amount);
+
+                if ($PaymentMethod == 'Polygon'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
+                    $CryptoPrice = $this->GetMaticPrice();
+                    $WalletAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
+                }
+                elseif ($PaymentMethod == 'USDTPOS'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
+                    $CryptoPrice = 1;
+                    $WalletAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
+
+                }
+                elseif ($PaymentMethod == 'Ton'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/Ton.png';
+                    $CryptoPrice = $this->GetTONPrice();
+                    $WalletAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
+                }
+                elseif ($PaymentMethod == 'USDTTON'){
+                    $Pic = 'https://vpn.ai1polaris.com/images/New/USDTTON.png';
+                    $CryptoPrice = 1;
+                    $WalletAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
+                }
+                $CryptoPrice = round($CryptoPrice , 6 , PHP_ROUND_HALF_UP);
+                $pay_amount = $Amount / $CryptoPrice;
+
+                $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'ChargeWith-' . $PaymentMethod  ]);
+
+                $text = "
+شارژ کیف پول
+‼️پیش از‌ پرداخت ، لطفا تمامی بند ها را مطالعه کنید‼️
+لطفا به آیدی زیر پیام بدهید و فاکتور واریز خود را برای او ارسال کنید.
+پس از بررسی و تایید انتقال وجه شما ،‌مبلغ به کیف پول شما اضافه میشود.
+" . PHP_EOL . "
+💲 روش پرداخت :". $PaymentMethod . "
+💲 مبلغ شارژ :". number_format($Amount ,2 ,'.' , ',') . " $
+💸 مبلغ نهایی : 📑" . "<code><b>" . number_format($pay_amount ,6 ,'.' , ',') . "</b></code> " . $PaymentMethod ."📑
+آدرس ولت : 📑<code>{$WalletAddress}</code>📑
+آیدی پشتیبان : @supervisor_admin369
+";
+
+                $this->EditMessage($text ,$inlineLayout , $Pic);
+
+
+
+
+                /*$PaymentDetail = $this->CreatePaymentOrder($PaymentMethod , $Amount);
 
                 $User = $this->SaveTelegramUser();
 
@@ -879,7 +925,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $text = "مشکلی در ساخت فاکتور پیش آمده لطفا بعدا دوباره تلاش کنید.";
                     $this->EditMessage($text ,$inlineLayout);
 
-                }
+                }*/
 
 
             }
