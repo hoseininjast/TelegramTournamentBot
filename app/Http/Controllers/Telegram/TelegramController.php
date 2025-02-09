@@ -92,7 +92,7 @@ class TelegramController extends Controller
                 $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'صفحه اصلی' ]);
 
                 $text = "
-شما میتوانید از طریف آیدی زیر با پشتیبانی کریپتو آرنا در تماس باشید.
+شما میتوانید از طریق آیدی زیر با پشتیبانی کریپتو آرنا در تماس باشید.
                 ";
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
 
