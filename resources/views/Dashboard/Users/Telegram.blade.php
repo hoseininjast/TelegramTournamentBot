@@ -56,12 +56,17 @@
                                                         win's : {{$user->TournamentsWon()->count()}}
                                                     </div>
                                                 </td>
-                                                <td>
-                                                    @if($user->Tournaments()->count() > 0 )
-                                                        <a class="btn btn-sm btn-outline-dark waves-effect waves-light disabled" disabled href="#" >Delete <i class="mdi mdi-trash-can"></i> </a>
-                                                    @else
-                                                        <a class="btn btn-sm btn-danger waves-effect waves-light"  href="{{route('Dashboard.Users.TelegramDelete' , $user->id)}}" data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
-                                                    @endif
+                                                <td >
+                                                    <div class="row">
+                                                        <a class="btn btn-sm btn-success waves-effect waves-light mb-2"  href="{{route('Dashboard.Users.TelegramCharge' , $user->id)}}"  >Charge <i class="mdi mdi-cash-plus"></i> </a>
+
+                                                        @if($user->Tournaments()->count() > 0 )
+                                                            <a class="btn btn-sm btn-outline-dark waves-effect waves-light disabled" disabled href="#" >Delete <i class="mdi mdi-trash-can"></i> </a>
+                                                        @else
+                                                            <a class="btn btn-sm btn-danger waves-effect waves-light"  href="{{route('Dashboard.Users.TelegramDelete' , $user->id)}}" data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
+                                                        @endif
+                                                    </div>
+
 
                                                 </td>
                                             </tr>

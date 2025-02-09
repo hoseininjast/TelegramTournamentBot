@@ -7,6 +7,7 @@ use App\Jobs\NotifyAllTelegramUsersJob;
 use App\Models\TelegramUsers;
 use App\Models\TournamentHistory;
 use App\Models\User;
+use App\Models\UserPaymentHistory;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -96,6 +97,39 @@ class UserController extends Controller
     {
         $User = TelegramUsers::find($ID);
         $User->delete();
+        Alert::success('User Deleted successfully');
+        return redirect()->route('Dashboard.Users.Telegram');
+
+    }
+    public function TelegramCharge(int $ID)
+    {
+        $User = TelegramUsers::find($ID);
+        return view('Dashboard.Users.TelegramCharge')->with(['User' => $User]);
+
+    }
+
+    public function TelegramChargePost(int $ID , Request $request)
+    {
+        $request->validate([
+            'Charge' => 'required|numeric',
+        ]);
+        $User = TelegramUsers::find($ID);
+        if($User->Charge < $request->Charge){
+            $Type = 'In';
+            $Description = 'Wallet charge increased';
+        }else{
+            $Type = 'Out';
+            $Description = 'Wallet charge decreased';
+        }
+        $User->update([
+            'Charge' => $request->Charge,
+        ]);
+        UserPaymentHistory::create([
+            'UserID' => $User->id,
+            'Description' => $Description,
+            'Amount' => $request->Charge,
+            'Type' => $Type,
+        ]);
         Alert::success('User Deleted successfully');
         return redirect()->route('Dashboard.Users.Telegram');
 
