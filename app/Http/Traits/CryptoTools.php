@@ -15,14 +15,14 @@ trait CryptoTools
 {
     protected function GetMaticPrice()
     {
-        $cmc = new CoinMarketCap(env('CMC_API_KEY'));
+        $cmc = new \CoinMarketCap\Api(env('CMC_API_KEY'));
         $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => 'MATIC']);
         return $response->data->MATIC->quote->USD->price;
     }
 
     protected function GetTONPrice()
     {
-        $cmc = new CoinMarketCap(env('CMC_API_KEY'));
+        $cmc = new \CoinMarketCap\Api(env('CMC_API_KEY'));
         $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => 'TON']);
         return $response->data->TON->quote->USD->price;
     }
@@ -30,7 +30,7 @@ trait CryptoTools
 
     protected function GetCryptoPrice($TokenName)
     {
-        $cmc = new CoinMarketCap(env('CMC_API_KEY'));
+        $cmc = new \CoinMarketCap\Api(env('CMC_API_KEY'));
         $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => $TokenName]);
         return $response->data->$TokenName->quote->USD->price ;
     }
