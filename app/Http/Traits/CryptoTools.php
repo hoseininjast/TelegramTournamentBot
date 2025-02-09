@@ -22,28 +22,15 @@ trait CryptoTools
 
     protected function GetTONPrice()
     {
-        $cmc = new CoinMarketCap\Api(env('CMC_API_KEY'));
+        $cmc = new CoinMarketCap(env('CMC_API_KEY'));
         $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => 'TON']);
         return $response->data->TON->quote->USD->price;
-    }
-    protected function GetNOTPrice()
-    {
-        $cmc = new CoinMarketCap\Api(env('CMC_API_KEY'));
-        $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => 'NOT']);
-        return $response->data->NOT->quote->USD->price ;
-    }
-
-    protected function GetDOGSPrice()
-    {
-        $cmc = new CoinMarketCap\Api(env('CMC_API_KEY'));
-        $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => 'DOGS']);
-        return $response->data->DOGS->quote->USD->price ;
     }
 
 
     protected function GetCryptoPrice($TokenName)
     {
-        $cmc = new CoinMarketCap\Api(env('CMC_API_KEY'));
+        $cmc = new CoinMarketCap(env('CMC_API_KEY'));
         $response = $cmc->cryptocurrency()->quotesLatest(['symbol' => $TokenName]);
         return $response->data->$TokenName->quote->USD->price ;
     }
