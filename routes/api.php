@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
+    Route::group(['prefix' => 'Games' , 'as' => 'Games.' ] , function (){
+        Route::post('/' , [\App\Http\Controllers\Api\V1\GamesController::class , 'index'])->name('index');
+    });
+});

@@ -12,5 +12,10 @@
         "laravel-vite-plugin": "^1.0.0",
         "sass": "^1.56.1",
         "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "@telegram-apps/sdk": "^3.4.0",
+        "@twa-dev/sdk": "^8.0.2",
+        "moment": "^2.30.1"
     }
 }

@@ -16,6 +16,7 @@
         "prevailexcel/laravel-nowpayments": "^1.0",
         "realrashid/sweet-alert": "^7.2",
         "silviolleite/laravelpwa": "^2.0",
+        "tightenco/ziggy": "^2.5",
         "vittominacori/coinmarketcap-php": "^1.1"
     },
     "require-dev": {

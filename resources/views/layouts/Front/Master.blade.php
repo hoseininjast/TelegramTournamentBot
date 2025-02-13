@@ -4,25 +4,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="forntEnd-Developer" content="Mamunur Rashid">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Jugaro - eSports and Gaming HTML Template</title>
-    {{--Telegram library--}}
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        var web_app = window.Telegram.WebApp;
-
-        var output = '';
-        for (var web_apps in web_app) {
-            output += web_apps + ': ' + web_app[web_apps]+'; ';
-        }
-
-        window.onload = function() {
-            document.getElementById("logs").innerHTML = output;
-        }
-
-    </script>
-
+    <meta name="description" content="{{env('APP_NAME')}}">
+    <meta name="keywords" content="Tournaments & gaming platform with crypto">
+    <meta name="author" content="{{env('APP_NAME')}}">
+    <title>{{env('APP_NAME')}}</title>
+    @routes()
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('Front/images/favicon.html')}}" type="image/x-icon">
     <!-- bootstrap -->
@@ -256,6 +244,17 @@
 <script src="{{asset('Front/js/mousemoveparallax.js')}}"></script>
 <!-- main -->
 <script src="{{asset('Front/js/main.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery.session@1.0.0/jquery.session.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+@include('sweetalert::alert' )
+
+@vite(['resources/js/app.js'])
+@yield('js')
 </body>
 
 
