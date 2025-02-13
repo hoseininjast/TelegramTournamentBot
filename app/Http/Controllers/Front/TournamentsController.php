@@ -22,12 +22,18 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class TournamentsController extends Controller
 {
-    use Uploader;
 
     public function index()
     {
         $Tournaments = Tournaments::all();
         return view('Dashboard.Tournaments.index')->with(['Tournaments' => $Tournaments]);
+    }
+
+    public function List($GameID , $Mode)
+    {
+        $Game = Games::find($GameID);
+        $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , $Mode)->get();
+        return view('Front.Tournaments.index')->with(['Tournaments' => $Tournaments]);
     }
 
 

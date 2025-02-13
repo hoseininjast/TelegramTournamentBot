@@ -1,55 +1,30 @@
-import {
-    ShowToast,
-    deleteSession,
-    setSession,
-    ReadSession, redirect,
-} from "./utilities.js";
-import { init, backButton } from '@telegram-apps/sdk';
-
-let SelectedMode = 'Free';
-
-const LoadGamesFreeButton = document.querySelector("#LoadGamesFree");
-const LoadGamesPaidButton = document.querySelector("#LoadGamesPaid");
-const PlayGameButtons = document.querySelectorAll(".PlayGame");
+import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams } from '@telegram-apps/sdk';
 
 
-const initPage = async () => {
-    init();
-    backButton.mount();
-    const off = backButton.onClick(() => {
-        off();
-        window.history.back();
-    });
-};
+const { initDataRaw, initData } = retrieveLaunchParams();
+const User = initData.user();
 
+$('#UserUsername').html('Welcome Back ' + User.username);
+$('#UserImage').src(User.photoUrl);
 
-
-
-
-function GetGames(Mode) {
-    SelectedMode = Mode;
-    $('#GameSection').show(400);
-
+init();
+backButton.mount();
+if (backButton.show.isAvailable()) {
+    backButton.show();
+}
+if (closingBehavior.mount.isAvailable()) {
+    closingBehavior.mount();
+    closingBehavior.isMounted(); // true
+}
+if (closingBehavior.enableConfirmation.isAvailable()) {
+    closingBehavior.enableConfirmation();
+    closingBehavior.isConfirmationEnabled(); // true
+}
+if (hapticFeedback.impactOccurred.isAvailable()) {
+    hapticFeedback.impactOccurred('medium');
 }
 
-
-
-
-LoadGamesFreeButton.addEventListener("click", () =>
-    GetGames('Free')
-);
-
-LoadGamesPaidButton.addEventListener("click", () =>
-    GetGames('Paid')
-);
-
-PlayGameButtons.forEach((plan) => plan.addEventListener('click', (event) => {
-    redirect(route('Front.Tournaments.List' , [ plan.getAttribute('data-GameID') , 'free' ]) );
-}));
-
-
-window.addEventListener("DOMContentLoaded", async () => {
-    await initPage();
+const off = backButton.onClick(() => {
+    off();
+    window.history.back();
 });
-
-

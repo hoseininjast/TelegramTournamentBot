@@ -6,6 +6,8 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/js/app.js',
+                'resources/js/Front/Games.js',
+                'resources/js/Front/Tournaments.js',
             ],
             refresh: true,
         }),

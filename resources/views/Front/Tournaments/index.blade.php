@@ -1,24 +1,97 @@
 @extends('layouts.Front.Master')
 @section('content')
-    <section class="games-filter">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="filter-wrapp">
-                        <div class="left-area">
-                            <a href="#" class="mybtn2"><i class="far fa-sun"></i>Select For you</a>
-                            <a href="#" class="mybtn2"><i class="fas fa-dice-five"></i>New Games</a>
-                            <a href="#" class="mybtn2"><i class="far fa-heart"></i>Most Popular</a>
+    <section class="turnaments-tab-section">
+        <div class="s-top-area">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-4">
+                        <div class="top-left-title">
+                            <h4>Browse Tournaments</h4>
                         </div>
-                        <div class="right-area">
-                            <form action="#">
-                                <input type="text" placeholder="Search Games">
-                                <button type="submit"><i class="fas fa-search"></i></button>
-                            </form>
+                    </div>
+                    <div class="col-xl-6 col-lg-8">
+                        <div class="t-t-s-nav">
+                            <ul class="nav"  role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link mybtn2  StatusButton" id="Status-Pending" data-Status="Pending"  >Pending</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link mybtn2 StatusButton" id="Status-Running" data-Status="Running"  >Running</a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link mybtn2 StatusButton" id="Status-Finished" data-Status="Finished"  >Finished</a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        @foreach($Tournaments as $Tournament)
+                            <div class="col-lg-12">
+                                <div class="single-turnaments">
+                                    <div class="left-area">
+                                        <div class="single-play">
+                                            <div class="image">
+                                                <img src="{{$Tournament->GetImage()}}" alt="">
+                                            </div>
+                                            <div class="contant">
+                                                <a href="tournaments2.html" class="mybtn2">Join Now</a>
+                                            </div>
+                                        </div>
+                                        <h4>{{$Tournament->PlayerCount}} Players</h4>
+                                    </div>
+                                    <div class="right-area">
+                                        <div class="r-top-area">
+                                            <h4>{{$Tournament->Name}}</h4>
+                                            <div class="list">
+                                                <p>
+                                                   Mode : {{$Tournament->Mode}}
+                                                </p>
+                                                <span></span>
+                                                <p>
+                                                    Type : {{$Tournament->Type}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="r-bottom-area">
+                                            <div class="rl-area">
+                                                <span class="title">Time left before finish:</span>
+                                                <div class="timecounter">
+                                                    <i class="far fa-clock"></i>
+                                                    <div data-countdown="{{\Carbon\Carbon::parse($Tournament->Start)->format('Y/m/d')}}"></div>
+                                                </div>
+                                                <img src="assets/images/s-box.png" alt="">
+                                            </div>
+                                            <div class="rr-area">
+                                                <h5>Prize pool</h5>
+                                                @foreach($Tournament->Awards as $award)
+                                                    <p>${{$award}}</p>
+                                                @endforeach
+                                                <div class="time-area">
+                                                    <h6>{{$Tournament->Start}} - {{$Tournament->End}}</h6>
+                                                    <img src="{{asset('Front/images/bg-time.png')}}" alt="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 @endsection
+
+@section('js')
+    @vite('resources/js/Front/Tournaments.js')
+@endsection
+

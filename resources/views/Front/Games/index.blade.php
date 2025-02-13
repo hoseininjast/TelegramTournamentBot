@@ -1,14 +1,7 @@
 @extends('layouts.Front.Master')
 @section('content')
 
-    <!-- Breadcrumb Area Start -->
-    <section class="breadcrumb-area games">
-        <div class="content">
-            <img src="{{asset('Front/images/contest/top-icon_.png')}}" alt="">
-            <h4>Super Fast Withdrawals!</h4>
-        </div>
-    </section>
-    <!-- Breadcrumb Area End -->
+
 
     <section class="games-filter">
         <div class="container">
@@ -51,9 +44,5 @@
 @endsection
 
 @section('js')
-    <script>
-        function LoadTournaments(Mode){
-
-        }
-    </script>
+    @vite('resources/js/Front/Games.js')
 @endsection

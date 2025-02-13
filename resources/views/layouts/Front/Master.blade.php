@@ -38,6 +38,16 @@
 @include('layouts.Front.Header')
 
 <!-- Header Area End  -->
+
+<!-- Breadcrumb Area Start -->
+<section class="breadcrumb-area games">
+    <div class="content">
+        <img id="UserImage"  alt="">
+        <h4 id="UserUsername"></h4>
+    </div>
+</section>
+<!-- Breadcrumb Area End -->
+
 @yield('content')
 <!-- Footer Area Start -->
 @include('layouts.Front.Footer')
