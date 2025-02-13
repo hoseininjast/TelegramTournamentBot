@@ -38,7 +38,7 @@ LoadGamesPaidButton.addEventListener("click", () =>
 );
 
 PlayGameButtons.forEach((plan) => plan.addEventListener('click', (event) => {
-    redirect(route('Front.Tournaments.List' , [ plan.getAttribute('data-GameID') , 'free' ]) );
+    redirect(route('Front.Tournaments.List' , [ plan.getAttribute('data-GameID') , SelectedMode ]) );
 }));
 
 
