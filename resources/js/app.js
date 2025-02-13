@@ -6,7 +6,12 @@ import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams 
 const { initDataRaw, initData } = retrieveLaunchParams();
 const User = initData.user();
 
-$('#logs').text(User);
+$('#logs').text(initData);
+console.log(initData);
+console.log('----------');
+console.log('----------');
+console.log('----------');
+console.log(initData.user());
 $('#UserUsername').html('Welcome Back ' + User.username);
 $('#UserImage').src(User.photoUrl);
 

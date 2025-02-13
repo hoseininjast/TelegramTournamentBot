@@ -28,7 +28,7 @@
                             <div class="image">
                                 <img src="{{$Game->Image}}" alt="Game Image">
                                 <h4>{{$Game->Name}}</h4>
-                                
+
                             </div>
                             <div class="contant">
                                 <button type="button" class="mybtn1 PlayGame" data-GameID="{{$Game->id}}" id="GameButton-{{$Game->id}}" value="{{$Game->id}}">Play</button>
