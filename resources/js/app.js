@@ -3,15 +3,6 @@ import './bootstrap';
 import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams } from '@telegram-apps/sdk';
 
 
-const { initDataRaw, initData } = retrieveLaunchParams();
-// const User = initData.user();
-
-$('#logs').text(initData);
-console.log(initData);
-console.log('----------');
-console.log('----------');
-console.log('----------');
-console.log(initDataRaw);
 // $('#UserUsername').html('Welcome Back ' + User.username);
 // $('#UserImage').src(User.photoUrl);
 
@@ -36,3 +27,15 @@ const off = backButton.onClick(() => {
     off();
     window.history.back();
 });
+
+
+
+const { initDataRaw, initData } = retrieveLaunchParams();
+// const User = initData.user();
+
+$('#logs').text(initData);
+console.log(initData);
+console.log('----------');
+console.log('----------');
+console.log('----------');
+console.log(initDataRaw);
