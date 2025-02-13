@@ -8,7 +8,7 @@ class FrontController extends Controller
 {
     public function index()
     {
-        return view('Front.index');
+        return redirect()->route('Front.Games');
     }
     public function Games()
     {
