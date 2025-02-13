@@ -39,7 +39,9 @@
                                             <div class="image">
                                                 <img src="{{$Tournament->GetImage()}}" alt="">
                                             </div>
+
                                             <div class="contant">
+                                                <h4>{{$Tournament->Name}}</h4>
                                                 <a href="tournaments2.html" class="mybtn2">Join Now</a>
                                             </div>
                                         </div>
@@ -47,7 +49,7 @@
                                     </div>
                                     <div class="right-area">
                                         <div class="r-top-area">
-                                            <h4>{{$Tournament->Name}}</h4>
+
                                             <div class="list">
                                                 <p>
                                                    Mode : {{$Tournament->Mode}}
