@@ -27,10 +27,11 @@
                         <div class="single-play">
                             <div class="image">
                                 <img src="{{$Game->Image}}" alt="Game Image">
+                                <h4>{{$Game->Name}}</h4>
+                                
                             </div>
                             <div class="contant">
                                 <button type="button" class="mybtn1 PlayGame" data-GameID="{{$Game->id}}" id="GameButton-{{$Game->id}}" value="{{$Game->id}}">Play</button>
-                                <h4>{{$Game->Tournaments()->count()}} Tournaments</h4>
                             </div>
                         </div>
                     </div>
