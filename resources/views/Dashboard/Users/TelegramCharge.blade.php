@@ -35,7 +35,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="Charge" class="form-label">Charge</label>
-                                                <input type="number" id="Charge" name="Charge" class="form-control" value="{{$User->Charge}}">
+                                                <input type="number" id="Charge" name="Charge" step="0.01" class="form-control" value="{{$User->Charge}}">
                                             </div>
 
 

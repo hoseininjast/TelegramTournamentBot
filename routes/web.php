@@ -18,8 +18,12 @@ Auth::routes();
 
 Route::post('/telegram/webhook', [\App\Http\Controllers\Telegram\TelegramController::class , 'index']);
 
-Route::get('/' , [\App\Http\Controllers\WebController::class , 'GotoDashboard'])->name('index');
 
+
+Route::group([ 'as' => 'Front.' ] , function (){
+    Route::get('/' , [\App\Http\Controllers\FrontController::class , 'index'])->name('index');
+
+});
 
 Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
     Route::get('index' , [\App\Http\Controllers\WebController::class , 'index'])->name('index');
