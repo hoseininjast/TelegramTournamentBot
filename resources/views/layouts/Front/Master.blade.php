@@ -12,7 +12,7 @@
     @routes()
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- favicon -->
-    <link rel="shortcut icon" href="{{asset('Front/images/favicon.html')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('images/MainLogo.png')}}" type="image/x-icon">
     <!-- bootstrap -->
     <link rel="stylesheet" href="{{asset('Front/css/bootstrap.min.css')}}">
     <!-- Plugin css -->
