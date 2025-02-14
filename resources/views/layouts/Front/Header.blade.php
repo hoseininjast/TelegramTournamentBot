@@ -78,7 +78,7 @@
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand d-lg-none" href="index.html">
-                            <img class="l2" src="Front/images/logo2.png" alt="">
+                            <img class="l2" src="{{asset('Front/images/logo2.png')}}" alt="">
                         </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_menu" aria-controls="main_menu"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -112,7 +112,7 @@
 
                                 </ul>
                                 <a class="navbar-brand  d-none d-lg-block" href="index.html">
-                                    <img class="l2" src="Front/images/logo2.png" alt="">
+                                    <img class="l2" src="{{asset('Front/images/logo2.png')}}" alt="">
                                 </a>
                                 <ul class="navbar-nav ml-auto">
 
