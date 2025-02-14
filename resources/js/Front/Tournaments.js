@@ -1,15 +1,13 @@
 import {
-    ShowToast,
-    deleteSession,
-    setSession,
-    ReadSession, redirect,
+    redirect,
 } from "../utilities.js";
 
-let SelectedMode = 'Free';
 
-const LoadGamesFreeButton = document.querySelector("#LoadGamesFree");
-const LoadGamesPaidButton = document.querySelector("#LoadGamesPaid");
-const PlayGameButtons = document.querySelectorAll(".PlayGame");
+const PendingStatusButton = document.querySelector("#StatusPending");
+const RunningStatusButton = document.querySelector("#StatusRunning");
+const FinishedStatusButton = document.querySelector("#StatusFinished");
+
+const TournamentDetailButtons = document.querySelectorAll(".TournamentDetail");
 
 
 const initPage = async () => {
@@ -20,25 +18,28 @@ const initPage = async () => {
 
 
 
-function GetGames(Mode) {
-    SelectedMode = Mode;
-    $('#GameSection').show(400);
+function FilterTournaments(Status) {
+    $('.Tournamnet').show(400);
+    $('.TournamnetStatus-' + Status).hide(400);
 
 }
 
 
 
 
-LoadGamesFreeButton.addEventListener("click", () =>
-    GetGames('Free')
+PendingStatusButton.addEventListener("click", () =>
+    FilterTournaments('Pending')
 );
 
-LoadGamesPaidButton.addEventListener("click", () =>
-    GetGames('Paid')
+RunningStatusButton.addEventListener("click", () =>
+    FilterTournaments('Running')
+);
+FinishedStatusButton.addEventListener("click", () =>
+    FilterTournaments('Finished')
 );
 
-PlayGameButtons.forEach((plan) => plan.addEventListener('click', (event) => {
-    redirect(route('Front.Tournaments.List' , [ plan.getAttribute('data-GameID') , 'free' ]) );
+TournamentDetailButtons.forEach((plan) => plan.addEventListener('click', (event) => {
+    redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-TournamentID')  ]) );
 }));
 
 

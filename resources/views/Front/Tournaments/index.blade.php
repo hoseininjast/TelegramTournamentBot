@@ -13,13 +13,13 @@
                         <div class="t-t-s-nav">
                             <ul class="nav"  role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link mybtn2  StatusButton" id="Status-Pending" data-Status="Pending"  >Pending</a>
+                                    <a class="nav-link mybtn2  StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link mybtn2 StatusButton" id="Status-Running" data-Status="Running"  >Running</a>
+                                    <a class="nav-link mybtn2 StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link mybtn2 StatusButton" id="Status-Finished" data-Status="Finished"  >Finished</a>
+                                    <a class="nav-link mybtn2 StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
                                 </li>
                             </ul>
                         </div>
@@ -32,17 +32,16 @@
                 <div class="col-lg-12">
                     <div class="row">
                         @foreach($Tournaments as $Tournament)
-                            <div class="col-lg-12">
+                            <div class="col-lg-12 Tournamnet TournamnetStatus-{{$Tournament->Status}}">
                                 <div class="single-turnaments">
                                     <div class="left-area">
                                         <div class="single-play">
                                             <div class="image">
                                                 <img src="{{$Tournament->GetImage()}}" alt="">
                                                 <h4>{{$Tournament->Name}}</h4>
-
                                             </div>
                                             <div class="contant">
-                                                <a href="tournaments2.html" class="mybtn2">Join Now</a>
+                                                <button type="button"  class="mybtn2 TournamentDetail" data-TournamentID="{{$Tournament->id}}">Tournament Detail</button>
                                             </div>
                                         </div>
                                         <h4>{{$Tournament->PlayerCount}} Players</h4>
@@ -67,7 +66,7 @@
                                                     <i class="far fa-clock"></i>
                                                     <div data-countdown="{{\Carbon\Carbon::parse($Tournament->Start)->format('Y/m/d')}}"></div>
                                                 </div>
-                                                <img src="assets/images/s-box.png" alt="">
+                                                <img src="{{asset('Front/images/s-box.png')}}" alt="">
                                             </div>
                                             <div class="rr-area">
                                                 <h5>Prize pool</h5>

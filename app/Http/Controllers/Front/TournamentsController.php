@@ -35,6 +35,11 @@ class TournamentsController extends Controller
         $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , $Mode)->get();
         return view('Front.Tournaments.index')->with(['Tournaments' => $Tournaments]);
     }
+    public function Detail($TournamentID)
+    {
+        $Tournament = Tournaments::find($TournamentID);
+        return view('Front.Tournaments.Details')->with(['Tournament' => $Tournament]);
+    }
 
 
     private function numToWords($number) {
