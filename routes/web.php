@@ -69,6 +69,8 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
     Route::group( ['prefix' => 'Games' , 'as' => 'Games.' , 'middleware' => 'isOwner'] ,function (){
         Route::get('index' , [\App\Http\Controllers\GamesController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\GamesController::class , 'Add'])->name('Add');
+        Route::get('Edit/{ID}' , [\App\Http\Controllers\GamesController::class , 'Edit'])->name('Edit');
+        Route::put('Update/{ID}' , [\App\Http\Controllers\GamesController::class , 'Update'])->name('Update');
         Route::post('Create' , [\App\Http\Controllers\GamesController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\GamesController::class , 'Delete'])->name('Delete')->middleware('isOwner');
 

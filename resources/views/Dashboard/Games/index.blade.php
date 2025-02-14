@@ -29,6 +29,7 @@
                                                 <td>{{$game->Name}}</td>
                                                 <td>{{$game->Description}}</td>
                                                 <td>
+                                                    <a class="btn btn-sm btn-warning waves-effect waves-light" href="{{route('Dashboard.Games.Edit' , $game->id)}}"   >Edit <i class="mdi mdi-pen-plus"></i> </a>
                                                     <a class="btn btn-sm btn-danger waves-effect waves-light" href="{{route('Dashboard.Games.Delete' , $game->id)}}"  data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
                                                 </td>
                                             </tr>

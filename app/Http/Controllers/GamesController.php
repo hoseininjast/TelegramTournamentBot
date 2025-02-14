@@ -22,6 +22,40 @@ class GamesController extends Controller
         return view('Dashboard.Games.Add');
 
     }
+
+    public function Edit(int $ID)
+    {
+        $Games = Games::find($ID);
+        return view('Dashboard.Games.Edit')->with([ 'Game' => $Games]);
+    }
+
+    public function Update(int $ID , Request $request)
+    {
+        $request->validate([
+            'Name' => 'required|string',
+            'Description' => 'required|string',
+            'Image' => 'nullable|file|image',
+        ]);
+        $Games = Games::find($ID);
+
+
+        if($request->hasFile('Image')){
+            $AttachmentAddress = $this->UploadImage($request->Image , 'Games');
+        }else{
+            $AttachmentAddress = $Games->Image;
+        }
+
+        $Games->update([
+            'Name' => $request->Name,
+            'Description' => $request->Description,
+            'Image' => $AttachmentAddress,
+        ]);
+
+        Alert::success('Game Updated successfully');
+
+        return redirect()->route('Dashboard.Games.index');
+
+    }
     public function Delete(int $ID)
     {
         $Games = Games::find($ID);
