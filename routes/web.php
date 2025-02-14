@@ -19,6 +19,7 @@ Auth::routes();
 Route::post('/telegram/webhook', [\App\Http\Controllers\Telegram\TelegramController::class , 'index']);
 
 
+Route::get('/home' , [\App\Http\Controllers\WebController::class , 'GotoDashboard'])->name('index');
 
 Route::group([ 'as' => 'Front.' ] , function (){
     Route::get('/' , [\App\Http\Controllers\FrontController::class , 'index'])->name('index');
