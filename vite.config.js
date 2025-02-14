@@ -14,6 +14,6 @@ export default defineConfig({
         }),
     ],
     build: {
-        outDir: '../public_html/kryptoarena.fun',
+        outDir: '../public_html/kryptoarena.fun/build',
     },
 });
