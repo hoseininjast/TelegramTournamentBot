@@ -93,7 +93,7 @@ class TournamentPlansController extends Controller
  بازیکن ها :
  {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
  @{$TournamentPlan->Player1->UserName} --- @{$TournamentPlan->Player2->UserName}
- امتیاز ها : {$request->Player1Score} : {$request->Player2Score}
+ امتیاز ها : بازیکن اول : {$request->Player1Score} --- بازیکن دوم : {$request->Player2Score}
  زمان بازی : {$JalaliDate}
  برنده : {$TournamentPlan->Winner->PlatoID}
  پس از مشخص شدن برنامه بازی های بعدی در ربات به شما اطلاع رسانی میشود.
