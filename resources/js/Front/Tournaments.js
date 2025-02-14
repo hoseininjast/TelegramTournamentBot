@@ -2,7 +2,6 @@ import {
     redirect,
 } from "../utilities.js";
 
-
 const PendingStatusButton = document.querySelector("#StatusPending");
 const RunningStatusButton = document.querySelector("#StatusRunning");
 const FinishedStatusButton = document.querySelector("#StatusFinished");
@@ -10,21 +9,15 @@ const FinishedStatusButton = document.querySelector("#StatusFinished");
 const TournamentDetailButtons = document.querySelectorAll(".TournamentDetail");
 
 
-const initPage = async () => {
-
-};
-
 
 
 
 
 function FilterTournaments(Status) {
-    $('.Tournamnet').show(400);
-    $('.TournamnetStatus-' + Status).hide(400);
+    $('.Tournamnet').hide(400);
+    $('.TournamnetStatus-' + Status).show(400);
 
 }
-
-
 
 
 PendingStatusButton.addEventListener("click", () =>
@@ -42,9 +35,5 @@ TournamentDetailButtons.forEach((plan) => plan.addEventListener('click', (event)
     redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-TournamentID')  ]) );
 }));
 
-
-window.addEventListener("DOMContentLoaded", async () => {
-    await initPage();
-});
 
 
