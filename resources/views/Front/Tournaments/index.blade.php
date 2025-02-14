@@ -93,6 +93,6 @@
 @endsection
 
 @section('js')
-    @vite('resources/js/Front/Tournaments.js')
+    @vite('resources/js/Front/Tournaments.js?version=1.0.0')
 @endsection
 
