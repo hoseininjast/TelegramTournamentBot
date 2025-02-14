@@ -174,14 +174,21 @@ class TournamentsController extends Controller
 مرحله : {$this->numToWordForStages($NextStage)}
  بازیکن ها :
  {$User1->PlatoID} --- {$User2->PlatoID}
+ @{$User1->UserName} --- @{$User2->UserName}
  زمان شروع : {$JalaliDate1} الی {$JalaliDate2} میباشد لطفا توی این زمان با ناظر خود هماهنگ کنید
  زمان بازی به زودی اعلام میشود.
 @krypto_arena_bot
 ";
 
                 if(env('APP_ENV') == 'production'){
-                    NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
-                    NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+
+                    if(preg_match('/KryptoArenaFreePosition/' , $User1->UserName ) != 1){
+                        NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
+                    }
+
+                    if(preg_match('/KryptoArenaFreePosition/' , $User2->UserName ) != 1){
+                        NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+                    }
                 }
 
             }
@@ -252,13 +259,21 @@ class TournamentsController extends Controller
 مرحله : {$this->numToWordForStages($NextStage)}
  بازیکن ها :
  {$User1->PlatoID} --- {$User2->PlatoID}
+ @{$User1->UserName} --- @{$User2->UserName}
  زمان شروع : {$JalaliDate1} الی {$JalaliDate2} میباشد لطفا توی این زمان با ناظر خود هماهنگ کنید
  زمان دقیق بازی به زودی اعلام میشود.
 @krypto_arena_bot
 ";
+
                 if(env('APP_ENV') == 'production'){
-                    NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
-                    NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+
+                    if(preg_match('/KryptoArenaFreePosition/' , $User1->UserName ) != 1){
+                        NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
+                    }
+
+                    if(preg_match('/KryptoArenaFreePosition/' , $User2->UserName ) != 1){
+                        NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+                    }
                 }
 
 

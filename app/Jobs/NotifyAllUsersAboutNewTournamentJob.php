@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
 use Telegram\Bot\Exceptions\TelegramOtherException;
 use Telegram\Bot\Exceptions\TelegramResponseException;
+use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -64,7 +65,7 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
             foreach ($Users as $user) {
                 $telegram->sendPhoto([
                     'chat_id' => $user->TelegramUserID,
-                    'photo' => $Tournament->GetImage(),
+                    'photo' => InputFile::create($Tournament->GetImage()  . '?version=1.0.6'),
                     'caption' => $text,
                     'parse_mode' => 'html',
                 ]);
@@ -78,7 +79,7 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
             $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
             $telegram->sendPhoto([
                 'chat_id' => $ChanelID['id'],
-                'photo' => $Tournament->GetImage(),
+                'photo' => InputFile::create($Tournament->GetImage()  . '?version=1.0.6'),
                 'caption' => $text,
                 'parse_mode' => 'html',
             ]);
