@@ -3,8 +3,7 @@ import './bootstrap';
 import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams } from '@telegram-apps/sdk';
 
 
-// $('#UserUsername').html('Welcome Back ' + User.username);
-// $('#UserImage').src(User.photoUrl);
+
 
 init();
 backButton.mount();
@@ -39,3 +38,5 @@ console.log('----------');
 console.log('----------');
 console.log('----------');
 console.log(initDataRaw);
+// $('#UserUsername').html('Welcome Back ' + User.username);
+// $('#UserImage').src(User.photoUrl);

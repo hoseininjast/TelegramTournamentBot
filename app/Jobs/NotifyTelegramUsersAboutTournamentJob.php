@@ -50,17 +50,25 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
 ";
 
 
-        $telegram->sendMessage([
-            'chat_id' => $this->TournamentPlan->Player1->TelegramUserID,
-            'text' => $text,
-            'parse_mode' => 'html',
-        ]);
+        if(preg_match('/KryptoArenaFreePosition/' , $this->TournamentPlan->Player1->UserName ) != 1){
+            $telegram->sendMessage([
+                'chat_id' => $this->TournamentPlan->Player1->TelegramUserID,
+                'text' => $text,
+                'parse_mode' => 'html',
+            ]);
+        }
 
-        $telegram->sendMessage([
-            'chat_id' => $this->TournamentPlan->Player2->TelegramUserID,
-            'text' => $text,
-            'parse_mode' => 'html',
-        ]);
+
+        if(preg_match('/KryptoArenaFreePosition/' , $this->TournamentPlan->Player2->UserName ) != 1){
+            $telegram->sendMessage([
+                'chat_id' => $this->TournamentPlan->Player2->TelegramUserID,
+                'text' => $text,
+                'parse_mode' => 'html',
+            ]);
+        }
+
+
+
 
         if($this->TournamentPlan->SupervisorID != null){
             $telegram->sendMessage([

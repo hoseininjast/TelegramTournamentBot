@@ -152,8 +152,14 @@ class TournamentPlansController extends Controller
 
 
         if(env('APP_ENV') == 'production'){
-            NotifyTelegramUsersJob::dispatch($User1 ,$text);
-            NotifyTelegramUsersJob::dispatch($User2 ,$text);
+
+            if(preg_match('/KryptoArenaFreePosition/' , $User1->UserName ) != 1){
+                NotifyTelegramUsersJob::dispatch($User1->TelegramUserID ,$text);
+            }
+
+            if(preg_match('/KryptoArenaFreePosition/' , $User2->UserName ) != 1){
+                NotifyTelegramUsersJob::dispatch($User2->TelegramUserID ,$text);
+            }
 
             NotifyTelegramUsersAboutTournamentJob::dispatch($TournamentPlan)->delay(Carbon::parse($TournamentPlan->Time)->subMinutes(15));
 
