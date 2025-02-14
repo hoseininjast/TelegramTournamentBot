@@ -1,15 +1,45 @@
+import './bootstrap';
 
-var web_app = window.Telegram.WebApp;
+import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams } from '@telegram-apps/sdk';
 
-var output = '';
-for (var web_apps in web_app) {
-    output += web_apps + ': ' + web_app[web_apps]+'; ';
+
+
+init();
+backButton.mount();
+console.log(backButton.show.isAvailable())
+console.log(closingBehavior.mount.isAvailable())
+console.log(closingBehavior.enableConfirmation.isAvailable())
+if (backButton.show.isAvailable()) {
+
+    backButton.show();
+}
+if (closingBehavior.mount.isAvailable()) {
+    closingBehavior.mount();
+    closingBehavior.isMounted(); // true
+}
+if (closingBehavior.enableConfirmation.isAvailable()) {
+    closingBehavior.enableConfirmation();
+    closingBehavior.isConfirmationEnabled(); // true
+}
+if (hapticFeedback.impactOccurred.isAvailable()) {
+    hapticFeedback.impactOccurred('medium');
 }
 
-window.onload = function() {
-    document.getElementById("logs").innerHTML = output;
-}
+const off = backButton.onClick(() => {
+    off();
+    window.history.back();
+});
 
-console.log(web_apps);
+
+
+const { initDataRaw, initData } = retrieveLaunchParams();
+// const User = initData.user();
+
+$('#logs').text(initData);
+console.log(initData);
+console.log('----------');
+console.log('----------');
+console.log('----------');
+console.log(initDataRaw);
 // $('#UserUsername').html('Welcome Back ' + User.username);
 // $('#UserImage').src(User.photoUrl);

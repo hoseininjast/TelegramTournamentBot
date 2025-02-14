@@ -12,9 +12,7 @@
     @routes()
 
     {{--Telegram--}}
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('images/MainLogo.png')}}" type="image/x-icon">
@@ -56,8 +54,6 @@
 @yield('content')
 <!-- Footer Area Start -->
 @include('layouts.Front.Footer')
-
-
 <p style="background: yellow" id="logs">the logs comes here...</p>
 <!-- Footer Area End -->
 
