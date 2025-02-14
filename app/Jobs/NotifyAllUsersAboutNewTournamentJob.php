@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Telegram\Bot\Api;
 use Telegram\Bot\Exceptions\TelegramOtherException;
 use Telegram\Bot\Exceptions\TelegramResponseException;
@@ -60,12 +61,13 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
+        $Image = preg_replace('/https\:\/\/kryptoarena\.fun/' , '../publc_html/kryptoarena.fun' , $Tournament->GetImage());
         try {
             $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
             foreach ($Users as $user) {
                 $telegram->sendPhoto([
                     'chat_id' => $user->TelegramUserID,
-                    'photo' => $Tournament->GetImage()  . '?version=1.0.6',
+                    'photo' => InputFile::create($Image  . '?version=1.0.6'),
                     'caption' => $text,
                     'parse_mode' => 'html',
                 ]);
@@ -79,7 +81,7 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
             $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
             $telegram->sendPhoto([
                 'chat_id' => $ChanelID['id'],
-                'photo' => $Tournament->GetImage()  . '?version=1.0.6',
+                'photo' => InputFile::create($Image  . '?version=1.0.6'),
                 'caption' => $text,
                 'parse_mode' => 'html',
             ]);
