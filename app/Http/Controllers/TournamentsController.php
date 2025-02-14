@@ -96,7 +96,6 @@ class TournamentsController extends Controller
             'StagesDate' => $request->StagesDate,
         ]);
 
-        NotifyAllUsersAboutNewTournamentJob::dispatch($Tournament);
 
 
         \Alert::success('Tournament Updated successfully');

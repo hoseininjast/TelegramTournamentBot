@@ -10,8 +10,10 @@ export default defineConfig({
                 'resources/js/Front/Games.js',
                 'resources/js/Front/Tournaments.js',
             ],
-            publicDirectory : 'public_html/kryptoarena.fun',
             refresh: true,
         }),
     ],
+    build: {
+        outDir: 'public_html/kryptoarena.fun',
+    },
 });
