@@ -68,10 +68,13 @@ class TournamentPlansController extends Controller
         ]);
 
         $TournamentPlan = TournamentPlans::find($ID);
-        if($TournamentPlan->SupervisorID != \Auth::id()){
-            \Alert::error('you dont have access to this game plan');
-            return redirect()->back();
+        if(!\Auth::user()->isOwner()){
+            if($TournamentPlan->SupervisorID != \Auth::id()){
+                \Alert::error('you dont have access to this game plan');
+                return redirect()->back();
+            }
         }
+
         $TournamentPlan->update([
             'Player1Score' => $request->Player1Score,
             'Player2Score' => $request->Player2Score,
@@ -118,10 +121,13 @@ class TournamentPlansController extends Controller
             'Time' => 'required|date_format:Y-m-d H:i:s',
         ]);
         $TournamentPlan = TournamentPlans::find($ID);
-        if($TournamentPlan->SupervisorID != \Auth::id()){
-            \Alert::error('you dont have access to this game plan');
-            return redirect()->back();
+        if(!\Auth::user()->isOwner()){
+            if($TournamentPlan->SupervisorID != \Auth::id()){
+                \Alert::error('you dont have access to this game plan');
+                return redirect()->back();
+            }
         }
+
         $TournamentPlan->update([
             'Time' => $request->Time
         ]);
