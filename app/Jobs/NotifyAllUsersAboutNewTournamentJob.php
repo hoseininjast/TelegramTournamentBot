@@ -65,7 +65,7 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
             foreach ($Users as $user) {
                 $telegram->sendPhoto([
                     'chat_id' => $user->TelegramUserID,
-                    'photo' => InputFile::create($Tournament->GetImage()  . '?version=1.0.6'),
+                    'photo' => $Tournament->GetImage()  . '?version=1.0.6',
                     'caption' => $text,
                     'parse_mode' => 'html',
                 ]);
@@ -79,7 +79,7 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
             $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
             $telegram->sendPhoto([
                 'chat_id' => $ChanelID['id'],
-                'photo' => InputFile::create($Tournament->GetImage()  . '?version=1.0.6'),
+                'photo' => $Tournament->GetImage()  . '?version=1.0.6',
                 'caption' => $text,
                 'parse_mode' => 'html',
             ]);
