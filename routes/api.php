@@ -22,6 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
     Route::group(['prefix' => 'Games' , 'as' => 'Games.' ] , function (){
-        Route::post('/' , [\App\Http\Controllers\Api\V1\GamesController::class , 'index'])->name('index');
+        Route::get('/' , [\App\Http\Controllers\Api\V1\GamesController::class , 'index'])->name('index');
+    });
+    Route::group(['prefix' => 'Tournaments' , 'as' => 'Tournaments.' ] , function (){
+        Route::get('/' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'index'])->name('index');
+        Route::get('Detail/{ID}' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'Detail'])->name('Detail');
     });
 });

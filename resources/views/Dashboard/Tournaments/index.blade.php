@@ -34,6 +34,7 @@
                                                 <td>{{$tournament->Status}}</td>
                                                 <td>
                                                     <a class="btn btn-sm btn-primary waves-effect waves-light" href="{{route('Dashboard.Tournaments.Manage' , $tournament->id)}}">Manage <i class="mdi mdi-eye"></i> </a>
+                                                    <a class="btn btn-sm btn-warning waves-effect waves-light" href="{{route('Dashboard.Tournaments.Edit' , $tournament->id)}}">Edit <i class="mdi mdi-pen-plus"></i> </a>
                                                     @if(Auth::user()->isOwner())
                                                         <a class="btn btn-sm btn-danger waves-effect waves-light" href="{{route('Dashboard.Tournaments.Delete' , $tournament->id)}}"  data-confirm-delete="true" >Delete <i class="mdi mdi-trash-can"></i> </a>
                                                     @endif

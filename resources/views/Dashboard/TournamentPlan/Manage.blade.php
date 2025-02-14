@@ -126,20 +126,20 @@
                                         <div class="row mt-5">
                                             <div class="mb-3 col-4">
                                                 <label for="Player1Score" class="form-label">Player 1 Score</label>
-                                                <input type="number" id="Player1Score" name="Player1Score" class="form-control">
+                                                <input type="number" id="Player1Score" name="Player1Score" class="form-control" value="{{$TournamentPlan->Player1Score}}">
                                             </div>
 
                                             <div class="mb-3 col-4">
                                                 <label for="Player2Score" class="form-label">Player 2 Score</label>
-                                                <input type="number" id="Player2Score" name="Player2Score" class="form-control">
+                                                <input type="number" id="Player2Score" name="Player2Score" class="form-control" value="{{$TournamentPlan->Player2Score}}">
                                             </div>
 
                                             <div class="mb-3 col-4">
                                                 <label for="WinnerID"  class="form-label">Winner </label>
                                                 <select class="form-select" id="WinnerID" name="WinnerID">
                                                     <option selected>Select tournament type</option>
-                                                    <option value="{{$TournamentPlan->Player1->id}}">{{$TournamentPlan->Player1->UserName}} => {{$TournamentPlan->Player1->PlatoID}} </option>
-                                                    <option value="{{$TournamentPlan->Player2->id}}">{{$TournamentPlan->Player2->UserName}} => {{$TournamentPlan->Player2->PlatoID}} </option>
+                                                    <option @if($TournamentPlan->WinnerID == $TournamentPlan->Player1->id) selected @endif value="{{$TournamentPlan->Player1->id}}">{{$TournamentPlan->Player1->UserName}} => {{$TournamentPlan->Player1->PlatoID}} </option>
+                                                    <option @if($TournamentPlan->WinnerID == $TournamentPlan->Player2->id) selected @endif value="{{$TournamentPlan->Player2->id}}">{{$TournamentPlan->Player2->UserName}} => {{$TournamentPlan->Player2->PlatoID}} </option>
                                                 </select>
                                             </div>
                                         </div>

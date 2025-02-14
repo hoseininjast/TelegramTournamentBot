@@ -43,6 +43,7 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
 مرحله : {$this->numToWordForStages($this->TournamentPlan->Stage)}
  بازیکن ها :
  {$this->TournamentPlan->Player1->PlatoID} --- {$this->TournamentPlan->Player2->PlatoID}
+ @{$this->TournamentPlan->Player1->UserName} --- @{$this->TournamentPlan->Player2->UserName}
  زمان بازی : {$JalaliDate}
  ناظر شما : {$SupervisorID}
 @krypto_arena_bot

@@ -16,11 +16,15 @@ class TournamentPlansController extends Controller
     public function Manage(int $ID)
     {
         $TournamentPlan = TournamentPlans::find($ID);
-        if($TournamentPlan->SupervisorID != \Auth::id()){
-            \Alert::error('you dont have access to this game plan');
-            return redirect()->back();
+        if(\Auth::user()->isOwner()){
+            return view('Dashboard.TournamentPlan.Manage')->with(['TournamentPlan' => $TournamentPlan]);
+        }else{
+            if($TournamentPlan->SupervisorID != \Auth::id()){
+                \Alert::error('you dont have access to this game plan');
+                return redirect()->back();
+            }
+            return view('Dashboard.TournamentPlan.Manage')->with(['TournamentPlan' => $TournamentPlan]);
         }
-        return view('Dashboard.TournamentPlan.Manage')->with(['TournamentPlan' => $TournamentPlan]);
 
     }
     public function JoinAsSupervisor(int $ID)
@@ -36,10 +40,11 @@ class TournamentPlansController extends Controller
         $text = "
 ناظر بازی شما مشخص شد.
 لطفا برای هماهنگی ساعت با او در ارتباط باشید.
-آیدی پلاتو ناظر : {$Supervisor->PlatoID}
-آیدی پلاتو بازیکن اول : {$User1->PlatoID}
-آیدی پلاتو بازیکن دوم : {$User2->PlatoID}
-@krypto_arena_bot
+بازی : {$TournamentPlan->Tournament->Game->Name}
+نام : {$TournamentPlan->Tournament->Name}
+ناظر : پلاتو : {$Supervisor->PlatoID} ،‌ تلگرام : @{$Supervisor->Username}
+بازیکن اول : پلاتو : {$User1->PlatoID} ، تلگرام : @{$User1->UserName}
+بازیکن دوم : پلاتو : {$User2->PlatoID} ، تلگرام : @{$User2->UserName}
 ";
 
         if(env('APP_ENV') == 'production'){
@@ -81,16 +86,18 @@ class TournamentPlansController extends Controller
 
         $text = "
 نتیجه بازی شما مشخص شد
+بازی : {$TournamentPlan->Tournament->Game->Name}
+نام : {$TournamentPlan->Tournament->Name}
 گروه : {$this->numToWords($TournamentPlan->Group)}
 مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
  {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
+ @{$TournamentPlan->Player1->UserName} --- @{$TournamentPlan->Player2->UserName}
  امتیاز ها : {$request->Player1Score} : {$request->Player2Score}
  زمان بازی : {$JalaliDate}
  برنده : {$TournamentPlan->Winner->PlatoID}
  پس از مشخص شدن برنامه بازی های بعدی در ربات به شما اطلاع رسانی میشود.
-@krypto_arena_bot
-        ";
+";
 
         if(env('APP_ENV') == 'production'){
             NotifyTelegramUsersJob::dispatch($User1 ,$text);
@@ -125,13 +132,15 @@ class TournamentPlansController extends Controller
 
         $text = "
 زمان مسابقه شما مشخص شد
+بازی : {$TournamentPlan->Tournament->Game->Name}
+نام : {$TournamentPlan->Tournament->Name}
 گروه : {$this->numToWords($TournamentPlan->Group)}
 مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
  بازیکن ها :
  {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
+ @{$TournamentPlan->Player1->UserName} --- @{$TournamentPlan->Player2->UserName}
  زمان بازی : {$JalaliDate}
  لطفا 1 ساعت قبل از شروع مسابقه با ناظر بازی هماهنگ کنید.
-@krypto_arena_bot
 ";
 
 

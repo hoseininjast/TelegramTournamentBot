@@ -21,7 +21,7 @@
                                 @endif
 
                                 <div class="row d-flex justify-content-around">
-                                    <img style="max-width: 300px;max-height: fit-content;" src="{{$Tournament->Image != null ? $Tournament->Image : 'https://platotournament.ai1polaris.com/images/MainLogo.png'}}"  alt="Tournament image"/>
+                                    <img style="max-width: 300px;max-height: fit-content;" src="{{$Tournament->GetImage()}}"  alt="Tournament image"/>
                                 </div>
 
                             </div>
@@ -182,15 +182,20 @@
                                                             @if($plan->SupervisorID == null)
                                                                 <a href="{{route('Dashboard.TournamentPlan.JoinAsSupervisor' , $plan->id)}}" class="btn btn-sm btn-info waves-effect waves-light">Join as supervisor</a>
                                                             @else
-                                                                @if($plan->SupervisorID == \Auth::id())
-                                                                    @if($plan->Status == 'Pending')
-                                                                        <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}" class="btn btn-sm btn-success waves-effect waves-light">Manage</a>
-                                                                    @else
-                                                                        <a href="#" class="btn btn-sm btn-outline-dark waves-effect waves-light disabled">Manage</a>
-                                                                    @endif
+                                                                @if(Auth::user()->isOwner())
+                                                                    <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}" class="btn btn-sm btn-success waves-effect waves-light">Manage</a>
                                                                 @else
-                                                                    <button class="btn btn-sm btn-outline-danger disabled" style="cursor: not-allowed">not allowed</button>
+                                                                    @if($plan->SupervisorID == \Auth::id())
+                                                                        @if($plan->Status == 'Pending')
+                                                                            <a href="{{route('Dashboard.TournamentPlan.Manage' , $plan->id)}}" class="btn btn-sm btn-success waves-effect waves-light">Manage</a>
+                                                                        @else
+                                                                            <a href="#" class="btn btn-sm btn-outline-dark waves-effect waves-light disabled">Manage</a>
+                                                                        @endif
+                                                                    @else
+                                                                        <button class="btn btn-sm btn-outline-danger disabled" style="cursor: not-allowed">not allowed</button>
+                                                                    @endif
                                                                 @endif
+
                                                             @endif
 
 

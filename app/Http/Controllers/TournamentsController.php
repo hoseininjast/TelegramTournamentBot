@@ -45,6 +45,65 @@ class TournamentsController extends Controller
         $Supervisors = User::whereIn('id' , $Supervisorids)->get();
         return view('Dashboard.Tournaments.Manage')->with(['Tournament' => $Tournament , 'Supervisors' => $Supervisors]);
     }
+    public function Edit(int $ID)
+    {
+        $Tournament = Tournaments::find($ID);
+        $Games = Games::all();
+        return view('Dashboard.Tournaments.Edit')->with(['Tournament' => $Tournament , 'Games' => $Games]);
+    }
+
+    public function Update(int $ID , Request $request)
+    {
+        $request->validate([
+            'Name' => 'required|string',
+            'Description' => 'required|string',
+            'Image' => 'nullable|file|image',
+            'PlayerCount' => 'required|integer',
+            'TotalStage' => 'required|integer',
+            'Type' => 'required|string|in:Knockout,WorldCup,League',
+            'Mode' => 'required|string|in:Free,Paid',
+            'Price' => 'required|integer',
+            'Time' => 'required|integer',
+            'Start' => 'required|date_format:Y-m-d H:i:s',
+            'End' => 'required|date_format:Y-m-d H:i:s',
+            'GameID' => 'required|integer|exists:games,id',
+            'Winners' => 'required|integer',
+            'Awards' => 'required|array',
+            'StagesDate' => 'required|array',
+        ]);
+        $Tournament = Tournaments::find($ID);
+
+        if($request->hasFile('Image')){
+            $AttachmentAddress = $this->UploadImage($request->Image , 'Tournaments');
+        }else{
+            $AttachmentAddress = $Tournament->GetImage();
+        }
+        $Tournament->update([
+            'Name' => $request->Name,
+            'Description' => $request->Description,
+            'Image' => $AttachmentAddress,
+            'PlayerCount' => $request->PlayerCount,
+            'TotalStage' => $request->TotalStage,
+            'Type' => $request->Type,
+            'Mode' => $request->Mode,
+            'Price' => $request->Price,
+            'Time' => $request->Time,
+            'Start' => $request->Start,
+            'End' => $request->End,
+            'GameID' => $request->GameID,
+            'Winners' => $request->Winners,
+            'Awards' => $request->Awards,
+            'StagesDate' => $request->StagesDate,
+        ]);
+
+
+
+        \Alert::success('Tournament Updated successfully');
+
+
+        return redirect()->route('Dashboard.Tournaments.index');
+    }
+
     public function Fill(int $ID)
     {
         $Tournament = Tournaments::find($ID);
@@ -109,6 +168,8 @@ class TournamentsController extends Controller
 
                 $text = "
 برنامه بازی های شما مشخص شد
+بازی : {$Tournament->Game->Name}
+نام : {$Tournament->Name}
 گروه : {$this->numToWords($Group)}
 مرحله : {$this->numToWordForStages($NextStage)}
  بازیکن ها :
@@ -185,6 +246,8 @@ class TournamentsController extends Controller
 
                 $text = "
 برنامه بازی های جدید شما مشخص شد
+بازی : {$Tournament->Game->Name}
+نام : {$Tournament->Name}
 گروه : {$this->numToWords($CurrentGroup)}
 مرحله : {$this->numToWordForStages($NextStage)}
  بازیکن ها :

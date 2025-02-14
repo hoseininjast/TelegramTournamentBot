@@ -79,6 +79,8 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
         Route::get('index' , [\App\Http\Controllers\TournamentsController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\TournamentsController::class , 'Add'])->name('Add')->middleware('isOwner');
         Route::get('Manage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Manage'])->name('Manage');
+        Route::get('Edit/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Edit'])->name('Edit');
+        Route::put('Update/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Update'])->name('Update');
         Route::get('Fill/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'Fill'])->name('Fill');
         Route::get('StartStage1/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartStage1'])->name('StartStage1')->middleware('isOwner');
         Route::get('StartNextStage/{ID}' , [\App\Http\Controllers\TournamentsController::class , 'StartNextStage'])->name('StartNextStage')->middleware('isOwner');

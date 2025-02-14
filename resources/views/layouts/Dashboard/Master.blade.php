@@ -23,6 +23,7 @@
     <link href="{{asset('Dashboard/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    @routes()
 
     @laravelPWA
 
