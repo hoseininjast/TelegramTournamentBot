@@ -42,18 +42,15 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
         $GamesCount = $Tournament->PlayerCount - 1;
 
         $text = "
-تورنومنت جدیدی ثبت شده است.
+تورنومنت جدید : {$Tournament->Game->Name}
 نام : {$Tournament->Name}
 توضیحات : {$Tournament->Description}
 نوع : {$Type}
 حالت : {$Mode}
  مبلغ ورودی : $ {$Tournament->Price}
 تعداد بازیکن : {$Tournament->PlayerCount}
-زمان بازی : {$Tournament->Time} روز
 تاریخ شروع : {$JalaliDate1}
 تاریخ پایان : {$JalaliDate2}
-مراحل : {$Tournament->TotalStage} مرحله
-تعداد بازی : {$GamesCount} بازی
 تعداد برندگان : {$Tournament->Winners}
 جوایز : \n {$adwards}
 وضعیت : {$Status}
@@ -65,9 +62,10 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
         try {
             $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
             foreach ($Users as $user) {
-                $telegram->sendMessage([
+                $telegram->sendPhoto([
                     'chat_id' => $user->TelegramUserID,
-                    'text' => $text,
+                    'photo' => $Tournament->GetImage(),
+                    'caption' => $text,
                     'parse_mode' => 'html',
                 ]);
             }
@@ -78,9 +76,10 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
 
         try {
             $ChanelID = Telegram::getChat(['chat_id' => '@krypto_arena']);
-            $telegram->sendMessage([
+            $telegram->sendPhoto([
                 'chat_id' => $ChanelID['id'],
-                'text' => $text,
+                'photo' => $Tournament->GetImage(),
+                'caption' => $text,
                 'parse_mode' => 'html',
             ]);
         }catch (TelegramOtherException | TelegramResponseException $exception){
