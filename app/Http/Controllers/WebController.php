@@ -14,11 +14,6 @@ class WebController extends Controller
     }
     public function GotoDashboard()
     {
-        $Supervisor = \Auth::user();
-
-        $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
-        $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $Supervisor->TelegramUserID]);
-        dd($SupervisorTelegramInfo['username']);
         return redirect()->route('Dashboard.index');
     }
 }

@@ -41,7 +41,7 @@ class TournamentPlansController extends Controller
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
         $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $Supervisor->TelegramUserID]);
-        $SupervisorTelegramUsername = $SupervisorTelegramInfo['result']['username'];
+        $SupervisorTelegramUsername = $SupervisorTelegramInfo['username'];
 
         $text = "
 ناظر بازی شما مشخص شد.

@@ -36,7 +36,7 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
         if($this->TournamentPlan->SupervisorID){
             $SupervisorID = $this->TournamentPlan->Supervisor->PlatoID;
             $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $this->TournamentPlan->Supervisor->TelegramUserID]);
-            $SupervisorTelegramUsername = $SupervisorTelegramInfo['result']['username'];
+            $SupervisorTelegramUsername = $SupervisorTelegramInfo['username'];
         }else{
             $SupervisorID = 'مشخص نشده';
             $SupervisorTelegramUsername = 'مشخص نشده';
