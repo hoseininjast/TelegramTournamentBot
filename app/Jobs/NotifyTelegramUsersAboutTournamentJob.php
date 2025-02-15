@@ -52,8 +52,7 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
  {$this->TournamentPlan->Player1->PlatoID} --- {$this->TournamentPlan->Player2->PlatoID}
  @{$this->TournamentPlan->Player1->UserName} --- @{$this->TournamentPlan->Player2->UserName}
  زمان بازی : {$JalaliDate}
- ناظر بازی : پلاتو : {$SupervisorID} ، تلگرام : {$SupervisorTelegramUsername}
-@krypto_arena_bot
+ناظر : پلاتو : {$SupervisorID} ،‌ تلگرام : @{$SupervisorTelegramUsername}
 ";
 
 
