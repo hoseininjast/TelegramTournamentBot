@@ -33,7 +33,14 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
         $JalaliDate = Verta($this->TournamentPlan->Time)->format('%A, %d %B  H:i ');
-        $SupervisorID = $this->TournamentPlan->SupervisorID ? $this->TournamentPlan->Supervisor->PlatoID : 'مشخص نشده';
+        if($this->TournamentPlan->SupervisorID){
+            $SupervisorID = $this->TournamentPlan->Supervisor->PlatoID;
+            $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $this->TournamentPlan->Supervisor->TelegramUserID]);
+            $SupervisorTelegramUsername = $SupervisorTelegramInfo['result']['username'];
+        }else{
+            $SupervisorID = 'مشخص نشده';
+            $SupervisorTelegramUsername = 'مشخص نشده';
+        }
 
 
         $text = "
@@ -45,7 +52,7 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
  {$this->TournamentPlan->Player1->PlatoID} --- {$this->TournamentPlan->Player2->PlatoID}
  @{$this->TournamentPlan->Player1->UserName} --- @{$this->TournamentPlan->Player2->UserName}
  زمان بازی : {$JalaliDate}
- ناظر شما : {$SupervisorID}
+ ناظر بازی : پلاتو : {$SupervisorID} ، تلگرام : {$SupervisorTelegramUsername}
 @krypto_arena_bot
 ";
 

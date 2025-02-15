@@ -6,11 +6,7 @@ import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams 
 
 init();
 backButton.mount();
-console.log(backButton.show.isAvailable())
-console.log(closingBehavior.mount.isAvailable())
-console.log(closingBehavior.enableConfirmation.isAvailable())
 if (backButton.show.isAvailable()) {
-
     backButton.show();
 }
 if (closingBehavior.mount.isAvailable()) {

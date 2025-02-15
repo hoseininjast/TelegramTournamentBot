@@ -10,6 +10,8 @@ use App\Models\Tournaments;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Telegram\Bot\Api;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TournamentPlansController extends Controller
 {
@@ -37,12 +39,16 @@ class TournamentPlansController extends Controller
         $User2 = $TournamentPlan->Player2;
         $Supervisor = \Auth::user();
 
+        $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
+        $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $Supervisor->TelegramUserID]);
+        $SupervisorTelegramUsername = $SupervisorTelegramInfo['result']['username'];
+
         $text = "
 ناظر بازی شما مشخص شد.
 لطفا برای هماهنگی ساعت با او در ارتباط باشید.
 بازی : {$TournamentPlan->Tournament->Game->Name}
 نام : {$TournamentPlan->Tournament->Name}
-ناظر : پلاتو : {$Supervisor->PlatoID} ،‌ تلگرام : @{$Supervisor->Username}
+ناظر : پلاتو : {$Supervisor->PlatoID} ،‌ تلگرام : @{$SupervisorTelegramUsername}
 بازیکن اول : پلاتو : {$User1->PlatoID} ، تلگرام : @{$User1->UserName}
 بازیکن دوم : پلاتو : {$User2->PlatoID} ، تلگرام : @{$User2->UserName}
 ";

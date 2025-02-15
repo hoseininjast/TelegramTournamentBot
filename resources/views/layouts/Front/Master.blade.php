@@ -12,7 +12,7 @@
     @routes()
 
     {{--Telegram--}}
-    
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('images/MainLogo.png')}}" type="image/x-icon">
