@@ -18,7 +18,7 @@ class WebController extends Controller
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
         $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $Supervisor->TelegramUserID]);
-        dd($SupervisorTelegramInfo['result']);
+        dd($SupervisorTelegramInfo);
         return redirect()->route('Dashboard.index');
     }
 }
