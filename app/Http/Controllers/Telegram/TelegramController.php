@@ -1188,16 +1188,17 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
 
 
-    protected function SaveTelegramUser(){
 
+    protected function SaveTelegramUser($ReferralID = null){
         $TelegramUserID = $this->GetUserInfo('id');
         if (preg_match('/\-/' , $TelegramUserID  ) != 1){
             if (TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->count() > 0){
                 $User = TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->first();
             }else{
                 $User = TelegramUsers::create([
-                    'TelegramUserID' => $this->GetUserInfo('id'),
+                    'TelegramUserID' => $this->ChatID,
                     'TelegramChatID' => $this->ChatID,
+                    'ReferralID' => $ReferralID,
                     'FirstName' => $this->GetUserInfo('first_name') ,
                     'LastName' => $this->GetUserInfo('last_name') ,
                     'UserName' => $this->GetUserInfo('username') ,
@@ -1208,7 +1209,6 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
         }else{
             return  null;
         }
-
     }
     protected function GetUsernameOrName(TelegramUsers $users)
     {
