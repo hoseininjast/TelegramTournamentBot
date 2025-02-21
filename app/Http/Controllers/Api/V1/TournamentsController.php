@@ -53,12 +53,7 @@ class TournamentsController extends Controller
             'chat_id' => $ChanelID['id'],
             'user_id' => $User->TelegramUserID,
         ]);
-        if($JoinInfo['status'] == 'left'){
-            return response()->json([
-                'Message' => 'You Must join our chanel first',
-                'Code' => 400
-            ] , 200);
-        }else{
+        if($JoinInfo['status'] != 'left'){
             if ($Tournaments->Players()->count() < $Tournaments->PlayerCount){
                 if(!$Tournaments->isJoined($User->id)){
                     if($User->PlatoID){
@@ -107,6 +102,12 @@ class TournamentsController extends Controller
                 $text = "Unfortunately, the number of players in this tournament is limited and you cannot participate in it. Please select another tournament from the tournaments menu.";
                 $Code = 302;
             }
+
+        }else{
+            return response()->json([
+                'Message' => 'You Must join our chanel first',
+                'Code' => 400
+            ] , 200);
         }
 
 
