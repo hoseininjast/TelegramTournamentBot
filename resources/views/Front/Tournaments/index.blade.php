@@ -77,7 +77,7 @@
                                                     <p>${{$award}}</p>
                                                 @endforeach
                                                 <div class="time-area">
-                                                    <h6>{{$Tournament->Start->format('Y/m/d')}} - {{$Tournament->End->format('Y/m/d')}}</h6>
+                                                    <h6>{{$Tournament->Start}} - {{$Tournament->End}}</h6>
                                                     <img src="{{asset('Front/images/bg-time.png')}}" alt="">
                                                 </div>
                                             </div>
