@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams , isTMA } from '@telegram-apps/sdk';
+import { init, backButton,closingBehavior,hapticFeedback , initDataUser , isTMA } from '@telegram-apps/sdk';
 
 
 
@@ -17,18 +17,14 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     if(isTMA()){
         init();
-        const { initDataRaw, initData } = retrieveLaunchParams();
 
-        console.log(initData);
-        console.log('----------');
-        console.log('----------');
-        console.log('----------');
-        console.log(initDataRaw);
+        const UserData = initDataUser;
 
-        const User = initData.user();
+        console.log(UserData)
+        // const User = initData.user();
 
-        $('#UserUsername').html('Welcome Back ' + User.username);
-        $('#UserImage').src(User.photoUrl);
+        // $('#UserUsername').html('Welcome Back ' + User.username);
+        // $('#UserImage').src(User.photoUrl);
 
         console.log(route('Front.Games'))
         if(route('Front.Games') == window.location.href){
