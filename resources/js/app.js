@@ -27,21 +27,23 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         const User = initData.user();
 
-
         $('#UserUsername').html('Welcome Back ' + User.username);
         $('#UserImage').src(User.photoUrl);
-        
-        backButton.mount();
-        if (backButton.show.isAvailable()) {
+
+        if(route('Front.Games') == window.location.href){
+            backButton.unmount();
+
+        }else{
+            backButton.mount();
             backButton.show();
         }
+
+
         if (closingBehavior.mount.isAvailable()) {
             closingBehavior.mount();
-            closingBehavior.isMounted(); // true
         }
         if (closingBehavior.enableConfirmation.isAvailable()) {
             closingBehavior.enableConfirmation();
-            closingBehavior.isConfirmationEnabled(); // true
         }
         if (hapticFeedback.impactOccurred.isAvailable()) {
             hapticFeedback.impactOccurred('medium');
