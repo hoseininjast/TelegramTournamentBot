@@ -1,0 +1,70 @@
+html {
+
+    --duration: .45s ;
+    --cubic: cubic-bezier(0.4, 0, 0.2, 1) ;
+    --color-1: #a2beff ;
+    --color-2: #0080ff;
+
+}
+
+
+.menu {
+
+    margin: 0 ;
+    width: auto ;
+    display: flex ;
+    height: 7em ;
+    user-select: none ;
+    position: relative ;
+    align-items: center ;
+    padding: 0 ;
+    justify-content: center ;
+    background-color: #581790 ;
+    color: white;
+    border-radius: 0em ;
+    -webkit-tap-highlight-color: transparent ;
+
+}
+
+@media (max-width: 42.625em) {
+
+    .menu {
+
+        font-size: .55em ;
+
+    }
+
+}
+
+
+
+.menu__item {
+
+    all: unset ;
+    flex-grow: 1 ;
+    display: flex ;
+    cursor: pointer ;
+    overflow: hidden ;
+    padding-top: 0.5em ;
+    position: relative ;
+    align-items: center ;
+    color: var(--color-1) ;
+    justify-content: center ;
+    transition: flex-grow var(--duration) var(--cubic) ;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+
+
+.menu__item.active {
+    color: var(--color-2) !important; ;
+}
+
+.footer-bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}

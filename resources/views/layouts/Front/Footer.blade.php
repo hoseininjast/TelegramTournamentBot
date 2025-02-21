@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="flogo">
-                    <a href="#"><img src="{{asset('Front/images/footer-ogo.png')}}" alt=""></a>
+                    <a href="#"><img src="{{asset('images/MainLogo.png')}}" alt=""></a>
                 </div>
                 <div class="social-links">
                     <ul>
@@ -71,7 +71,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright © 2021.All Rights Reserved By Jugaro</p>
+                    <p>All Rights Reserved By {{env('APP_NAME')}}</p>
                 </div>
             </div>
         </div>

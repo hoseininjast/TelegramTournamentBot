@@ -25,6 +25,12 @@
     <link rel="stylesheet" href="{{asset('Front/css/style.css')}}">
     <!-- responsive -->
     <link rel="stylesheet" href="{{asset('Front/css/responsive.css')}}">
+    <link href="{{asset('Dashboard/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <script src="{{asset('Dashboard/assets/libs/feather-icons/feather.min.js')}}"></script>
+
+    @vite(['resources/css/app.css'])
+
+    @yield('head')
 </head>
 
 <body>
@@ -53,16 +59,21 @@
 
 @yield('content')
 <!-- Footer Area Start -->
-@include('layouts.Front.Footer')
-<p style="background: yellow" id="logs">the logs comes here...</p>
+
+
+@include('layouts.Front.Navbar')
+
+
+{{--@include('layouts.Front.Footer')--}}
+{{--<p style="background: yellow" id="logs">the logs comes here...</p>--}}
 <!-- Footer Area End -->
 
-
+{{--
 <!-- Back to Top Start -->
 <div class="bottomtotop">
     <i class="fas fa-chevron-right"></i>
 </div>
-<!-- Back to Top End -->
+<!-- Back to Top End -->--}}
 
 
 <!-- SignIn Area Start -->
@@ -172,6 +183,8 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery.session@1.0.0/jquery.session.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
 
+
+{{--<script src="//cdn.jsdelivr.net/npm/eruda"></script>--}}
 
 @include('sweetalert::alert' )
 

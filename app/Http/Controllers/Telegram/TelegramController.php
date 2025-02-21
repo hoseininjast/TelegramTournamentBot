@@ -1188,22 +1188,27 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
 
 
-    protected function SaveTelegramUser($ReferralID = null){
+    protected function SaveTelegramUser(){
 
-        if (TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->count() > 0){
-            $User = TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->first();
+        $TelegramUserID = $this->GetUserInfo('id');
+        if (preg_match('/\-/' , $TelegramUserID  ) != 1){
+            if (TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->count() > 0){
+                $User = TelegramUsers::where('TelegramUserID' , $this->GetUserInfo('id'))->first();
+            }else{
+                $User = TelegramUsers::create([
+                    'TelegramUserID' => $this->GetUserInfo('id'),
+                    'TelegramChatID' => $this->ChatID,
+                    'FirstName' => $this->GetUserInfo('first_name') ,
+                    'LastName' => $this->GetUserInfo('last_name') ,
+                    'UserName' => $this->GetUserInfo('username') ,
+                ]);
+            }
+
+            return $User;
         }else{
-            $User = TelegramUsers::create([
-                'TelegramUserID' => $this->ChatID,
-                'TelegramChatID' => $this->ChatID,
-                'ReferralID' => $ReferralID,
-                'FirstName' => $this->GetUserInfo('first_name') ,
-                'LastName' => $this->GetUserInfo('last_name') ,
-                'UserName' => $this->GetUserInfo('username') ,
-            ]);
+            return  null;
         }
 
-        return $User;
     }
     protected function GetUsernameOrName(TelegramUsers $users)
     {
