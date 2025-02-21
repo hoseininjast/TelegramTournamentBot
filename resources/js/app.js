@@ -30,11 +30,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#UserUsername').html('Welcome Back ' + User.username);
         $('#UserImage').src(User.photoUrl);
 
+        console.log(route('Front.Games'))
         if(route('Front.Games') == window.location.href){
             backButton.unmount();
             closingBehavior.mount();
             closingBehavior.enableConfirmation();
-
         }else{
             backButton.mount();
             backButton.show();
