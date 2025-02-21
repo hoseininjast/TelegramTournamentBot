@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import { init, backButton,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA } from '@telegram-apps/sdk';
+import { init, backButton ,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA } from '@telegram-apps/sdk';
 
 
 
@@ -35,9 +35,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         // $('#UserUsername').html('Welcome Back ' + User.username);
         // $('#UserImage').src(User.photoUrl);
 
-        console.log(route('Front.Games'))
         if(route('Front.Games') == window.location.href){
             backButton.unmount();
+            backButton.hide();
             closingBehavior.mount();
             closingBehavior.enableConfirmation();
         }else{
