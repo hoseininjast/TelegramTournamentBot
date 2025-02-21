@@ -21,7 +21,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         console.log(InitData)
         console.log('-----')
-        console.log(InitData.user.username)
+        console.log(InitData.user().username)
         console.log(InitData.user.photo_url)
         console.log('-----')
 
