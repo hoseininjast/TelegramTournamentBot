@@ -53,7 +53,7 @@ class TournamentsController extends Controller
             'chat_id' => $ChanelID['id'],
             'user_id' => $User->TelegramUserID,
         ]);
-        if($JoinInfo['status'] != 'left'){
+        if($JoinInfo['status'] == 'creator' || $JoinInfo['status'] == 'administrator'|| $JoinInfo['status'] == 'member'){
             if ($Tournaments->Players()->count() < $Tournaments->PlayerCount){
                 if(!$Tournaments->isJoined($User->id)){
                     if($User->PlatoID){
