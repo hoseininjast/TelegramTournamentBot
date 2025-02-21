@@ -87,6 +87,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     initData.restore();
     const InitData = initData;
     User = InitData.user();
+    console.log(User.id)
     var TourID = $('#TournamentID').val()
     CheckTournamentJoinStatus(TourID)
 });
