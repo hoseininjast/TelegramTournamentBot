@@ -1,7 +1,6 @@
 import './bootstrap';
 
-import { init, backButton ,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA , parseInitData } from '@telegram-apps/sdk';
-
+import { init, backButton ,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA  } from '@telegram-apps/sdk';
 
 
 
@@ -18,7 +17,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     if(isTMA()){
         init();
         initData.restore();
-        const InitData = parseInitData(initData);
+        const InitData = initData;
 
         console.log(InitData)
         console.log('-----')
