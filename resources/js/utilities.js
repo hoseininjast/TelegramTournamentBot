@@ -53,3 +53,12 @@ export const ShowToast = (
         title: Text,
     });
 };
+export const ShowAlert = (
+    Icon = "success",
+    Text = "successful",
+) => {
+    Swal.fire({
+        icon: Icon,
+        text: Text,
+    });
+};

@@ -1,6 +1,6 @@
 import {
     redirect,
-    ShowToast
+    ShowAlert
 } from "../utilities.js";
 
 import { initData} from '@telegram-apps/sdk';
@@ -60,12 +60,12 @@ function JoinTournament(TourID){
         },
         success: function (response) {
             if (response.Code == 200 || response.Code == 201) {
-                ShowToast('success' , response.Message);
+                ShowAlert('success' , response.Message);
                 $('.mybtn2').attr('disabled' , true).text('joined');
             }else if(response.Code == 300 || response.Code == 301 || response.Code == 302){
-                ShowToast('warning' , response.Message);
+                ShowAlert('warning' , response.Message);
             }else if(response.Code == 400){
-                ShowToast('error' , response.Message);
+                ShowAlert('error' , response.Message);
             }
 
         }
