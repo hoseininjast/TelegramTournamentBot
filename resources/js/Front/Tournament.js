@@ -60,8 +60,7 @@ function JoinTournament(TourID){
         success: function (response) {
             if (response.Code == 200 || response.Code == 201) {
                 ShowToast('success' , response.Message);
-                $('.mybtn2').attr('disabled' , true)
-                $('.mybtn2').text('joined');
+                $('.mybtn2').attr('disabled' , true).text('joined');
             }else if(response.Code == 300 || response.Code == 301 || response.Code == 302){
                 ShowToast('warning' , response.Message);
             }else if(response.Code == 400){
@@ -71,7 +70,7 @@ function JoinTournament(TourID){
         }
     });
 
-    redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-TournamentID')  ]) );
+    // redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-TournamentID')  ]) );
 
 }
 
@@ -87,7 +86,6 @@ window.addEventListener("DOMContentLoaded", async () => {
     initData.restore();
     const InitData = initData;
     User = InitData.user();
-    console.log(User.id)
     var TourID = $('#TournamentID').val()
     CheckTournamentJoinStatus(TourID)
 });
