@@ -53,7 +53,6 @@ class TournamentsController extends Controller
             'chat_id' => $ChanelID['id'],
             'user_id' => $User->TelegramUserID,
         ]);
-        return $JoinInfo;
         if($JoinInfo['status'] == 'left'){
             return response()->json([
                 'Message' => 'You Must join our chanel first',
