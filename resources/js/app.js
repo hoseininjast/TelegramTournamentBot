@@ -18,20 +18,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         init();
         initData.restore();
         const InitData = initData;
+        const User = InitData.user();
 
-        console.log(InitData)
-        console.log('-----')
-        console.log(InitData.user().username)
-        console.log(InitData.user.photo_url)
-        console.log('-----')
 
-        // console.log(UserData.id)
-        // console.log(UserData.photo_url)
-        // console.log(UserData.username)
-        // const User = initData.user();
-
-        // $('#UserUsername').html('Welcome Back ' + User.username);
-        // $('#UserImage').src(User.photoUrl);
+        $('#UserUsername').html('Welcome Back ' + User.username);
+        $('#UserImage').src(User.photoUrl);
 
         if(route('Front.Games') == window.location.href){
             backButton.unmount();
