@@ -20,6 +20,7 @@
                                 </div>
 
                             </div>
+                            <input type="hidden" id="TournamentID" value="{{$Tournament->id}}">
                             <div class="right-area">
                                 <div class="r-top-area">
                                     <h4>{{$Tournament->Name}}</h4>
