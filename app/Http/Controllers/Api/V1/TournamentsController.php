@@ -103,6 +103,11 @@ class TournamentsController extends Controller
                 $Code = 302;
             }
 
+            return response()->json([
+                'Message' => $text,
+                'Code' => $Code
+            ] , 200);
+            
         }else{
             return response()->json([
                 'Message' => 'You Must join our chanel first',
@@ -112,10 +117,7 @@ class TournamentsController extends Controller
 
 
 
-        return response()->json([
-            'Message' => 'You Must join our chanel first',
-            'Code' => $Code
-        ] , 200);
+
 
     }
 
