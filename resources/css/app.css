@@ -71,3 +71,7 @@ html {
 .forged-fixed-bottom-bar{
     height: 40px;
 }
+
+.UserProfileImage{
+    border-radius: 50%;
+}

@@ -41,7 +41,7 @@
                                                 <h4>{{$Tournament->Name}}</h4>
                                             </div>
                                             <div class="contant">
-                                                <button type="button"  class="mybtn2 TournamentDetail" data-TournamentID="{{$Tournament->id}}">Tournament Detail</button>
+                                                <button type="button"  class="mybtn2 TournamentDetail" data-TournamentID="{{$Tournament->id}}">Details</button>
                                             </div>
                                         </div>
                                         <h4>{{$Tournament->PlayerCount}} Players</h4>
