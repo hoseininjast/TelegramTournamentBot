@@ -107,7 +107,7 @@ class TournamentsController extends Controller
                 'Message' => $text,
                 'Code' => $Code
             ] , 200);
-            
+
         }else{
             return response()->json([
                 'Message' => 'You Must join our chanel first',
