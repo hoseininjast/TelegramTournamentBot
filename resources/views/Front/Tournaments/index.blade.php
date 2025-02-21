@@ -60,7 +60,7 @@
                                             </div>
                                         </div>
                                         <div class="r-bottom-area">
-                                            @if(\Carbon\Carbon::now() > $Tournament->Start)
+                                            @if(\Carbon\Carbon::now() < $Tournament->Start)
                                                 <div class="rl-area">
                                                     <span class="title">Time left before finish:</span>
                                                     <div class="timecounter">
@@ -73,11 +73,14 @@
 
                                             <div class="rr-area">
                                                 <h5>Prize pool</h5>
-                                                @foreach($Tournament->Awards as $award)
-                                                    <p>${{$award}}</p>
-                                                @endforeach
+                                                <div class="d-flex justify-content-around">
+                                                    @foreach($Tournament->Awards as $award)
+                                                        <p>${{$award}}</p>
+                                                    @endforeach
+                                                </div>
+
                                                 <div class="time-area">
-                                                    <h6>{{$Tournament->Start}} - {{$Tournament->End}}</h6>
+                                                    <h6>{{\Carbon\Carbon::parse($Tournament->Start)->format('Y/m/d H:i')}} - {{\Carbon\Carbon::parse($Tournament->End)->format('Y/m/d H:i') }}</h6>
                                                     <img src="{{asset('Front/images/bg-time.png')}}" alt="">
                                                 </div>
                                             </div>

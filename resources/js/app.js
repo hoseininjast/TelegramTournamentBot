@@ -8,11 +8,7 @@ import { init, backButton,closingBehavior,hapticFeedback , retrieveLaunchParams 
 
 
 
-// const User = initData.user();
 
-
-// $('#UserUsername').html('Welcome Back ' + User.username);
-// $('#UserImage').src(User.photoUrl);
 
 
 
@@ -29,6 +25,12 @@ window.addEventListener("DOMContentLoaded", async () => {
         console.log('----------');
         console.log(initDataRaw);
 
+        const User = initData.user();
+
+
+        $('#UserUsername').html('Welcome Back ' + User.username);
+        $('#UserImage').src(User.photoUrl);
+        
         backButton.mount();
         if (backButton.show.isAvailable()) {
             backButton.show();
