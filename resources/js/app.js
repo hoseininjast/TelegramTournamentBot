@@ -32,19 +32,14 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         if(route('Front.Games') == window.location.href){
             backButton.unmount();
+            closingBehavior.mount();
+            closingBehavior.enableConfirmation();
 
         }else{
             backButton.mount();
             backButton.show();
         }
 
-
-        if (closingBehavior.mount.isAvailable()) {
-            closingBehavior.mount();
-        }
-        if (closingBehavior.enableConfirmation.isAvailable()) {
-            closingBehavior.enableConfirmation();
-        }
         if (hapticFeedback.impactOccurred.isAvailable()) {
             hapticFeedback.impactOccurred('medium');
         }
