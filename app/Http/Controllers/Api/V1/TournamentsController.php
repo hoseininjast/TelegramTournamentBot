@@ -40,7 +40,7 @@ class TournamentsController extends Controller
     {
         $request->validate([
             'TournamentID' => 'required|int|exists:tournaments,id',
-            'UserID' => 'required|int|exists:telegram_users,id',
+            'UserID' => 'required|int|exists:telegram_users,TelegramUserID',
         ]);
 
         $Tournaments = Tournaments::find($request->TournamentID);
@@ -122,7 +122,7 @@ class TournamentsController extends Controller
     {
         $request->validate([
             'TournamentID' => 'required|int|exists:tournaments,id',
-            'UserID' => 'required|int|exists:telegram_users,id',
+            'UserID' => 'required|int|exists:telegram_users,TelegramUserID',
         ]);
 
         $Tournaments = Tournaments::find($request->TournamentID);
