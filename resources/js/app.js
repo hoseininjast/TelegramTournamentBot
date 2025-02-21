@@ -22,7 +22,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
         $('#UserUsername').html('Welcome Back ' + User.username);
-        $('#UserImage').attr('src',User.photoUrl);
+        $('#UserImage').attr('src', User.photo_url );
 
         if(route('Front.Games') == window.location.href){
             backButton.unmount();

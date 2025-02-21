@@ -51,7 +51,7 @@
 <!-- Breadcrumb Area Start -->
 <section class="breadcrumb-area games">
     <div class="content">
-        <img id="UserImage"  alt="">
+        <img id="UserImage"  alt="" />
         <h4 id="UserUsername"></h4>
     </div>
 </section>
