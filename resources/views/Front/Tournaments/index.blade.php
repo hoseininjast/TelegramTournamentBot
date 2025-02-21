@@ -60,21 +60,24 @@
                                             </div>
                                         </div>
                                         <div class="r-bottom-area">
-                                            <div class="rl-area">
-                                                <span class="title">Time left before finish:</span>
-                                                <div class="timecounter">
-                                                    <i class="far fa-clock"></i>
-                                                    <div data-countdown="{{\Carbon\Carbon::parse($Tournament->Start)->format('Y/m/d')}}"></div>
+                                            @if(\Carbon\Carbon::now() > $Tournament->Start)
+                                                <div class="rl-area">
+                                                    <span class="title">Time left before finish:</span>
+                                                    <div class="timecounter">
+                                                        <i class="far fa-clock"></i>
+                                                        <div data-countdown="{{\Carbon\Carbon::parse($Tournament->Start)->format('Y/m/d')}}"></div>
+                                                    </div>
+                                                    <img src="{{asset('Front/images/s-box.png')}}" alt="">
                                                 </div>
-                                                <img src="{{asset('Front/images/s-box.png')}}" alt="">
-                                            </div>
+                                            @endif
+
                                             <div class="rr-area">
                                                 <h5>Prize pool</h5>
                                                 @foreach($Tournament->Awards as $award)
                                                     <p>${{$award}}</p>
                                                 @endforeach
                                                 <div class="time-area">
-                                                    <h6>{{$Tournament->Start}} - {{$Tournament->End}}</h6>
+                                                    <h6>{{$Tournament->Start->format('Y/m/d')}} - {{$Tournament->End->format('Y/m/d')}}</h6>
                                                     <img src="{{asset('Front/images/bg-time.png')}}" alt="">
                                                 </div>
                                             </div>

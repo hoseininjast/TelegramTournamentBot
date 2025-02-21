@@ -68,3 +68,6 @@ html {
     right: 0;
     z-index: 99;
 }
+.forged-fixed-bottom-bar{
+    height: 40px;
+}
