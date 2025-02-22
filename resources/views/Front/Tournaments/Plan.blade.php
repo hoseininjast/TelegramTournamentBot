@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="right2">
                                                 <h4><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{\App\Models\TelegramUsers::find($winner)->PlatoID}}</h4>
-                                                <h4><i class="fa fa-telegram telegramIcon"></i> <a href="https://t.me/{{\App\Models\TelegramUsers::find($winner)->UserName}}">{{\App\Models\TelegramUsers::find($winner)->UserName}}</a></h4>
+                                                <h4><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{\App\Models\TelegramUsers::find($winner)->UserName}}">{{\App\Models\TelegramUsers::find($winner)->UserName}}</a></h4>
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                                 </div>
                                                 <div class="right2 vselement pt-2">
                                                     <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
-                                                    <span class="text text-white"><i class="fa fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player1->UserName}}">{{$plan->Player1->UserName}}</a></span>
+                                                    <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player1->UserName}}">{{$plan->Player1->UserName}}</a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -151,7 +151,7 @@
                                                 </div>
                                                 <div class="right2 vselement pt-2">
                                                     <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>
-                                                    <span class="text text-white"><i class="fa fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player2->UserName}}">{{$plan->Player2->UserName}}</a></span>
+                                                    <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player2->UserName}}">{{$plan->Player2->UserName}}</a></span>
                                                 </div>
                                             </div>
                                         </div>
