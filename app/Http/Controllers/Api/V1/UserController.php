@@ -82,7 +82,7 @@ class UserController extends Controller
                     ];
 
                     $telegram->sendPhoto([
-                        'chat_id' => $RefferalUser->TelegramUserID,
+                        'chat_id' => $RefferalUser->TelegramChatID,
                         'photo' => InputFile::create(public_path('images/Robot/Main.png')),
                         'caption' => "بازیکن جدیدی با لینک شما ثبت نام کرده است و جایزه معرفی آن به حساب شما واریز شده است.\n موجودی کیف پول : {$RefferalUser->Charge} دلار ",
                         'parse_mode' => 'html',
