@@ -91,9 +91,9 @@
                                             <div class="left2">
                                                 <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
                                             </div>
-                                            <div class="right2">
-                                                <h4><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{\App\Models\TelegramUsers::find($winner)->PlatoID}}</h4>
-                                                <h4><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{\App\Models\TelegramUsers::find($winner)->UserName}}">{{\App\Models\TelegramUsers::find($winner)->UserName}}</a></h4>
+                                            <div class="right2 vselement">
+                                                <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{\App\Models\TelegramUsers::find($winner)->PlatoID}}</span>
+                                                <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{\App\Models\TelegramUsers::find($winner)->UserName}}">{{\App\Models\TelegramUsers::find($winner)->UserName}}</a></span>
                                             </div>
                                         </div>
                                     </div>
