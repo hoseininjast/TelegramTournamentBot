@@ -21,7 +21,7 @@
     <!-- Game play area start -->
     <section class="game-play-section game-play-section2" style="display: none" id="GameSection">
         <div class="container">
-            <div class="row">
+            <div class="row" id="GameRow">
                 @foreach($Games as $Game)
                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-4">
                         <div class="single-play">

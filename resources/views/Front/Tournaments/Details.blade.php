@@ -13,7 +13,9 @@
                                         <img src="{{$Tournament->Image}}" alt="">
                                     </div>
                                     <div class="contant">
-                                        <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg rounded-pill JoinButton">Join Now</button>
+                                        @if($Tournament->Status == 'Pending')
+                                            <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg rounded-pill JoinButton">Join Now</button>
+                                        @endif
 
 
                                     </div>
@@ -113,7 +115,9 @@
                                 </div>
                             </div>
                             <div class="right">
-                                <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg btn-block rounded-pill JoinButton">Join Now</button>
+                                @if($Tournament->Status == 'Pending')
+                                    <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg btn-block rounded-pill JoinButton">Join Now</button>
+                                @endif
                                 <a href="{{route('Front.Tournaments.Plan' , $Tournament->id)}}"  class="btn btn-info btn-lg btn-block mt-2 rounded-pill JoinButton">Plans</a>
                             </div>
                         </div>

@@ -23,6 +23,9 @@ const initPage = async () => {
 function GetGames(Mode) {
     SelectedMode = Mode;
     $('#GameSection').show(400);
+    $('html, body').animate({
+        scrollTop: $("#GameRow").offset().top
+    }, 2000);
 
 }
 
