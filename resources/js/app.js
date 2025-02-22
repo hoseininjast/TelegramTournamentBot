@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import { init, backButton ,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA ,retrieveLaunchParams  } from '@telegram-apps/sdk';
+import { init, backButton ,closingBehavior,hapticFeedback , initData , isTMA   } from '@telegram-apps/sdk';
 import moment from "moment/moment.js";
 import {redirect} from "./utilities.js";
 
@@ -8,7 +8,7 @@ let TelegramUser;
 let User;
 
 
-function GetUser(){
+function GetUser(ReferralID = null){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -22,7 +22,7 @@ function GetUser(){
         url: route('V1.User.FindOrCreate'),
         data : {
             TelegramData :   TelegramUser,
-
+            ReferralID : ReferralID
         },
         success: function (response) {
             User = response.Data.User;
@@ -54,12 +54,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         initData.restore();
         const InitData = initData;
         TelegramUser = InitData.user();
+        var ReferralID = initData.startParam();
 
-        const { initDataRaw } = retrieveLaunchParams();
+        GetUser( ReferralID)
 
-        console.log( initData.startParam())
-
-        GetUser(TelegramUser.id)
 
         $('#UserUsername').html('Welcome Back ' + TelegramUser.username);
         $('#UserImage').attr('src', TelegramUser.photo_url );
