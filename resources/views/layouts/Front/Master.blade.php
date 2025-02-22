@@ -49,12 +49,15 @@
 <!-- Header Area End  -->
 
 <!-- Breadcrumb Area Start -->
-<section class="breadcrumb-area games">
-    <div class="content">
-        <img id="UserImage" class="UserProfileImage"  alt="" />
-        <h4 id="UserUsername"></h4>
-    </div>
-</section>
+@if(preg_match('/Profile/' , Request::url() ) != 1 )
+    <section class="breadcrumb-area games">
+        <div class="content">
+            <img id="UserImage" class="UserProfileImage"  alt="" />
+            <h4 id="UserUsername"></h4>
+        </div>
+    </section>
+@endif
+
 <!-- Breadcrumb Area End -->
 
 @yield('content')

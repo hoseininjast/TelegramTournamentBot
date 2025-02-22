@@ -15,6 +15,7 @@ class TelegramUsers extends Model
         'FirstName',
         'LastName',
         'UserName',
+        'Image',
         'WalletAddress',
         'TonWalletAddress',
         'Charge',

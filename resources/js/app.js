@@ -19,7 +19,12 @@ function GetUser(UserID){
     });
 
     $.ajax({
-        url: route('V1.User.Find' , UserID),
+        url: route('V1.User.FindOrCreate'),
+        data : {
+            telegram_id :   UserID,
+            TelegramData :   TelegramUser,
+
+        },
         success: function (response) {
             User = response.Data.User;
         }
@@ -33,6 +38,17 @@ function GetUser(UserID){
 
 window.addEventListener("DOMContentLoaded", async () => {
     $('#FooterBar').show();
+
+    if(route().current('Front.Games') || route().current('Front.Tournaments.Detail') || route().current('Front.Tournaments.List') ){
+        $('.NavbarButtons').removeClass('active')
+        $('#Navbar-Tournaments').addClass('active')
+    }else if( route().current('Front.Tournaments.MyTournaments') ){
+        $('.NavbarButtons').removeClass('active')
+        $('#Navbar-MyTournaments').addClass('active')
+    }else if(route().current('Front.Profile.index') ){
+        $('.NavbarButtons').removeClass('active')
+        $('#Navbar-Profile').addClass('active')
+    }
 
     if(isTMA()){
         init();
@@ -68,6 +84,8 @@ window.addEventListener("DOMContentLoaded", async () => {
             off();
             window.history.back();
         });
+    }else{
+        GetUser(76203510)
     }
 
 

@@ -25,7 +25,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('Dashboard.Tournaments.index');
+        return view('Front.User.Profile');
     }
     public function Show($UserID)
     {

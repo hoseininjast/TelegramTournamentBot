@@ -32,6 +32,7 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
         Route::post('JoinStatus' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'JoinStatus'])->name('JoinStatus');
     });
     Route::group(['prefix' => 'User' , 'as' => 'User.' ] , function (){
-        Route::get('Find/{UserID}' , [\App\Http\Controllers\Api\V1\GamesController::class , 'Find'])->name('Find');
+        Route::get('Find/{UserID}' , [\App\Http\Controllers\Api\V1\UserController::class , 'Find'])->name('Find');
+        Route::post('FindOrCreate' , [\App\Http\Controllers\Api\V1\UserController::class , 'FindOrCreate'])->name('FindOrCreate');
     });
 });
