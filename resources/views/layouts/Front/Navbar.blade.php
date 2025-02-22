@@ -16,10 +16,10 @@
             <span>Profile</span>
         </a>
 
-        <a class="menu__item" href="{{route('Front.Games')}}">
+       {{-- <a class="menu__item" href="{{route('Front.Games')}}">
            <i class="fa fa-wallet mb-2"></i>
             <span>Wallet</span>
-        </a>
+        </a>--}}
 
     </menu>
 

@@ -27,7 +27,7 @@ function GetTournaments(Mode){
     $.ajax({
         url: route('V1.Tournaments.MyTournaments' ),
         data : {
-            UserID : 76203510,
+            UserID : User.id,
             Mode : Mode
         },
         success: function (response) {

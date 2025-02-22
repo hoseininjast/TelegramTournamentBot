@@ -124,6 +124,10 @@
                             Tournament Plans
                         </h2>
                     </div>
+                    @php
+                    $alphabet = range('A', 'Z');
+
+                    @endphp
                     @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
                         <div class="l-arcive-box2-wrapper">
                             <h6> Stage {{$i}}</h6>
@@ -136,38 +140,43 @@
                                 @endif
                             </div>
                             <div class="l-arcive-box2">
-                                @foreach($Tournament->Plans()->where('Stage' , $i)->get() as $plan)
-                                    <div class="s-a-b">
-                                        <div class="left">
-                                            <div class="content">
-                                                <div class="left2">
-                                                    <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                @if($Tournament->Plans()->where('Stage' , $i)->count() > 0)
+                                    @foreach($Tournament->Plans()->where('Stage' , $i)->get() as $plan)
+                                        <div class="s-a-b">
+                                            <div class="left">
+                                                <div class="content">
+                                                    <div class="left2">
+                                                        <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                    </div>
+                                                    <div class="right2 vselement pt-2">
+                                                        <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
+                                                        <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player1->UserName}}">{{$plan->Player1->UserName}}</a></span>
+                                                    </div>
                                                 </div>
-                                                <div class="right2 vselement pt-2">
-                                                    <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
-                                                    <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player1->UserName}}">{{$plan->Player1->UserName}}</a></span>
+                                            </div>
+                                            <div class="center vsDiv">
+                                                <span>Group {{$alphabet[$plan->Group - 1]}}</span>
+                                                <span>{{\Carbon\Carbon::parse($plan->Time)->format('M/d')}}</span>
+                                                <span>{{\Carbon\Carbon::parse($plan->Time)->format('H:i')}}</span>
+                                                <span>{{$plan->Player1Score ?? 0}} / {{$plan->Player2Score ?? 0}}</span>
+                                            </div>
+                                            <div class="left">
+                                                <div class="content">
+                                                    <div class="left2">
+                                                        <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                    </div>
+                                                    <div class="right2 vselement pt-2">
+                                                        <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>
+                                                        <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player2->UserName}}">{{$plan->Player2->UserName}}</a></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="center vsDiv">
-                                            <span>Group {{$plan->Group}}</span>
-                                            <span>{{\Carbon\Carbon::parse($plan->Time)->format('M/d')}}</span>
-                                            <span>{{\Carbon\Carbon::parse($plan->Time)->format('H:i')}}</span>
-                                            <span>{{$plan->Player1Score ?? 0}} / {{$plan->Player2Score ?? 0}}</span>
-                                        </div>
-                                        <div class="left">
-                                            <div class="content">
-                                                <div class="left2">
-                                                    <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
-                                                </div>
-                                                <div class="right2 vselement pt-2">
-                                                    <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>
-                                                    <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player2->UserName}}">{{$plan->Player2->UserName}}</a></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
+                                    @endforeach
+                                @else
+                                    <span>this stage does not started</span>
+                                @endif
+
 
                             </div>
                         </div>

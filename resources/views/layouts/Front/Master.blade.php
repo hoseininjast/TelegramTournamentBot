@@ -44,7 +44,7 @@
 <!-- preloader area end -->
 
 <!-- Header Area Start  -->
-{{--@include('layouts.Front.Header')--}}
+@include('layouts.Front.Header')
 
 <!-- Header Area End  -->
 

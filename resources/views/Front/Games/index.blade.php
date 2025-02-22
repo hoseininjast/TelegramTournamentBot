@@ -8,9 +8,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="filter-wrapp">
-                        <div class="left-area">
-                            <button id="LoadGamesFree" type="button" class="btn btn-success btn-lg rounded-pill">Free</button>
-                            <button id="LoadGamesPaid" type="button" class="btn btn-success btn-lg rounded-pill">Paid</button>
+                        <div class="left-area d-flex justify-content-around">
+                            <button id="LoadGamesFree" type="button" class="btn btn-outline-success col-5 btn-lg  rounded-pill">Free</button>
+                            <button id="LoadGamesPaid" type="button" class="btn btn-outline-info col-5 btn-lg rounded-pill">Paid</button>
                         </div>
                     </div>
                 </div>
