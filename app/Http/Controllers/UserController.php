@@ -27,7 +27,8 @@ class UserController extends Controller
     }
     public function Telegram()
     {
-        $Users = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->paginate(50);
+        $FakeUserIds = TelegramUsers::where('UserName' , 'like' , '%KryptoArenaFreePosition%')->pluck('id')->toArray();
+        $Users = TelegramUsers::whereNotIn('id', $FakeUserIds)->paginate(50);
         confirmDelete('Delete User!', 'Are you sure you want to delete this user?');
         return view('Dashboard.Users.Telegram')->with(['Users' => $Users]);
     }
