@@ -27,9 +27,9 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($Users as $user)
+                                        @foreach($Users as $key => $user)
                                             <tr>
-                                                <th scope="row">{{$loop->iteration}}</th>
+                                                <th scope="row">{{$key + $Users->firstItem()}}</th>
                                                 <td>{{$user->FirstName .' ' . $user->LastName}}</td>
                                                 <td>{{$user->UserName}}</td>
                                                 <td>
