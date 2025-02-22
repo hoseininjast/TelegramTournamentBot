@@ -33,7 +33,8 @@ class UserController extends Controller
             'TelegramData' => 'required|array',
         ]);
 
-        return $request->TelegramData ;
+
+        return gettype($request->TelegramData) ;
         $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
         $ReferralCount = TelegramUsers::where('ReferralID' , $User->id)->count();
         $TournamentsJoined = $User->Tournaments()->count();
