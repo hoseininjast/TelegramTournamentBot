@@ -90,9 +90,9 @@
                                                 <div class="left2">
                                                     <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
                                                 </div>
-                                                <div class="right2">
-                                                    <h4>Pid: {{$plan->Player1->PlatoID}}</h4>
-                                                    <h4>Tid: {{$plan->Player1->UserName}}</h4>
+                                                <div class="right2 vselement">
+                                                    <p>PID: {{$plan->Player1->PlatoID}}</p>
+                                                    <p>TID: {{$plan->Player1->UserName}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,9 +107,9 @@
                                                 <div class="left2">
                                                     <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
                                                 </div>
-                                                <div class="right2">
-                                                    <h4>PID: {{$plan->Player2->PlatoID}}</h4>
-                                                    <h4>TID: {{$plan->Player2->UserName}}</h4>
+                                                <div class="right2 vselement">
+                                                    <p>Plato: {{$plan->Player2->PlatoID}}</p>
+                                                    <p>Telegram: {{$plan->Player2->UserName}}</p>
                                                 </div>
                                             </div>
                                         </div>

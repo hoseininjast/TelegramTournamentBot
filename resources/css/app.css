@@ -88,3 +88,8 @@ html {
     flex-direction: column;
     align-items: center;
 }
+
+.vselement{
+    overflow: hidden;
+    width: 110px;
+}
