@@ -127,6 +127,14 @@
                     @for($i = 1 ; $i <= $Tournament->TotalStage ; $i++)
                         <div class="l-arcive-box2-wrapper">
                             <h6> Stage {{$i}}</h6>
+                            <div class="row pl-3">
+                                <span class="text text-success"> Start : {{$Tournament->StagesDate[$i - 1]}}</span>
+                                @if($i == $Tournament->TotalStage)
+                                    <span class="text text-danger"> End : {{$Tournament->End}}</span>
+                                @else
+                                    <span class="text text-danger"> End : {{$Tournament->StagesDate[$i]}}</span>
+                                @endif
+                            </div>
                             <div class="l-arcive-box2">
                                 @foreach($Tournament->Plans()->where('Stage' , $i)->get() as $plan)
                                     <div class="s-a-b">

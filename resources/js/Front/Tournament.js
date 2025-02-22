@@ -27,11 +27,11 @@ function CheckTournamentJoinStatus(TourID){
         },
         success: function (response) {
             if (response.Code == 1 ) {
-                $('.mybtn2').attr('disabled' , true)
-                $('.mybtn2').text('joined');
+                $('.JoinButton').attr('disabled' , true)
+                $('.JoinButton').text('joined');
             }else if(response.Code == 2){
-                $('.mybtn2').attr('disabled' , false)
-                $('.mybtn2').text('Join');
+                $('.JoinButton').attr('disabled' , false)
+                $('.JoinButton').text('Join');
             }
 
         }
@@ -61,7 +61,7 @@ function JoinTournament(TourID){
         success: function (response) {
             if (response.Code == 200 || response.Code == 201) {
                 ShowAlert('success' , response.Message);
-                $('.mybtn2').attr('disabled' , true).text('joined');
+                $('.JoinButton').attr('disabled' , true).text('joined');
             }else if(response.Code == 300 || response.Code == 301 || response.Code == 302){
                 ShowAlert('warning' , response.Message);
             }else if(response.Code == 400){

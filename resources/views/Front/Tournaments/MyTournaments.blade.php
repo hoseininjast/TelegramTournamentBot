@@ -11,17 +11,17 @@
                     </div>
                     <div class="col-xl-6 col-lg-8">
                         <div class="t-t-s-nav">
-                            <ul class="nav"  role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn btn-primary btn-lg rounded-pill  StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn btn-primary btn-lg rounded-pill StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link btn btn-primary btn-lg rounded-pill StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
-                                </li>
-                            </ul>
+                            <div class="row">
+                                <div class="col-4">
+                                    <a class="nav-link btn btn-outline-warning rounded-pill   StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="nav-link btn btn-outline-success rounded-pill  StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
+                                </div>
+                                <div class="col-4">
+                                    <a class="nav-link btn btn-outline-danger rounded-pill  StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

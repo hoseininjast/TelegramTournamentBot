@@ -27,7 +27,7 @@ function GetTournaments(Mode){
     $.ajax({
         url: route('V1.Tournaments.MyTournaments' ),
         data : {
-            UserID : User.id,
+            UserID : 76203510,
             Mode : Mode
         },
         success: function (response) {
@@ -35,7 +35,18 @@ function GetTournaments(Mode){
             $(response.Data.Tournaments).each(async function (index, Tournament) {
                 let awards = '';
                 $(Tournament.Awards).each(async function (index, Award) {
-                    awards += '$' +Award + '\n';
+                    var image = index.Parse
+                    if(index <= 3){
+                        awards += `<div class="col-4">
+                                    <div class="single-prize">
+                                        <img src="/Front/images/prize/`+( parseInt(index) + 1) +`.png" alt="">
+                                        <span>$`+Award+`</span>
+                                    </div>
+                                </div>`;
+                    }else{
+                        awards += `<span>$` + Award+ `</span>`;
+                    }
+
                 });
                 let startTime = moment(Tournament.Start).format("YY/M/D HH:mm");
                 let endTime = moment(Tournament.End).format("YY/M/D HH:mm");
@@ -67,10 +78,10 @@ function GetTournaments(Mode){
 											</div>
 											<div class="r-bottom-area">
 												<div class="rr-area">
-													<h5>Prize pool</h5>
-													<div class="d-flex justify-content-around">
-													    <p>`+awards+`</p>
-                                                    </div>
+													<h5>Prize's</h5>
+													<div class="row">
+													` + awards+ `
+													</div>
 													<div class="time-area">
 														<h6>`+startTime +` - `+endTime+`</h6>
 														<img src="/Front/images/bg-time.png" alt="">
