@@ -28,12 +28,20 @@ Route::group([ 'as' => 'Front.' ] , function (){
         Route::get('/' , [\App\Http\Controllers\Front\TournamentsController::class , 'index'])->name('index');
         Route::get('List/{GameID}/{Mode}' , [\App\Http\Controllers\Front\TournamentsController::class , 'List'])->name('List');
         Route::get('Detail/{TournamentID}' , [\App\Http\Controllers\Front\TournamentsController::class , 'Detail'])->name('Detail');
+        Route::get('Plan/{TournamentID}' , [\App\Http\Controllers\Front\TournamentsController::class , 'Plan'])->name('Plan');
         Route::get('MyTournaments' , [\App\Http\Controllers\Front\TournamentsController::class , 'MyTournaments'])->name('MyTournaments');
 
     });
 
 
 });
+
+
+
+
+
+
+
 
 Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => ['auth']] , function (){
     Route::get('index' , [\App\Http\Controllers\WebController::class , 'index'])->name('index');

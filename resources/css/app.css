@@ -75,3 +75,16 @@ html {
 .UserProfileImage{
     border-radius: 50%;
 }
+
+
+.l-arcive-box2 .s-a-b .left .content {
+    padding-left: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vsDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -13,13 +13,13 @@
                         <div class="t-t-s-nav">
                             <ul class="nav"  role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link mybtn2  StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
+                                    <a class="nav-link btn btn-primary btn-lg rounded-pill  StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link mybtn2 StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
+                                    <a class="nav-link btn btn-primary btn-lg rounded-pill StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link mybtn2 StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
+                                    <a class="nav-link btn btn-primary btn-lg rounded-pill StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
                                 </li>
                             </ul>
                         </div>

@@ -13,7 +13,7 @@
                                         <img src="{{$Tournament->Image}}" alt="">
                                     </div>
                                     <div class="contant">
-                                        <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn2 JoinButton">Join Now</button>
+                                        <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg rounded-pill JoinButton">Join Now</button>
 
 
                                     </div>
@@ -113,8 +113,8 @@
                                 </div>
                             </div>
                             <div class="right">
-                                <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn2 JoinButton">Join Now</button>
-
+                                <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg btn-block rounded-pill JoinButton">Join Now</button>
+                                <a href="{{route('Front.Tournaments.Plan' , $Tournament->id)}}"  class="btn btn-info btn-lg btn-block mt-2 rounded-pill JoinButton">Plans</a>
                             </div>
                         </div>
                     </div>
@@ -148,6 +148,41 @@
                         <br>
                         <br>
 
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <h2 class="title ">
+                            Tournament Plans
+                        </h2>
+                    </div>
+                    <div class="l-arcive-box2-wrapper">
+                        <div class="l-arcive-box2">
+                            <div class="s-a-b">
+                                <div class="left">
+                                    <img src="assets/images/arcive/sa4.png" alt="">
+                                    <div class="content">
+                                        <div class="left2">
+                                            <img src="assets/images/arcive/m1.png" alt="">
+                                        </div>
+                                        <div class="right2">
+                                            <h4>Lee Miller</h4>
+                                            <div class="stars">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star-half-alt"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <img src="assets/images/arcive/mony.png" alt="">
+                                    <h6>_ 25.8772200 BTC</h6>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

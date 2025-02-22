@@ -40,6 +40,11 @@ class TournamentsController extends Controller
         $Tournament = Tournaments::find($TournamentID);
         return view('Front.Tournaments.Details')->with(['Tournament' => $Tournament]);
     }
+    public function Plan($TournamentID)
+    {
+        $Tournament = Tournaments::find($TournamentID);
+        return view('Front.Tournaments.Plan')->with(['Tournament' => $Tournament]);
+    }
     public function MyTournaments()
     {
         return view('Front.Tournaments.MyTournaments');

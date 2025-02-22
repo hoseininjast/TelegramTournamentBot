@@ -6,7 +6,7 @@
             <span>Tournaments</span>
         </a>
 
-        <a class="menu__item" href="{{route('Front.Games')}}">
+        <a class="menu__item" href="{{route('Front.Tournaments.MyTournaments')}}">
            <i class="fa fa-trophy mb-2"></i>
             <span>My Tour</span>
         </a>

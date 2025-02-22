@@ -8,7 +8,6 @@ const PendingStatusButton = document.querySelector("#StatusPending");
 const RunningStatusButton = document.querySelector("#StatusRunning");
 const FinishedStatusButton = document.querySelector("#StatusFinished");
 
-const TournamentDetailButtons = document.querySelectorAll(".TournamentDetail");
 
 let User;
 
@@ -28,7 +27,7 @@ function GetTournaments(Mode){
     $.ajax({
         url: route('V1.Tournaments.MyTournaments' ),
         data : {
-            UserID : 76203510,
+            UserID : User.id,
             Mode : Mode
         },
         success: function (response) {
@@ -49,7 +48,7 @@ function GetTournaments(Mode){
 													 <h4>`+Tournament.Name+`</h4>
 												</div>
 												<div class="contant">
-                                                    <button type="button"  class="mybtn2 TournamentDetail" data-TournamentID="`+Tournament.id+`">Details</button>
+                                                    <button type="button"  class="btn btn-primary btn-lg rounded-pill TournamentDetail" data-TournamentID="`+Tournament.id+`">Details</button>
 												</div>
 											</div>
 											<h4>`+Tournament.PlayerCount+` Players</h4>
@@ -86,6 +85,13 @@ function GetTournaments(Mode){
 
             });
 
+            const TournamentDetailButtons = document.querySelectorAll(".TournamentDetail");
+
+
+            TournamentDetailButtons.forEach((plan) => plan.addEventListener('click', (event) => {
+                console.log(plan.getAttribute('data-TournamentID'));
+                redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-TournamentID')  ]) );
+            }));
 
         }
     });
@@ -118,11 +124,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 });
 
 
-
-TournamentDetailButtons.forEach((plan) => plan.addEventListener('click', (event) => {
-    console.log(plan.getAttribute('data-tournamentid'));
-    redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-tournamentid')  ]) );
-}));
 
 
 

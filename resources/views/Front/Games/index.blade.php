@@ -31,7 +31,7 @@
 
                             </div>
                             <div class="contant">
-                                <button type="button" class="mybtn1 PlayGame" data-GameID="{{$Game->id}}" id="GameButton-{{$Game->id}}" value="{{$Game->id}}">Play</button>
+                                <button type="button" class="btn btn-primary btn-lg rounded-pill  PlayGame" data-GameID="{{$Game->id}}" id="GameButton-{{$Game->id}}" value="{{$Game->id}}">Play</button>
                             </div>
                         </div>
                     </div>
