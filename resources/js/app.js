@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import { init, backButton ,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA  } from '@telegram-apps/sdk';
+import { init, backButton ,closingBehavior,hapticFeedback , initData, initDataChat, initDataUser , isTMA ,retrieveLaunchParams  } from '@telegram-apps/sdk';
 import moment from "moment/moment.js";
 import {redirect} from "./utilities.js";
 
@@ -8,7 +8,7 @@ let TelegramUser;
 let User;
 
 
-function GetUser(UserID){
+function GetUser(){
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -21,7 +21,6 @@ function GetUser(UserID){
     $.ajax({
         url: route('V1.User.FindOrCreate'),
         data : {
-            telegram_id :   UserID,
             TelegramData :   TelegramUser,
 
         },
@@ -56,15 +55,19 @@ window.addEventListener("DOMContentLoaded", async () => {
         const InitData = initData;
         TelegramUser = InitData.user();
 
+        const { initDataRaw } = retrieveLaunchParams();
+
+        console.log( initData.startParam())
+
         GetUser(TelegramUser.id)
 
         $('#UserUsername').html('Welcome Back ' + TelegramUser.username);
         $('#UserImage').attr('src', TelegramUser.photo_url );
 
 
-        $('#NavbarUsername').html('Welcome Back ' + User.UserName);
+        $('#NavbarUsername').html( User.UserName);
         $('#NavbarCharge').text(User.Charge);
-        $('#NavbarProfileImage').attr('src', TelegramUser.photo_url );
+        $('#NavbarProfileImage').attr('src', User.Image ? User.Image : TelegramUser.photo_url);
 
 
         if(route('Front.Games') == window.location.href){

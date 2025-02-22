@@ -33,29 +33,21 @@ class UserController extends Controller
         ]);
 
 
-        return $request->TelegramData;
         if(TelegramUsers::where('TelegramUserID', $request->TelegramData['id'])->count() > 0){
             $User = TelegramUsers::where('TelegramUserID', $request->TelegramData['id'])->first();
         }else{
             $User = TelegramUsers::create([
                 'TelegramUserID' => $request->TelegramData['id'],
                 'TelegramChatID' => $request->TelegramData['id'],
-                'FirstName' => $request->TelegramData[''] ,
-                'LastName' => $this->GetUserInfo('last_name') ,
-                'UserName' => $this->GetUserInfo('username') ,
+                'FirstName' => $request->TelegramData['first_name'] ,
+                'LastName' => $request->TelegramData['last_name'] ,
+                'UserName' => $request->TelegramData['username'] ,
+                'Image' => $request->TelegramData['photo_url'] ,
             ]);
         }
-        return $request->TelegramData['id'] ;
-        $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
-        $ReferralCount = TelegramUsers::where('ReferralID' , $User->id)->count();
-        $TournamentsJoined = $User->Tournaments()->count();
-        $TournamentsWinned = $User->TournamentsWon()->count();
         return response()->json([
             'Data' => [
                 'User' => $User,
-                'ReferralCount' => $ReferralCount,
-                'TournamentsJoined' => $TournamentsJoined,
-                'TournamentsWinned' => $TournamentsWinned,
             ],
         ] , 200);
     }

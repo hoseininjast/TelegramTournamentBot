@@ -70,7 +70,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         var endDate = moment(User.created_at, "YYYY-MM-DD");
         var days = currentDate.diff(endDate, 'days')
 
-        console.log(User.UserName)
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ReferralCount').text(ReferralCount)
         $('#TournamentsJoined').text(TournamentsJoined)
