@@ -71,6 +71,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 pt-5">
+                    <div class="section-heading">
+                        <h2 class="title">
+                            Champions
+                        </h2>
+                    </div>
+
+                    <div class="l-arcive-box2-wrapper">
+                        <div class="l-arcive-box2">
+                            @foreach($Tournament->History->Winners as $winner)
+                                <div class="s-a-b">
+                                    <div class="left">
+                                        <img src="{{asset('Front/images/arcive/sa'. $loop->iteration + 3 .'.png')}}" alt="">
+                                        <div class="content pl-5">
+                                            <div class="left2">
+                                                <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                            </div>
+                                            <div class="right2">
+                                                <h4><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{\App\Models\TelegramUsers::find($winner)->PlatoID}}</h4>
+                                                <h4><i class="fa fa-telegram telegramIcon"></i> <a href="https://t.me/{{\App\Models\TelegramUsers::find($winner)->UserName}}">{{\App\Models\TelegramUsers::find($winner)->UserName}}</a></h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right pt-4">
+                                        <img src="{{asset('Front/images/arcive/mony.png')}}" alt="">
+                                        <h6>${{$Tournament->Awards[$loop->index]}}</h6>
+                                    </div>
+                                </div>
+                            @endforeach
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 pt-5">
@@ -90,9 +132,9 @@
                                                 <div class="left2">
                                                     <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
                                                 </div>
-                                                <div class="right2 vselement">
-                                                    <p>PID: {{$plan->Player1->PlatoID}}</p>
-                                                    <p>TID: {{$plan->Player1->UserName}}</p>
+                                                <div class="right2 vselement pt-2">
+                                                    <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
+                                                    <span class="text text-white"><i class="fa fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player1->UserName}}">{{$plan->Player1->UserName}}</a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -107,9 +149,9 @@
                                                 <div class="left2">
                                                     <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
                                                 </div>
-                                                <div class="right2 vselement">
-                                                    <p>Plato: {{$plan->Player2->PlatoID}}</p>
-                                                    <p>Telegram: {{$plan->Player2->UserName}}</p>
+                                                <div class="right2 vselement pt-2">
+                                                    <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>
+                                                    <span class="text text-white"><i class="fa fa-telegram telegramIcon"></i><a href="https://t.me/{{$plan->Player2->UserName}}">{{$plan->Player2->UserName}}</a></span>
                                                 </div>
                                             </div>
                                         </div>

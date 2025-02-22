@@ -91,5 +91,24 @@ html {
 
 .vselement{
     overflow: hidden;
-    width: 110px;
+    width: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.vselement span {
+    font-size: 10px !important;
+}
+
+.telegramIcon{
+    color: lightblue;
+    font-size: 15px;
+    padding-right: 5px;
+}
+
+
+.PlatoIcon{
+    width: 15px;
+    height: 15px !important;
+    padding-right: 5px;
 }
