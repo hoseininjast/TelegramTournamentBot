@@ -29,11 +29,22 @@ class UserController extends Controller
     public function FindOrCreate(Request $request)
     {
         $request->validate([
-            'telegram_id' => 'required',
             'TelegramData' => 'required|array',
         ]);
 
 
+        return $request->TelegramData;
+        if(TelegramUsers::where('TelegramUserID', $request->TelegramData['id'])->count() > 0){
+            $User = TelegramUsers::where('TelegramUserID', $request->TelegramData['id'])->first();
+        }else{
+            $User = TelegramUsers::create([
+                'TelegramUserID' => $request->TelegramData['id'],
+                'TelegramChatID' => $request->TelegramData['id'],
+                'FirstName' => $request->TelegramData[''] ,
+                'LastName' => $this->GetUserInfo('last_name') ,
+                'UserName' => $this->GetUserInfo('username') ,
+            ]);
+        }
         return $request->TelegramData['id'] ;
         $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
         $ReferralCount = TelegramUsers::where('ReferralID' , $User->id)->count();
