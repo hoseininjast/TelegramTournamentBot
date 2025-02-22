@@ -40,16 +40,11 @@ class TournamentsController extends Controller
         $Tournament = Tournaments::find($TournamentID);
         return view('Front.Tournaments.Details')->with(['Tournament' => $Tournament]);
     }
-
-
-    private function numToWords($number) {
-      $N2W = new Number2Word();
-      return $N2W->numberToWords($number);
+    public function MyTournaments()
+    {
+        return view('Front.Tournaments.MyTournaments');
     }
-    private function numToWordForStages($number) {
 
-        $N2W = new Number2Word();
-        return $N2W->numToWordForStages($number);
-    }
+
 
 }

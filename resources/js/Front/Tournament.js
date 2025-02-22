@@ -3,7 +3,7 @@ import {
     ShowAlert
 } from "../utilities.js";
 
-import { initData} from '@telegram-apps/sdk';
+import {initData, isTMA} from '@telegram-apps/sdk';
 
 
 const JoinTournamentButtons = document.querySelectorAll(".JoinButton");
@@ -84,11 +84,14 @@ JoinTournamentButtons.forEach((plan) => plan.addEventListener('click', (event) =
 
 window.addEventListener("DOMContentLoaded", async () => {
 
-    initData.restore();
-    const InitData = initData;
-    User = InitData.user();
-    var TourID = $('#TournamentID').val()
-    CheckTournamentJoinStatus(TourID)
+    if(isTMA()){
+        initData.restore();
+        const InitData = initData;
+        User = InitData.user();
+        var TourID = $('#TournamentID').val()
+        CheckTournamentJoinStatus(TourID)
+    }
+
 });
 
 

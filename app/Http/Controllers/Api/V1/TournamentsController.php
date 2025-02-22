@@ -36,6 +36,22 @@ class TournamentsController extends Controller
         ] , 200);
     }
 
+    public function MyTournaments(Request $request)
+    {
+        $request->validate([
+            'UserID' => 'required|int|exists:telegram_users,TelegramUserID',
+            'Mode' => 'required|string|in:Pending,Running,Finished',
+        ]);
+
+        $User = TelegramUsers::where('TelegramUserID' , $request->UserID )->first();
+        $Tournaments = $User->MyTournament($request->Mode);
+        return response()->json([
+            'Data' => [
+                'Tournaments' => $Tournaments
+            ],
+        ] , 200);
+    }
+
     public function Join(Request $request)
     {
         $request->validate([

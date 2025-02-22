@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/Front/Games.js',
                 'resources/js/Front/Tournaments.js',
                 'resources/js/Front/Tournament.js',
+                'resources/js/Front/MyTournaments.js',
             ],
             refresh: true,
         }),

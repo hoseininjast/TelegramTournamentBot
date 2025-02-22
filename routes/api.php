@@ -27,6 +27,7 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
     Route::group(['prefix' => 'Tournaments' , 'as' => 'Tournaments.' ] , function (){
         Route::get('/' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'index'])->name('index');
         Route::get('Detail/{ID}' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'Detail'])->name('Detail');
+        Route::post('MyTournaments' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'MyTournaments'])->name('MyTournaments');
         Route::post('Join' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'Join'])->name('Join');
         Route::post('JoinStatus' , [\App\Http\Controllers\Api\V1\TournamentsController::class , 'JoinStatus'])->name('JoinStatus');
     });
