@@ -104,13 +104,17 @@
 {{--<script src="//cdn.jsdelivr.net/npm/eruda"></script>--}}
 
 @include('sweetalert::alert' )
+<script src="{{asset('js/Functions.js')}}"></script>
 
 @vite(['resources/js/app.js'])
 @yield('js')
 
+
 @if($errors->any())
     @foreach($errors->all() as $err)
-        ShowToast('error' , '{{$err}}')
+        <script>
+            ShowToast('error' , '{{$err}}')
+        </script>
     @endforeach
 @endif
 

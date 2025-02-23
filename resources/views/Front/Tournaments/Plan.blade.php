@@ -149,7 +149,7 @@
                                             <div class="left">
                                                 <div class="content">
                                                     <div class="left2">
-                                                        <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        <img src="{{$plan->Player1->Image ? $plan->Player1->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
                                                     </div>
                                                     <div class="right2 vselement pt-2">
                                                         <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
@@ -166,7 +166,7 @@
                                             <div class="left">
                                                 <div class="content">
                                                     <div class="left2">
-                                                        <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        <img src="{{$plan->Player2->Image ? $plan->Player2->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
                                                     </div>
                                                     <div class="right2 vselement pt-2">
                                                         <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>

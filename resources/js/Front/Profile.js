@@ -143,6 +143,14 @@ async function CreateInvoice() {
     $('#PaymentArea').show(400)
 }
 
+function ShowLoading(){
+    Swal.fire({
+        title: "Updating...",
+        html: "Please wait a moment"
+    });
+    Swal.showLoading()
+}
+
 AffiliateButton.addEventListener("click", () =>
     ChangeSections('Affiliate')
 );
@@ -160,11 +168,7 @@ InvoiceButton.addEventListener("click", () =>
 );
 
 UpdateProfileButton.addEventListener("click", () =>
-    Swal.fire({
-        title: "Updating...",
-        html: "Please wait a moment"
-    }),
-    Swal.showLoading()
+    ShowLoading()
 );
 
 

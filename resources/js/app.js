@@ -57,15 +57,14 @@ window.addEventListener("DOMContentLoaded", async () => {
         var ReferralID = initData.startParam();
 
         GetUser( ReferralID)
+        var ProfileImage = User.Image ? User.Image : TelegramUser.photo_url;
 
 
-        $('#UserUsername').html('Welcome Back ' + TelegramUser.username);
-        $('#UserImage').attr('src', TelegramUser.photo_url );
-
-
+        $('#UserUsername').html('Welcome Back ' + User.UserName);
+        $('#UserImage').attr('src', ProfileImage );
         $('#NavbarUsername').html( User.UserName);
         $('#NavbarCharge').text(User.Charge);
-        $('#NavbarProfileImage').attr('src', User.Image ? User.Image : TelegramUser.photo_url);
+        $('#NavbarProfileImage').attr('src', ProfileImage);
 
 
         if(route('Front.Games') == window.location.href){

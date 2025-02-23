@@ -105,13 +105,13 @@
                     <div class="t-t-s-nav">
                         <div class="row">
                             <div class="col-4">
-                                <a class="nav-link btn btn-outline-warning rounded-pill   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
+                                <a class="nav-link d-flex btn btn-outline-warning rounded-pill   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
                             </div>
                             <div class="col-4">
-                                <a class="nav-link btn btn-outline-success rounded-pill  ProfileSectionButtons" id="WalletButton" data-Section="Wallet"  > <i class="fas fa-wallet"></i> Wallet</a>
+                                <a class="nav-link d-flex btn btn-outline-success rounded-pill  ProfileSectionButtons" id="WalletButton" data-Section="Wallet"  > <i class="fas fa-wallet"></i> Wallet</a>
                             </div>
                             <div class="col-4">
-                                <a class="nav-link btn btn-outline-danger rounded-pill  ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
+                                <a class="nav-link d-flex btn btn-outline-danger rounded-pill  ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
                             </div>
                         </div>
                     </div>
