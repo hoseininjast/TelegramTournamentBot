@@ -11,6 +11,8 @@ import { restClient } from "coinmarketcap-js";
 
 
 
+const UpdateProfileButton = document.querySelector("#UpdateProfileButton");
+
 const AffiliateButton = document.querySelector("#AffiliateButton");
 const WalletButton = document.querySelector("#WalletButton");
 const SettingButton = document.querySelector("#SettingButton");
@@ -155,6 +157,14 @@ SettingButton.addEventListener("click", () =>
 
 InvoiceButton.addEventListener("click", () =>
     CreateInvoice()
+);
+
+UpdateProfileButton.addEventListener("click", () =>
+    Swal.fire({
+        title: "Updating...",
+        html: "Please wait a moment"
+    }),
+    Swal.showLoading()
 );
 
 

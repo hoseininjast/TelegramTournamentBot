@@ -292,7 +292,7 @@
                                                     <label for="Image">Image</label>
                                                     <input type="file" accept="image/*"  class="form-control" id="Image" name="Image">
                                                 </div>
-                                                <button type="submit" class="btn btn-success rounded-pill">Update</button>
+                                                <button type="submit" class="btn btn-success rounded-pill" id="UpdateProfileButton">Update</button>
                                             </form>
 
                                         </div>

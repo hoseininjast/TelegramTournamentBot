@@ -85,16 +85,19 @@
                         <div class="l-arcive-box2-wrapper">
                             <div class="l-arcive-box2">
                                 @foreach($Tournament->History->Winners as $winner)
+                                    @php
+                                        $User = \App\Models\TelegramUsers::find($winner);
+                                    @endphp
                                     <div class="s-a-b">
                                         <div class="left">
                                             <img src="{{asset('Front/images/arcive/sa'. $loop->iteration + 3 .'.png')}}" alt="">
                                             <div class="content pl-5">
                                                 <div class="left2">
-                                                    <img src="{{asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                    <img src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
                                                 </div>
                                                 <div class="right2 vselement">
-                                                    <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{\App\Models\TelegramUsers::find($winner)->PlatoID}}</span>
-                                                    <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{\App\Models\TelegramUsers::find($winner)->UserName}}">{{\App\Models\TelegramUsers::find($winner)->UserName}}</a></span>
+                                                    <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$User->PlatoID}}</span>
+                                                    <span class="text text-white"><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{$User->UserName}}">{{$User->UserName}}</a></span>
                                                 </div>
                                             </div>
                                         </div>
