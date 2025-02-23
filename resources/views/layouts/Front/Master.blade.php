@@ -107,6 +107,14 @@
 
 @vite(['resources/js/app.js'])
 @yield('js')
+
+@if($errors->any())
+    @foreach($errors->all() as $err)
+        ShowToast('error' , '{{$err}}')
+    @endforeach
+@endif
+
+
 </body>
 
 

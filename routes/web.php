@@ -36,6 +36,7 @@ Route::group([ 'as' => 'Front.' ] , function (){
     Route::group(['prefix' => 'Profile' , 'as' => 'Profile.' ] , function (){
         Route::get('index' , [\App\Http\Controllers\Front\UserController::class , 'index'])->name('index');
         Route::get('Show/{UserID}' , [\App\Http\Controllers\Front\UserController::class , 'Show'])->name('Show');
+        Route::post('Update' , [\App\Http\Controllers\Front\UserController::class , 'Update'])->name('Update');
 
     });
 

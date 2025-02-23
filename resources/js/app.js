@@ -85,8 +85,6 @@ window.addEventListener("DOMContentLoaded", async () => {
             off();
             window.history.back();
         });
-    }else{
-        GetUser(76203510)
     }
 
 

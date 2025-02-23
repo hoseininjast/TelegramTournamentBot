@@ -105,13 +105,13 @@
                     <div class="t-t-s-nav">
                         <div class="row">
                             <div class="col-4">
-                                <a class="nav-link btn btn-outline-warning rounded-pill   ProfileSectionButtons" id="StatusPending" data-Status="Pending"  ><i class="fas fa-code-branch"></i> Affiliate</a>
+                                <a class="nav-link btn btn-outline-warning rounded-pill   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
                             </div>
                             <div class="col-4">
-                                <a class="nav-link btn btn-outline-success rounded-pill  ProfileSectionButtons" id="StatusRunning" data-Status="Running"  > <i class="fas fa-wallet"></i> Wallet</a>
+                                <a class="nav-link btn btn-outline-success rounded-pill  ProfileSectionButtons" id="WalletButton" data-Section="Wallet"  > <i class="fas fa-wallet"></i> Wallet</a>
                             </div>
                             <div class="col-4">
-                                <a class="nav-link btn btn-outline-danger rounded-pill  ProfileSectionButtons" id="StatusFinished" data-Status="Finished"  > <i class="fas  fa-cog"></i> Setting</a>
+                                <a class="nav-link btn btn-outline-danger rounded-pill  ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
                             </div>
                         </div>
                     </div>
@@ -127,7 +127,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
-                    <main>
+                    <main class="MainDashboardSections" id="WalletSection" style="display: none">
                         <div class="main-box wallet-box">
                             <div class="header-area">
                                 <h4>Wallet</h4>
@@ -137,15 +137,6 @@
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" id="pills-wt1-tab" data-toggle="pill" href="#pills-wt1" role="tab" aria-controls="pills-wt1" aria-selected="true">Deposit</a>
                                     </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="pills-wt2-tab" data-toggle="pill" href="#pills-wt2" role="tab" aria-controls="pills-wt2" aria-selected="false">Withdraw</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Buy Crypto</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="pills-wt4-tab" data-toggle="pill" href="#pills-wt4" role="tab" aria-controls="pills-wt4" aria-selected="false">Transactions</a>
-                                    </li>
                                 </ul>
                             </div>
                             <div class="wallet-tab-content"  id="pills-tabContent">
@@ -153,32 +144,74 @@
                                     <div class="tab-pane fade show active" id="pills-wt1" role="tabpanel" aria-labelledby="pills-wt1-tab">
                                         <div class="dipo-box">
                                             <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="current-balance">
-                                                        <p>Current Balance</p>
-                                                        <h4>
-                                                            0.00051 <span>BTC</span>
-                                                        </h4>
-                                                        <span class="t-sm">
-															1BTC = 39746.90 USD
-														</span>
-                                                    </div>
-                                                </div>
                                                 <div class="col-lg-8">
                                                     <div class="dipo_btc">
                                                         <div class="header-area">
-                                                            <h4>Deposit BTC</h4>
-                                                            <p>
-                                                                You may switch to other currencies in the top right corner.
-                                                            </p>
+                                                            <h4>Deposit </h4>
                                                         </div>
                                                         <div class="referral-link-area">
                                                             <div class="row">
                                                                 <div class="col-md-12">
-                                                                    <div class="left">
-                                                                        <h4 class="title"BTC Deposit Address</h4>
+
+                                                                    <h6> Select Token</h6>
+                                                                    <div class="row">
+                                                                        <div class="col-6 pt-2">
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="Polygon">Polygon</button>
+                                                                        </div>
+                                                                        <div class="col-6 pt-2">
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="TonButton" data-Token="Ton">Ton</button>
+                                                                        </div>
+                                                                        <div class="col-6 pt-2">
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="USDTPOLButton" data-Token="USDTPOL">USDT(POL)</button>
+                                                                        </div>
+                                                                        <div class="col-6 pt-2">
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="USDTTONButton" data-Token="USDTTON">USDT(TON)</button>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <h6 class="pt-2"> Select Amount</h6>
+                                                                    <div class="row pt-2">
+                                                                        <div class="col-4">
+                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="1">$1</button>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="2">$2</button>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="5">$5</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row pt-2">
+                                                                        <div class="col-4">
+                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="10">$10</button>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="20">$20</button>
+                                                                        </div>
+                                                                        <div class="col-4">
+                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="50">$50</button>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <div class="row pt-2">
+                                                                        <div class="col-12">
+                                                                            <button class="btn btn-primary btn-block rounded-pill PriceButton" data-Amount="100">$100</button>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="pt-4">
+                                                                        <button class="btn btn-info btn-block rounded-pill  InvoiceButton" id="InvoiceButton">Create Invoice</button>
+                                                                    </div>
+
+
+
+
+                                                                    <div class="left" id="PaymentArea" style="display: none">
+                                                                        <h4 class="title">Deposit Address</h4>
                                                                         <div class="aff-code">
-                                                                            <input type="text" value="bc1quxahsy9s7h99q5q4xykmmmh">
+                                                                            <input type="text" id="WalletAddress" value="bc1quxahsy9s7h99q5q4xykmmmh">
                                                                             <i class="fas fa-file"></i>
                                                                         </div>
                                                                         <div class="aff-code-bottom">
@@ -200,304 +233,11 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="pills-wt2" role="tabpanel" aria-labelledby="pills-wt2-tab">
-                                        <div class="dipo-box">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="current-balance">
-                                                        <p>Current Balance</p>
-                                                        <h4>
-                                                            0.00051 <span>BTC</span>
-                                                        </h4>
-                                                        <span class="t-sm">
-															1BTC = 39746.90 USD
-														</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <div class="dipo_btc">
-                                                        <div class="header-area">
-                                                            <h4>Withdraw BITCOIN</h4>
-                                                            <p>
-                                                                You may switch to other currencies in the top right corner.
-                                                            </p>
-                                                        </div>
-                                                        <div class="form-area">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <form action="#">
-                                                                        <div class="form-group">
-                                                                            <label for="">Amount</label>
-                                                                            <input type="text" class="input-field" placeholder="Amount">
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label for="">Payment Address</label>
-                                                                            <input type="text"  class="input-field" placeholder="Payment Address">
-                                                                        </div>
-                                                                        <button type="submit" class="mybtn2">Submit</button>
-                                                                    </form>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="notice-area">
-                                                            <p><span>Transaction fee:</span> Your withdrawal will also have 0.0006 BTC  subtracted to cover the transaction fee.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-wt3" role="tabpanel" aria-labelledby="pills-wt3-tab">
-                                        <div class="dipo-box">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <div class="current-balance">
-                                                        <p>Current Balance</p>
-                                                        <h4>
-                                                            0.00051 <span>BTC</span>
-                                                        </h4>
-                                                        <span class="t-sm">
-															1BTC = 39746.90 USD
-														</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <div class="dipo_btc">
-                                                        <div class="header-area">
-                                                            <h4>Buy cryptocurrency directly to your Jugaro account</h4>
-                                                            <p>
-                                                                Once payment is completed, your cryptocurrency will be available in your Jugaro
-                                                                a																unt within minutes
-                                                            </p>
-                                                        </div>
-                                                        <div class="crypto-info">
-                                                            <h5>1. Choose the crypto you wish to buy, enter the amount, and choose your
-                                                                favorite payment method.</h5>
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Buy</label>
-                                                                        <select name="" id="" class="input-field" placeholder="Amount">
-                                                                            <option value="">BTC</option>
-                                                                            <option value="">CTO</option>
-                                                                            <option value="">YOK</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Payment Methods</label>
-                                                                        <select name="" id="" class="input-field" placeholder="Amount">
-                                                                            <option value="">VISA</option>
-                                                                            <option value="">MASTER</option>
-                                                                            <option value="">DABIT</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group-2">
-                                                                        <label for="">Amount</label>
-                                                                        <div class="select-payment-area">
-                                                                            <input type="text" value="434">
-                                                                            <select name="" id="">
-                                                                                <option value="">BTC</option>
-                                                                                <option value="">CTO</option>
-                                                                                <option value="">YOK</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <h5 class="mt-5">2. Choose the best offer from our payment partners, and complete
-                                                                your purchase.</h5>
-                                                            <div class="table-responsive">
-                                                                <table class="table">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>Channels</th>
-                                                                        <th>Arrival Time</th>
-                                                                        <th>You will get</th>
-                                                                        <th>Rate ( Fee Included)</th>
-                                                                        <th>Trade</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-wt4" role="tabpanel" aria-labelledby="pills-wt4-tab">
-                                        <div class="trns-box">
-                                            <div class="trns-table-filter">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="single-filter">
-                                                            <label for="">Month</label>
-                                                            <input type="month" class="input-field" name="" id="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="single-filter">
-                                                            <label for="">Type</label>
-                                                            <select name="" id="" class="input-field">
-                                                                <option value="">All</option>
-                                                                <option value="">Type 1</option>
-                                                                <option value="">Type 2</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="single-filter">
-                                                            <label for="">Currency</label>
-                                                            <select name="" id="" class="input-field">
-                                                                <option value="">BTC</option>
-                                                                <option value="">BDT</option>
-                                                                <option value="">USD</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="filter-wrapper">
-                                                            <a href="#" class="mybtn2">Filter</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th>Date/Time</th>
-                                                        <th>Type</th>
-                                                        <th>Currency</th>
-                                                        <th>Amount</th>
-                                                        <th>Balance before</th>
-                                                        <th>Balance after</th>
-                                                        <th>Game</th>
-                                                        <th>Game ID</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>2021-01-07 16:33:53</td>
-                                                        <td>Deposit</td>
-                                                        <td>BTC</td>
-                                                        <td>0.000005210</td>
-                                                        <td>0.000000000</td>
-                                                        <td>0.000005210</td>
-                                                        <td>--</td>
-                                                        <td>--</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2021-01-07 16:33:53</td>
-                                                        <td>Deposit</td>
-                                                        <td>BTC</td>
-                                                        <td>0.000005210</td>
-                                                        <td>0.000000000</td>
-                                                        <td>0.000005210</td>
-                                                        <td>--</td>
-                                                        <td>--</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2021-01-07 16:33:53</td>
-                                                        <td>Deposit</td>
-                                                        <td>BTC</td>
-                                                        <td>0.000005210</td>
-                                                        <td>0.000000000</td>
-                                                        <td>0.000005210</td>
-                                                        <td>--</td>
-                                                        <td>--</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2021-01-07 16:33:53</td>
-                                                        <td>Deposit</td>
-                                                        <td>BTC</td>
-                                                        <td>0.000005210</td>
-                                                        <td>0.000000000</td>
-                                                        <td>0.000005210</td>
-                                                        <td>--</td>
-                                                        <td>--</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2021-01-07 16:33:53</td>
-                                                        <td>Deposit</td>
-                                                        <td>BTC</td>
-                                                        <td>0.000005210</td>
-                                                        <td>0.000000000</td>
-                                                        <td>0.000005210</td>
-                                                        <td>--</td>
-                                                        <td>--</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </main>
-                    <main>
+                    <main class="MainDashboardSections" id="SettingSection" style="display: none">
                         <div class="main-box u-setting-area">
                             <div class="header-area">
                                 <h4>Setting</h4>
@@ -507,99 +247,29 @@
                                     <div class="single-user-setting">
                                         <div class="s-title-area">
                                             <h4>Personal Details</h4>
-                                            <a href="#"> <i class="fas fa-edit"></i> Edit</a>
                                         </div>
                                         <div class="s-content-area">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>Name <span>:</span></td>
-                                                        <td>Tim Wilkins</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Date of Birth <span>:</span></td>
-                                                        <td>15-03-1974</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Address <span>:</span></td>
-                                                        <td>8198 Fieldstone Dr.La Crosse, WI 54601</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
+                                            <form action="{{route('Front.Profile.Update')}}" enctype="multipart/form-data" method="post">
+                                                @csrf
+                                                <input type="hidden" name="UserID" id="UserID">
+                                                <div class="form-group">
+                                                    <label for="UserName"> Telegram Username</label>
+                                                    <input class="form-control" id="UserName" name="UserName" type="text" placeholder="Enter Your Telegram UserName">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="PlatoID"> Plato ID</label>
+                                                    <input class="form-control" id="PlatoID" name="PlatoID" type="text" placeholder="Enter Your Plato ID">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="Image">Image</label>
+                                                    <input type="file" accept="image/*"  class="form-control" id="Image" name="Image">
+                                                </div>
+                                                <button type="submit" class="btn btn-success rounded-pill">Update</button>
+                                            </form>
+
                                         </div>
                                     </div>
-                                    <div class="single-user-setting">
-                                        <div class="s-title-area">
-                                            <h4>Account Settings</h4>
-                                            <a href="#"> <i class="fas fa-edit"></i> Edit</a>
-                                        </div>
-                                        <div class="s-content-area">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>Language <span>:</span></td>
-                                                        <td>English (United States)</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Time Zone <span>:</span></td>
-                                                        <td>(GMT-06:00) Central America</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Status <span>:</span></td>
-                                                        <td>Active</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-user-setting">
-                                        <div class="s-title-area">
-                                            <h4>Email Addresses</h4>
-                                            <a href="#"> <i class="fas fa-edit"></i> Edit</a>
-                                        </div>
-                                        <div class="s-content-area">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>Email <span>:</span></td>
-                                                        <td><a href="https://pixner.net/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5c3d303e392e286f68651c3b313d3530723f3331">[email&#160;protected]</a></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-user-setting">
-                                        <div class="s-title-area">
-                                            <h4>Phone</h4>
-                                            <a href="#"> <i class="fas fa-edit"></i> Edit</a>
-                                        </div>
-                                        <div class="s-content-area">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>Mobile <span>:</span></td>
-                                                        <td>+1 234-567-8925</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="single-user-setting">
-                                        <div class="s-title-area">
-                                            <h4>Security</h4>
-                                            <a href="#"> <i class="fas fa-edit"></i> Edit</a>
-                                        </div>
-                                        <div class="s-content-area">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <tr>
-                                                        <td>Password <span>:</span></td>
-                                                        <td>********</td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
