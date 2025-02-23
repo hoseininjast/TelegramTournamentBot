@@ -127,6 +127,30 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
+                    <main class="MainDashboardSections" id="AffiliateSection" style="display: none">
+                        <div class="main-box affiliate-box">
+                            <div class="header-area">
+                                <h4>Affiliate Program</h4>
+                                <p>
+                                    Get a lifetime reward for inviting new people!
+                                </p>
+                            </div>
+                            <div class="referral-link-area">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="left">
+                                            <h4 class="title">MY REFERRAL LINK</h4>
+                                            <div class="aff-code">
+                                                <input id="MyInviteLink" type="text" value="" onclick="copyContent(this.value)">
+                                                <i class="fas fa-file" onclick="copyContent($('#MyInviteLink').val())" ></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </main>
                     <main class="MainDashboardSections" id="WalletSection" style="display: none">
                         <div class="main-box wallet-box">
                             <div class="header-area">
@@ -156,10 +180,10 @@
                                                                     <h6> Select Token</h6>
                                                                     <div class="row">
                                                                         <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="Polygon">Polygon</button>
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="MATIC">Polygon</button>
                                                                         </div>
                                                                         <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="TonButton" data-Token="Ton">Ton</button>
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="TonButton" data-Token="TON">Ton</button>
                                                                         </div>
                                                                         <div class="col-6 pt-2">
                                                                             <button class="btn btn-success rounded-pill   TokenButtons" id="USDTPOLButton" data-Token="USDTPOL">USDT(POL)</button>
@@ -211,22 +235,26 @@
                                                                     <div class="left" id="PaymentArea" style="display: none">
                                                                         <h4 class="title">Deposit Address</h4>
                                                                         <div class="aff-code">
-                                                                            <input type="text" id="WalletAddress" value="bc1quxahsy9s7h99q5q4xykmmmh">
-                                                                            <i class="fas fa-file"></i>
+                                                                            <input type="text" id="WalletAddress" value="" onclick="copyContent(this.value)">
+                                                                            <i class="fas fa-file" onclick="copyContent($('#WalletAddress').val())"></i>
                                                                         </div>
-                                                                        <div class="aff-code-bottom">
-                                                                            <a href="#">Show QR Code</a>
-                                                                            <a href="#">Copy Address</a>
+                                                                        <h4 class="title">Amount</h4>
+                                                                        <div class="aff-code">
+                                                                            <input type="text" id="DepositAmount" value="" onclick="copyContent(this.value)">
+                                                                            <i class="fas fa-file" onclick="copyContent($('#DepositAmount').val())"></i>
                                                                         </div>
+                                                                        <div class="">
+                                                                            <a class="btn btn-outline-success rounded-pill btn-block" href="https://t.me/supervisor_admin369">Talk to Support</a>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="notice-area">
-                                                            <p><span>IMPORTANT:</span>Send only BTC to this address, sending any other coin or
+                                                            <p><span>IMPORTANT:</span>Send only Selected token to this address, sending any other coin or
                                                                 token will result in losing your funds</p>
-                                                            <p><span>Notice :</span>Your deposit will be credited after 1 confirmation on the BTC
-                                                                blockchain network.</p>
+                                                            <p><span>Notice :</span>you must deposit the fund in the wallet and then send the transaction hash to our support</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -287,5 +315,45 @@
 
 @section('js')
     @vite('resources/js/Front/Profile.js')
+    <script>
+
+        const copyContent = async (selectedtext) => {
+            try {
+                selectedtext = selectedtext.replace(/&amp;/g, '&');
+                selectedtext = selectedtext.replace(/\s/g, '');
+                await navigator.clipboard.writeText(selectedtext);
+                ShowToast("success"," Copied to your clipboard");
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
+
+
+        const ShowToast = (
+            Icon = "success",
+            Text = "successful",
+            Timer = 3000,
+            ShowConfirmButton = false,
+            Position = "top-end",
+            ProgressBar = true
+        ) => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: Position,
+                showConfirmButton: ShowConfirmButton,
+                timer: Timer,
+                timerProgressBar: ProgressBar,
+                didOpen: (toast) => {
+                    toast.addEventListener("mouseenter", Swal.stopTimer);
+                    toast.addEventListener("mouseleave", Swal.resumeTimer);
+                },
+            });
+
+            Toast.fire({
+                icon: Icon,
+                title: Text,
+            });
+        };
+    </script>
 @endsection
 

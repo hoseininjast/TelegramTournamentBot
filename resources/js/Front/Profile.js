@@ -31,8 +31,8 @@ let Token = 'Polygon';
 let Amount = 1;
 
 const PolygonAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
-const USDTPOLAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
 const TonAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
+const USDTPOLAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
 const USDTTONAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
 
 
@@ -80,15 +80,64 @@ function ChangeSections(Section) {
 
     $('html, body').animate({
         scrollTop: $('#' + Section + 'Section').offset().top
-    }, 2000);
+    }, 400);
 
 }
 
 
 async function CreateInvoice() {
-    const rest = restClient(import.meta.env.VITE_CMC_API_KEY);
-    const result = await rest.crypto.latestQuotes({symbol: "MATIC"});
-    console.log(result);
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        async: false,
+        cache: false,
+    });
+
+    let CryptoPrice , WalletAddress;
+
+    if(Token == 'MATIC' ){
+        WalletAddress = PolygonAddress;
+        $.ajax({
+            url: route('V1.Payment.GetPrice' , Token),
+            success: function (response) {
+                CryptoPrice = response.Price.MATIC.quote.USD.price;
+                console.log(CryptoPrice)
+                return response.Price.MATIC.quote.USD.price;
+
+
+            }
+        });
+        CryptoPrice = parseFloat(CryptoPrice).toFixed(6)
+
+    }else if(Token == 'TON' ){
+        WalletAddress = TonAddress;
+        $.ajax({
+            url: route('V1.Payment.GetPrice' , Token),
+            success: function (response) {
+                CryptoPrice = response.Price.TON.quote.USD.price;
+                return response.Price.TON.quote.USD.price;
+
+            }
+        });
+        CryptoPrice = parseFloat(CryptoPrice).toFixed(6)
+    }else if(Token == 'USDTPOL' ){
+        WalletAddress = USDTPOLAddress;
+        CryptoPrice = 1;
+    }else if(Token == 'USDTTON' ){
+        WalletAddress = USDTTONAddress;
+        CryptoPrice = 1;
+    }
+
+    let payable = Amount / CryptoPrice;
+    console.log(CryptoPrice)
+    console.log(Amount)
+    console.log(payable)
+
+    $('#WalletAddress').val(WalletAddress)
+    $('#DepositAmount').val(payable)
+
     $('#PaymentArea').show(400)
 }
 
@@ -131,12 +180,6 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         GetUser(TelegramUser.id)
 
-
-
-    }else{
-        GetUser(76203510)
-
-
         $('#ProfileUsername').text(User.UserName)
 
         const currentDate = moment(new Date(), 'YYYY-MM-DD');
@@ -152,9 +195,17 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#UserID').val(User.id)
         $('#UserName').val(User.UserName)
         $('#PlatoID').val(User.PlatoID)
+        $('#MyInviteLink').val('https://t.me/KryptoArenaBot?startapp=' + TelegramUser.id)
 
 
         $('#ProfileImage').attr('src' , User.Image)
+
+
+    }else{
+        GetUser(76203510)
+
+
+
     }
 
 });
