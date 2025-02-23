@@ -86,7 +86,7 @@ function ChangeSections(Section) {
 
 
 async function CreateInvoice() {
-    const rest = restClient(import.meta.env.VITE_CMC_API_KEY)
+    const rest = restClient(import.meta.env.VITE_CMC_API_KEY);
     const result = await rest.crypto.latestQuotes({symbol: "MATIC"});
     console.log(result);
     $('#PaymentArea').show(400)
