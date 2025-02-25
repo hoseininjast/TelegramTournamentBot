@@ -23,12 +23,11 @@
                             @endphp
                             <div class="s-a-b">
                                 <div class="left">
-                                    <img class="rounded-pill image-max-60" src="{{$User->Image}}" alt="">
-                                    <h6>{{$User->UserName}}</h6>
+                                    <img class="rounded-pill " width="40px" height="40px" src="{{$User->Image}}" alt="">
+                                    <span style="font-size: 12px">{{$User->UserName}}</span>
                                 </div>
                                 <div class="right">
                                     <h6>{{$champion['WinCount']}} Wins</h6>
-                                    <img src="{{asset('Front/images/arcive/mony.png')}}" alt="">
                                 </div>
                             </div>
                         @endforeach
