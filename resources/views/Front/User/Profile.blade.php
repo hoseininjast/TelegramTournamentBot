@@ -8,6 +8,9 @@
                 <div class="col-lg-12">
                     <div class="bc-content">
                         <div class="left">
+                            <div class="img">
+                                <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
+                            </div>
                             <h3 id="ProfileUsername"></h3>
                             <p id="ProfileJoinDate"></p>
                         </div>
@@ -53,9 +56,7 @@
                 <div class="col-lg-12">
                     <div class="gamer-profile-top-inner">
                         <div class="profile-photo">
-                            <div class="img">
-                                <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
-                            </div>
+
                             <div class="mybadge">
                                 <img src="{{asset('Front/images/gamer/badge.png')}}" alt="">
                             </div>
