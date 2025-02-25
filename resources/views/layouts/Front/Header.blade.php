@@ -8,7 +8,7 @@
                     <div class="content">
                         <div class="left-content">
                             <img id="NavbarProfileImage" class="rounded-pill" src="{{asset('images/Users/DefaultProfile.png')}}" width="50px">
-                            <span id="NavbarUsername"></span>
+                            <span class="NavbarUsername" id="NavbarUsername"></span>
                         </div>
                        {{-- <div class="center-content">
                             <ul class="center-list">
