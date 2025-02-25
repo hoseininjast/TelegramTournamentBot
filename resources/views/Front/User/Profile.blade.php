@@ -113,10 +113,10 @@
                     <div class="t-t-s-nav">
                         <div class="row">
                             <div class="col-6">
-                                <a class="nav-link d-flex btn btn-outline-warning rounded-pill   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
+                                <a class="nav-link d-flex mybtn mybtn-success mybtn-pill-40   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
                             </div>
                             <div class="col-6">
-                                <a class="nav-link d-flex btn btn-outline-danger rounded-pill  ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
+                                <a class="nav-link d-flex mybtn mybtn-danger mybtn-pill-40 ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
                             </div>
                         </div>
                     </div>
@@ -132,7 +132,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
-                    <main class="MainDashboardSections" id="AffiliateSection" style="display: none">
+                    <main class="MainDashboardSections" id="AffiliateSection" >
                         <div class="main-box affiliate-box">
                             <div class="header-area">
                                 <h4>Affiliate Program</h4>
@@ -144,10 +144,14 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="left">
-                                            <h4 class="title">MY REFERRAL LINK</h4>
+                                            <h4 class="title">Copy Referral Link <i class="fas fa-file" onclick="copyContent($('#MyInviteLink').val())" ></i></h4>
+
                                             <div class="aff-code">
-                                                <input id="MyInviteLink" type="text" value="" onclick="copyContent(this.value)" readonly>
-                                                <i class="fas fa-file" onclick="copyContent($('#MyInviteLink').val())" ></i>
+                                                <span>
+                                                    <span id="MyInviteLink" onclick="copyContent(this.value)"></span>
+                                                </span>
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -179,11 +183,21 @@
                                                     <label for="PlatoID"> Plato ID</label>
                                                     <input class="form-control" id="PlatoID" name="PlatoID" type="text" placeholder="Enter Your Plato ID">
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="WalletAddress">Polygon Wallet</label>
+                                                    <input class="form-control" id="WalletAddress" name="WalletAddress" type="text" placeholder="Enter Your Polygon Wallet Address">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="TonWalletAddress">Ton Wallet</label>
+                                                    <input class="form-control" id="TonWalletAddress" name="TonWalletAddress" type="text" placeholder="Enter Your Ton Wallet Address">
+                                                </div>
+
                                                 <div class="form-group">
                                                     <label for="Image">Image</label>
                                                     <input type="file" accept="image/*"  class="form-control" id="Image" name="Image">
                                                 </div>
-                                                <button type="submit" class="btn btn-success rounded-pill" id="UpdateProfileButton">Update</button>
+                                                <button type="submit" class=" mybtn mybtn-success mybtn-pill-40 " id="UpdateProfileButton">Update</button>
                                             </form>
 
                                         </div>

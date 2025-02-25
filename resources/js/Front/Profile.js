@@ -50,16 +50,10 @@ function GetUser(UserID){
 
 
 function ChangeSections(Section) {
-    $('.ProfileSectionButtons').removeClass('active');
-    $('#' + Section + 'Button').addClass('active');
 
     $('.MainDashboardSections').hide(400);
     $('#' + Section + 'Section').show(400);
 
-
-    $('html, body').animate({
-        scrollTop: $('#' + Section + 'Section').offset().top
-    }, 400);
 
 }
 
@@ -115,6 +109,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         $('#ProfileImage').attr('src' , User.Image)
 
+        Swal.close()
 
     }
 

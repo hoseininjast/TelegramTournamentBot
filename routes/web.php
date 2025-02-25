@@ -30,6 +30,7 @@ Route::group([ 'as' => 'Front.' ] , function (){
         Route::get('Detail/{TournamentID}' , [\App\Http\Controllers\Front\TournamentsController::class , 'Detail'])->name('Detail');
         Route::get('Plan/{TournamentID}' , [\App\Http\Controllers\Front\TournamentsController::class , 'Plan'])->name('Plan');
         Route::get('MyTournaments' , [\App\Http\Controllers\Front\TournamentsController::class , 'MyTournaments'])->name('MyTournaments');
+        Route::get('Champions' , [\App\Http\Controllers\Front\TournamentsController::class , 'Champions'])->name('Champions');
 
     });
 

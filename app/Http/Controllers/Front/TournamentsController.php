@@ -50,6 +50,47 @@ class TournamentsController extends Controller
         return view('Front.Tournaments.MyTournaments');
     }
 
+    public function Champions()
+    {
+        $Champions = TournamentHistory::all();
+        $Data = [];
+        $key = 0;
+        foreach ($Champions as $champion) {
+            foreach ( $champion->Winners as $item) {
+                $Data[$key] = $item;
+                $key++;
+            }
+        }
+
+        $occurrences = array_count_values($Data);
+        $FinalChampions = [];
+        foreach ($occurrences as $championid => $wincount) {
+            $FinalChampions[] = [
+                'ChampionID' => $championid,
+                'WinCount' => $wincount
+            ];
+        }
+
+        $this->aasort($FinalChampions ,'WinCount' );
+
+        $FinalChampions = array_slice($FinalChampions, 0, 10);
+
+        return view('Front.Tournaments.Champions')->with(['Champions' => $FinalChampions]);
+    }
+
+    function aasort (&$array, $key) {
+        $sorter = array();
+        $ret = array();
+        reset($array);
+        foreach ($array as $ii => $va) {
+            $sorter[$ii] = $va[$key];
+        }
+        arsort($sorter);
+        foreach ($sorter as $ii => $va) {
+            $ret[$ii] = $array[$ii];
+        }
+        $array = $ret;
+    }
 
 
 }

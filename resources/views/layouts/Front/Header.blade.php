@@ -22,7 +22,7 @@
                             <ul class="right-list">
                                 <li>
                                     <div class="notofication"  data-toggle="modal" data-target="#usernotification">
-                                         $<span class="NavbarUsername" id="NavbarCharge"></span>
+                                         <span class="NavbarUsername" id="NavbarCharge"></span>
                                     </div>
                                 </li>
                             </ul>

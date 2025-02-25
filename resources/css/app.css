@@ -214,3 +214,8 @@ html {
 .NavbarUsername{
     color: #00bbff;
 }
+
+.image-max-60{
+    max-width: 60px;
+    max-height: 60px;
+}

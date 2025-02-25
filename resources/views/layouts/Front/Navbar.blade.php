@@ -3,7 +3,7 @@
 
         <a class="menu__item  NavbarButtons" id="Navbar-Tournaments" href="{{route('Front.Games')}}">
             <i class="fa fa-dice mb-2"></i>
-            <span>Tournaments</span>
+            <span>Tours</span>
         </a>
 
         <a class="menu__item NavbarButtons" id="Navbar-MyTournaments" href="{{route('Front.Tournaments.MyTournaments')}}">
@@ -12,12 +12,12 @@
         </a>
 
 
-        <a class="menu__item NavbarButtons" id="Navbar-MyTournaments" href="{{route('Front.Tournaments.MyTournaments')}}">
+        <a class="menu__item NavbarButtons" id="Navbar-Champions" href="{{route('Front.Tournaments.Champions')}}">
            <i class="fa fa-trophy mb-2"></i>
             <span>Champions</span>
         </a>
 
-        <a class="menu__item NavbarButtons" id="Navbar-MyTournaments" href="{{route('Front.Tournaments.MyTournaments')}}">
+        <a class="menu__item NavbarButtons" id="Navbar-Wallet" href="{{route('Front.Profile.Wallet')}}">
            <i class="fa fa-wallet mb-2"></i>
             <span>Wallet</span>
         </a>

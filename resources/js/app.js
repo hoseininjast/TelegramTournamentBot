@@ -44,6 +44,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     }else if( route().current('Front.Tournaments.MyTournaments') ){
         $('.NavbarButtons').removeClass('active')
         $('#Navbar-MyTournaments').addClass('active')
+    }else if(route().current('Front.Tournaments.Champions') ){
+        $('.NavbarButtons').removeClass('active')
+        $('#Navbar-Champions').addClass('active')
+    }else if(route().current('Front.Profile.Wallet') ){
+        $('.NavbarButtons').removeClass('active')
+        $('#Navbar-Wallet').addClass('active')
     }else if(route().current('Front.Profile.index') ){
         $('.NavbarButtons').removeClass('active')
         $('#Navbar-Profile').addClass('active')
@@ -60,14 +66,12 @@ window.addEventListener("DOMContentLoaded", async () => {
         var ProfileImage = User.Image ? User.Image : TelegramUser.photo_url;
 
 
-        $('#UserUsername').html('Welcome Back ' + User.UserName);
-        $('#UserImage').attr('src', ProfileImage );
         $('#NavbarUsername').html( User.UserName);
-        $('#NavbarCharge').text(User.Charge);
+        $('#NavbarCharge').text('$'+User.Charge);
         $('#NavbarProfileImage').attr('src', ProfileImage);
 
 
-        if(route('Front.Games') == window.location.href){
+        if(route().current('Front.Games')){
             backButton.unmount();
             backButton.hide();
             closingBehavior.mount();

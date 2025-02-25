@@ -43,6 +43,8 @@ class UserController extends Controller
             'UserID' => 'required|numeric|exists:telegram_users,id',
             'UserName' => 'required|string|'.Rule::unique('telegram_users' , 'UserName')->ignore($request->UserID),
             'PlatoID' => 'required|string|'.Rule::unique('telegram_users' , 'PlatoID')->ignore($request->UserID),
+            'WalletAddress' => 'nullable|string|regex:/^(0x)?[0-9a-fA-F]{40}$/',
+            'TonWalletAddress' => 'nullable|string',
             'Image' => 'nullable|file|image',
 
         ]);
@@ -55,6 +57,8 @@ class UserController extends Controller
         $User->update([
             'UserName' => $request->UserName,
             'PlatoID' => $request->PlatoID,
+            'WalletAddress' => $request->WalletAddress,
+            'TonWalletAddress' => $request->TonWalletAddress,
             'Image' => $AttachmentAddress,
         ]);
 
