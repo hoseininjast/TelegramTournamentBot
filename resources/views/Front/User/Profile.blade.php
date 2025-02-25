@@ -112,13 +112,10 @@
                 <div class="col-lg-12">
                     <div class="t-t-s-nav">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-6">
                                 <a class="nav-link d-flex btn btn-outline-warning rounded-pill   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
                             </div>
-                            <div class="col-4">
-                                <a class="nav-link d-flex btn btn-outline-success rounded-pill  ProfileSectionButtons" id="WalletButton" data-Section="Wallet"  > <i class="fas fa-wallet"></i> Wallet</a>
-                            </div>
-                            <div class="col-4">
+                            <div class="col-6">
                                 <a class="nav-link d-flex btn btn-outline-danger rounded-pill  ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
                             </div>
                         </div>
@@ -149,126 +146,12 @@
                                         <div class="left">
                                             <h4 class="title">MY REFERRAL LINK</h4>
                                             <div class="aff-code">
-                                                <input id="MyInviteLink" type="text" value="" onclick="copyContent(this.value)">
+                                                <input id="MyInviteLink" type="text" value="" onclick="copyContent(this.value)" readonly>
                                                 <i class="fas fa-file" onclick="copyContent($('#MyInviteLink').val())" ></i>
                                             </div>
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-                    <main class="MainDashboardSections" id="WalletSection" style="display: none">
-                        <div class="main-box wallet-box">
-                            <div class="header-area">
-                                <h4>Wallet</h4>
-                            </div>
-                            <div class="wallet-tab-menu">
-                                <ul class="nav" id="pills-tab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="pills-wt1-tab" data-toggle="pill" href="#pills-wt1" role="tab" aria-controls="pills-wt1" aria-selected="true">Deposit</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="wallet-tab-content"  id="pills-tabContent">
-                                <div class="tab-content">
-                                    <div class="tab-pane fade show active" id="pills-wt1" role="tabpanel" aria-labelledby="pills-wt1-tab">
-                                        <div class="dipo-box">
-                                            <div class="row">
-                                                <div class="col-lg-8">
-                                                    <div class="dipo_btc">
-                                                        <div class="header-area">
-                                                            <h4>Deposit </h4>
-                                                        </div>
-                                                        <div class="referral-link-area">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-
-                                                                    <h6> Select Token</h6>
-                                                                    <div class="row">
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="MATIC">Polygon</button>
-                                                                        </div>
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="TonButton" data-Token="TON">Ton</button>
-                                                                        </div>
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="USDTPOLButton" data-Token="USDTPOL">USDT(POL)</button>
-                                                                        </div>
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="USDTTONButton" data-Token="USDTTON">USDT(TON)</button>
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <h6 class="pt-2"> Select Amount</h6>
-                                                                    <div class="row pt-2">
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="1">$1</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="2">$2</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="5">$5</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row pt-2">
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="10">$10</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="20">$20</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="50">$50</button>
-                                                                        </div>
-
-                                                                    </div>
-
-                                                                    <div class="row pt-2">
-                                                                        <div class="col-12">
-                                                                            <button class="btn btn-primary btn-block rounded-pill PriceButton" data-Amount="100">$100</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="pt-4">
-                                                                        <button class="btn btn-info btn-block rounded-pill  InvoiceButton" id="InvoiceButton">Create Invoice</button>
-                                                                    </div>
-
-
-
-
-                                                                    <div class="left" id="PaymentArea" style="display: none">
-                                                                        <h4 class="title">Deposit Address</h4>
-                                                                        <div class="aff-code">
-                                                                            <input type="text" id="WalletAddress" value="" onclick="copyContent(this.value)">
-                                                                            <i class="fas fa-file" onclick="copyContent($('#WalletAddress').val())"></i>
-                                                                        </div>
-                                                                        <h4 class="title">Amount</h4>
-                                                                        <div class="aff-code">
-                                                                            <input type="text" id="DepositAmount" value="" onclick="copyContent(this.value)">
-                                                                            <i class="fas fa-file" onclick="copyContent($('#DepositAmount').val())"></i>
-                                                                        </div>
-                                                                        <div class="">
-                                                                            <a class="btn btn-outline-success rounded-pill btn-block" href="https://t.me/supervisor_admin369">Talk to Support</a>
-                                                                        </div>
-
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="notice-area">
-                                                            <p><span>IMPORTANT:</span>Send only Selected token to this address, sending any other coin or
-                                                                token will result in losing your funds</p>
-                                                            <p><span>Notice :</span>you must deposit the fund in the wallet and then send the transaction hash to our support</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -323,45 +206,5 @@
 
 @section('js')
     @vite('resources/js/Front/Profile.js')
-    <script>
-
-        const copyContent = async (selectedtext) => {
-            try {
-                selectedtext = selectedtext.replace(/&amp;/g, '&');
-                selectedtext = selectedtext.replace(/\s/g, '');
-                await navigator.clipboard.writeText(selectedtext);
-                ShowToast("success"," Copied to your clipboard");
-            } catch (err) {
-                console.error('Failed to copy: ', err);
-            }
-        }
-
-
-        const ShowToast = (
-            Icon = "success",
-            Text = "successful",
-            Timer = 3000,
-            ShowConfirmButton = false,
-            Position = "top-end",
-            ProgressBar = true
-        ) => {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: Position,
-                showConfirmButton: ShowConfirmButton,
-                timer: Timer,
-                timerProgressBar: ProgressBar,
-                didOpen: (toast) => {
-                    toast.addEventListener("mouseenter", Swal.stopTimer);
-                    toast.addEventListener("mouseleave", Swal.resumeTimer);
-                },
-            });
-
-            Toast.fire({
-                icon: Icon,
-                title: Text,
-            });
-        };
-    </script>
 @endsection
 

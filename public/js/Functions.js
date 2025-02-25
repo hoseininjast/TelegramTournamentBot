@@ -127,6 +127,17 @@ function CopyTextWithToast(Text, Title = "EBR Code") {
     document.body.removeChild(textArea);
 }
 
+const copyContent = async (selectedtext) => {
+    try {
+        selectedtext = selectedtext.replace(/&amp;/g, '&');
+        selectedtext = selectedtext.replace(/\s/g, '');
+        await navigator.clipboard.writeText(selectedtext);
+        ShowToast("success"," Copied to your clipboard");
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+}
+
 function ShowTooltip(TooltipID, Time = 5) {
     $("#" + TooltipID).tooltip("show");
     setTimeout(function () {

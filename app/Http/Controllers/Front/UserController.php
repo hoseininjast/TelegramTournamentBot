@@ -28,6 +28,10 @@ class UserController extends Controller
     {
         return view('Front.User.Profile');
     }
+    public function Wallet()
+    {
+        return view('Front.User.Wallet');
+    }
     public function Show($UserID)
     {
         $User = TelegramUsers::find($UserID);

@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/Front/Profile.js',
+                'resources/js/Front/Wallet.js',
                 'resources/js/Front/Games.js',
                 'resources/js/Front/Tournaments.js',
                 'resources/js/Front/Tournament.js',
