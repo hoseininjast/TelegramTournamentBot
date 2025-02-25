@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Breadcrumb Area Start -->
-    <section class="breadcrumb-area gamer-profile">
+    <section class="breadcrumb-area gamer-profile pt-2">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -16,9 +16,6 @@
                                                 <div class="profile-photo">
                                                     <div class="img">
                                                         <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
-                                                    </div>
-                                                    <div class="mybadge">
-                                                        <img src="{{asset('Front/images/gamer/badge.png')}}" alt="">
                                                     </div>
                                                 </div>
                                                 <h3 id="ProfileUsername"></h3>
