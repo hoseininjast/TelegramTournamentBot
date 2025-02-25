@@ -49,6 +49,7 @@
 <!-- Header Area End  -->
 
 <!-- Breadcrumb Area Start -->
+{{--
 @if(preg_match('/Profile/' , Request::url() ) != 1 )
     <section class="breadcrumb-area games">
         <div class="content">
@@ -57,6 +58,7 @@
         </div>
     </section>
 @endif
+--}}
 
 <!-- Breadcrumb Area End -->
 
