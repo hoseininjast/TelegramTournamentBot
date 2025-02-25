@@ -8,7 +8,7 @@ class FrontController extends Controller
 {
     public function index()
     {
-        return redirect()->route('Front.Games');
+        return redirect()->route('Front.Tournaments.Champions');
     }
     public function Games()
     {
