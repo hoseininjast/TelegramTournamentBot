@@ -63,7 +63,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         var ReferralID = initData.startParam();
 
         GetUser( ReferralID)
-        var ProfileImage = User.Image ? User.Image : TelegramUser.photo_url;
+        var ProfileImage = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
 
 
         $('#NavbarUsername').html( User.UserName);
