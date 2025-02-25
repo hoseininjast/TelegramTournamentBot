@@ -25,7 +25,7 @@
                                     <div class="row d-flex justify-content-around">
 
 
-                                       {{-- @for($i = 0; $i < $Tournament->Winners ; $i++)
+                                        @for($i = 0; $i < $Tournament->Winners ; $i++)
                                             <div class="col-auto mb-3 ">
                                                 <label for="Winner{{$i}}" class="form-label">Winner {{$i + 1}}</label>
                                                 <select class="form-select" id="Winner{{$i}}" name="Winner[{{$i + 1}}]" >
@@ -35,7 +35,7 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        @endfor--}}
+                                        @endfor
 
                                             <div class="mb-3 ">
                                                 <label for="Image" class="form-label">Image</label>
