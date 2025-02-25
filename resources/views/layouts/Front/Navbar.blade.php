@@ -18,7 +18,7 @@
         </a>
 
         <a class="menu__item NavbarButtons" id="Navbar-MyTournaments" href="{{route('Front.Tournaments.MyTournaments')}}">
-           <i class="fa fa-trophy mb-2"></i>
+           <i class="fa fa-wallet mb-2"></i>
             <span>Wallet</span>
         </a>
 

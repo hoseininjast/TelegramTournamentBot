@@ -8,11 +8,27 @@
                 <div class="col-lg-12">
                     <div class="bc-content">
                         <div class="left">
-                            <div class="img">
-                                <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
-                            </div>
-                            <h3 id="ProfileUsername"></h3>
-                            <p id="ProfileJoinDate"></p>
+                            <section class="gamer-profile-top">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <div class="gamer-profile-top-inner">
+                                                <div class="profile-photo">
+                                                    <div class="img">
+                                                        <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
+                                                    </div>
+                                                    <div class="mybadge">
+                                                        <img src="{{asset('Front/images/gamer/badge.png')}}" alt="">
+                                                    </div>
+                                                </div>
+                                                <h3 id="ProfileUsername"></h3>
+                                            </div>
+                                            <p id="ProfileJoinDate"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
                         </div>
                         <div class="right">
                             <div class="player-wrapper">
@@ -55,12 +71,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="gamer-profile-top-inner">
-                        <div class="profile-photo">
-
-                            <div class="mybadge">
-                                <img src="{{asset('Front/images/gamer/badge.png')}}" alt="">
-                            </div>
-                        </div>
                         <div class="g-p-t-counters row">
                             <div class="g-p-t-single-counter">
                                 <div class="img">
