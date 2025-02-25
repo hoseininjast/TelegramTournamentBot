@@ -110,6 +110,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#UserID').val(User.id)
         $('#UserName').val(User.UserName)
         $('#PlatoID').val(User.PlatoID)
+        $('#WalletAddress').val(User.WalletAddress)
+        $('#TonWalletAddress').val(User.TonWalletAddress)
+        $('#PlatoID').val(User.PlatoID)
         $('#MyInviteLink').text(ReferralLink)
 
 
