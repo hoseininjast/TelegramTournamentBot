@@ -10,14 +10,14 @@
                             <img id="NavbarProfileImage" class="rounded-pill" src="{{asset('images/Users/DefaultProfile.png')}}" width="50px">
                             <span id="NavbarUsername"></span>
                         </div>
-                        <div class="center-content">
+                       {{-- <div class="center-content">
                             <ul class="center-list">
                                 <li>
                                     <a href="gamer-profile8.html" class="mybtn2 navbarmybtn2" > <i class="mdi mdi-tournament"></i> Order</a>
                                 </li>
 
                             </ul>
-                        </div>
+                        </div>--}}
                         <div class="right-content">
                             <ul class="right-list">
                                 <li>
