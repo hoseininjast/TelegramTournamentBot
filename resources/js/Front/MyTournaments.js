@@ -100,7 +100,6 @@ function GetTournaments(Mode){
 
 
             TournamentDetailButtons.forEach((plan) => plan.addEventListener('click', (event) => {
-                console.log(plan.getAttribute('data-TournamentID'));
                 redirect(route('Front.Tournaments.Detail' , [ plan.getAttribute('data-TournamentID')  ]) );
             }));
 

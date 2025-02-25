@@ -19,11 +19,11 @@ html {
     align-items: center ;
     padding: 0 ;
     justify-content: center ;
-    background-color: #581790 ;
+    background-color: #1f0644 ;
     color: white;
-    border-radius: 0em ;
     -webkit-tap-highlight-color: transparent ;
-
+    border: 1px solid #008bff;
+    border-radius: 10px 10px 0px 0px;
 }
 
 @media (max-width: 42.625em) {
@@ -97,7 +97,7 @@ html {
     align-items: center;
 }
 .vselement span {
-    font-size: 10px !important;
+    font-size: 15px !important;
 }
 
 .telegramIcon{
@@ -111,4 +111,102 @@ html {
     width: 15px;
     height: 15px !important;
     padding-right: 5px;
+}
+
+.MainDiv{
+    padding-top: 100px;
+}
+.pt-100{
+    padding-top: 100px;
+}
+.breadcrumb-section{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.navbarmybtn2{
+    color: #00a2ff;
+    padding: 6px 15px;
+}
+
+.breadcrumb-image{
+    width: 200px
+}
+
+.subtitle{
+    color: #fa009f;
+}
+
+.rainbow-text {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mybtn{
+    text-transform: capitalize;
+    background-color: #000000;
+    padding: 10px 50px;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 30px;
+}
+.mybtn-success{
+    color: #4aff00;
+    box-shadow: inset 0px 0px 10px 7px #2aff00;
+}
+.mybtn-primary{
+    color: #00bbff;
+    box-shadow: inset 0px 0px 10px 7px #00bbff;
+}
+.mybtn-info{
+    color: #00fff6;
+    box-shadow: inset 0px 0px 10px 7px #00FFF6FF;
+}
+.mybtn-warning{
+    color: #ffe900;
+    box-shadow: inset 0px 0px 10px 7px #ffe900;
+}
+.mybtn-danger{
+    color: #ff0000;
+    box-shadow: inset 0px 0px 10px 7px #FF0000FF;
+}
+.mybtn-pill{
+    padding: 10px 60px;
+}
+
+.mybtn-pill-10{
+    padding: 10px 10px;
+}
+
+.mybtn-pill-20{
+    padding: 10px 20px;
+}
+
+
+.mybtn-pill-30{
+    padding: 10px 30px;
+}
+
+.mybtn-pill-40{
+    padding: 10px 40px;
+}
+.mybtn-pill-50{
+    padding: 10px 50px;
+}
+
+
+.champion-image{
+    width: 120px !important;
+    height: 120px !important;
+}
+
+.plan-image{
+    width: 90px !important;
+    height: 90px !important;
+}
+.navbar-background{
+    background-color: #1f0644;
 }

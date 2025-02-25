@@ -5,27 +5,7 @@
 
 
     <section class="games-filter">
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-6 col-lg-4">
-                    <div class="top-left-title">
-                        <h4>Join Private Tournament</h4>
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-8">
-                            <input type="text" class="form-control" name="TournamentCode" id="TournamentCode" placeholder="Tournament Code">
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-info"> Search <i class="fa fa-search"></i>  </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="s-top-area pt-3">
+        <div class="s-top-area ">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-4">
@@ -37,13 +17,32 @@
                         <div class="t-t-s-nav">
                             <div class="row">
                                 <div class="col-6">
-                                    <button id="LoadGamesFree" type="button" class="btn btn-outline-success btn-lg btn-block  rounded-pill">Free</button>
+                                    <button id="LoadGamesFree" type="button" class="mybtn mybtn-success mybtn-pill">Free</button>
                                 </div>
                                 <div class="col-6">
-                                    <button id="LoadGamesPaid" type="button" class="btn btn-outline-info btn-lg btn-block rounded-pill">Paid</button>
+                                    <button id="LoadGamesPaid" type="button" class="mybtn mybtn-primary mybtn-pill">Paid</button>
                                 </div>
                             </div>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-xl-6 col-lg-4">
+                    <div class="top-left-title">
+                        <h4>Join Private Tournament</h4>
+                    </div>
+                </div>
+                <div class="col-lg-12 pt-2">
+                    <div class="row">
+                        <div class="col-7">
+                            <input type="text" class="form-control" name="TournamentCode" id="TournamentCode" placeholder="Tournament Code">
+                        </div>
+                        <div class="col-5">
+                            <button class="mybtn mybtn-primary mybtn-pill-40"> Join  </button>
                         </div>
                     </div>
                 </div>
@@ -65,7 +64,7 @@
 
                             </div>
                             <div class="contant">
-                                <button type="button" class="btn btn-primary btn-lg rounded-pill  PlayGame" data-GameID="{{$Game->id}}" id="GameButton-{{$Game->id}}" value="{{$Game->id}}">Play</button>
+                                <button type="button" class="mybtn mybtn-primary mybtn-pill-40  PlayGame" data-GameID="{{$Game->id}}" id="GameButton-{{$Game->id}}" value="{{$Game->id}}">Play</button>
                             </div>
                         </div>
                     </div>

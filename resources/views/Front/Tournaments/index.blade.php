@@ -13,13 +13,13 @@
                         <div class="t-t-s-nav">
                             <div class="row">
                                 <div class="col-4">
-                                    <a class="nav-link btn btn-outline-warning rounded-pill   StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
+                                    <button class="nav-link mybtn mybtn-warning mybtn-pill-10   StatusButton" id="StatusPending" data-Status="Pending"  >Pending</button>
                                 </div>
                                 <div class="col-4">
-                                    <a class="nav-link btn btn-outline-success rounded-pill  StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
+                                    <button class="nav-link mybtn mybtn-success mybtn-pill-10  StatusButton" id="StatusRunning" data-Status="Running"  >Running</button>
                                 </div>
                                 <div class="col-4">
-                                    <a class="nav-link btn btn-outline-danger rounded-pill  StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
+                                    <button class="nav-link mybtn mybtn-danger mybtn-pill-10  StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</button>
                                 </div>
                             </div>
 
@@ -42,7 +42,7 @@
                                                 <h4>{{$Tournament->Name}}</h4>
                                             </div>
                                             <div class="contant">
-                                                <button type="button"  class="btn btn-primary btn-lg rounded-pill TournamentDetail" data-TournamentID="{{$Tournament->id}}">Details</button>
+                                                <button type="button"  class="mybtn mybtn-primary mybtn-pill-20 TournamentDetail" data-TournamentID="{{$Tournament->id}}">Details</button>
                                             </div>
                                         </div>
                                         <h4>{{$Tournament->PlayerCount}} Players</h4>

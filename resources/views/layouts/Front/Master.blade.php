@@ -49,20 +49,21 @@
 <!-- Header Area End  -->
 
 <!-- Breadcrumb Area Start -->
-{{--
 @if(preg_match('/Profile/' , Request::url() ) != 1 )
-    <section class="breadcrumb-area games">
-        <div class="content">
-            <img id="UserImage" class="UserProfileImage"  alt="" />
-            <h4 id="UserUsername"></h4>
+    <section class="pt-100 ">
+        <div class="content breadcrumb-section">
+            <img class="breadcrumb-image rounded-pill" src="{{asset('images/MainLogo.png')}}"  alt="" />
+            <h2 class="title pt-2 rainbow-text" >Krypto Arena</h2>
+            <h5 class="subtitle">Blockchain Tournament Platform</h5>
         </div>
     </section>
 @endif
---}}
 
 <!-- Breadcrumb Area End -->
 
-@yield('content')
+<div id="MainDiv" >
+    @yield('content')
+</div>
 <!-- Footer Area Start -->
 
 <div class="forged-fixed-bottom-bar"></div>

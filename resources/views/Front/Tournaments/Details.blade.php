@@ -14,7 +14,9 @@
                                     </div>
                                     <div class="contant">
                                         @if($Tournament->Status == 'Pending')
-                                            <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg rounded-pill JoinButton">Join Now</button>
+                                            <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn mybtn-primary mybtn-pill-30 JoinButton">Join Now</button>
+                                        @else
+                                            <button type="button"  class="mybtn mybtn-danger mybtn-pill-30 disabled JoinButton" disabled>Finished</button>
                                         @endif
 
 
@@ -116,9 +118,9 @@
                             </div>
                             <div class="right">
                                 @if($Tournament->Status == 'Pending')
-                                    <button type="button" data-TournamentID="{{$Tournament->id}}" class="btn btn-primary btn-lg btn-block rounded-pill JoinButton">Join Now</button>
+                                    <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn mybtn-primary mybtn-pill-30 JoinButton">Join Now</button>
                                 @endif
-                                <a href="{{route('Front.Tournaments.Plan' , $Tournament->id)}}"  class="btn btn-info btn-lg btn-block mt-2 rounded-pill">Plans</a>
+                                <a href="{{route('Front.Tournaments.Plan' , $Tournament->id)}}"  class="mybtn mybtn-info mybtn-pill-30 mt-2 rounded-pill">Plans</a>
                             </div>
                         </div>
                     </div>

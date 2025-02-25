@@ -14,7 +14,7 @@
                                     </div>
                                     <h4>{{$Tournament->Name}}</h4>
                                     <div class="contant">
-                                        <button type="button" class="btn btn-primary btn-lg rounded-pill">Back to Details</button>
+                                        <button type="button" class="mybtn mybtn-info mybtn-pill-40">Back to Details</button>
                                     </div>
                                 </div>
 
@@ -93,7 +93,7 @@
                                             <img src="{{asset('Front/images/arcive/sa'. $loop->iteration + 3 .'.png')}}" alt="">
                                             <div class="content pl-5">
                                                 <div class="left2">
-                                                    <img src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                    <img class="champion-image" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
                                                 </div>
                                                 <div class="right2 vselement">
                                                     <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$User->PlatoID}}</span>
@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="right pt-4">
+                                        <div class="right pt-5">
                                             <img src="{{asset('Front/images/arcive/mony.png')}}" alt="">
                                             <h6>${{$Tournament->Awards[$loop->index]}}</h6>
                                         </div>
@@ -149,7 +149,7 @@
                                             <div class="left">
                                                 <div class="content">
                                                     <div class="left2">
-                                                        <img src="{{$plan->Player1->Image ? $plan->Player1->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        <img class="plan-image" src="{{$plan->Player1->Image ? $plan->Player1->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
                                                     </div>
                                                     <div class="right2 vselement pt-2">
                                                         <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
@@ -166,7 +166,7 @@
                                             <div class="left">
                                                 <div class="content">
                                                     <div class="left2">
-                                                        <img src="{{$plan->Player2->Image ? $plan->Player2->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        <img class="plan-image" src="{{$plan->Player2->Image ? $plan->Player2->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
                                                     </div>
                                                     <div class="right2 vselement pt-2">
                                                         <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>
