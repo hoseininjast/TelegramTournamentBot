@@ -2,7 +2,7 @@ import {
     ShowToast,
     deleteSession,
     setSession,
-    ReadSession, redirect,
+    ReadSession, redirect, copyContent
 } from "../utilities.js";
 import moment from "moment/moment.js";
 
@@ -14,6 +14,10 @@ const UpdateProfileButton = document.querySelector("#UpdateProfileButton");
 
 const AffiliateButton = document.querySelector("#AffiliateButton");
 const SettingButton = document.querySelector("#SettingButton");
+
+
+const ReferralidCopyIcon = document.querySelector("#ReferralidCopyIcon");
+const MyInviteLink = document.querySelector("#MyInviteLink");
 
 
 
@@ -95,6 +99,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         var endDate = moment(User.created_at, "YYYY-MM-DD");
         var days = currentDate.diff(endDate, 'days')
 
+        var ReferralLink = 'https://t.me/KryptoArenaBot?startapp=' + TelegramUser.id;
+
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ReferralCount').text(ReferralCount)
         $('#TournamentsJoined').text(TournamentsJoined)
@@ -104,7 +110,19 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#UserID').val(User.id)
         $('#UserName').val(User.UserName)
         $('#PlatoID').val(User.PlatoID)
-        $('#MyInviteLink').val('https://t.me/KryptoArenaBot?startapp=' + TelegramUser.id)
+        $('#MyInviteLink').text(ReferralLink)
+
+
+
+
+        ReferralidCopyIcon.addEventListener("click", () =>
+            copyContent(ReferralLink)
+        );
+
+        MyInviteLink.addEventListener("click", () =>
+            copyContent(ReferralLink)
+        );
+
 
 
         $('#ProfileImage').attr('src' , User.Image)

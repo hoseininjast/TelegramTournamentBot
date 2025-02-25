@@ -144,7 +144,7 @@
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="left">
-                                            <h4 class="title">Copy Referral Link <i class="fas fa-file" onclick="copyContent($('#MyInviteLink').val())" ></i></h4>
+                                            <h4 class="title">Copy Referral Link <i class="fas fa-file" id="ReferralidCopyIcon" ></i></h4>
 
                                             <div class="aff-code">
                                                 <span>

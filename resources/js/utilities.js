@@ -27,6 +27,16 @@ export function ReadSession(key) {
 }
 
 
+export const copyContent = async (selectedtext) => {
+    try {
+        selectedtext = selectedtext.replace(/&amp;/g, '&');
+        selectedtext = selectedtext.replace(/\s/g, '');
+        await navigator.clipboard.writeText(selectedtext);
+        ShowToast("success"," Copied to your clipboard");
+    } catch (err) {
+        console.error('Failed to copy: ', err);
+    }
+}
 
 export const ShowToast = (
     Icon = "success",
