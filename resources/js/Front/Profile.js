@@ -99,7 +99,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         var endDate = moment(User.created_at, "YYYY-MM-DD");
         var days = currentDate.diff(endDate, 'days')
 
-        var ReferralLink = 'https://t.me/KryptoArenaBot?startapp=' + TelegramUser.id;
+        var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=' + TelegramUser.id;
 
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ReferralCount').text(ReferralCount)
