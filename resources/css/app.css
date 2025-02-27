@@ -201,6 +201,7 @@ html {
 .champion-image{
     width: 120px !important;
     height: 120px !important;
+    border-radius: 50%;
 }
 
 .plan-image{
@@ -218,4 +219,8 @@ html {
 .image-max-60{
     max-width: 60px;
     max-height: 60px;
+}
+
+.l-arcive-box .s-a-b .left img {
+    margin-right: 0px !important;
 }
