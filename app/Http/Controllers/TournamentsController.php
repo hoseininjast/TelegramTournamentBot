@@ -43,6 +43,8 @@ class TournamentsController extends Controller
             $Supervisorids[] = $tournamentPlan->SupervisorID;
         }
         $Supervisors = User::whereIn('id' , $Supervisorids)->get();
+        confirmDelete('Remove User From Tournament', 'Are you sure you want to remove this user? user will be notified about this action');
+
         return view('Dashboard.Tournaments.Manage')->with(['Tournament' => $Tournament , 'Supervisors' => $Supervisors]);
     }
     public function Edit(int $ID)
@@ -450,6 +452,34 @@ class TournamentsController extends Controller
         $Tournament->delete();
         Alert::success('Tournament Deleted successfully');
         return redirect()->route('Dashboard.Tournaments.index');
+
+    }
+
+    public function RemoveUser(int $TournamentUserID)
+    {
+        $UserTournament = UserTournaments::find($TournamentUserID);
+        $Tournament = Tournaments::find($UserTournament->TournamentID);
+        $User = TelegramUsers::find($UserTournament->UserID);
+
+        if($Tournament->Status != 'Pending'){
+            Alert::error("you cant remove user from {$Tournament->Status} tournament");
+        }else{
+            $text = "
+شما از تورنومنت زیر حدف شدید :
+تورنومنت : {$Tournament->Name}
+بازی : {$Tournament->Game->Name}
+میتوانید دلیل حذف شدن خود را از ادمین بپرسید.
+با تشکر از همکاری شما.";
+            if(env('APP_ENV') == 'production'){
+                if(preg_match('/KryptoArenaFreePosition/' , $User->UserName ) != 1){
+                    NotifyTelegramUsersJob::dispatch($User->TelegramUserID ,$text);
+                }
+            }
+            $UserTournament->delete();
+            Alert::success('User Removed from tournament successfully');
+        }
+
+        return redirect()->back();
 
     }
 

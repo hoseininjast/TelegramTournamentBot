@@ -47,6 +47,7 @@
                                                 <th>PlatoID</th>
                                                 <th>Wallet Address</th>
                                                 <th>Date</th>
+                                                <th>Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -58,6 +59,15 @@
                                                     <td>{{$user->Player->PlatoID}}</td>
                                                     <td class="cursor-pointer" onclick="CopyTextWithToast('{{$user->Player->WalletAddress}}' , 'Wallet Address')">{{$user->Player->WalletAddress}}</td>
                                                     <td>{{$user->created_at}}</td>
+                                                    <td>
+                                                        @if(\Auth::user()->isOwner())
+                                                            @if($Tournament->Status == 'Pending')
+                                                                <a class="btn btn-sm btn-danger waves-effect waves-light" href="{{route('Dashboard.Tournaments.RemoveUser' , $user->id )}}"  data-confirm-delete="true" >Remove <i class="mdi mdi-trash-can"></i> </a>
+                                                            @else
+                                                                <a class="btn btn-sm btn-outline-dark waves-effect waves-light disabled" href="#"  disabled>Remove <i class="mdi mdi-trash-can"></i> </a>
+                                                            @endif
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
 
