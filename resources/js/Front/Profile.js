@@ -124,12 +124,15 @@ window.addEventListener("DOMContentLoaded", async () => {
         $(ReferralUsers).each(async function (index, User) {
 
             let startTime = moment(User.created_at).format("YY/M/D");
+            let Name = User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName;
+            let Image = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
             let row = `<tr>
-                                            <td><img src="" alt="user profile" /></td>
-                                            <td>`+ User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName  +`</td>
+                                            <td><img src="`+ Image +`" alt="user profile" ></td>
+                                            <td>`+ Name  +`</td>
                                             <td>`+User.PlatoID+`</td>
                                             <td>`+startTime+`</td>
                                         </tr>`;
+
 
             $('#ReferralHistoryTable').append(row);
 
@@ -152,6 +155,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ProfileImage').attr('src' , User.Image)
 
         Swal.close()
+
+    }else{
+        GetUser(76203510)
 
     }
 

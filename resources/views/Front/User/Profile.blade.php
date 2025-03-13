@@ -181,13 +181,19 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>UserName</th>
-                                            <th>PlatoID</th>
+                                            <th>User Name</th>
+                                            <th>Plato ID</th>
                                             <th>Date</th>
                                         </tr>
                                         </thead>
                                         <tbody id="ReferralHistoryTable">
+                                        <tr>
 
+                                            <td>Level01</td>
+                                            <td>Maxine24</td>
+                                            <td>0.00000000BTC</td>
+                                            <td>Maxine24@gmail.com</td>
+                                        </tr>
 
 
                                         </tbody>
