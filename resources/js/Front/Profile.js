@@ -127,7 +127,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             let Name = User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName;
             let Image = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
             let row = `<tr>
-                                            <td><img src="`+ Image +`" alt="user profile" ></td>
+                                            <td><img style='width: 30px;height: 30px' class="rounded-pill" src="`+ Image +`" alt="user profile" ></td>
                                             <td>`+ Name  +`</td>
                                             <td>`+User.PlatoID+`</td>
                                             <td>`+startTime+`</td>
