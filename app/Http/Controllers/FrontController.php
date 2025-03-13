@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Games;
 use App\Models\TimeTable;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Response;
 
 class FrontController extends Controller
 {
@@ -26,6 +27,10 @@ class FrontController extends Controller
     {
         $TimeTable = TimeTable::first();
         $thisMonth = Carbon::now()->month;
-        return response()->download($TimeTable->Image, $thisMonth);
+        $headers = array(
+            'Content-Type: application/image',
+        );
+        return Response::download($TimeTable->Image, 'TimeTable-'.$thisMonth.'.png', $headers);
+        return response()->download($TimeTable->Image);
     }
 }
