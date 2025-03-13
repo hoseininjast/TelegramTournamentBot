@@ -5,6 +5,32 @@
 
 
     <section class="games-filter">
+
+        <div class="s-top-area ">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-xl-6 col-lg-4">
+                        <div class="top-left-title">
+                            <h4>Quick Access</h4>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-8">
+                        <div class="t-t-s-nav">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a  href="#" class="mybtn mybtn-primary mybtn-pill">Open Tours</a>
+                                </div>
+                                <div class="col-6">
+                                    <a  href="#" class="mybtn mybtn-success mybtn-pill">Time Table</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="s-top-area ">
             <div class="container">
                 <div class="row align-items-center">
