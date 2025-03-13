@@ -29,6 +29,11 @@ class TournamentsController extends Controller
         return view('Dashboard.Tournaments.index')->with(['Tournaments' => $Tournaments]);
     }
 
+    public function Open()
+    {
+        $Tournaments = Tournaments::where('Status' , 'Pending')->get();
+        return view('Front.Tournaments.Open')->with(['Tournaments' => $Tournaments]);
+    }
     public function List($GameID , $Mode)
     {
         $Game = Games::find($GameID);

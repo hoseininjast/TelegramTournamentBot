@@ -6,6 +6,7 @@ use App\Models\Games;
 use App\Models\TimeTable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Storage;
 
 class FrontController extends Controller
 {
@@ -30,6 +31,8 @@ class FrontController extends Controller
         $headers = array(
             'Content-Type: application/image',
         );
+        $FileAddress = preg_replace('/https:\/\/kryptoarena\.fun\//' , '' , $TimeTable->Image);
+
         return Response::download($TimeTable->Image, 'TimeTable-'.$thisMonth.'.png', $headers);
         return response()->download($TimeTable->Image);
     }

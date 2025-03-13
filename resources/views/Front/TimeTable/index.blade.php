@@ -21,10 +21,9 @@
                     <div class="row TimeTableDiv" >
                         <img src="{{$TimeTable->Image}}" alt="time table image">
                     </div>
-                    <div class="row d-flex justify-content-around pt-4">
+                   {{-- <div class="row d-flex justify-content-around pt-4">
                         <a href="{{route('Front.DownloadTimeTable')}}" class="mybtn mybtn-primary mybtn-pill"> Download <i class="fa fa-download"></i></a>
-
-                    </div>
+                    </div>--}}
                 </div>
             </div>
         </div>

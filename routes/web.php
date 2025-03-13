@@ -29,6 +29,7 @@ Route::group([ 'as' => 'Front.' ] , function (){
 
     Route::group(['prefix' => 'Tournaments' , 'as' => 'Tournaments.' ] , function (){
         Route::get('/' , [\App\Http\Controllers\Front\TournamentsController::class , 'index'])->name('index');
+        Route::get('Open' , [\App\Http\Controllers\Front\TournamentsController::class , 'Open'])->name('Open');
         Route::get('List/{GameID}/{Mode}' , [\App\Http\Controllers\Front\TournamentsController::class , 'List'])->name('List');
         Route::get('Detail/{TournamentID}' , [\App\Http\Controllers\Front\TournamentsController::class , 'Detail'])->name('Detail');
         Route::get('Plan/{TournamentID}' , [\App\Http\Controllers\Front\TournamentsController::class , 'Plan'])->name('Plan');
