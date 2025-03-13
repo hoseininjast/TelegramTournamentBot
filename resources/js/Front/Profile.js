@@ -123,10 +123,13 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         $(ReferralUsers).each(async function (index, User) {
 
+
+            let key = index + 1;
             let startTime = moment(User.created_at).format("YY/M/D");
             let Name = User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName;
             let Image = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
             let row = `<tr>
+                                            <td>`+ key  +`</td>
                                             <td><img style='width: 30px;height: 30px' class="rounded-pill" src="`+ Image +`" alt="user profile" ></td>
                                             <td>`+ Name  +`</td>
                                             <td>`+User.PlatoID+`</td>
