@@ -24,6 +24,9 @@ Route::get('/home' , [\App\Http\Controllers\WebController::class , 'GotoDashboar
 Route::group([ 'as' => 'Front.' ] , function (){
     Route::get('/' , [\App\Http\Controllers\FrontController::class , 'index'])->name('index');
     Route::get('Games' , [\App\Http\Controllers\FrontController::class , 'Games'])->name('Games');
+    Route::get('TimeTable' , [\App\Http\Controllers\FrontController::class , 'TimeTable'])->name('TimeTable');
+    Route::get('DownloadTimeTable' , [\App\Http\Controllers\FrontController::class , 'DownloadTimeTable'])->name('DownloadTimeTable');
+
     Route::group(['prefix' => 'Tournaments' , 'as' => 'Tournaments.' ] , function (){
         Route::get('/' , [\App\Http\Controllers\Front\TournamentsController::class , 'index'])->name('index');
         Route::get('List/{GameID}/{Mode}' , [\App\Http\Controllers\Front\TournamentsController::class , 'List'])->name('List');

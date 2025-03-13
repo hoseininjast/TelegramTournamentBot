@@ -6,7 +6,7 @@
 
     <section class="games-filter">
 
-        <div class="s-top-area ">
+        <div class="s-top-area pb-5">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-xl-6 col-lg-4">
@@ -18,10 +18,10 @@
                         <div class="t-t-s-nav">
                             <div class="row">
                                 <div class="col-6">
-                                    <a  href="#" class="mybtn mybtn-primary mybtn-pill">Open Tours</a>
+                                    <a  href="#" class="mybtn mybtn-warning mybtn-pill-25">Open Tours</a>
                                 </div>
                                 <div class="col-6">
-                                    <a  href="#" class="mybtn mybtn-success mybtn-pill">Time Table</a>
+                                    <a  href="{{route('Front.TimeTable')}}" class="mybtn mybtn-danger mybtn-pill-30">Time Table</a>
                                 </div>
                             </div>
 

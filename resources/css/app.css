@@ -186,6 +186,10 @@ html {
 }
 
 
+.mybtn-pill-25{
+    padding: 10px 25px;
+}
+
 .mybtn-pill-30{
     padding: 10px 30px;
 }
@@ -223,4 +227,9 @@ html {
 
 .l-arcive-box .s-a-b .left img {
     margin-right: 0px !important;
+}
+
+.TimeTableDiv{
+    padding-left: 20px;
+    padding-right: 20px;
 }
