@@ -106,6 +106,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=' + TelegramUser.id;
 
         $('#ProfileJoinDate').text(days + ' Days')
+        $('#ReferralCountinTable').text(ReferralCount)
         $('#ReferralCount').text(ReferralCount)
         $('#TournamentsJoined').text(TournamentsJoined)
         $('#TournamentsWinned').text(TournamentsWinned)
