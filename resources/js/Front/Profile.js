@@ -23,7 +23,9 @@ const MyInviteLink = document.querySelector("#MyInviteLink");
 
 let TelegramUser;
 let User;
+let ReferralUsers;
 let ReferralCount;
+let ReferralIncome;
 let TournamentsJoined;
 let TournamentsWinned;
 
@@ -42,7 +44,9 @@ function GetUser(UserID){
         url: route('V1.User.Find' , UserID),
         success: function (response) {
             User = response.Data.User;
+            ReferralUsers = response.Data.ReferralUsers;
             ReferralCount = response.Data.ReferralCount;
+            ReferralIncome = response.Data.ReferralIncome;
             TournamentsJoined = response.Data.TournamentsJoined;
             TournamentsWinned = response.Data.TournamentsWinned;
         }
@@ -60,7 +64,6 @@ function ChangeSections(Section) {
 
 
 }
-
 
 function ShowLoading(){
     Swal.fire({
@@ -81,6 +84,7 @@ SettingButton.addEventListener("click", () =>
 UpdateProfileButton.addEventListener("click", () =>
     ShowLoading()
 );
+
 
 
 
@@ -114,6 +118,23 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#TonWalletAddress').val(User.TonWalletAddress)
         $('#PlatoID').val(User.PlatoID)
         $('#MyInviteLink').text(ReferralLink)
+
+        $("#ReferralIncome").text('$' + ReferralIncome);
+
+        $(ReferralUsers).each(async function (index, User) {
+
+            let startTime = moment(User.created_at).format("YY/M/D");
+            let row = `<tr>
+                                            <td><img src="" alt="user profile" /></td>
+                                            <td>`+ User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName  +`</td>
+                                            <td>`+User.PlatoID+`</td>
+                                            <td>`+startTime+`</td>
+                                        </tr>`;
+
+            $('#ReferralHistoryTable').append(row);
+
+        });
+
 
 
 

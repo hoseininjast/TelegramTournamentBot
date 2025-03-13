@@ -20,13 +20,20 @@ class UserController extends Controller
     public function Find($UserID)
     {
         $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
-        $ReferralCount = TelegramUsers::where('ReferralID' , $User->id)->count();
+
+        $ReferralUsers = TelegramUsers::where('ReferralID' , $User->id)->get();
+        $ReferralCount = $ReferralUsers->count();
+        $ReferralIncome = $ReferralCount * 0.01;
+
         $TournamentsJoined = $User->Tournaments()->count();
         $TournamentsWinned = $User->TournamentsWon()->count();
+
         return response()->json([
             'Data' => [
                 'User' => $User,
+                'ReferralUsers' => $ReferralUsers,
                 'ReferralCount' => $ReferralCount,
+                'ReferralIncome' => $ReferralIncome,
                 'TournamentsJoined' => $TournamentsJoined,
                 'TournamentsWinned' => $TournamentsWinned,
             ],
