@@ -70,7 +70,10 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
 
     });
 
-
+    Route::group( ['prefix' => 'TimeTable' , 'as' => 'TimeTable.' ] ,function (){
+        Route::get('index' , [\App\Http\Controllers\TimeTableController::class , 'index'])->name('index');
+        Route::post('Update' , [\App\Http\Controllers\TimeTableController::class , 'Update'])->name('Update');
+    });
 
     Route::group( ['prefix' => 'Profile' , 'as' => 'Profile.' ] ,function (){
         Route::get('Setting' , [\App\Http\Controllers\UserController::class , 'Setting'])->name('Setting');

@@ -71,6 +71,12 @@
                         </div>
                     </li>
                     <li>
+                        <a href="{{route('Dashboard.TimeTable.index')}}">
+                            <i class="mdi mdi-table-clock"></i>
+                            <span> Time Table </span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="#Users" data-bs-toggle="collapse">
                             <i class="mdi mdi-account-multiple"></i>
                             <span> Panel Users </span>
