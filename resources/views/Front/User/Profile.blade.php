@@ -161,7 +161,14 @@
 
                             <div class="earning-info-area">
                                 <div class="s-info">
-                                    <img src="assets/images/user/a1.png" alt="">
+                                    <img src="{{asset('Front/images/user/a1.png')}}" alt="">
+                                    <div class="content">
+                                        <h4 id="ReferralCountinTable">0</h4>
+                                        <p>Referral Count</p>
+                                    </div>
+                                </div>
+                                <div class="s-info">
+                                    <img src="{{asset('Front/images/user/a2.png')}}" alt="">
                                     <div class="content">
                                         <h4 id="ReferralIncome">$0</h4>
                                         <p>Earned Referral</p>
@@ -172,9 +179,6 @@
                             <div class="aff-table">
                                 <div class="header-area">
                                     <h4>Referral History</h4>
-                                    <div class="d-pick">
-                                        <input type="date">
-                                    </div>
                                 </div>
                                 <div class="table-responsive">
                                     <table class="table">
