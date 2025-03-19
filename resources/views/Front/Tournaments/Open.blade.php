@@ -58,6 +58,14 @@
                                                 <p>
                                                     Type : {{$Tournament->Type}}
                                                 </p>
+                                                <span></span>
+                                                <p>
+                                                    Game : {{$Tournament->Game->Name}}
+                                                </p>
+                                                <span></span>
+                                                <p>
+                                                    Price : <i class="fa fa-coins text-warning mr-1"></i> {{$Tournament->Price}}
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="r-bottom-area">

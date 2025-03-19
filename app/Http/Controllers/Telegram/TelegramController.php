@@ -1052,7 +1052,16 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
             if (isset($this->Data['message']['text'])){
 
                 if ($this->Data['message']['text'] == '/start' || $this->Data['message']['text'] == 'start'){
-                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا از گزینه های زیر یکی رو انتخاب کنید🤝💸🌠" , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
+                    $keyboard = [
+                        'inline_keyboard' => [
+                            [
+                                ['text' => 'بازکردن مینی آپ', 'web_app' => ['url' => 'https://kryptoarena.fun'] ]
+                            ]
+                        ]
+                    ];
+                    $encodedKeyboard = json_encode($keyboard);
+
+                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا برای استفاده از امکانات ربات از طریق مینی آپ اقدام نمایید🤝💸🌠" , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){

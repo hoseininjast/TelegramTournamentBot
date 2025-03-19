@@ -66,16 +66,18 @@ window.addEventListener("DOMContentLoaded", async () => {
         var ProfileImage = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
 
 
+        var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
         $('#NavbarUsername').html( User.UserName);
-        $('#NavbarCharge').text('$'+User.Charge);
+        $('#NavbarCharge').html("<i class='fa fa-coins text-warning mr-1'></i>" + Charge);
         $('#NavbarProfileImage').attr('src', ProfileImage);
 
 
-        if(route().current('Front.Games')){
+        if(route().current('Front.Tournaments.Champions')){
             backButton.unmount();
             backButton.hide();
             closingBehavior.mount();
             closingBehavior.enableConfirmation();
+
         }else{
             backButton.mount();
             backButton.show();
@@ -88,6 +90,31 @@ window.addEventListener("DOMContentLoaded", async () => {
             off();
             window.history.back();
         });
+    }else{
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: 'GET',
+            async: false,
+            cache: false,
+        });
+
+        $.ajax({
+            url: route('V1.User.Find' , '76203510'),
+            success: function (response) {
+                User = response.Data.User;
+            }
+        });
+
+        var ProfileImage = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
+
+
+        var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
+        $('#NavbarUsername').html( User.UserName);
+        $('#NavbarCharge').html("<i class='fa fa-coins text-warning mr-1'></i>" + Charge);
+        $('#NavbarProfileImage').attr('src', ProfileImage);
+
     }
 
 

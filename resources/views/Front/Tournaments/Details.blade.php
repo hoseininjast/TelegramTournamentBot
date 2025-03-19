@@ -13,11 +13,21 @@
                                         <img src="{{$Tournament->Image}}" alt="">
                                     </div>
                                     <div class="contant">
-                                        @if($Tournament->Status == 'Pending')
-                                            <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn mybtn-primary mybtn-pill-30 JoinButton">Join Now</button>
-                                        @else
-                                            <button type="button"  class="mybtn mybtn-danger mybtn-pill-30 disabled JoinButton" disabled>Finished</button>
-                                        @endif
+                                        <div class="mb-2">
+                                            @if($Tournament->Mode == 'Paid')
+                                                <span> Entry Fee : <i class="fa fa-coins text-warning mr-1"></i> {{$Tournament->Price}} </span>
+                                            @else
+                                                <span> Entry Fee : Free </span>
+                                            @endif
+                                        </div>
+
+                                       <div >
+                                           @if($Tournament->Status == 'Pending')
+                                               <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn mybtn-primary mybtn-pill-30 JoinButton">Join Now</button>
+                                           @else
+                                               <button type="button"  class="mybtn mybtn-danger mybtn-pill-30 disabled JoinButton" disabled>Finished</button>
+                                           @endif
+                                       </div>
 
 
                                     </div>
