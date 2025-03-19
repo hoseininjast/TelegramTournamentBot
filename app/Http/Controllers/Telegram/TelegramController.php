@@ -1059,9 +1059,11 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                             ]
                         ]
                     ];
+
                     $encodedKeyboard = json_encode($keyboard);
 
-                    $this->ResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا برای استفاده از امکانات ربات از طریق مینی آپ اقدام نمایید🤝💸🌠" , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
+
+                    $this->CustomResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا برای استفاده از امکانات ربات از طریق مینی آپ اقدام نمایید🤝💸🌠" , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
@@ -1420,6 +1422,20 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 'resize_keyboard' => true,
                 'one_time_keyboard' => true
             ])
+        ]);
+
+    }
+    protected function CustomResponseWithPhoto($Message , $Keyboard = null , $PhotoAddress = null , $ChatID = null){
+        $this->SendChatAction('UPLOAD_PHOTO');
+        if ($PhotoAddress == null){
+            $PhotoAddress = InputFile::create(public_path('images/MainLogo.png'));
+        }
+        Telegram::sendPhoto([
+            'chat_id' => $ChatID != null ? $ChatID :  $this->ChatID,
+            'photo' => InputFile::create($PhotoAddress  . '?version=1.0.6'),
+            'caption' => $Message,
+            'parse_mode' => 'html',
+            'reply_markup' => $Keyboard,
         ]);
 
     }
