@@ -64,7 +64,7 @@
                                                 </p>
                                                 <span></span>
                                                 <p>
-                                                    Price : <i class="fa fa-coins text-warning mr-1"></i> {{$Tournament->Price}}
+                                                    Price : <i class="fa fa-coins text-warning mr-1"></i> {{$Tournament->GetPrice()}}
                                                 </p>
                                             </div>
                                         </div>

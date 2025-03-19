@@ -59,4 +59,8 @@ class Tournaments extends Model
     {
         return $this->Image != null ? $this->Image : $this->Game->Image ;
     }
+    public function GetPrice()
+    {
+        return $this->Price * 1000;
+    }
 }

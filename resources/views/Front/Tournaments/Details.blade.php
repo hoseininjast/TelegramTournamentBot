@@ -15,7 +15,7 @@
                                     <div class="contant">
                                         <div class="mb-2">
                                             @if($Tournament->Mode == 'Paid')
-                                                <span> Entry Fee : <i class="fa fa-coins text-warning mr-1"></i> {{$Tournament->Price}} </span>
+                                                <span> Entry Fee : <i class="fa fa-coins text-warning mr-1"></i> {{$Tournament->GetPrice() }} </span>
                                             @else
                                                 <span> Entry Fee : Free </span>
                                             @endif
