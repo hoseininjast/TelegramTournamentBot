@@ -107,7 +107,7 @@
                                             <div class="row">
                                                 <div class="mb-3 col-6">
                                                     <label for="Price" class="form-label">Price</label>
-                                                    <input type="number" id="Price" name="Price" class="form-control">
+                                                    <input type="number" id="Price" name="Price" step="0.01" class="form-control">
                                                 </div>
 
                                                 <div class="mb-3 col-6">

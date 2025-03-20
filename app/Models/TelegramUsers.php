@@ -55,6 +55,16 @@ class TelegramUsers extends Model
         });
     }
 
+
+    public function WinnerPositionInTournament(Tournaments $Tournament)
+    {
+        $History = $Tournament->History;
+        return array_keys($History->Winners, $this->id);
+        /*        // get player position in the game
+        $D = TournamentHistory::find(6);
+        dd(array_keys($D->Winners, $PlayerID));*/
+    }
+
     public function Referral()
     {
         return $this->hasOne(TelegramUsers::class , 'id' , 'ReferralID');
@@ -62,6 +72,11 @@ class TelegramUsers extends Model
     public function Referrals()
     {
         return $this->hasMany(TelegramUsers::class , 'ReferralID' , 'id');
+    }
+
+    public function ReferralPlanHistory()
+    {
+        return $this->hasMany(ReferralPlanHistory::class , 'UserID' , 'id');
     }
 
 

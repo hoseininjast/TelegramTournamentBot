@@ -233,3 +233,11 @@ html {
     padding-left: 20px;
     padding-right: 20px;
 }
+
+
+.user-main-dashboard aside .rank-area .bottom-area span{
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 0px;
+    color: #838bf1;
+}

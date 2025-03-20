@@ -9,7 +9,7 @@
             <div class="col-md-8 col-lg-6 col-xl-4">
                 <div class="text-center">
                     <a href="#">
-                        <img src="{{asset('images/MainLogo.png')}}" alt="" height="22" class="mx-auto">
+                        <img src="{{asset('images/MainLogo.png')}}" alt="" height="100" class="mx-auto rounded-pill">
                     </a>
                     <p class="text-muted mt-2 mb-4">Krypto Arena</p>
 

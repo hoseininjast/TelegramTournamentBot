@@ -91,6 +91,17 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
     });
 
 
+    Route::group( ['prefix' => 'ReferralPlan' , 'as' => 'ReferralPlan.' , 'middleware' => 'isOwner'] ,function (){
+        Route::get('index' , [\App\Http\Controllers\ReferralPlanController::class , 'index'])->name('index');
+        Route::get('Add' , [\App\Http\Controllers\ReferralPlanController::class , 'Add'])->name('Add');
+        Route::get('Edit/{ID}' , [\App\Http\Controllers\ReferralPlanController::class , 'Edit'])->name('Edit');
+        Route::put('Update/{ID}' , [\App\Http\Controllers\ReferralPlanController::class , 'Update'])->name('Update');
+        Route::post('Create' , [\App\Http\Controllers\ReferralPlanController::class , 'Create'])->name('Create');
+        Route::delete('Delete/{id}' , [\App\Http\Controllers\ReferralPlanController::class , 'Delete'])->name('Delete');
+
+    });
+
+
     Route::group( ['prefix' => 'Games' , 'as' => 'Games.' , 'middleware' => 'isOwner'] ,function (){
         Route::get('index' , [\App\Http\Controllers\GamesController::class , 'index'])->name('index');
         Route::get('Add' , [\App\Http\Controllers\GamesController::class , 'Add'])->name('Add');

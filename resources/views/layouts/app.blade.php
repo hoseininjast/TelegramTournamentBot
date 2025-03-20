@@ -22,7 +22,7 @@
 
 </head>
 
-<body class="loading authentication-bg authentication-bg-pattern">
+<body class="loading authentication-bg authentication-bg-pattern" >
 
 @yield('content')
 <!-- end page -->

@@ -54,6 +54,107 @@ function GetUser(UserID){
 
 }
 
+function LoadReferralPlans(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.ReferralPlan.List' ),
+        success: function (response) {
+            $('#ReferralPlansDiv').empty()
+            var lockNewRows = false;
+            $(response.Data.ReferralPlans).each(async function (index, ReferralPlan) {
+
+
+                if(ReferralCount >= ReferralPlan.Count){
+                    let row = ` <div class="rank-area">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <img src="`+ ReferralPlan.Image +`" alt="plan image">
+                                            </div>
+                                            <div class="right text-center">
+                                                <p><span>`+ ReferralPlan.Name +`</span></p>
+                                                <p>Count : <span>`+ ReferralPlan.Count +` people</span></p>
+                                                <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i> `+ ReferralPlan.Award * 1000+` </span></p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <div>Done <i class="fa fa-check text-success"></i></div> </div>
+                                            </div>
+                                            <span>`+ ReferralPlan.Description +`</span>
+                                        </div>
+                                    </div>`;
+                    $('#ReferralPlansDiv').append(row);
+                }else{
+                    if(lockNewRows == false){
+                        let percent = (ReferralCount * 100) / ReferralPlan.Count;
+
+                        let row = ` <div class="rank-area">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <img src="`+ ReferralPlan.Image +`" alt="plan image">
+                                            </div>
+                                            <div class="right text-center">
+                                                <p><span>`+ ReferralPlan.Name +`</span></p>
+                                                <p>Count : <span>`+ ReferralPlan.Count +` people</span></p>
+                                                <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i> `+ ReferralPlan.Award * 1000 +` </span></p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="`+percent+`" aria-valuemin="0" aria-valuemax="100" style="width: `+percent+`%">`+ (ReferralCount ) +` / `+ ReferralPlan.Count +`</div>
+                                            </div>
+                                            <span>`+ ReferralPlan.Description +`</span>
+                                        </div>
+                                    </div>`;
+                        $('#ReferralPlansDiv').append(row);
+                        lockNewRows = true;
+                    }else{
+                        let percent = (ReferralCount * 100) / ReferralPlan.Count;
+
+                        let row = ` <div class="rank-area">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <img src="`+ ReferralPlan.Image +`" alt="plan image">
+                                            </div>
+                                            <div class="right text-center">
+                                                <p><span>`+ ReferralPlan.Name +`</span></p>
+                                                <p>Count : <span>`+ ReferralPlan.Count +` people</span></p>
+                                                <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i> `+ ReferralPlan.Award * 1000 +` </span></p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                            <div class="text-center">
+                                                <span class="text-warning">you must complete previous plan!</span>
+                                            </div>
+                                            <span>`+ ReferralPlan.Description +`</span>
+                                        </div>
+                                    </div>`;
+                        $('#ReferralPlansDiv').append(row);
+                    }
+
+                }
+
+
+
+
+
+            });
+
+
+
+        }
+    });
+
+}
+
 
 
 
@@ -96,7 +197,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         TelegramUser = InitData.user();
 
         GetUser(TelegramUser.id)
-
+        LoadReferralPlans()
         $('#ProfileUsername').text(User.UserName)
 
         const currentDate = moment(new Date(), 'YYYY-MM-DD');
@@ -162,7 +263,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     }else{
         GetUser(76203510)
-
+        LoadReferralPlans()
     }
 
 });

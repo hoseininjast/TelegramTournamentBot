@@ -401,7 +401,7 @@ class TournamentsController extends Controller
             'TotalStage' => 'required|integer',
             'Type' => 'required|string|in:Knockout,WorldCup,League',
             'Mode' => 'required|string|in:Free,Paid',
-            'Price' => 'required|integer',
+            'Price' => 'required|numeric',
             'Time' => 'required|integer',
             'Start' => 'required|date_format:Y-m-d H:i:s',
             'End' => 'required|date_format:Y-m-d H:i:s',

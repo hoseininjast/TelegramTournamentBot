@@ -159,7 +159,12 @@
                                 </div>
                             </div>
 
-                            <div class="earning-info-area">
+                            <div class="header-area mt-5 mb-0">
+                                <h4>Referral Status</h4>
+                            </div>
+
+                            <div class="earning-info-area mt-0">
+
                                 <div class="s-info">
                                     <img src="{{asset('Front/images/user/a1.png')}}" alt="">
                                     <div class="content">
@@ -176,6 +181,28 @@
                                 </div>
 
                             </div>
+
+
+                            <div class="user-main-dashboard">
+
+                                <aside>
+                                    <div class="about">
+                                        <h4>Referral Plan</h4>
+                                        <p> here you can see all our Referral plans and see your progress , also for completing each plan you will get rewards </p>
+
+                                    </div>
+                                   <div id="ReferralPlansDiv">
+
+                                   </div>
+
+
+
+                                </aside>
+
+                            </div>
+
+
+
                             <div class="aff-table">
                                 <div class="header-area">
                                     <h4>Referral History</h4>

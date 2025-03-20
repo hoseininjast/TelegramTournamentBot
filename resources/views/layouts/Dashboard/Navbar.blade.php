@@ -95,6 +95,24 @@
                     </li>
 
                     <li>
+                        <a href="#ReferralPlan" data-bs-toggle="collapse">
+                            <i class="mdi mdi-lan"></i>
+                            <span> Referral Plans </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="ReferralPlan">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{route('Dashboard.ReferralPlan.index')}}">All</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('Dashboard.ReferralPlan.Add')}}">Add</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
                         <a href="#Telegram" data-bs-toggle="collapse">
                             <i class="mdi mdi-card-account-details"></i>
                             <span> Telegram </span>

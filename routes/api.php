@@ -39,4 +39,11 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
     Route::group(['prefix' => 'Payment' , 'as' => 'Payment.' ] , function (){
         Route::get('GetPrice/{TokenName}' , [\App\Http\Controllers\Api\V1\PaymentsController::class , 'GetPrice'])->name('GetPrice');
     });
+
+
+    Route::group(['prefix' => 'ReferralPlan' , 'as' => 'ReferralPlan.' ] , function (){
+        Route::get('List' , [\App\Http\Controllers\Api\V1\ReferralPlanController::class , 'List'])->name('List');
+    });
+
+
 });
