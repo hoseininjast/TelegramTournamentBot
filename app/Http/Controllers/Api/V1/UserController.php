@@ -71,7 +71,7 @@ class UserController extends Controller
                     $ReferralPlanHistoryCount = ReferralPlanHistory::where('UserID' , $RefferalUser->id)->count();
                     if($ReferralPlanHistoryCount == 0){
                         $FirstStage = ReferralPlan::first();
-                        if ($RefferalUser->Referrals()->count() == $FirstStage->Count){
+                        if ($RefferalUser->Referrals()->count() >= $FirstStage->Count){
 
 
                             $RefferalUser->update([
@@ -97,30 +97,35 @@ class UserController extends Controller
                         $Stages = $RefferalUser->ReferralPlanHistory;
                         $ReferralPlanCounted = 0;
                         foreach ($Stages as $stage) {
-                            $ReferralPlanCounted += $stage->Count;
+                            $ReferralPlanCounted += $stage->ReferralPlan->Count;
                         }
                         $ReferralsCount = $RefferalUser->Referrals()->count() ;
                         $NewReferrals = $ReferralsCount - $ReferralPlanCounted;
                         $NextStage = ReferralPlan::where('Level' , '>' , $LastStage->ReferralPlan->Level)->first();
-                        if($NewReferrals == $NextStage->Count){
+                        if($NewReferrals >= $NextStage->Count){
 
-                            $RefferalUser->update([
-                                'Charge' => $RefferalUser->Charge + $NextStage->Award
-                            ]);
+                            $CheckReferralPlan = ReferralPlanHistory::where('UserID' , $RefferalUser->id)->where('ReferralPlanID' , $NextStage->id)->count();
+                            if($CheckReferralPlan == 0){
+                                $RefferalUser->update([
+                                    'Charge' => $RefferalUser->Charge + $NextStage->Award
+                                ]);
 
-                            UserPaymentHistory::create([
-                                'UserID' => $RefferalUser->id,
-                                'Description' => "Referral Plan Reward : {$NextStage->Name}",
-                                'Amount' => $NextStage->Award,
-                                'Type' => 'In',
-                            ]);
+                                UserPaymentHistory::create([
+                                    'UserID' => $RefferalUser->id,
+                                    'Description' => "Referral Plan Reward : {$NextStage->Name}",
+                                    'Amount' => $NextStage->Award,
+                                    'Type' => 'In',
+                                ]);
 
 
 
-                            $ReferralPlanHistory = ReferralPlanHistory::create([
-                                'ReferralPlanID' => $NextStage->id,
-                                'UserID' => $RefferalUser->id,
-                            ]);
+                                $ReferralPlanHistory = ReferralPlanHistory::create([
+                                    'ReferralPlanID' => $NextStage->id,
+                                    'UserID' => $RefferalUser->id,
+                                ]);
+                            }
+
+
                         }
 
                     }

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Games;
+use App\Models\ReferralPlan;
+use App\Models\ReferralPlanHistory;
+use App\Models\TelegramUsers;
 use App\Models\TimeTable;
+use App\Models\UserPaymentHistory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
@@ -11,6 +15,10 @@ use Illuminate\Support\Facades\Storage;
 class FrontController extends Controller
 {
     public function index()
+    {
+        return redirect()->route('Front.Tournaments.Champions');
+    }
+    public function Test()
     {
         return redirect()->route('Front.Tournaments.Champions');
     }

@@ -69,10 +69,14 @@ function LoadReferralPlans(){
         success: function (response) {
             $('#ReferralPlansDiv').empty()
             var lockNewRows = false;
+            var CountedReferrals  = 0;
+            var RemainingReferrals  = 0;
             $(response.Data.ReferralPlans).each(async function (index, ReferralPlan) {
 
 
-                if(ReferralCount >= ReferralPlan.Count){
+                var PlanStatus = await CheckReferralPlanHistory(ReferralPlan.id);
+                if(PlanStatus == true){
+                    CountedReferrals += ReferralPlan.Count;
                     let row = ` <div class="rank-area">
                                         <div class="top-area">
                                             <div class="left">
@@ -93,8 +97,11 @@ function LoadReferralPlans(){
                                     </div>`;
                     $('#ReferralPlansDiv').append(row);
                 }else{
+                    RemainingReferrals = ReferralCount - CountedReferrals;
+
+
                     if(lockNewRows == false){
-                        let percent = (ReferralCount * 100) / ReferralPlan.Count;
+                        let percent = (RemainingReferrals * 100) / ReferralPlan.Count;
 
                         let row = ` <div class="rank-area">
                                         <div class="top-area">
@@ -109,7 +116,7 @@ function LoadReferralPlans(){
                                         </div>
                                         <div class="bottom-area">
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="`+percent+`" aria-valuemin="0" aria-valuemax="100" style="width: `+percent+`%">`+ (ReferralCount ) +` / `+ ReferralPlan.Count +`</div>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="`+percent+`" aria-valuemin="0" aria-valuemax="100" style="width: `+percent+`%">`+ (RemainingReferrals ) +` / `+ ReferralPlan.Count +`</div>
                                             </div>
                                             <span>`+ ReferralPlan.Description +`</span>
                                         </div>
@@ -117,7 +124,7 @@ function LoadReferralPlans(){
                         $('#ReferralPlansDiv').append(row);
                         lockNewRows = true;
                     }else{
-                        let percent = (ReferralCount * 100) / ReferralPlan.Count;
+                        let percent = (RemainingReferrals * 100) / ReferralPlan.Count;
 
                         let row = ` <div class="rank-area">
                                         <div class="top-area">
@@ -155,6 +162,40 @@ function LoadReferralPlans(){
 
 }
 
+
+
+
+
+async function CheckReferralPlanHistory(PlanID) {
+
+    var functionresponse = true;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.ReferralPlan.Check' , UserID),
+        data: {
+            ReferralPlanID: PlanID,
+            UserID: User.id
+        },
+        success: function (response) {
+            if(response.Data.Code == 200){
+                functionresponse =  true;
+            }else{
+                functionresponse =  false;
+            }
+        }
+    });
+
+    return functionresponse;
+
+}
 
 
 
