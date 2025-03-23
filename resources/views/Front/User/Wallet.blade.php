@@ -1,5 +1,4 @@
 @extends('layouts.Front.Master')
-
 @section('content')
     <!-- Breadcrumb Area Start -->
     <section class="breadcrumb-area gamer-profile pt-2">
@@ -63,7 +62,7 @@
                                                                     <h6> Select Token</h6>
                                                                     <div class="row">
                                                                         <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="MATIC">Polygon</button>
+                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="Polygon">Polygon</button>
                                                                         </div>
                                                                         <div class="col-6 pt-2">
                                                                             <button class="btn btn-success rounded-pill   TokenButtons" id="TonButton" data-Token="TON">Ton</button>
@@ -115,7 +114,20 @@
 
 
 
-                                                                    <div class="left" id="PaymentArea" style="display: none">
+                                                                    <div class="left mt-5" id="PaymentArea" style="display: none">
+
+                                                                        <div class="row">
+                                                                            <div class="col-12 mt-2">
+                                                                                Order ID : <span id="OrderID"></span>
+                                                                            </div>
+                                                                            <div class="col-12 mt-2">
+                                                                                Payment Method : <span id="PaymentMethod"></span>
+                                                                            </div>
+                                                                            <div class="col-12 mt-2">
+                                                                                Amount : <span id="Amount"></span>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <h4 class="title">Deposit Address</h4>
                                                                         <div class="aff-code">
                                                                             <input type="text" id="WalletAddress" value="" onclick="copyContent(this.value)">
@@ -126,8 +138,41 @@
                                                                             <input type="text" id="DepositAmount" value="" onclick="copyContent(this.value)">
                                                                             <i class="fas fa-file" onclick="copyContent($('#DepositAmount').val())"></i>
                                                                         </div>
-                                                                        <div class="">
-                                                                            <a class="btn btn-outline-success rounded-pill btn-block" href="https://t.me/supervisor_admin369">Talk to Support</a>
+
+
+                                                                        <div class="mt-3">
+                                                                            <a id="PaymentButton" class="btn btn-outline-success rounded-pill btn-block" href="#" target="_blank">Pay</a>
+                                                                            <button id="CheckStatusButton" class="btn btn-outline-primary btn-block rounded-pill ">Check Status</button>
+                                                                            <button id="CancelButton" class="btn btn-outline-danger btn-block rounded-pill ">Cancel</button>
+                                                                        </div>
+
+
+
+                                                                        <div class="row" style="margin-bottom: 20px;display:none;" id="ConfirmingHandler">
+                                                                            <div class="note bg-success col-sm-12 col-md-12 "><em class="fa fa-check text-dark"></em>
+                                                                                <p id="ConfirmingHandler-Text" class="text-warning"></p>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row" style="margin-bottom: 20px;display:none;" id="ErrorHandler">
+                                                                            <div class="note note-danger col-sm-12 col-md-12"><em class="fa fa-exclamation-triangle text text-warning"></em>
+                                                                                <p id="ErrorHandler-Text">something wet wrong , please try again</p></div>
+                                                                        </div>
+
+                                                                        <div class="mt-4 p-3 border border-primary rounded">
+                                                                            <span>you must transfer token using Pay button or if you dont see Pay button you must transfer tokens manually using your wallet application</span>
+
+                                                                        </div>
+
+
+
+                                                                    </div>
+
+                                                                    <div  id="PaymentSuccessArea" style="display: none">
+                                                                        <div class="message-box _success">
+                                                                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                                                            <h3> Your payment was successful </h3>
+                                                                            <span> Thank you for your payment. <br>
+                                                                                your wallet has been charged. </span>
                                                                         </div>
 
                                                                     </div>

@@ -241,3 +241,25 @@ html {
     margin-bottom: 0px;
     color: #838bf1;
 }
+
+._success {
+    box-shadow: 0 15px 25px #00000019;
+    width: 100%;
+    text-align: center;
+    margin: 40px auto;
+    border-bottom: solid 4px #28a745;
+}
+
+._success i {
+    font-size: 55px;
+    color: #28a745;
+}
+.note{padding:15px 15px 15px 45px;border-radius:4px;position:relative;}
+.note [class*=fa]{position:absolute;top:50%;transform:translateY(-50%);left:0;font-size:12px;line-height:20px;width:45px;text-align:center;}
+.note p{font-size:12px!important;line-height:1.5em;}
+.note-info{background:#edf5ff;}
+.note-info p{color:#6783b8!important;}
+.note-info [class*=fa]{color:#87bfff;}
+.note-danger{background:rgba(255,0,0,0.05);}
+.note-danger p{color:rgba(255,0,0,0.7)!important;}
+.note-danger [class*=fa]{color:rgba(255,0,0,0.7);}

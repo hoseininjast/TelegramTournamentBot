@@ -13,17 +13,17 @@ export function redirect(url) {
     window.location.href = url;
 }
 export function deleteSession(key) {
-    $.session.remove(key);
+    sessionStorage.removeItem(key);
     return;
 }
 
 export function setSession(key, value) {
-    $.session.set(key, value);
+    sessionStorage.setItem(key,value);
     return;
 }
 
 export function ReadSession(key) {
-    return $.session.get(key);
+    return sessionStorage.getItem(key);
 }
 
 

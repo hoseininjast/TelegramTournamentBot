@@ -12,6 +12,8 @@ import { restClient } from "coinmarketcap-js";
 
 
 const InvoiceButton = document.querySelector("#InvoiceButton");
+const CheckStatusButton = document.querySelector("#CheckStatusButton");
+const CancelButton = document.querySelector("#CancelButton");
 
 const PolygonButton = document.querySelector("#PolygonButton");
 const TonButton = document.querySelector("#TonButton");
@@ -79,58 +81,153 @@ async function CreateInvoice() {
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
-        type: 'GET',
+        type: 'POST',
         async: false,
         cache: false,
     });
 
-    let CryptoPrice , WalletAddress;
+    $.ajax({
+        url: route('V1.Payment.Create'),
+        data: {
+            PaymentMethod : Token,
+            Price : Amount,
+            UserID : User.id,
+        },
+        success: function (response) {
+            if (response.Code == 200 ) {
+                setSession('payment_id' , response.PaymentID)
+                setSession('pay_address' , response.Data.pay_address)
+                setSession('pay_amount' , response.Data.pay_amount)
+                setSession('payment_status' , 'Pending')
+                setSession('selected_plan' , response.Data.selected_plan)
 
-    if(Token == 'MATIC' ){
-        WalletAddress = PolygonAddress;
-        $.ajax({
-            url: route('V1.Payment.GetPrice' , Token),
-            success: function (response) {
-                CryptoPrice = response.Price.MATIC.quote.USD.price;
-                console.log(CryptoPrice)
-                return response.Price.MATIC.quote.USD.price;
+                $('#DepositAmount').val(response.Data.pay_amount)
+                $('#WalletAddress').val(response.Data.pay_address)
+                $('#PaymentMethod').text(Token)
+                $('#Amount').text(Amount)
+                $('#OrderID').text(response.Data.order_id)
 
+                if(Token == 'Polygon'){
+                    var PaymentAddress = "https://metamask.app.link/send/"+response.Data.pay_address+"@137?value=" + response.Data.pay_amount +"e18";
+                    $('#PaymentButton').attr('href' , PaymentAddress).show(400);
+                }else if(Token == 'USDTPOL'){
+                    var PaymentAddress = "https://metamask.app.link/send/0xc2132D05D31c914a87C6611C10748AEb04B58e8F@137/transfer?address="+ response.Data.pay_address +"&uint256=" + response.Data.pay_amount;
+                    $('#PaymentButton').attr('href' , PaymentAddress).show(400);
+                }else if(Token == 'TON'){
+                    var PaymentAddress = "https://app.tonkeeper.com/transfer/"+ response.Data.pay_address +"?amount=" + response.Data.pay_amount;
+                    $('#PaymentButton').attr('href' , PaymentAddress).show(400);
+                }else{
+                    $('#PaymentButton').hide(400).attr('href' , "#");
+                }
+
+
+
+
+            }else{
+                Swal.fire({
+                    icon: "warning",
+                    title: "Payment gateway problem",
+                    text: response.message,
+                });
 
             }
-        });
-        CryptoPrice = parseFloat(CryptoPrice).toFixed(6)
 
-    }else if(Token == 'TON' ){
-        WalletAddress = TonAddress;
-        $.ajax({
-            url: route('V1.Payment.GetPrice' , Token),
-            success: function (response) {
-                CryptoPrice = response.Price.TON.quote.USD.price;
-                return response.Price.TON.quote.USD.price;
+        }
+    });
 
-            }
-        });
-        CryptoPrice = parseFloat(CryptoPrice).toFixed(6)
-    }else if(Token == 'USDTPOL' ){
-        WalletAddress = USDTPOLAddress;
-        CryptoPrice = 1;
-    }else if(Token == 'USDTTON' ){
-        WalletAddress = USDTTONAddress;
-        CryptoPrice = 1;
-    }
 
-    let payable = Amount / CryptoPrice;
-    $('#WalletAddress').val(WalletAddress)
-    $('#DepositAmount').val(payable)
+
+
+
 
     $('#PaymentArea').show(400)
 }
+
+
+function CheckPayment(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+    $.ajax({
+        url: route('V1.Payment.Check' , ),
+        data: {
+            PaymentID: ReadSession('payment_id'),
+        },
+        success: function (response) {
+
+
+            if (response.Code == 4) {
+                ShowToast('success' , 'Payment paid successfully')
+                deleteSession('payment_id')
+                deleteSession('pay_address')
+                deleteSession('pay_amount')
+                deleteSession('payment_status')
+                deleteSession('selected_plan')
+                $('#PaymentArea').hide(400)
+                $('#PaymentSuccessArea').show(400)
+
+
+            }
+
+            else if(response.Code == 5){
+
+                $('#ErrorHandler').text(response.Message).show(400)
+                deleteSession('payment_id')
+                deleteSession('pay_address')
+                deleteSession('pay_amount')
+                deleteSession('payment_status')
+                ShowToast('error' , response.Message)
+            }
+
+            else if(response.Code == 3){
+                $('#ErrorHandler').show(400)
+                deleteSession('payment_id')
+                deleteSession('pay_address')
+                deleteSession('pay_amount')
+                deleteSession('payment_status')
+                ShowToast('error' , response.Message)
+            }
+            else{
+                $('#ConfirmingHandler').show(400)
+                $('#ConfirmingHandler-Text').text(response.Message)
+                ShowToast('success' , response.Message)
+            }
+
+        }
+    });
+}
+
+
+
+function CancelPayment() {
+    setSession('payment_status' , 'NoPending')
+    deleteSession('payment_id')
+    deleteSession('pay_address')
+    deleteSession('pay_amount')
+    deleteSession('payment_status')
+    $('#PaymentArea').hide(400)
+
+}
+
 
 InvoiceButton.addEventListener("click", () =>
     CreateInvoice()
 );
 
 
+CancelButton.addEventListener("click", () =>
+    CancelPayment()
+);
+
+
+CheckStatusButton.addEventListener("click", () =>
+    CheckPayment()
+);
 
 TokenButtons.forEach((plan) => plan.addEventListener('click', (event) => {
     Token = plan.getAttribute('data-Token');
@@ -160,19 +257,11 @@ window.addEventListener("DOMContentLoaded", async () => {
         var days = currentDate.diff(endDate, 'days')
 
         $('#ProfileJoinDate').text(days + ' Days')
-        $('#ReferralCount').text(ReferralCount)
-        $('#TournamentsJoined').text(TournamentsJoined)
-        $('#TournamentsWinned').text(TournamentsWinned)
-        $('#Championship').text(TournamentsWinned)
-
-        $('#UserID').val(User.id)
-        $('#UserName').val(User.UserName)
-        $('#PlatoID').val(User.PlatoID)
-        $('#MyInviteLink').val('https://t.me/KryptoArenaBot?startapp=' + TelegramUser.id)
-
-
         $('#ProfileImage').attr('src' , User.Image)
 
+
+    }else{
+        GetUser(76203510)
 
     }
 
