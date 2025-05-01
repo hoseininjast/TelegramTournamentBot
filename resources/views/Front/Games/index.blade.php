@@ -21,7 +21,7 @@
                                     <a  href="{{route('Front.Tournaments.Open')}}" class="mybtn mybtn-warning mybtn-pill-25">Open Tours</a>
                                 </div>
                                 <div class="col-6">
-                                    <a  href="{{route('Front.TimeTable')}}" class="mybtn mybtn-danger mybtn-pill-30">Time Table</a>
+                                    <a  href="{{route('Front.TimeTable')}}" class="mybtn mybtn-primary mybtn-pill-30">Time Table</a>
                                 </div>
                             </div>
 
@@ -43,7 +43,7 @@
                         <div class="t-t-s-nav">
                             <div class="row">
                                 <div class="col-6">
-                                    <button id="LoadGamesFree" type="button" class="mybtn mybtn-success mybtn-pill">Free</button>
+                                    <button id="LoadGamesFree" type="button" class="mybtn mybtn-warning mybtn-pill">Free</button>
                                 </div>
                                 <div class="col-6">
                                     <button id="LoadGamesPaid" type="button" class="mybtn mybtn-primary mybtn-pill">Paid</button>
@@ -68,7 +68,7 @@
                             <input type="text" class="form-control" name="TournamentCode" id="TournamentCode" placeholder="Tournament Code">
                         </div>
                         <div class="col-5">
-                            <button class="mybtn mybtn-primary mybtn-pill-40"> Join  </button>
+                            <button class="mybtn mybtn-success mybtn-pill-40"> Join  </button>
                         </div>
                     </div>
                 </div>

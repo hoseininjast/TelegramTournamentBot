@@ -154,7 +154,7 @@ function CheckPayment(){
         cache: false,
     });
     $.ajax({
-        url: route('V1.Payment.Check' , ),
+        url: route('V1.Payment.Check' ),
         data: {
             PaymentID: ReadSession('payment_id'),
         },
@@ -262,6 +262,14 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     }else{
         GetUser(76203510)
+        $('#ProfileUsername').text(User.UserName)
+
+        const currentDate = moment(new Date(), 'YYYY-MM-DD');
+        var endDate = moment(User.created_at, "YYYY-MM-DD");
+        var days = currentDate.diff(endDate, 'days')
+
+        $('#ProfileJoinDate').text(days + ' Days')
+        $('#ProfileImage').attr('src' , User.Image)
 
     }
 

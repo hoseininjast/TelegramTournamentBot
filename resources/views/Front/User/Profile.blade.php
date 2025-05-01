@@ -8,7 +8,7 @@
                 <div class="col-lg-12">
                     <div class="bc-content">
                         <div class="left">
-                            <section class="gamer-profile-top">
+                            <section class="gamer-profile-top BackgroundImageUnset">
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-12 text-center">
@@ -18,8 +18,8 @@
                                                         <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
                                                     </div>
                                                 </div>
-                                                <h3 id="ProfileUsername"></h3>
                                             </div>
+                                            <h3 id="ProfileUsername"></h3>
                                             <p id="ProfileJoinDate"></p>
                                         </div>
                                     </div>
@@ -40,17 +40,17 @@
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="{{asset('Front/images/prize/1.png')}}" alt="">
+                                        <img src="{{asset('Front/images/ui/gold.png')}}" alt="">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="{{asset('Front/images/prize/2.png')}}" alt="">
+                                        <img src="{{asset('Front/images/ui/silver.png')}}" alt="">
                                     </a>
                                 </li>
                                 <li>
                                     <a href="#">
-                                        <img src="{{asset('Front/images/prize/3.png')}}" alt="">
+                                        <img src="{{asset('Front/images/ui/bronze.png')}}" alt="">
                                     </a>
                                 </li>
                             </ul>
@@ -113,10 +113,10 @@
                     <div class="t-t-s-nav">
                         <div class="row">
                             <div class="col-6">
-                                <a class="nav-link d-flex mybtn mybtn-success mybtn-pill-40   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
+                                <a class="nav-link d-flex mybtn mybtn-primary mybtn-pill-40   ProfileSectionButtons" id="AffiliateButton" data-Section="Affiliate"  ><i class="fas fa-code-branch"></i> Affiliate</a>
                             </div>
                             <div class="col-6">
-                                <a class="nav-link d-flex mybtn mybtn-danger mybtn-pill-40 ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
+                                <a class="nav-link d-flex mybtn mybtn-primary  mybtn-pill-40 ProfileSectionButtons" id="SettingButton" data-Section="Setting"  > <i class="fas  fa-cog"></i> Setting</a>
                             </div>
                         </div>
                     </div>

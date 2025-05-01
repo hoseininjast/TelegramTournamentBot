@@ -59,7 +59,7 @@ function GetTournaments(Mode){
 													 <h4>`+Tournament.Name+`</h4>
 												</div>
 												<div class="contant">
-                                                    <button type="button"  class="btn btn-primary btn-lg rounded-pill TournamentDetail" data-TournamentID="`+Tournament.id+`">Details</button>
+                                                    <button type="button"  class="mybtn mybtn-primary TournamentDetail" data-TournamentID="`+Tournament.id+`">Details</button>
 												</div>
 											</div>
 											<h4>`+Tournament.PlayerCount+` Players</h4>

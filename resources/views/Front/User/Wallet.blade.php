@@ -15,8 +15,8 @@
                                                 <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
                                             </div>
                                         </div>
-                                        <h3 id="ProfileUsername"></h3>
                                     </div>
+                                    <h3 id="ProfileUsername"></h3>
                                     <p id="ProfileJoinDate"></p>
                                 </div>
                             </div>
@@ -43,10 +43,20 @@
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link active" id="pills-wt1-tab" data-toggle="pill" href="#pills-wt1" role="tab" aria-controls="pills-wt1" aria-selected="true">Deposit</a>
                                     </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="pills-wt2-tab" data-toggle="pill" href="#pills-wt2" role="tab" aria-controls="pills-wt2" aria-selected="false">Withdraw</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Swap</a>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="pills-wt4-tab" data-toggle="pill" href="#pills-wt4" role="tab" aria-controls="pills-wt4" aria-selected="false">Transactions</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="wallet-tab-content"  id="pills-tabContent">
                                 <div class="tab-content">
+
                                     <div class="tab-pane fade show active" id="pills-wt1" role="tabpanel" aria-labelledby="pills-wt1-tab">
                                         <div class="dipo-box">
                                             <div class="row">
@@ -189,6 +199,310 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="tab-pane fade" id="pills-wt2" role="tabpanel" aria-labelledby="pills-wt2-tab">
+                                        <div class="dipo-box">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="current-balance">
+                                                        <p>Current Balance</p>
+                                                        <h4>
+                                                            0.00051 <span>BTC</span>
+                                                        </h4>
+                                                        <span class="t-sm">
+															1BTC = 39746.90 USD
+														</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="dipo_btc">
+                                                        <div class="header-area">
+                                                            <h4>Withdraw BITCOIN</h4>
+                                                            <p>
+                                                                You may switch to other currencies in the top right corner.
+                                                            </p>
+                                                        </div>
+                                                        <div class="form-area">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <form action="#">
+                                                                        <div class="form-group">
+                                                                            <label for="">Amount</label>
+                                                                            <input type="text" class="input-field" placeholder="Amount">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="">Payment Address</label>
+                                                                            <input type="text"  class="input-field" placeholder="Payment Address">
+                                                                        </div>
+                                                                        <button type="submit" class="mybtn2">Submit</button>
+                                                                    </form>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="notice-area">
+                                                            <p><span>Transaction fee:</span> Your withdrawal will also have 0.0006 BTC  subtracted to cover the transaction fee.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="pills-wt3" role="tabpanel" aria-labelledby="pills-wt3-tab">
+                                        <div class="dipo-box">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="current-balance">
+                                                        <p>Current Balance</p>
+                                                        <h4>
+                                                            0.00051 <span>BTC</span>
+                                                        </h4>
+                                                        <span class="t-sm">
+															1BTC = 39746.90 USD
+														</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="dipo_btc">
+                                                        <div class="header-area">
+                                                            <h4>Buy cryptocurrency directly to your Jugaro account</h4>
+                                                            <p>
+                                                                Once payment is completed, your cryptocurrency will be available in your Jugaro
+                                                                a																unt within minutes
+                                                            </p>
+                                                        </div>
+                                                        <div class="crypto-info">
+                                                            <h5>1. Choose the crypto you wish to buy, enter the amount, and choose your
+                                                                favorite payment method.</h5>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="">Buy</label>
+                                                                        <select name="" id="" class="input-field" placeholder="Amount">
+                                                                            <option value="">BTC</option>
+                                                                            <option value="">CTO</option>
+                                                                            <option value="">YOK</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group">
+                                                                        <label for="">Payment Methods</label>
+                                                                        <select name="" id="" class="input-field" placeholder="Amount">
+                                                                            <option value="">VISA</option>
+                                                                            <option value="">MASTER</option>
+                                                                            <option value="">DABIT</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-12">
+                                                                    <div class="form-group-2">
+                                                                        <label for="">Amount</label>
+                                                                        <div class="select-payment-area">
+                                                                            <input type="text" value="434">
+                                                                            <select name="" id="">
+                                                                                <option value="">BTC</option>
+                                                                                <option value="">CTO</option>
+                                                                                <option value="">YOK</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <h5 class="mt-5">2. Choose the best offer from our payment partners, and complete
+                                                                your purchase.</h5>
+                                                            <div class="table-responsive">
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>Channels</th>
+                                                                        <th>Arrival Time</th>
+                                                                        <th>You will get</th>
+                                                                        <th>Rate ( Fee Included)</th>
+                                                                        <th>Trade</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="assets/images/chanel-logo.png" alt="">
+                                                                        </td>
+                                                                        <td>5-15 mins</td>
+                                                                        <td>0.003091 BTC</td>
+                                                                        <td>39254.59 USD</td>
+                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="assets/images/chanel-logo.png" alt="">
+                                                                        </td>
+                                                                        <td>5-15 mins</td>
+                                                                        <td>0.003091 BTC</td>
+                                                                        <td>39254.59 USD</td>
+                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="assets/images/chanel-logo.png" alt="">
+                                                                        </td>
+                                                                        <td>5-15 mins</td>
+                                                                        <td>0.003091 BTC</td>
+                                                                        <td>39254.59 USD</td>
+                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="assets/images/chanel-logo.png" alt="">
+                                                                        </td>
+                                                                        <td>5-15 mins</td>
+                                                                        <td>0.003091 BTC</td>
+                                                                        <td>39254.59 USD</td>
+                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="assets/images/chanel-logo.png" alt="">
+                                                                        </td>
+                                                                        <td>5-15 mins</td>
+                                                                        <td>0.003091 BTC</td>
+                                                                        <td>39254.59 USD</td>
+                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <img src="assets/images/chanel-logo.png" alt="">
+                                                                        </td>
+                                                                        <td>5-15 mins</td>
+                                                                        <td>0.003091 BTC</td>
+                                                                        <td>39254.59 USD</td>
+                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="pills-wt4" role="tabpanel" aria-labelledby="pills-wt4-tab">
+                                        <div class="trns-box">
+                                            <div class="trns-table-filter">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="single-filter">
+                                                            <label for="">Month</label>
+                                                            <input type="month" class="input-field" name="" id="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="single-filter">
+                                                            <label for="">Type</label>
+                                                            <select name="" id="" class="input-field">
+                                                                <option value="">All</option>
+                                                                <option value="">Type 1</option>
+                                                                <option value="">Type 2</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="single-filter">
+                                                            <label for="">Currency</label>
+                                                            <select name="" id="" class="input-field">
+                                                                <option value="">BTC</option>
+                                                                <option value="">BDT</option>
+                                                                <option value="">USD</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="filter-wrapper">
+                                                            <a href="#" class="mybtn2">Filter</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="aff-table">
+                                                <div class="header-area">
+                                                    <h4>Transaction History</h4>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>Date/Time</th>
+                                                            <th>Type</th>
+                                                            <th>Currency</th>
+                                                            <th>Amount</th>
+                                                            <th>Balance before</th>
+                                                            <th>Balance after</th>
+                                                            <th>Game</th>
+                                                            <th>Game ID</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>2021-01-07 16:33:53</td>
+                                                            <td>Deposit</td>
+                                                            <td>BTC</td>
+                                                            <td>0.000005210</td>
+                                                            <td>0.000000000</td>
+                                                            <td>0.000005210</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2021-01-07 16:33:53</td>
+                                                            <td>Deposit</td>
+                                                            <td>BTC</td>
+                                                            <td>0.000005210</td>
+                                                            <td>0.000000000</td>
+                                                            <td>0.000005210</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2021-01-07 16:33:53</td>
+                                                            <td>Deposit</td>
+                                                            <td>BTC</td>
+                                                            <td>0.000005210</td>
+                                                            <td>0.000000000</td>
+                                                            <td>0.000005210</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2021-01-07 16:33:53</td>
+                                                            <td>Deposit</td>
+                                                            <td>BTC</td>
+                                                            <td>0.000005210</td>
+                                                            <td>0.000000000</td>
+                                                            <td>0.000005210</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2021-01-07 16:33:53</td>
+                                                            <td>Deposit</td>
+                                                            <td>BTC</td>
+                                                            <td>0.000005210</td>
+                                                            <td>0.000000000</td>
+                                                            <td>0.000005210</td>
+                                                            <td>--</td>
+                                                            <td>--</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

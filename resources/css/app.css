@@ -4,9 +4,12 @@ html {
     --cubic: cubic-bezier(0.4, 0, 0.2, 1) ;
     --color-1: #a2beff ;
     --color-2: #0080ff;
+    --ServerUrl: "https://tournamentgram.test/";
 
 }
-
+body{
+    background: #002440;
+}
 
 .menu {
 
@@ -19,7 +22,7 @@ html {
     align-items: center ;
     padding: 0 ;
     justify-content: center ;
-    background-color: #1f0644 ;
+    background-color: #06467feb ;
     color: white;
     -webkit-tap-highlight-color: transparent ;
     border: 1px solid #008bff;
@@ -147,11 +150,11 @@ html {
 
 .mybtn{
     text-transform: capitalize;
-    background-color: #000000;
+    background-color: transparent;
     padding: 10px 50px;
     font-weight: bold;
     font-style: italic;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 .mybtn-success{
     color: #4aff00;
@@ -213,11 +216,24 @@ html {
     height: 90px !important;
 }
 .navbar-background{
-    background-color: #1f0644;
+    background-image: url(https://img.freepik.com/free-vector/gradient-black-abstract-technology-background_23-2149213767.jpg?t=st=1745681637~exp=1745685237~hmac=78778da…&w=2000);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.header .top-header .content{
+    background-image: unset;
+}
+.header .top-header .content::before{
+    content: unset;
+}
+.header .top-header .content::after{
+    content: unset;
 }
 
+
 .NavbarUsername{
-    color: #00bbff;
+    color: white;
 }
 
 .image-max-60{
@@ -263,3 +279,184 @@ html {
 .note-danger{background:rgba(255,0,0,0.05);}
 .note-danger p{color:rgba(255,0,0,0.7)!important;}
 .note-danger [class*=fa]{color:rgba(255,0,0,0.7);}
+
+
+.MasterBreadCrumbSection{
+    background-image: url(https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba…&w=2000);
+}
+
+.breadcrumb-area.gamer-profile {
+    background-image: url(https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba…&w=2000);
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+    padding: 210px 0px 10px;
+}
+
+.breadcrumb-area.gamer-profile.pt-2 {
+    border-bottom: 1px solid #00a2ff;
+    box-shadow: 0px 0px 10px 2px #00a2ff;
+}
+.gamer-profile-top .gamer-profile-top-inner .g-p-t-counters .g-p-t-single-counter{
+    background: #023f6d;
+}
+.usermenu-section{
+    background: #023f6f;
+}
+.t-t-s-nav{
+    padding-bottom: 20px;
+}
+
+.gamer-profile-top{
+    background-image: url(https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba…&w=2000);
+    box-shadow:unset;
+}
+
+.BackgroundImageUnset{
+    background-image: unset;
+}
+
+.header::after {
+    background: #00a2ff;
+    box-shadow: 0px 0px 10px 2px #00a2ff;
+}
+
+.affiliate-box .referral-link-area{
+    background: #023f6e;
+}
+
+.affiliate-box .earning-info-area{
+    background: #023f6f;
+}
+
+.affiliate-box .earning-info-area .s-info{
+    background: #00052a;
+}
+.user-main-dashboard{
+    background-color: #121212;
+}
+.user-main-dashboard aside .about{
+    background-color: #023f6f;
+}
+
+
+.user-main-dashboard aside .rank-area{
+    background: #023f70;
+}
+.user-main-dashboard aside .rank-area .bottom-area .progress{
+    background: #126a02;
+}
+
+.user-main-dashboard aside .rank-area .bottom-area .progress .progress-bar{
+    background-color: #27b402;
+}
+
+.affiliate-box .aff-table{
+    background: #023f71;
+}
+
+.affiliate-box .aff-table .table tbody tr{
+    background: #00052a;
+    border-top: 1px solid #023f72 !important;
+}
+.affiliate-box .aff-table .table thead th{
+    border-bottom: 1px solid #086bab;
+}
+.affiliate-box .aff-table .table tr td{
+    border-bottom: 1px solid #018ce1 !important;
+}
+.user-main-dashboard main .main-box .table-responsive tbody tr:last-child{
+    border-bottom: 3px solid #086bab;
+}
+
+.preloader{
+    background-image: url("https://tournamentgram.test/Front/images/ui/SplashScreen.png");
+    background-color: #0b122e;
+}
+.loader-1 .loader-outter{
+    border: 4px solid #00bcff;
+    border-left-color: transparent;
+    border-bottom: 0;
+}
+.loader-1 .loader-inner{
+    border: 4px solid #001fff;
+    border-right: 0;
+    border-top-color: transparent;
+
+}
+
+
+.latest-arcive , .games-filter{
+    background: #121212;
+}
+
+.l-arcive-box{
+    background-color: #023f6f;
+}
+
+.game-play-section.game-play-section2{
+    background-image: url("https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba%E2%80%A6&w=2000");
+    background-size: cover;
+    background-position: right;
+}
+
+.game-play-section.game-play-section2 .single-play{
+    background-color: #070b28;
+}
+.single-play{
+    box-shadow: inset 0px 0px 12px 7px #00a2ff;
+}
+
+.turnaments-tab-section{
+    background: #212529;
+}
+
+.single-turnaments{
+    background: #0b122e;
+}
+.single-turnaments .left-area .single-play{
+    box-shadow: inset 0px 0px 12px 7px #00a2ff;
+}
+
+.turnaments-section .turnaments-top-section{
+    background-color: #070b28;
+    background-image: unset;
+}
+.turnaments-section .turnaments-top-section .stf{
+    border: 1px solid #00a2ff;
+    background: #070b28;
+    border-radius: 10px;
+}
+
+.turnaments-section{
+    background-color: #0b122e;
+}
+
+.mybtn{
+    color:white
+}
+
+.l-arcive-box2 .s-a-b{
+    border-top: 4px solid #007bff;
+    border-bottom: 4px solid #007bff;
+    background: #00052a;
+}
+
+.wallet-box .wallet-tab-menu .nav{
+    background: #023f6e;
+}
+.wallet-box .wallet-tab-content .trns-box .trns-table-filter .single-filter .input-field{
+    background: #023f6e;
+}
+
+.wallet-box .wallet-tab-content .trns-box .table-responsive .table thead{
+    background: #00052a;
+}
+
+.user-main-dashboard main .main-box .table-responsive tbody{
+    background: #00052a;
+}
+
+.user-main-dashboard main .main-box .table-responsive tbody tr{
+    border-top: 3px solid #023f72;
+}

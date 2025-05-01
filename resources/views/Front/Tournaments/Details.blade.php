@@ -130,7 +130,7 @@
                                 @if($Tournament->Status == 'Pending')
                                     <button type="button" data-TournamentID="{{$Tournament->id}}" class="mybtn mybtn-primary mybtn-pill-30 JoinButton">Join Now</button>
                                 @endif
-                                <a href="{{route('Front.Tournaments.Plan' , $Tournament->id)}}"  class="mybtn mybtn-info mybtn-pill-30 mt-2 rounded-pill">Plans</a>
+                                <a href="{{route('Front.Tournaments.Plan' , $Tournament->id)}}"  class="mybtn mybtn-info mybtn-pill-30 mt-2 ">Plans</a>
                             </div>
                         </div>
                     </div>

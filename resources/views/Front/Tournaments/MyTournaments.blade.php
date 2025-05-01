@@ -13,13 +13,13 @@
                         <div class="t-t-s-nav">
                             <div class="row">
                                 <div class="col-4">
-                                    <a class="nav-link mybtn mybtn-warning mybtn-pill-10   StatusButton" id="StatusPending" data-Status="Pending"  >Pending</a>
+                                    <button class="nav-link mybtn mybtn-warning mybtn-pill-10   StatusButton" id="StatusPending" data-Status="Pending"  >Pending</button>
                                 </div>
                                 <div class="col-4">
-                                    <a class="nav-link mybtn mybtn-success mybtn-pill-10  StatusButton" id="StatusRunning" data-Status="Running"  >Running</a>
+                                    <button class="nav-link mybtn mybtn-success mybtn-pill-10  StatusButton" id="StatusRunning" data-Status="Running"  >Running</button>
                                 </div>
                                 <div class="col-4">
-                                    <a class="nav-link mybtn mybtn-danger mybtn-pill-10  StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</a>
+                                    <button class="nav-link mybtn mybtn-danger mybtn-pill-10  StatusButton" id="StatusFinished" data-Status="Finished"  >Finished</button>
                                 </div>
                             </div>
                         </div>

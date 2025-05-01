@@ -50,7 +50,7 @@
 
 <!-- Breadcrumb Area Start -->
 @if(preg_match('/Profile/' , Request::url() ) != 1 )
-    <section class="pt-100 ">
+    <section class="MasterBreadCrumbSection pt-100 ">
         <div class="content breadcrumb-section">
             <img class="breadcrumb-image rounded-pill" src="{{asset('images/MainLogo.png')}}"  alt="" />
             <h2 class="title pt-2 rainbow-text" >Krypto Arena</h2>

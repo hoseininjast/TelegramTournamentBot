@@ -90,7 +90,7 @@ function LoadReferralPlans(){
                                         </div>
                                         <div class="bottom-area">
                                             <div class="progress">
-                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <div>Done <i class="fa fa-check text-success"></i></div> </div>
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <div>Done <i class="fa fa-check text-warning"></i></div> </div>
                                             </div>
                                             <span>`+ ReferralPlan.Description +`</span>
                                         </div>
@@ -305,6 +305,69 @@ window.addEventListener("DOMContentLoaded", async () => {
     }else{
         GetUser(76203510)
         LoadReferralPlans()
+
+        $('#ProfileUsername').text(User.UserName)
+
+        const currentDate = moment(new Date(), 'YYYY-MM-DD');
+        var endDate = moment(User.created_at, "YYYY-MM-DD");
+        var days = currentDate.diff(endDate, 'days')
+
+        var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=' + 76203510;
+
+        $('#ProfileJoinDate').text(days + ' Days')
+        $('#ReferralCountinTable').text(ReferralCount)
+        $('#ReferralCount').text(ReferralCount)
+        $('#TournamentsJoined').text(TournamentsJoined)
+        $('#TournamentsWinned').text(TournamentsWinned)
+        $('#Championship').text(TournamentsWinned)
+
+        $('#UserID').val(User.id)
+        $('#UserName').val(User.UserName)
+        $('#PlatoID').val(User.PlatoID)
+        $('#WalletAddress').val(User.WalletAddress)
+        $('#TonWalletAddress').val(User.TonWalletAddress)
+        $('#PlatoID').val(User.PlatoID)
+        $('#MyInviteLink').text(ReferralLink)
+
+        $("#ReferralIncome").text('$' + ReferralIncome);
+
+        $(ReferralUsers).each(async function (index, User) {
+
+
+            let key = index + 1;
+            let startTime = moment(User.created_at).format("YY/M/D");
+            let Name = User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName;
+            let Image = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
+            let row = `<tr>
+                                            <td>`+ key  +`</td>
+                                            <td><img style='width: 30px;height: 30px' class="rounded-pill" src="`+ Image +`" alt="user profile" ></td>
+                                            <td>`+ Name  +`</td>
+                                            <td>`+User.PlatoID+`</td>
+                                            <td>`+startTime+`</td>
+                                        </tr>`;
+
+
+            $('#ReferralHistoryTable').append(row);
+
+        });
+
+
+
+
+
+        ReferralidCopyIcon.addEventListener("click", () =>
+            copyContent(ReferralLink)
+        );
+
+        MyInviteLink.addEventListener("click", () =>
+            copyContent(ReferralLink)
+        );
+
+
+
+
+        Swal.close()
+
     }
 
 });
