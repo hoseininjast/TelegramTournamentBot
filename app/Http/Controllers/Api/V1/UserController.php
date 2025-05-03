@@ -11,6 +11,8 @@ use App\Models\TelegramUserRewards;
 use App\Models\TelegramUsers;
 use App\Models\UserPaymentHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use RealRashid\SweetAlert\Facades\Alert;
 use Telegram\Bot\Api;
 use Telegram\Bot\FileUpload\InputFile;
@@ -19,6 +21,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 class UserController extends Controller
 {
+    use Uploader;
     public function Find($UserID)
     {
         $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
@@ -162,5 +165,52 @@ class UserController extends Controller
         ] , 200);
     }
 
+    public function UpdateImage(Request $request)
+    {
+        $request->validate([
+            'UserID' => 'required|numeric|exists:telegram_users,id',
+            'Image' => 'required',
+        ]);
+
+
+        try{
+            $User = TelegramUsers::where('id' , $request->UserID)->first();
+
+            $data = substr($request->Image, strpos($request->Image, ',') + 1);
+            $data = base64_decode($data);
+
+            $filenametostore =  rand(100000 , 100000000) . time() .'.png';
+
+            $path =    'Profile/'  . date('Y/m/d') . '/';
+
+            Storage::disk('publichtml')->put($path . $filenametostore , $data);
+
+            $ImageAddress =  'https://kryptoarena.fun/Uploads/' . $path . $filenametostore;
+
+
+
+            $User->update([
+                'Image' => $ImageAddress,
+            ]);
+
+
+
+            return response()->json([
+                'Data' => [
+                    'Message' => 'Profile Image Updated successfully',
+                    'Code' => 200,
+                ],
+            ] , 200);
+        }catch (\Exception $exception){
+            return response()->json([
+                'Data' => [
+                    'Message' => $exception->getMessage(),
+                    'Code' => 400,
+                ],
+            ] , 200);
+        }
+
+
+    }
 
 }

@@ -44,6 +44,7 @@ Route::group([ 'as' => 'Front.' ] , function (){
         Route::get('Wallet' , [\App\Http\Controllers\Front\UserController::class , 'Wallet'])->name('Wallet');
         Route::get('Show/{UserID}' , [\App\Http\Controllers\Front\UserController::class , 'Show'])->name('Show');
         Route::post('Update' , [\App\Http\Controllers\Front\UserController::class , 'Update'])->name('Update');
+        Route::post('UpdatePlatform' , [\App\Http\Controllers\Front\UserController::class , 'UpdatePlatform'])->name('UpdatePlatform');
 
     });
 

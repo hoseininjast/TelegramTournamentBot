@@ -42,28 +42,36 @@ class UserController extends Controller
         $request->validate([
             'UserID' => 'required|numeric|exists:telegram_users,id',
             'UserName' => 'required|string|'.Rule::unique('telegram_users' , 'UserName')->ignore($request->UserID),
-            'PlatoID' => 'required|string|'.Rule::unique('telegram_users' , 'PlatoID')->ignore($request->UserID),
             'WalletAddress' => 'nullable|string|regex:/^(0x)?[0-9a-fA-F]{40}$/',
-            'TonWalletAddress' => 'nullable|string',
-            'Image' => 'nullable|file|image',
 
         ]);
         $User = TelegramUsers::where('id' , $request->UserID)->first();
-        if($request->hasFile('Image')){
-            $AttachmentAddress = $this->UploadImage($request->Image , 'Profile');
-        }else{
-            $AttachmentAddress = $User->Image;
-        }
+
         $User->update([
             'UserName' => $request->UserName,
-            'PlatoID' => $request->PlatoID,
             'WalletAddress' => $request->WalletAddress,
-            'TonWalletAddress' => $request->TonWalletAddress,
-            'Image' => $AttachmentAddress,
         ]);
 
 
         \Alert::success('Profile Updated successfully');
+
+        return redirect()->back();
+    }
+    public function UpdatePlatform(Request $request)
+    {
+        $request->validate([
+            'UserID' => 'required|numeric|exists:telegram_users,id',
+            'PlatoID' => 'required|string|'.Rule::unique('telegram_users' , 'PlatoID')->ignore($request->UserID),
+
+        ]);
+        $User = TelegramUsers::where('id' , $request->UserID)->first();
+
+        $User->update([
+            'PlatoID' => $request->PlatoID,
+        ]);
+
+
+        \Alert::success('Platforms Updated successfully');
 
         return redirect()->back();
     }

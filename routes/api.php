@@ -34,8 +34,14 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
     Route::group(['prefix' => 'User' , 'as' => 'User.' ] , function (){
         Route::get('Find/{UserID}' , [\App\Http\Controllers\Api\V1\UserController::class , 'Find'])->name('Find');
         Route::post('FindOrCreate' , [\App\Http\Controllers\Api\V1\UserController::class , 'FindOrCreate'])->name('FindOrCreate');
+    });
+
+    Route::group(['prefix' => 'Profile' , 'as' => 'Profile.' ] , function (){
+        Route::post('UpdateImage' , [\App\Http\Controllers\Api\V1\UserController::class , 'UpdateImage'])->name('UpdateImage');
 
     });
+
+
     Route::group(['prefix' => 'Payment' , 'as' => 'Payment.' ] , function (){
         Route::get('GetPrice/{TokenName}' , [\App\Http\Controllers\Api\V1\PaymentsController::class , 'GetPrice'])->name('GetPrice');
         Route::post('Create' , [\App\Http\Controllers\Api\V1\PaymentsController::class , 'Create'])->name('Create');

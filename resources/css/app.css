@@ -164,6 +164,12 @@ body{
     color: #00bbff;
     box-shadow: inset 0px 0px 10px 7px #00bbff;
 }
+.mybtn-secondary{
+    box-shadow: inset 0px 0px 10px 7px #333333;
+}
+.mybtn-white{
+    box-shadow: inset 0px 0px 10px 7px #ffffff;
+}
 .mybtn-info{
     color: #00fff6;
     box-shadow: inset 0px 0px 10px 7px #00FFF6FF;
@@ -511,4 +517,13 @@ body{
 
 .u-setting-area .single-user-setting{
     background: #0b122e;
+}
+
+.modal .modal-content{
+    background: #0b122e;
+}
+
+.modal-footer{
+    border-top:unset;
+    justify-content: center;
 }
