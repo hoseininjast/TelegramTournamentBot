@@ -13,6 +13,7 @@ import {init, initData, isTMA} from "@telegram-apps/sdk";
 const UpdateProfileButton = document.querySelector("#UpdateProfileButton");
 
 const AffiliateButton = document.querySelector("#AffiliateButton");
+const PlatformButton = document.querySelector("#PlatformButton");
 const SettingButton = document.querySelector("#SettingButton");
 
 
@@ -219,6 +220,10 @@ AffiliateButton.addEventListener("click", () =>
     ChangeSections('Affiliate')
 );
 
+PlatformButton.addEventListener("click", () =>
+    ChangeSections('Platform')
+);
+
 SettingButton.addEventListener("click", () =>
     ChangeSections('Setting')
 );
@@ -258,7 +263,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#UserName').val(User.UserName)
         $('#PlatoID').val(User.PlatoID)
         $('#WalletAddress').val(User.WalletAddress)
-        $('#TonWalletAddress').val(User.TonWalletAddress)
         $('#PlatoID').val(User.PlatoID)
         $('#MyInviteLink').text(ReferralLink)
 
@@ -325,7 +329,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#UserName').val(User.UserName)
         $('#PlatoID').val(User.PlatoID)
         $('#WalletAddress').val(User.WalletAddress)
-        $('#TonWalletAddress').val(User.TonWalletAddress)
         $('#PlatoID').val(User.PlatoID)
         $('#MyInviteLink').text(ReferralLink)
 

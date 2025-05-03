@@ -196,12 +196,32 @@ body{
 .mybtn-pill-30{
     padding: 10px 30px;
 }
+.mybtn-pill-35{
+    padding: 10px 35px;
+}
 
 .mybtn-pill-40{
     padding: 10px 40px;
 }
 .mybtn-pill-50{
     padding: 10px 50px;
+}
+
+.mybtn-pill-60{
+    padding: 10px 60px;
+}
+
+.mybtn-pill-70{
+    padding: 10px 70px;
+}
+.mybtn-pill-80{
+    padding: 10px 80px;
+}
+.mybtn-pill-90{
+    padding: 10px 90px;
+}
+.mybtn-pill-100{
+    padding: 10px 100px;
 }
 
 
@@ -216,7 +236,7 @@ body{
     height: 90px !important;
 }
 .navbar-background{
-    background-image: url(https://img.freepik.com/free-vector/gradient-black-abstract-technology-background_23-2149213767.jpg?t=st=1745681637~exp=1745685237~hmac=78778da…&w=2000);
+    background-image: url("https://kryptoarena.fun/Front/images/ui/Header-min.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -282,11 +302,11 @@ body{
 
 
 .MasterBreadCrumbSection{
-    background-image: url(https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba…&w=2000);
+    background-image: url("https://kryptoarena.fun/Front/images/ui/BackgroundProfile-min.png");
 }
 
 .breadcrumb-area.gamer-profile {
-    background-image: url(https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba…&w=2000);
+    background-image: url("https://kryptoarena.fun/Front/images/ui/BackgroundProfile-min.png");
     background-repeat: no-repeat;
     background-position: left;
     background-size: cover;
@@ -308,7 +328,7 @@ body{
 }
 
 .gamer-profile-top{
-    background-image: url(https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba…&w=2000);
+    background-image: url("https://kryptoarena.fun/Front/images/ui/BackgroundProfile-min.png");
     box-shadow:unset;
 }
 
@@ -370,7 +390,7 @@ body{
 }
 
 .preloader{
-    background-image: url("https://tournamentgram.test/Front/images/ui/SplashScreen.png");
+    background-image: url("https://kryptoarena.fun/Front/images/ui/SplashScreen.png");
     background-color: #0b122e;
 }
 .loader-1 .loader-outter{
@@ -395,7 +415,7 @@ body{
 }
 
 .game-play-section.game-play-section2{
-    background-image: url("https://img.freepik.com/free-photo/3d-rendering-hexagonal-texture-background_23-2150796417.jpg?t=st=1745680932~exp=1745684532~hmac=c66dfba%E2%80%A6&w=2000");
+    background-image: url("https://kryptoarena.fun/Front/images/ui/BackgroundProfile-min.png");
     background-size: cover;
     background-position: right;
 }
@@ -459,4 +479,36 @@ body{
 
 .user-main-dashboard main .main-box .table-responsive tbody tr{
     border-top: 3px solid #023f72;
+}
+
+.wallet-box .wallet-tab-content .dipo-box .dipo_btc{
+    border: 1px solid #096ec2;
+}
+
+.TokenButtonSelected{
+    border: 1px solid #00a6ff;
+    border-radius: 10%;
+}
+
+
+.wallet-box .wallet-tab-content .notice-area{
+    border: 1px solid #007bff;
+    background: #070b28;
+    color: white;
+}
+
+.wallet-box .wallet-tab-content .dipo-box .dipo_btc .referral-link-area .left .aff-code input{
+    background: #023f6e;
+    color: white;
+}
+
+#PaymentArea > div.mt-4.p-3{
+    background-color: #070b28;
+    color: white;
+    border: 1px solid #007bff;
+    border-radius: 10px;
+}
+
+.u-setting-area .single-user-setting{
+    background: #0b122e;
 }

@@ -231,16 +231,56 @@ CheckStatusButton.addEventListener("click", () =>
 
 TokenButtons.forEach((plan) => plan.addEventListener('click', (event) => {
     Token = plan.getAttribute('data-Token');
+    $('.TokenButtons').removeClass('TokenButtonSelected')
+    $('#' + plan.id).addClass('TokenButtonSelected')
+    $('.AmountDiv').show(400)
 }));
 
 
 
 PriceButtons.forEach((plan) => plan.addEventListener('click', (event) => {
     Amount = plan.getAttribute('data-Amount');
+    $('#InvoiceButton').show(400)
 }));
 
 
 
+function LoadTransactionTable(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+    $.ajax({
+        url: route('V1.PaymentHistory.List' ),
+        data: {
+            UserID: User.id,
+        },
+        success: function (response) {
+
+            $('#TransactionTable').empty()
+            var key = 1;
+            $(response.Data.History).each(async function (index, History) {
+                let HistoryDate = moment(History.created_at).format("YY/M/D HH:mm");
+                var row = `<tr>
+                                                            <td>`+key +`</td>
+                                                            <td>`+HistoryDate+`</td>
+                                                            <td>$`+History.Amount+`</td>
+                                                            <td>`+ History.Type +`</td>
+                                                            <td>KAC</td>
+                                                            <td>`+ History.Description+`</td>
+                                                        </tr>`;
+                $('#TransactionTable').append(row);
+                key++;
+            });
+
+
+        }
+    });
+}
 window.addEventListener("DOMContentLoaded", async () => {
     if(isTMA()) {
         init();
@@ -258,7 +298,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ProfileImage').attr('src' , User.Image)
-
+        LoadTransactionTable();
 
     }else{
         GetUser(76203510)
@@ -270,7 +310,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ProfileImage').attr('src' , User.Image)
-
+        LoadTransactionTable();
     }
 
 });

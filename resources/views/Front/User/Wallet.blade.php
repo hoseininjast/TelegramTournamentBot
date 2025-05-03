@@ -39,20 +39,32 @@
                                 <h4>Wallet</h4>
                             </div>
                             <div class="wallet-tab-menu">
-                                <ul class="nav" id="pills-tab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="pills-wt1-tab" data-toggle="pill" href="#pills-wt1" role="tab" aria-controls="pills-wt1" aria-selected="true">Deposit</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="pills-wt2-tab" data-toggle="pill" href="#pills-wt2" role="tab" aria-controls="pills-wt2" aria-selected="false">Withdraw</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Swap</a>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="pills-wt4-tab" data-toggle="pill" href="#pills-wt4" role="tab" aria-controls="pills-wt4" aria-selected="false">Transactions</a>
-                                    </li>
-                                </ul>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <a class="mybtn mybtn-primary mybtn-pill-40" id="pills-wt1-tab" data-toggle="pill" href="#pills-wt1" role="tab" aria-controls="pills-wt1" aria-selected="true">Deposit</a>
+
+                                    </div>
+                                    <div class="col-6">
+                                        <a class="mybtn mybtn-primary mybtn-pill-20 disabled" disabled="" id="pills-wt2-tab" data-toggle="pill" href="#pills-wt2" role="tab" aria-controls="pills-wt2" aria-selected="false">Withdraw</a>
+
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-12 mt-3">
+                                        <a class="mybtn mybtn-primary disabled" disabled="" style="padding: 10px 115px;" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Swap</a>
+
+                                    </div>
+                                    <div class="col-12 mt-3">
+                                        <a class="mybtn mybtn-primary" style="padding: 10px 85px;" id="pills-wt4-tab" data-toggle="pill" href="#pills-wt4" role="tab" aria-controls="pills-wt4" aria-selected="false">Transactions</a>
+
+                                    </div>
+                                </div>
+
+
+
+
+
                             </div>
                             <div class="wallet-tab-content"  id="pills-tabContent">
                                 <div class="tab-content">
@@ -70,56 +82,67 @@
                                                                 <div class="col-md-12">
 
                                                                     <h6> Select Token</h6>
-                                                                    <div class="row">
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="PolygonButton" data-Token="Polygon">Polygon</button>
+                                                                    <div class="row mb-5">
+                                                                        <div class="col-6 pt-2 text-center TokenButtons" id="PolygonButton"  data-Token="Polygon" >
+                                                                            <img src="{{asset('images/CryptoIcons/matic.png')}}"   />
+                                                                            <span class="text-white">Polygon</span>
                                                                         </div>
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="TonButton" data-Token="TON">Ton</button>
+                                                                        <div class="col-6 pt-2 text-center TokenButtons" id="TonButton"  data-Token="TON" >
+                                                                            <img src="{{asset('images/CryptoIcons/ton.png')}}"   />
+                                                                            <span class="text-white">TON</span>
                                                                         </div>
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="USDTPOLButton" data-Token="USDTPOL">USDT(POL)</button>
+                                                                        <div class="col-6 pt-2 text-center TokenButtons" id="USDTPOLButton"  data-Token="USDTPOL" >
+                                                                            <img src="{{asset('images/CryptoIcons/USDTPOL.png')}}"   />
+                                                                            <span class="text-white">USDT(POL)</span>
+
                                                                         </div>
-                                                                        <div class="col-6 pt-2">
-                                                                            <button class="btn btn-success rounded-pill   TokenButtons" id="USDTTONButton" data-Token="USDTTON">USDT(TON)</button>
+                                                                        <div class="col-6 pt-2 text-center TokenButtons" id="USDTTONButton"  data-Token="USDTTON" >
+                                                                            <img src="{{asset('images/CryptoIcons/USDTTON.png')}}"   />
+                                                                            <span class="text-white">USDT(TON)</span>
+
                                                                         </div>
 
                                                                     </div>
-                                                                    <h6 class="pt-2"> Select Amount</h6>
-                                                                    <div class="row pt-2">
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="1">$1</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="2">$2</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="5">$5</button>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div class="row pt-2">
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="10">$10</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="20">$20</button>
-                                                                        </div>
-                                                                        <div class="col-4">
-                                                                            <button class="btn btn-primary rounded-pill PriceButton" data-Amount="50">$50</button>
+                                                                    <div class="AmountDiv" style="display: none">
+                                                                        <h6 class="pt-2"> Select Amount</h6>
+                                                                        <div class="row pt-2">
+                                                                            <div class="col-6">
+                                                                                <button class="mybtn mybtn-primary mybtn-pill-40 PriceButton" data-Amount="1">$1</button>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <button class="mybtn mybtn-primary mybtn-pill-40 PriceButton" data-Amount="2">$2</button>
+                                                                            </div>
                                                                         </div>
 
-                                                                    </div>
 
-                                                                    <div class="row pt-2">
-                                                                        <div class="col-12">
-                                                                            <button class="btn btn-primary btn-block rounded-pill PriceButton" data-Amount="100">$100</button>
+                                                                        <div class="row pt-2">
+                                                                            <div class="col-6">
+                                                                                <button class="mybtn mybtn-primary mybtn-pill-40 PriceButton" data-Amount="5">$5</button>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <button class="mybtn mybtn-primary mybtn-pill-35 PriceButton" data-Amount="10">$10</button>
+                                                                            </div>
+
                                                                         </div>
+
+                                                                        <div class="row pt-2">
+                                                                            <div class="col-6">
+                                                                                <button class="mybtn mybtn-primary mybtn-pill-35 PriceButton" data-Amount="20">$20</button>
+                                                                            </div>
+                                                                            <div class="col-6">
+                                                                                <button class="mybtn mybtn-primary mybtn-pill-35 PriceButton" data-Amount="50">$50</button>
+                                                                            </div>
+
+                                                                        </div>
+
+
+
                                                                     </div>
 
-                                                                    <div class="pt-4">
-                                                                        <button class="btn btn-info btn-block rounded-pill  InvoiceButton" id="InvoiceButton">Create Invoice</button>
+                                                                    <div class="pt-4" >
+                                                                        <button class="mybtn mybtn-info  InvoiceButton" style="display: none" id="InvoiceButton">Create Invoice</button>
                                                                     </div>
+
 
 
 
@@ -151,9 +174,9 @@
 
 
                                                                         <div class="mt-3">
-                                                                            <a id="PaymentButton" class="btn btn-outline-success rounded-pill btn-block" href="#" target="_blank">Pay</a>
-                                                                            <button id="CheckStatusButton" class="btn btn-outline-primary btn-block rounded-pill ">Check Status</button>
-                                                                            <button id="CancelButton" class="btn btn-outline-danger btn-block rounded-pill ">Cancel</button>
+                                                                            <a id="PaymentButton" class="mybtn mybtn-success mybtn-pill-90" href="#" target="_blank">Pay</a>
+                                                                            <button id="CheckStatusButton" class="mybtn mybtn-primary mybtn-pill-50 ">Check Status</button>
+                                                                            <button id="CancelButton" class="mybtn mybtn-danger mybtn-pill-80 ">Cancel</button>
                                                                         </div>
 
 
@@ -168,11 +191,16 @@
                                                                                 <p id="ErrorHandler-Text">something wet wrong , please try again</p></div>
                                                                         </div>
 
-                                                                        <div class="mt-4 p-3 border border-primary rounded">
+                                                                        <div class="mt-4 p-3">
                                                                             <span>you must transfer token using Pay button or if you dont see Pay button you must transfer tokens manually using your wallet application</span>
 
                                                                         </div>
 
+                                                                        <div class="notice-area">
+                                                                            <p><span>IMPORTANT:</span>Send only Selected token to this address, sending any other coin or
+                                                                                token will result in losing your funds</p>
+                                                                            <p><span>Notice :</span>you must deposit the fund in the wallet and then send the transaction hash to our support</p>
+                                                                        </div>
 
 
                                                                     </div>
@@ -188,17 +216,15 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                         </div>
-                                                        <div class="notice-area">
-                                                            <p><span>IMPORTANT:</span>Send only Selected token to this address, sending any other coin or
-                                                                token will result in losing your funds</p>
-                                                            <p><span>Notice :</span>you must deposit the fund in the wallet and then send the transaction hash to our support</p>
-                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+{{--
 
                                     <div class="tab-pane fade" id="pills-wt2" role="tabpanel" aria-labelledby="pills-wt2-tab">
                                         <div class="dipo-box">
@@ -387,44 +413,10 @@
                                             </div>
                                         </div>
                                     </div>
+--}}
 
                                     <div class="tab-pane fade" id="pills-wt4" role="tabpanel" aria-labelledby="pills-wt4-tab">
                                         <div class="trns-box">
-                                            <div class="trns-table-filter">
-                                                <div class="row">
-                                                    <div class="col-md-3">
-                                                        <div class="single-filter">
-                                                            <label for="">Month</label>
-                                                            <input type="month" class="input-field" name="" id="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="single-filter">
-                                                            <label for="">Type</label>
-                                                            <select name="" id="" class="input-field">
-                                                                <option value="">All</option>
-                                                                <option value="">Type 1</option>
-                                                                <option value="">Type 2</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="single-filter">
-                                                            <label for="">Currency</label>
-                                                            <select name="" id="" class="input-field">
-                                                                <option value="">BTC</option>
-                                                                <option value="">BDT</option>
-                                                                <option value="">USD</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-3">
-                                                        <div class="filter-wrapper">
-                                                            <a href="#" class="mybtn2">Filter</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="aff-table">
                                                 <div class="header-area">
                                                     <h4>Transaction History</h4>
@@ -433,67 +425,17 @@
                                                     <table class="table">
                                                         <thead>
                                                         <tr>
-                                                            <th>Date/Time</th>
+                                                            <th>#</th>
+                                                            <th>Date</th>
+                                                            <th>Amount</th>
                                                             <th>Type</th>
                                                             <th>Currency</th>
-                                                            <th>Amount</th>
-                                                            <th>Balance before</th>
-                                                            <th>Balance after</th>
-                                                            <th>Game</th>
-                                                            <th>Game ID</th>
+                                                            <th>Description</th>
                                                         </tr>
                                                         </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>2021-01-07 16:33:53</td>
-                                                            <td>Deposit</td>
-                                                            <td>BTC</td>
-                                                            <td>0.000005210</td>
-                                                            <td>0.000000000</td>
-                                                            <td>0.000005210</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2021-01-07 16:33:53</td>
-                                                            <td>Deposit</td>
-                                                            <td>BTC</td>
-                                                            <td>0.000005210</td>
-                                                            <td>0.000000000</td>
-                                                            <td>0.000005210</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2021-01-07 16:33:53</td>
-                                                            <td>Deposit</td>
-                                                            <td>BTC</td>
-                                                            <td>0.000005210</td>
-                                                            <td>0.000000000</td>
-                                                            <td>0.000005210</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2021-01-07 16:33:53</td>
-                                                            <td>Deposit</td>
-                                                            <td>BTC</td>
-                                                            <td>0.000005210</td>
-                                                            <td>0.000000000</td>
-                                                            <td>0.000005210</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2021-01-07 16:33:53</td>
-                                                            <td>Deposit</td>
-                                                            <td>BTC</td>
-                                                            <td>0.000005210</td>
-                                                            <td>0.000000000</td>
-                                                            <td>0.000005210</td>
-                                                            <td>--</td>
-                                                            <td>--</td>
-                                                        </tr>
+                                                        <tbody id="TransactionTable">
+
+
                                                         </tbody>
                                                     </table>
                                                 </div>

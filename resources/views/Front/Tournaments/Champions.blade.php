@@ -12,7 +12,7 @@
                                 Top Players
                             </h5>
                             <h2 class="title ">
-                                Leaderboard
+                                Plato Leaderboard
                             </h2>
                         </div>
                     </div>
