@@ -15,7 +15,7 @@
                                             <div class="gamer-profile-top-inner">
                                                 <div class="profile-photo">
                                                     <div class="img">
-                                                        <img id="ProfileImage" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
+                                                        <img id="ProfileImage" style="clip-path: circle(30%);" src="{{asset('images/Users/DefaultProfile.png')}}" alt="" class="rounded-pill" />
                                                     </div>
                                                 </div>
                                             </div>
