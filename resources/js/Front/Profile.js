@@ -73,13 +73,13 @@ function LoadReferralPlans(){
             var CountedReferrals  = 0;
             var RemainingReferrals  = 0;
             var ReferralIncomeCoins = 0;
-            
+
             $(response.Data.ReferralPlans).each(async function (index, ReferralPlan) {
 
 
                 var PlanStatus = await CheckReferralPlanHistory(ReferralPlan.id);
                 if(PlanStatus == true){
-                    ReferralIncomeCoins += ( ReferralPlan.Award * 1000);
+                    ReferralIncomeCoins += ( ReferralPlan.Award );
                     CountedReferrals += ReferralPlan.Count;
                     let row = ` <div class="rank-area">
                                         <div class="top-area">
@@ -158,7 +158,7 @@ function LoadReferralPlans(){
 
 
             });
-            $("#ReferralIncome").html('<i class=" fa fa-coins text-warning mr-2" > </i>' + ReferralIncomeCoins);
+            $("#ReferralIncome").html('<i class=" fa fa-coins text-warning mr-2" > </i>' + (ReferralIncomeCoins * 1000) );
 
 
         }
