@@ -56,6 +56,8 @@ function GetUser(UserID){
 }
 
 function LoadReferralPlans(){
+    let ReferralIncomeCoins = 0;
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -72,14 +74,13 @@ function LoadReferralPlans(){
             var lockNewRows = false;
             var CountedReferrals  = 0;
             var RemainingReferrals  = 0;
-            var ReferralIncomeCoins = 0;
 
             $(response.Data.ReferralPlans).each(async function (index, ReferralPlan) {
 
 
                 var PlanStatus = await CheckReferralPlanHistory(ReferralPlan.id);
                 if(PlanStatus == true){
-                    ReferralIncomeCoins += ( ReferralPlan.Award );
+                    ReferralIncomeCoins = (ReferralIncomeCoins + ReferralPlan.Award)  ;
                     CountedReferrals += ReferralPlan.Count;
                     let row = ` <div class="rank-area">
                                         <div class="top-area">
@@ -154,12 +155,14 @@ function LoadReferralPlans(){
                 }
 
 
+                console.log(ReferralIncomeCoins)
+
+                $("#ReferralIncome").html('<i class=" fa fa-coins text-warning mr-2" > </i>' + (ReferralIncomeCoins * 1000) );
+
 
 
 
             });
-            $("#ReferralIncome").html('<i class=" fa fa-coins text-warning mr-2" > </i>' + (ReferralIncomeCoins * 1000) );
-
 
         }
     });
