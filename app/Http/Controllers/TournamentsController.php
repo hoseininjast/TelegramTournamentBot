@@ -25,7 +25,7 @@ class TournamentsController extends Controller
 
     public function index()
     {
-        $Tournaments = Tournaments::all();
+        $Tournaments = Tournaments::all()->sortDesc();
         confirmDelete('Delete Tournament!', 'Are you sure you want to delete this Tournament?');
         return view('Dashboard.Tournaments.index')->with(['Tournaments' => $Tournaments]);
     }
