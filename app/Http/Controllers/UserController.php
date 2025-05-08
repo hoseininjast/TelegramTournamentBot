@@ -113,24 +113,54 @@ class UserController extends Controller
     {
         $request->validate([
             'Charge' => 'required|numeric',
+            'KATCharge' => 'required|numeric',
         ]);
         $User = TelegramUsers::find($ID);
         if($User->Charge < $request->Charge){
             $Type = 'In';
             $Description = 'Wallet charge increased';
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => $Description,
+                'Amount' => $request->Charge,
+                'Type' => $Type,
+            ]);
         }else{
             $Type = 'Out';
             $Description = 'Wallet charge decreased';
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => $Description,
+                'Amount' => $request->Charge,
+                'Type' => $Type,
+            ]);
+        }
+        if($User->KAT < $request->KATCharge){
+            $Type = 'In';
+            $Description = 'Wallet charge increased';
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => $Description,
+                'Amount' => $request->KATCharge,
+                'Currency' => 'KAT',
+                'Type' => $Type,
+            ]);
+        }else{
+            $Type = 'Out';
+            $Description = 'Wallet charge decreased';
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => $Description,
+                'Amount' => $request->KATCharge,
+                'Currency' => 'KAT',
+                'Type' => $Type,
+            ]);
         }
         $User->update([
             'Charge' => $request->Charge,
+            'KAT' => $request->KATCharge,
         ]);
-        UserPaymentHistory::create([
-            'UserID' => $User->id,
-            'Description' => $Description,
-            'Amount' => $request->Charge,
-            'Type' => $Type,
-        ]);
+
         Alert::success('User Deleted successfully');
         return redirect()->route('Dashboard.Users.Telegram');
 

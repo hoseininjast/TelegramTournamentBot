@@ -34,8 +34,12 @@
                                                 <input type="text" id="Name" name="Name" class="form-control" value="{{$User->UserName}}" disabled>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="Charge" class="form-label">Charge</label>
+                                                <label for="Charge" class="form-label">KAC Charge</label>
                                                 <input type="number" id="Charge" name="Charge" step="0.01" class="form-control" value="{{$User->Charge}}">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="Charge" class="form-label">KAT Charge</label>
+                                                <input type="number" id="KATCharge" name="KATCharge" step="0.01" class="form-control" value="{{$User->KAT}}">
                                             </div>
 
 
