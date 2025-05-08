@@ -179,7 +179,7 @@
                                 <div class="s-info">
                                     <img src="{{asset('Front/images/user/a2.png')}}" alt="">
                                     <div class="content">
-                                        <h4 id="ReferralIncome">$0</h4>
+                                        <h4 id="ReferralIncome">0</h4>
                                         <p>Earned Referral</p>
                                     </div>
                                 </div>
