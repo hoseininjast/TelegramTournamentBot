@@ -45,7 +45,7 @@
 
                                     </div>
                                     <div class="col-6">
-                                        <a class="mybtn mybtn-primary mybtn-pill-20 disabled" disabled="" id="pills-wt2-tab" data-toggle="pill" href="#pills-wt2" role="tab" aria-controls="pills-wt2" aria-selected="false">Withdraw</a>
+                                        <a class="mybtn mybtn-primary mybtn-pill-20 "  id="pills-wt2-tab" data-toggle="pill" href="#pills-wt2" role="tab" aria-controls="pills-wt2" aria-selected="false">Withdraw</a>
 
                                     </div>
                                 </div>
@@ -224,7 +224,6 @@
                                             </div>
                                         </div>
                                     </div>
-{{--
 
                                     <div class="tab-pane fade" id="pills-wt2" role="tabpanel" aria-labelledby="pills-wt2-tab">
                                         <div class="dipo-box">
@@ -233,41 +232,49 @@
                                                     <div class="current-balance">
                                                         <p>Current Balance</p>
                                                         <h4>
-                                                            0.00051 <span>BTC</span>
+                                                            <span id="CurrentKATBalance">0</span> <span>KAT</span>
                                                         </h4>
                                                         <span class="t-sm">
-															1BTC = 39746.90 USD
+															1 KAT = 1 USDT
 														</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="dipo_btc">
                                                         <div class="header-area">
-                                                            <h4>Withdraw BITCOIN</h4>
+                                                            <h4>Withdraw KAT</h4>
                                                             <p>
-                                                                You may switch to other currencies in the top right corner.
+                                                                you can change your payout address from your profile -> settings section
                                                             </p>
                                                         </div>
                                                         <div class="form-area">
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <form action="#">
+
                                                                         <div class="form-group">
-                                                                            <label for="">Amount</label>
-                                                                            <input type="text" class="input-field" placeholder="Amount">
+                                                                            <div class="WithdrawAmountLabelDiv pb-3">
+                                                                                <label for="">Amount</label>
+                                                                                <button type="button" id="MaxWithdrawButton" class="mybtn mybtn-primary mybtn-pill-30">Max</button>
+                                                                            </div>
+
+                                                                            <input type="text" id="WithdrawAmount" name="WithdrawAmount" class="input-field" placeholder="Amount">
                                                                         </div>
+
                                                                         <div class="form-group">
                                                                             <label for="">Payment Address</label>
-                                                                            <input type="text"  class="input-field" placeholder="Payment Address">
+                                                                            <input type="text" id="PayingAddress" name="PayingAddress"  class="input-field" placeholder="Paying Address" readonly>
                                                                         </div>
-                                                                        <button type="submit" class="mybtn2">Submit</button>
+
+                                                                        <button type="button" id="SubmitButton" class="mybtn mybtn-success">Submit</button>
+
                                                                     </form>
 
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="notice-area">
-                                                            <p><span>Transaction fee:</span> Your withdrawal will also have 0.0006 BTC  subtracted to cover the transaction fee.</p>
+                                                            <p><span>Transaction fee:</span> Your withdrawal will also have 1 USD subtracted to cover the transaction fee.</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -413,7 +420,6 @@
                                             </div>
                                         </div>
                                     </div>
---}}
 
                                     <div class="tab-pane fade" id="pills-wt4" role="tabpanel" aria-labelledby="pills-wt4-tab">
                                         <div class="trns-box">

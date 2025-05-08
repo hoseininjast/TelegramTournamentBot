@@ -10,6 +10,7 @@ class UserPaymentHistory extends Model
         'UserID',
         'Description',
         'Amount',
+        'Currency',
         'Type',
     ];
 

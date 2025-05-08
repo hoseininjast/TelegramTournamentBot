@@ -561,3 +561,28 @@ body{
     border-radius: 8%;
     width: 90%;
 }
+
+.wallet-box .wallet-tab-content .current-balance h4{
+    background: #0b122e;
+}
+
+.wallet-box .wallet-tab-content .current-balance{
+    background: #023f6d;
+    border: 1px solid #00a2ff;
+}
+
+.wallet-box .wallet-tab-content .form-area .form-group .input-field{
+    background: #0b122e;
+}
+
+.WithdrawAmountLabelDiv{
+
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+}
+
+.dipo_btc{
+    background-color: #023f6e;
+}

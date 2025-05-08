@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Classes\Number2Word;
 use App\Models\TournamentPlans;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -32,27 +33,27 @@ class NotifyTelegramUsersAboutTournamentJob implements ShouldQueue
     {
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
-        $JalaliDate = Verta($this->TournamentPlan->Time)->format('%A, %d %B  H:i ');
+        $JalaliDate = Carbon::parse($this->TournamentPlan->Time)->format('Y-M-d H:i');
         if($this->TournamentPlan->SupervisorID){
             $SupervisorID = $this->TournamentPlan->Supervisor->PlatoID;
             $SupervisorTelegramInfo = $telegram->getChat(['chat_id' => $this->TournamentPlan->Supervisor->TelegramUserID]);
             $SupervisorTelegramUsername = $SupervisorTelegramInfo['username'];
         }else{
-            $SupervisorID = 'مشخص نشده';
-            $SupervisorTelegramUsername = 'مشخص نشده';
+            $SupervisorID = 'Not specified';
+            $SupervisorTelegramUsername = 'Not specified';
         }
 
 
         $text = "
-۱۵ دقیقه دیگر بازی شما آغاز میشود .
-اگر تا ۵ دقیقه پس از ساعت مشخص شده در بازی آنلاین نشوید ، ناظر حریف را برنده اعلام میکند.
-گروه : {$this->numToWords($this->TournamentPlan->Group)}
-مرحله : {$this->numToWordForStages($this->TournamentPlan->Stage)}
- بازیکن ها :
+Your match starts in 15 minutes.
+If you do not come online within 5 minutes of the specified time in the game, the moderator will declare the opponent the winner.
+Group : {$this->numToWords($this->TournamentPlan->Group)}
+Stage : {$this->numToWordForStages($this->TournamentPlan->Stage)}
+ Players :
  {$this->TournamentPlan->Player1->PlatoID} --- {$this->TournamentPlan->Player2->PlatoID}
  @{$this->TournamentPlan->Player1->UserName} --- @{$this->TournamentPlan->Player2->UserName}
- زمان بازی : {$JalaliDate}
-ناظر : پلاتو : {$SupervisorID} ،‌ تلگرام : @{$SupervisorTelegramUsername}
+ Start Date : {$JalaliDate}
+Supervisor : Plato : {$SupervisorID} ،‌ Telegram : @{$SupervisorTelegramUsername}
 ";
 
 

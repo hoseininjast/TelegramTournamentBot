@@ -136,22 +136,12 @@ class UserController extends Controller
 
 
                     $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
-                    $inlineLayout = [
-                        [
-                            Keyboard::inlineButton(['text' => 'ورود به صفحه اصلی' , 'callback_data' => 'صفحه اصلی' ])
-                        ],
-                    ];
 
                     $telegram->sendPhoto([
                         'chat_id' => $RefferalUser->TelegramUserID,
                         'photo' => InputFile::create(public_path('images/Robot/Main.png')),
-                        'caption' => "بازیکن جدیدی با لینک شما ثبت نام کرده است. ",
+                        'caption' => "A new player has registered with your link.",
                         'parse_mode' => 'html',
-                        'reply_markup' => json_encode([
-                            'inline_keyboard' => $inlineLayout,
-                            'resize_keyboard' => true,
-                            'one_time_keyboard' => true
-                        ])
                     ]);
                 }
             }

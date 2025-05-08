@@ -48,6 +48,11 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
         Route::post('Check' , [\App\Http\Controllers\Api\V1\PaymentsController::class , 'Check'])->name('Check');
     });
 
+    Route::group(['prefix' => 'Withdraw' , 'as' => 'Withdraw.' ] , function (){
+        Route::post('Create' , [\App\Http\Controllers\Api\V1\WithdrawController::class , 'Create'])->name('Create');
+        Route::post('Check' , [\App\Http\Controllers\Api\V1\WithdrawController::class , 'Check'])->name('Check');
+    });
+
     Route::group(['prefix' => 'PaymentHistory' , 'as' => 'PaymentHistory.' ] , function (){
         Route::post('List' , [\App\Http\Controllers\Api\V1\UserPaymentHistoryController::class , 'List'])->name('List');
     });

@@ -2,7 +2,7 @@ import {
     ShowToast,
     deleteSession,
     setSession,
-    ReadSession, redirect,
+    ReadSession, redirect, ShowAlert,
 } from "../utilities.js";
 import moment from "moment/moment.js";
 
@@ -23,6 +23,11 @@ const TokenButtons = document.querySelectorAll(".TokenButtons");
 
 
 const PriceButtons = document.querySelectorAll(".PriceButton");
+
+
+const SubmitButton = document.querySelector("#SubmitButton");
+const MaxWithdrawButton = document.querySelector("#MaxWithdrawButton");
+
 
 
 let Token = 'Polygon';
@@ -229,6 +234,14 @@ CheckStatusButton.addEventListener("click", () =>
     CheckPayment()
 );
 
+MaxWithdrawButton.addEventListener("click", () =>
+    $('#WithdrawAmount').val(User.KAT)
+);
+
+SubmitButton.addEventListener("click", () =>
+    MakeWithdraw()
+);
+
 TokenButtons.forEach((plan) => plan.addEventListener('click', (event) => {
     Token = plan.getAttribute('data-Token');
     $('.TokenButtons').removeClass('TokenButtonSelected')
@@ -281,6 +294,69 @@ function LoadTransactionTable(){
         }
     });
 }
+
+function LoadWithdrawSection(){
+
+    $('#CurrentKATBalance').text(User.KAT);
+    $('#PayingAddress').val(User.WalletAddress);
+
+}
+
+function MakeWithdraw(){
+    var WithdrawAmount = $('#WithdrawAmount').val();
+    var PayingAddress = $('#PayingAddress').val();
+
+    if(WithdrawAmount < 3){
+        ShowAlert('error' , 'you must withdraw at least 2 KAT');
+    }else{
+        Swal.fire({
+            title: "Are you sure?",
+            html: `
+    Are you sure to withdraw with this details?<br>
+    Amount : <b>`+WithdrawAmount+`</b><br>
+    Address : <b>`+PayingAddress+`</b>
+  `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#6aff39",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes , Withdraw Now !",
+            cancelButtonText: "No , Cancel !"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.showLoading();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    async: false,
+                    cache: false,
+                });
+                $.ajax({
+                    url: route('V1.Withdraw.Create'),
+                    data: {
+                        Amount: WithdrawAmount,
+                        PayingAddress: PayingAddress,
+                        UserID: User.id,
+                    },
+                    success: function (response) {
+                        Swal.close()
+                        if (response.Data.Code == 200 ) {
+                            ShowAlert('success' , response.Data.Message);
+                            window.location.reload()
+                        }else {
+                            ShowAlert('error' , response.Data.Message);
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+
+}
 window.addEventListener("DOMContentLoaded", async () => {
     if(isTMA()) {
         init();
@@ -299,6 +375,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ProfileImage').attr('src' , User.Image)
         LoadTransactionTable();
+        LoadWithdrawSection();
+
 
     }else{
         GetUser(76203510)
@@ -311,6 +389,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ProfileImage').attr('src' , User.Image)
         LoadTransactionTable();
+        LoadWithdrawSection();
     }
 
 });

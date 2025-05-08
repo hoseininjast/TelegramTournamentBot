@@ -44,13 +44,13 @@ class TournamentPlansController extends Controller
         $SupervisorTelegramUsername = $SupervisorTelegramInfo['username'];
 
         $text = "
-ناظر بازی شما مشخص شد.
-لطفا برای هماهنگی ساعت با او در ارتباط باشید.
-بازی : {$TournamentPlan->Tournament->Game->Name}
-نام : {$TournamentPlan->Tournament->Name}
-ناظر : پلاتو : {$Supervisor->PlatoID} ،‌ تلگرام : @{$SupervisorTelegramUsername}
-بازیکن اول : پلاتو : {$User1->PlatoID} ، تلگرام : @{$User1->UserName}
-بازیکن دوم : پلاتو : {$User2->PlatoID} ، تلگرام : @{$User2->UserName}
+Your match supervisor has been identified.
+Please contact him/her to arrange a time.
+Game : {$TournamentPlan->Tournament->Game->Name}
+Tournament : {$TournamentPlan->Tournament->Name}
+Supervisor : Plato : {$Supervisor->PlatoID} ،‌ Telegram : @{$SupervisorTelegramUsername}
+First Player : Plato : {$User1->PlatoID} ، Telegram : @{$User1->UserName}
+Second Player : Plato : {$User2->PlatoID} ، Telegram : @{$User2->UserName}
 ";
 
         if(env('APP_ENV') == 'production'){
@@ -91,21 +91,21 @@ class TournamentPlansController extends Controller
         $User2 = $TournamentPlan->Player2->TelegramUserID;
 
 
-        $JalaliDate = Verta($TournamentPlan->Time)->format('%A, %d %B  H:i ');
+        $JalaliDate = Carbon::parse($TournamentPlan->Time)->format('Y-M-d H:i');
 
         $text = "
-نتیجه بازی شما مشخص شد
-بازی : {$TournamentPlan->Tournament->Game->Name}
-نام : {$TournamentPlan->Tournament->Name}
-گروه : {$this->numToWords($TournamentPlan->Group)}
-مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
- بازیکن ها :
+The result of your match has been determined.
+Game : {$TournamentPlan->Tournament->Game->Name}
+Tournament : {$TournamentPlan->Tournament->Name}
+Group : {$this->numToWords($TournamentPlan->Group)}
+Stage : {$this->numToWordForStages($TournamentPlan->Stage)}
+ Players :
  {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
  @{$TournamentPlan->Player1->UserName} --- @{$TournamentPlan->Player2->UserName}
- امتیاز ها : بازیکن اول : {$request->Player1Score} --- بازیکن دوم : {$request->Player2Score}
- زمان بازی : {$JalaliDate}
- برنده : {$TournamentPlan->Winner->PlatoID}
- پس از مشخص شدن برنامه بازی های بعدی در ربات به شما اطلاع رسانی میشود.
+ Points : First Player : {$request->Player1Score} --- Second Player : {$request->Player2Score}
+ Start Date : {$JalaliDate}
+ Winner : {$TournamentPlan->Winner->PlatoID}
+You will be notified once the schedule for the next match in the app is determined.
 ";
 
         if(env('APP_ENV') == 'production'){
@@ -145,19 +145,19 @@ class TournamentPlansController extends Controller
         $User1 = $TournamentPlan->Player1->TelegramUserID;
         $User2 = $TournamentPlan->Player2->TelegramUserID;
 
-        $JalaliDate = Verta($TournamentPlan->Time)->format('%A, %d %B  H:i ');
+        $JalaliDate = Carbon::parse($TournamentPlan->Time)->format('Y-M-d H:i');
 
         $text = "
-زمان مسابقه شما مشخص شد
-بازی : {$TournamentPlan->Tournament->Game->Name}
-نام : {$TournamentPlan->Tournament->Name}
-گروه : {$this->numToWords($TournamentPlan->Group)}
-مرحله : {$this->numToWordForStages($TournamentPlan->Stage)}
- بازیکن ها :
+Your match time has been set.
+Game : {$TournamentPlan->Tournament->Game->Name}
+Tournament : {$TournamentPlan->Tournament->Name}
+Group : {$this->numToWords($TournamentPlan->Group)}
+Stage : {$this->numToWordForStages($TournamentPlan->Stage)}
+ Players :
  {$TournamentPlan->Player1->PlatoID} --- {$TournamentPlan->Player2->PlatoID}
  @{$TournamentPlan->Player1->UserName} --- @{$TournamentPlan->Player2->UserName}
- زمان بازی : {$JalaliDate}
- لطفا 1 ساعت قبل از شروع مسابقه با ناظر بازی هماهنگ کنید.
+ Start Date : {$JalaliDate}
+Please coordinate with the match supervisor 1 hour before the start of the match.
 ";
 
 

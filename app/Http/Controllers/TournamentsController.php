@@ -165,21 +165,20 @@ class TournamentsController extends Controller
                 $User1 = TelegramUsers::find($PlayerIDs[$i]);
                 $User2 = TelegramUsers::find($PlayerIDs[$i+1]);
 
-                $JalaliDate1 = Verta($Stage1Time)->format('%A, %d %B  H:i ');
-                $JalaliDate2 = Verta($Stage2Time)->format('%A, %d %B  H:i ');
+                $JalaliDate1 = Carbon::parse($Stage1Time)->format('Y-M-d H:i');
+                $JalaliDate2 = Carbon::parse($Stage2Time)->format('Y-M-d H:i');
 
                 $text = "
-برنامه بازی های شما مشخص شد
-بازی : {$Tournament->Game->Name}
-نام : {$Tournament->Name}
-گروه : {$this->numToWords($Group)}
-مرحله : {$this->numToWordForStages($NextStage)}
- بازیکن ها :
+Your match plan has been determined.
+Game : {$Tournament->Game->Name}
+Tournament : {$Tournament->Name}
+Group : {$this->numToWords($Group)}
+Stage : {$this->numToWordForStages($NextStage)}
+ Players :
  {$User1->PlatoID} --- {$User2->PlatoID}
  @{$User1->UserName} --- @{$User2->UserName}
- زمان شروع : {$JalaliDate1} الی {$JalaliDate2} میباشد لطفا توی این زمان با ناظر خود هماهنگ کنید
- زمان بازی به زودی اعلام میشود.
-@krypto_arena_bot
+ Start : {$JalaliDate1} to {$JalaliDate2} Please coordinate with your supervisor at this time.
+Match time will be announced soon.
 ";
 
                 if(env('APP_ENV') == 'production'){
@@ -233,8 +232,8 @@ class TournamentsController extends Controller
 
 
 
-            $JalaliDate1 = Verta($CurrentStageTime)->format('%A, %d %B  H:i ');
-            $JalaliDate2 = Verta($NextStageTime)->format('%A, %d %B  H:i ');
+            $JalaliDate1 = Carbon::parse($CurrentStageTime)->format('Y-M-d H:i');
+            $JalaliDate2 = Carbon::parse($NextStageTime)->format('Y-M-d H:i');
 
 
             for ($i = 0 , $o = 0 ; $o < $TotalGroup ; $i += 2 ,$o++ , $CurrentGroup++) {
@@ -254,17 +253,16 @@ class TournamentsController extends Controller
 
 
                 $text = "
-برنامه بازی های جدید شما مشخص شد
-بازی : {$Tournament->Game->Name}
-نام : {$Tournament->Name}
-گروه : {$this->numToWords($CurrentGroup)}
-مرحله : {$this->numToWordForStages($NextStage)}
- بازیکن ها :
+Your new match schedule has been announced.
+Game : {$Tournament->Game->Name}
+Tournament : {$Tournament->Name}
+Group : {$this->numToWords($CurrentGroup)}
+Stage : {$this->numToWordForStages($NextStage)}
+ Players :
  {$User1->PlatoID} --- {$User2->PlatoID}
  @{$User1->UserName} --- @{$User2->UserName}
- زمان شروع : {$JalaliDate1} الی {$JalaliDate2} میباشد لطفا توی این زمان با ناظر خود هماهنگ کنید
- زمان دقیق بازی به زودی اعلام میشود.
-@krypto_arena_bot
+ Start : {$JalaliDate1} to {$JalaliDate2} Please coordinate with your supervisor at this time.
+Match time will be announced soon.
 ";
 
                 if(env('APP_ENV') == 'production'){
@@ -348,7 +346,7 @@ class TournamentsController extends Controller
             foreach ($request->Winner as $player) {
                 $User = TelegramUsers::find($player);
                 $Players[$key] = $User->id;
-                $Winners .= "نفر ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1 ] ." \n";
+                $Winners .= "Position ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1 ] ." \n";
                 $key++;
             }
             if($request->hasFile('Image')){
@@ -366,13 +364,12 @@ class TournamentsController extends Controller
                 'Status' => 'Finished'
             ]);
             $text = "
-تورنومنت به پایان رسید.
-نام تورنومنت : {$Tournament->Name}
-برندگان :
+The tournament is over.
+Tournament  : {$Tournament->Name}
+Winners :
 {$Winners}
-جوایز واریز شدند و لینک آنها در کانال قرار داده میشود.
-برای تورنومنت های بیشتر با ما همراه باشید.
-@krypto_arena_bot
+Prizes have been deposited and can be withdrawn through the app.
+Stay tuned for more tournaments.
 ";
             if(env('APP_ENV') == 'production'){
                 NotifyAllTelegramUsersJob::dispatch($text);
@@ -465,11 +462,11 @@ class TournamentsController extends Controller
             Alert::error("you cant remove user from {$Tournament->Status} tournament");
         }else{
             $text = "
-شما از تورنومنت زیر حدف شدید :
-تورنومنت : {$Tournament->Name}
-بازی : {$Tournament->Game->Name}
-میتوانید دلیل حذف شدن خود را از ادمین بپرسید.
-با تشکر از همکاری شما.";
+You have been removed from the following tournament:
+Tournament : {$Tournament->Name}
+Game : {$Tournament->Game->Name}
+You can ask the supervisor the reason for your removal.
+";
             if(env('APP_ENV') == 'production'){
                 if(preg_match('/KryptoArenaFreePosition/' , $User->UserName ) != 1){
                     NotifyTelegramUsersJob::dispatch($User->TelegramUserID ,$text);

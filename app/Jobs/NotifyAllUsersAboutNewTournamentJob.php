@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\TelegramUsers;
 use App\Models\Tournaments;
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -36,27 +37,27 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
         $Type = __('messages.Type.' . $Tournament->Type);
         $adwards = '';
         foreach ($Tournament->Awards as $key => $award) {
-            $adwards .= 'نفر ' . $key + 1 . ' = $' .$award ."\n";
+            $adwards .= 'Position ' . $key + 1 . ' = $' .$award ."\n";
         }
 
-        $JalaliDate1 = Verta($Tournament->Start)->format('%A, %d %B  H:i ');
-        $JalaliDate2 = Verta($Tournament->End)->format('%A, %d %B  H:i ');
+        $JalaliDate1 = Carbon::parse($Tournament->Start)->format('Y-M-d H:i');
+        $JalaliDate2 = Carbon::parse($Tournament->End)->format('Y-M-d H:i');
         $GamesCount = $Tournament->PlayerCount - 1;
 
         $text = "
-تورنومنت جدید : {$Tournament->Game->Name}
-نام : {$Tournament->Name}
-توضیحات : {$Tournament->Description}
-نوع : {$Type}
-حالت : {$Mode}
- مبلغ ورودی : $ {$Tournament->Price}
-تعداد بازیکن : {$Tournament->PlayerCount}
-تاریخ شروع : {$JalaliDate1}
-تاریخ پایان : {$JalaliDate2}
-تعداد برندگان : {$Tournament->Winners}
-جوایز : \n {$adwards}
-وضعیت : {$Status}
-برای شرکت در تورنومنت وارد ربات شوید.
+New Tournament : {$Tournament->Game->Name}
+Name : {$Tournament->Name}
+Description : {$Tournament->Description}
+Type : {$Type}
+Mode : {$Mode}
+ Entry  : $ {$Tournament->Price}
+Players : {$Tournament->PlayerCount}
+Start Date : {$JalaliDate1}
+End Date : {$JalaliDate2}
+Winners : {$Tournament->Winners}
+Awards : \n {$adwards}
+Status : {$Status}
+for joining tournament go to krypto arena app.
 ";
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));

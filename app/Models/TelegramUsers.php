@@ -19,6 +19,7 @@ class TelegramUsers extends Model
         'WalletAddress',
         'TonWalletAddress',
         'Charge',
+        'KAT',
         'PlatoID',
         'PlatoScreenShot',
         'Status',

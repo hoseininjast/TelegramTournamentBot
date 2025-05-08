@@ -1,0 +1,47 @@
+<?php
+
+namespace App\Http\Controllers\Api\V1;
+
+use App\Http\Controllers\Controller;
+use App\Models\TelegramUsers;
+use App\Models\Withdraws;
+use Illuminate\Http\Request;
+
+
+class WithdrawController extends Controller
+{
+    public function Create(Request $request)
+    {
+        $request->validate([
+            'Amount' => 'required|numeric|min:2',
+            'PayingAddress' => 'required|string|regex:/^(0x)?(?i:[0-9a-f]){40}$/',
+            'UserID' => 'required|integer|exists:telegram_users,id',
+        ]);
+
+
+
+        $User = TelegramUsers::find($request->UserID);
+        $User->update([
+            'KAT' => $User->KAT - $request->Amount,
+        ]);
+        $Withdraw = Withdraws::create([
+            'WithdrawID' => 'KAW' . rand(10000000, 99999999),
+            'Amount' => $request->Amount,
+            'PayingAddress' => $request->PayingAddress,
+            'UserTransactionHash' => null,
+            'Status' => 'Pending',
+            'UserID' => $User->id,
+        ]);
+
+        return response()->json([
+            'Data' => [
+                'Message' => 'Withdraw request submitted successfully',
+                'Code' => 200,
+            ],
+        ] , 200);
+
+
+
+
+    }
+}
