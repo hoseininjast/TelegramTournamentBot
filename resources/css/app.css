@@ -270,7 +270,18 @@ body{
 .l-arcive-box .s-a-b .left img {
     margin-right: 0px !important;
 }
+.l-arcive-box .s-a-b{
+    border-top: 2px solid #00a2ff;
+    border-bottom: 2px solid #00a2ff;
+}
 
+.ChampionLeft{
+    display: flex;
+    flex-direction: column;
+}
+.l-arcive-box .s-a-b .right img{
+    margin-left:unset;
+}
 .TimeTableDiv{
     padding-left: 20px;
     padding-right: 20px;
@@ -528,4 +539,25 @@ body{
 .modal-footer{
     border-top:unset;
     justify-content: center;
+}
+
+.header .top-header .content{
+    padding: 5px;
+}
+
+.NavbarItem{
+    display: flex;
+    flex-direction: column;
+    font-size: 15px;
+}
+.font-22px{
+    font-size: 22px !important;
+}
+
+.fa-dollar-color{
+    color: #299001 !important;
+}
+.single-play .image img , .single-turnaments .left-area .single-play .image img{
+    border-radius: 8%;
+    width: 90%;
 }

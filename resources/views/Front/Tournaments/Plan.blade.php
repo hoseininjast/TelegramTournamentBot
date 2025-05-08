@@ -14,7 +14,7 @@
                                     </div>
                                     <h4>{{$Tournament->Name}}</h4>
                                     <div class="contant">
-                                        <button type="button" class="mybtn mybtn-info mybtn-pill-40">Back to Details</button>
+                                        <button type="button" id="BackToDetailsButton" class="mybtn mybtn-info mybtn-pill-40">Back to Details</button>
                                     </div>
                                 </div>
 
