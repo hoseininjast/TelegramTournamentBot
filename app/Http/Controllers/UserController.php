@@ -161,7 +161,7 @@ class UserController extends Controller
             'KAT' => $request->KATCharge,
         ]);
 
-        Alert::success('User Deleted successfully');
+        Alert::success('User Charged successfully');
         return redirect()->route('Dashboard.Users.Telegram');
 
     }

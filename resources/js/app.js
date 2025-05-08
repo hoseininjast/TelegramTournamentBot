@@ -114,6 +114,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
         $('#NavbarUsername').html( User.UserName);
         $('#NavbarCharge').html("<i class='fa fa-coins text-warning mr-1'></i>" + Charge);
+        $('#NavbarKATCharge').html("<i class='fas fa-dollar-sign fa-dollar-color text-success mr-1 font-22px' ></i>" + User.KAT);
+        
         $('#NavbarProfileImage').attr('src', ProfileImage);
 
     }
