@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import { init, backButton ,closingBehavior,hapticFeedback , initData , isTMA   } from '@telegram-apps/sdk';
+import { init, backButton ,closingBehavior,hapticFeedback , initData , isTMA ,requestFullscreen, isFullscreen  } from '@telegram-apps/sdk';
 import moment from "moment/moment.js";
 import {redirect} from "./utilities.js";
 
@@ -61,6 +61,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         const InitData = initData;
         TelegramUser = InitData.user();
         var ReferralID = initData.startParam();
+
+        if (requestFullscreen.isAvailable()) {
+            await requestFullscreen();
+        }
 
         GetUser( ReferralID)
         var ProfileImage = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
