@@ -590,3 +590,8 @@ body{
 .mytext-blue{
     color : #00a2ff;
 }
+
+.mybg-primary{
+    background-color: #070a28 !important;
+    color:white;
+}

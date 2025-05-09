@@ -187,10 +187,11 @@
 
 
                                                                         <div class="row" style="margin-bottom: 20px;display:none;" id="ConfirmingHandler">
-                                                                            <div class="note bg-success col-sm-12 col-md-12 "><em class="fa fa-check text-dark"></em>
+                                                                            <div class="note mybg-primary mt-3 col-sm-12 col-md-12 "><em class="fa fa-check text-dark"></em>
                                                                                 <p id="ConfirmingHandler-Text" class="text-warning"></p>
                                                                             </div>
                                                                         </div>
+                                                                        
                                                                         <div class="row" style="margin-bottom: 20px;display:none;" id="ErrorHandler">
                                                                             <div class="note note-danger col-sm-12 col-md-12"><em class="fa fa-exclamation-triangle text text-warning"></em>
                                                                                 <p id="ErrorHandler-Text">something wet wrong , please try again</p></div>
