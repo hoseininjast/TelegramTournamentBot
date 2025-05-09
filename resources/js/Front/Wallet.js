@@ -131,7 +131,7 @@ async function CreateInvoice() {
                 }
 
                 $('html, body').animate({
-                    scrollTop: $('#OrderID').offset().top
+                    scrollTop: $('#InvoiceButton').offset().top
                 }, 1000);
 
 
@@ -158,7 +158,7 @@ async function CreateInvoice() {
 
 
 function CheckPayment(){
-
+    console.log(PaymentID)
     Swal.fire({
         title: "Updating...",
         html: "Please wait a moment"
@@ -176,7 +176,7 @@ function CheckPayment(){
     $.ajax({
         url: route('V1.Payment.Check' ),
         data: {
-            PaymentID: PaymentID,
+            PaymentID: $('#PaymentIDVal').val(),
         },
         success: function (response) {
 
