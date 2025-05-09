@@ -152,6 +152,8 @@
 
                                                                     <div class="left mt-5" id="PaymentArea" style="display: none">
 
+                                                                        <input type="hidden" id="OrderIdVal">
+                                                                        <input type="hidden" id="PaymentIDVal">
                                                                         <div class="row">
                                                                             <div class="col-12 mt-2">
                                                                                 Order ID : <span id="OrderID"></span>

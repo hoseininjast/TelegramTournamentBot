@@ -106,6 +106,9 @@ async function CreateInvoice() {
                 setSession('payment_status' , 'Pending')
                 setSession('selected_plan' , response.Data.selected_plan)
 
+                $('#OrderIdVal').val(response.Data.order_id)
+                $('#PaymentIDVal').val(response.PaymentID)
+
                 $('#DepositAmount').val(response.Data.pay_amount)
                 $('#WalletAddress').val(response.Data.pay_address)
                 $('#PaymentMethod').text(Token)
@@ -125,6 +128,9 @@ async function CreateInvoice() {
                     $('#PaymentButton').hide(400).attr('href' , "#");
                 }
 
+                $('html, body').animate({
+                    scrollTop: $('#PaymentArea').offset().top
+                }, 1000);
 
 
 
@@ -247,6 +253,10 @@ TokenButtons.forEach((plan) => plan.addEventListener('click', (event) => {
     $('.TokenButtons').removeClass('TokenButtonSelected')
     $('#' + plan.id).addClass('TokenButtonSelected')
     $('.AmountDiv').show(400)
+    $('html, body').animate({
+        scrollTop: $('.AmountDiv').offset().top
+    }, 1000);
+
 }));
 
 
@@ -261,6 +271,7 @@ function DepositAmountSelected(element){
     $(element.id).addClass('TokenButtonSelected')
     $('#SelectedAmount').text('$' + Amount);
     $('#InvoiceButton').show(400)
+
 }
 
 
