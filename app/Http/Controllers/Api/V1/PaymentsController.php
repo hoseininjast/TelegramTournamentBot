@@ -34,7 +34,7 @@ class PaymentsController extends Controller
             if ($request->PaymentMethod == 'Polygon'){
 
                 $data = [
-                    'price_amount' => $request->Price,
+                    'price_amount' => $request->Price + 0.2,
                     'price_currency' => 'usd',
                     'order_id' => 'KryptoArena' .  rand(100000,10000000000),
                     'pay_currency' => 'MATICMAINNET',
@@ -43,7 +43,7 @@ class PaymentsController extends Controller
 
             }elseif ($request->PaymentMethod == 'Ton'){
                 $data = [
-                    'price_amount' => $request->Price,
+                    'price_amount' => $request->Price + 0.2,
                     'price_currency' => 'usd',
                     'order_id' => 'KryptoArena' .  rand(100000,10000000000),
                     'pay_currency' => 'TON',
@@ -51,7 +51,7 @@ class PaymentsController extends Controller
                 ];
             }elseif ($request->PaymentMethod == 'USDTPOL'){
                 $data = [
-                    'price_amount' => $request->Price,
+                    'price_amount' => $request->Price + 0.2,
                     'price_currency' => 'usd',
                     'order_id' => 'KryptoArena' .  rand(100000,10000000000),
                     'pay_currency' => 'USDTMATIC',
@@ -59,7 +59,7 @@ class PaymentsController extends Controller
                 ];
             }elseif ($request->PaymentMethod == 'USDTTON'){
                 $data = [
-                    'price_amount' => $request->Price,
+                    'price_amount' => $request->Price + 0.2,
                     'price_currency' => 'usd',
                     'order_id' => 'KryptoArena' .  rand(100000,10000000000),
                     'pay_currency' => 'USDTTON',
@@ -169,7 +169,7 @@ class PaymentsController extends Controller
                 ]);
                 UserPaymentHistory::create([
                     'UserID' => $User->id,
-                    'Description' => 'Wallet charged',
+                    'Description' => 'Deposit : Wallet charged',
                     'Amount' => $payments->FiatAmount,
                     'Type' => 'In',
                 ]);
