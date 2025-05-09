@@ -23,7 +23,7 @@
                                 <li>
                                     <div class="d-flex NavbarItem" data-toggle="modal" data-target="#usernotification" >
                                         <span class="NavbarUsername" id="NavbarCharge"><i class="fa fa-coins text-warning mr-1"></i>0</span>
-                                        <span class="NavbarUsername" id="NavbarKATCharge"><i class="fas fa-dollar-sign fa-dollar-color text-success mr-1 font-22px" ></i>0</span>
+                                        <span class="NavbarUsername mytext-blue" ><span class="text-white" id="NavbarKATCharge">0 </span> KAT</span>
                                     </div>
                                 </li>
                             </ul>
