@@ -65,7 +65,7 @@ class TelegramController extends Controller
 
         if ($updates->isType('callback_query') ){
 
-
+/*
             if ($this->Data['callback_query']['data'] == 'صفحه اصلی'){
                 $this->EditMessage("💎سلام به ربات Krypto Arena خوش آمدید💎 \nلطفا از گزینه های زیر یکی رو انتخاب کنید" , $MainMenuKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png');
             }
@@ -872,81 +872,6 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
 
 
-                /*$PaymentDetail = $this->CreatePaymentOrder($PaymentMethod , $Amount);
-
-                $User = $this->SaveTelegramUser();
-
-                if($PaymentDetail){
-
-                    $Payment = Payments::create([
-                        'OrderID' => $PaymentDetail['order_id'],
-                        'PaymentID' => $PaymentDetail['payment_id'],
-                        'FiatAmount' => $PaymentDetail['price_amount'],
-                        'CryptoAmount' => $PaymentDetail['pay_amount'],
-                        'PaymentMethod' => $PaymentMethod,
-                        'PayingAddress' => $PaymentDetail['pay_address'],
-                        'Status' => 'Pending',
-                        'UserID' => $User->id,
-                    ]);
-
-                    $PaymentID = $PaymentDetail['payment_id'];
-                    $WalletAddress = $pay_address = $PaymentDetail['pay_address'];
-                    $pay_amount = $PaymentDetail['pay_amount'];
-
-                    if ($PaymentMethod == 'Polygon'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/Matic.png';
-                        $PaymentAddress = "https://metamask.app.link/send/{$WalletAddress}@137?value=" . $pay_amount ."e18";
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id ]);
-                    }
-                    elseif ($PaymentMethod == 'USDTPOL'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDT.png';
-                        $PayAmountForUSDT = preg_replace("/\./", "", round($pay_amount, 6 ,PHP_ROUND_HALF_UP) );
-                        $PaymentAddress = "https://metamask.app.link/send/0xc2132D05D31c914a87C6611C10748AEb04B58e8F@137/transfer?address={$pay_address}&uint256={$PayAmountForUSDT}";
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id]);
-                    }
-                    elseif ($PaymentMethod == 'Ton'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/Ton.png';
-                        $PayAmountForTon = preg_replace("/\./", "", $pay_amount);
-                        $pay_amount_button = $PayAmountForTon . 0;
-                        $PaymentAddress = "https://app.tonkeeper.com/transfer/{$WalletAddress}?amount={$pay_amount_button}";
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'پرداخت' , 'url' =>  $PaymentAddress]);
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id  ]);
-                    }
-                    elseif ($PaymentMethod == 'USDTTON'){
-                        $Pic = 'https://vpn.ai1polaris.com/images/New/USDTTON.png';
-                        $inlineLayout[][] = Keyboard::inlineButton(['text' => 'بروزرسانی فاکتور' , 'callback_data' => 'CheckPaymentStatus-' .$Payment->id ]);
-                    }
-
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'ChargeWith-' . $PaymentMethod  ]);
-
-                    $text = "
-شارژ کیف پول
-‼️پیش از‌ پرداخت ، لطفا تمامی بند ها را مطالعه کنید‼️
-1⃣ مبلغ فاكتور شما به شرح زير ميباشد. لطفا در صورت تاييد روى دكمه پرداخت كليک كنيد.
-2⃣ پس از پرداخت توسط والت به همين صفحه برگرديد و هر ٣٠ ثانيه روى دكمه بروزرسانى كليک كنيد تا مبلغ مورد نظر به کیف پول شما اضافه شود.
-3⃣ در صورتي كه ديوايس شما اپديت نباشد، ميتوانيد مبلغ و ادرس مقصد را به صورت دستى و دقيق در والتتان وارد كرده و انتقال را انجام دهيد سپس به همين صفحه برگرديد و روي دكمه بروزرسانى كليک كنيد.
-تا زمانی که ربات به شما پیام موفقیت آمیز بودن پرداخت را ندهد باید در این صفحه صبر کنید و بروزرسانی را بزنید.
-" . PHP_EOL . "
-💲 روش پرداخت :". $PaymentMethod . "
-💲 مبلغ شارژ :". number_format($Amount ,2 ,'.' , ',') . " $
-💸 مبلغ نهایی : 📑" . "<code><b>" . number_format($pay_amount ,6 ,'.' , ',') . "</b></code> " . $PaymentMethod ."📑
-آدرس ولت : 📑<code>{$WalletAddress}</code>📑
-";
-
-                    $this->EditMessage($text ,$inlineLayout , $Pic);
-
-
-
-                }else{
-                    $inlineLayout[][] = Keyboard::inlineButton(['text' => 'مرحله قبل' , 'callback_data' => 'ChargeWith-' . $PaymentMethod  ]);
-                    $text = "مشکلی در ساخت فاکتور پیش آمده لطفا بعدا دوباره تلاش کنید.";
-                    $this->EditMessage($text ,$inlineLayout);
-
-                }*/
-
-
             }
 
             if (preg_match('/^CheckPaymentStatus-/' , $this->Data['callback_query']['data']) == 1){
@@ -1044,7 +969,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
 
                 $this->EditMessage($text , $inlineLayout , 'https://kryptoarena.fun/images/Robot/Main.png');
-            }
+            }*/
 
 
 
@@ -1056,7 +981,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $keyboard = [
                         'inline_keyboard' => [
                             [
-                                ['text' => 'بازکردن مینی آپ', 'web_app' => ['url' => 'https://kryptoarena.fun'] ]
+                                ['text' => 'Open Mini App', 'web_app' => ['url' => 'https://kryptoarena.fun'] ]
                             ]
                         ]
                     ];
@@ -1064,9 +989,9 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $encodedKeyboard = json_encode($keyboard);
 
 
-                    $this->CustomResponseWithPhoto("🌠💸🤝سلام به ربات Krypto Arena خوش آمدید\nلطفا برای استفاده از امکانات ربات از طریق مینی آپ اقدام نمایید🤝💸🌠" , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
+                    $this->CustomResponseWithPhoto("Welcome to Krypto Arena \n Please use below button to open new mini app🤝💸🌠" , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
-
+/*
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
                     $ReferralID = preg_replace("/\/start\s/", "", $this->Data['message']['text']);
                     $RefferalUser = TelegramUsers::where('TelegramUserID' , $ReferralID)->first();
@@ -1187,7 +1112,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                 ";
                     $this->ResponseWithPhoto($text , $inlineLayout, 'https://kryptoarena.fun/images/Robot/WalletAddress.png' );
 
-                }
+                }*/
 
             }
         }
