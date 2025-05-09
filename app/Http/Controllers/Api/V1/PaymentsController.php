@@ -79,14 +79,14 @@ class PaymentsController extends Controller
                 'payment_id' => $paymentDetails['payment_id'],
                 'pay_address' => $paymentDetails['pay_address'],
                 'pay_amount' => $paymentDetails['pay_amount'],
-                'price_amount' => $paymentDetails['price_amount'],
+                'price_amount' => $request->Price,
                 'order_id' => $paymentDetails['order_id'],
             ];
 
             $Payment = Payments::create([
                 'OrderID' => $paymentDetails['order_id'],
                 'PaymentID' => $paymentDetails['payment_id'],
-                'FiatAmount' => $paymentDetails['price_amount'],
+                'FiatAmount' => $request->Price,
                 'CryptoAmount' => $paymentDetails['pay_amount'],
                 'PaymentMethod' => $request->PaymentMethod,
                 'PayingAddress' => $paymentDetails['pay_address'],

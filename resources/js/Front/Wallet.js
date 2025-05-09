@@ -159,12 +159,7 @@ async function CreateInvoice() {
 
 
 function CheckPayment(){
-    console.log(PaymentID)
-    Swal.fire({
-        title: "Updating...",
-        html: "Please wait a moment"
-    });
-    Swal.showLoading()
+
 
     $.ajaxSetup({
         headers: {
@@ -218,11 +213,10 @@ function CheckPayment(){
                 $('#ConfirmingHandler-Text').text(response.Message)
                 ShowToast('success' , response.Message)
             }
-            Swal.close()
+
         }
     });
 
-    Swal.close()
 }
 
 
@@ -312,7 +306,7 @@ function LoadTransactionTable(){
                                                             <td>`+HistoryDate+`</td>
                                                             <td>$`+History.Amount+`</td>
                                                             <td>`+ History.Type +`</td>
-                                                            <td>KAC</td>
+                                                            <td>`+ History.Currency +`</td>
                                                             <td>`+ History.Description+`</td>
                                                         </tr>`;
                 $('#TransactionTable').append(row);
