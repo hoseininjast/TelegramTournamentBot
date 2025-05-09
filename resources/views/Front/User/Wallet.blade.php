@@ -174,8 +174,8 @@
 
 
                                                                         <div class="mt-3">
-                                                                            <a id="PaymentButton" class="mybtn mybtn-success mybtn-pill-90" href="#" target="_blank">Pay</a>
-                                                                            <button id="CheckStatusButton" class="mybtn mybtn-primary mybtn-pill-50 ">Check Status</button>
+                                                                            <a id="PaymentButton" class="mybtn mybtn-success mybtn-pill-90 " href="#" target="_blank">Pay</a>
+                                                                            <button id="CheckStatusButton" class="mybtn mybtn-primary mybtn-pill-50 mb-3 mt-4">Check Status</button>
                                                                             <button id="CancelButton" class="mybtn mybtn-danger mybtn-pill-80 ">Cancel</button>
                                                                         </div>
 
