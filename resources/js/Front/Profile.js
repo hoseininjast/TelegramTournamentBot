@@ -210,6 +210,9 @@ function ChangeSections(Section) {
 
     $('.MainDashboardSections').hide(400);
     $('#' + Section + 'Section').show(400);
+    $('html, body').animate({
+        scrollTop: $('#MainDashboardSectionDiv').offset().top
+    }, 1000);
 
 
 }

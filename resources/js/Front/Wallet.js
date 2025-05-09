@@ -252,10 +252,16 @@ TokenButtons.forEach((plan) => plan.addEventListener('click', (event) => {
 
 
 PriceButtons.forEach((plan) => plan.addEventListener('click', (event) => {
-    Amount = plan.getAttribute('data-Amount');
-    $('#InvoiceButton').show(400)
+    DepositAmountSelected(plan)
 }));
 
+function DepositAmountSelected(element){
+    Amount = element.getAttribute('data-Amount');
+    $('.PriceButton').removeClass('mybtn-success')
+    $(element.id).addClass('TokenButtonSelected')
+    $('#SelectedAmount').text('$' + Amount);
+    $('#InvoiceButton').show(400)
+}
 
 
 function LoadTransactionTable(){

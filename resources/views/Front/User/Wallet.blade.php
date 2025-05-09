@@ -105,6 +105,9 @@
                                                                     </div>
                                                                     <div class="AmountDiv" style="display: none">
                                                                         <h6 class="pt-2"> Select Amount</h6>
+                                                                        <div class="row">
+                                                                            <span>Selected Amount : <span id="SelectedAmount"></span></span>
+                                                                        </div>
                                                                         <div class="row pt-2">
                                                                             <div class="col-6">
                                                                                 <button class="mybtn mybtn-primary mybtn-pill-40 PriceButton" data-Amount="1">$1</button>

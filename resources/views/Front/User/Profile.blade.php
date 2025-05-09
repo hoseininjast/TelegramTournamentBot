@@ -135,7 +135,7 @@
     <section class="user-main-dashboard">
         <div class="container">
             <div class="row">
-                <div class="col-xl-12">
+                <div class="col-xl-12" id="MainDashboardSectionDiv">
                     <main class="MainDashboardSections" id="AffiliateSection" >
                         <div class="main-box affiliate-box">
                             <div class="header-area">
