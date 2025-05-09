@@ -989,7 +989,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
                     $encodedKeyboard = json_encode($keyboard);
 
 
-                    $this->CustomResponseWithPhoto('Welcome to <b>"Krypto Arena"</b> \n Please use below button to open new mini app🤝💸🌠' , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
+                    $this->CustomResponseWithPhoto('Welcome to <b>"Krypto Arena"</b> <br><br> Please use below button to open new mini app🤝💸🌠' , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
 
 /*
