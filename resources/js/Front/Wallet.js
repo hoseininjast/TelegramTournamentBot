@@ -158,6 +158,13 @@ async function CreateInvoice() {
 
 
 function CheckPayment(){
+
+    Swal.fire({
+        title: "Updating...",
+        html: "Please wait a moment"
+    });
+    Swal.showLoading()
+
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -210,9 +217,11 @@ function CheckPayment(){
                 $('#ConfirmingHandler-Text').text(response.Message)
                 ShowToast('success' , response.Message)
             }
-
+            Swal.close()
         }
     });
+
+    Swal.close()
 }
 
 
