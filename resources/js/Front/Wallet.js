@@ -130,9 +130,6 @@ async function CreateInvoice() {
                     $('#PaymentButton').hide(400).attr('href' , "#");
                 }
 
-                $('html, body').animate({
-                    scrollTop: $('#InvoiceButton').offset().top
-                }, 1000);
 
 
 
@@ -154,6 +151,10 @@ async function CreateInvoice() {
 
 
     $('#PaymentArea').show(400)
+
+    $('html, body').animate({
+        scrollTop: $('#PaymentArea').offset().top
+    }, 1000);
 }
 
 
