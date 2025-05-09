@@ -32,6 +32,7 @@ const MaxWithdrawButton = document.querySelector("#MaxWithdrawButton");
 
 let Token = 'Polygon';
 let Amount = 1;
+let PaymentID = null;
 
 const PolygonAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
 const TonAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
@@ -108,6 +109,7 @@ async function CreateInvoice() {
 
                 $('#OrderIdVal').val(response.Data.order_id)
                 $('#PaymentIDVal').val(response.PaymentID)
+                PaymentID = response.PaymentID;
 
                 $('#DepositAmount').val(response.Data.pay_amount)
                 $('#WalletAddress').val(response.Data.pay_address)
@@ -129,7 +131,7 @@ async function CreateInvoice() {
                 }
 
                 $('html, body').animate({
-                    scrollTop: $('#PaymentArea').offset().top
+                    scrollTop: $('#OrderID').offset().top
                 }, 1000);
 
 
@@ -167,7 +169,7 @@ function CheckPayment(){
     $.ajax({
         url: route('V1.Payment.Check' ),
         data: {
-            PaymentID: ReadSession('payment_id'),
+            PaymentID: PaymentID,
         },
         success: function (response) {
 

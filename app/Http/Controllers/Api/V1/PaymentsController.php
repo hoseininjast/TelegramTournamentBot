@@ -131,23 +131,27 @@ class PaymentsController extends Controller
             $paymentDetails = json_decode($paymentDetails , true);
 
             if($payments->Status == 'Finished'){
-                return [
-                    'Message' => 'this payment paid successfully.',
-                    'Code' => 5
-                ];
+                return response()->json([
+                    'Code' => 5,
+                    'Message' => 'this payment paid successfully.'
+                ] , 200);
+
+
             }
 
             if ($paymentDetails['payment_status'] == 'confirming' || $paymentDetails['payment_status'] == 'confirmed' || $paymentDetails['payment_status'] == 'sending'){
-                return [
-                    'Message' => 'confirming payment in blockchain , please wait for confirmation.',
-                    'Code' => 1
-                ];
+
+                return response()->json([
+                    'Code' => 1,
+                    'Message' => 'confirming payment in blockchain , please wait for confirmation.'
+                ] , 200);
             }
             if ($paymentDetails['payment_status'] == 'waiting' ){
-                return [
-                    'Message' => 'waiting for payment to be paid',
-                    'Code' => 2
-                ];
+
+                return response()->json([
+                    'Code' => 2,
+                    'Message' => 'waiting for payment to be paid'
+                ] , 200);
             }
             if ($paymentDetails['payment_status'] == 'failed' || $paymentDetails['payment_status'] == 'refunded' ||$paymentDetails['payment_status'] == 'expired'  ){
 
@@ -155,10 +159,13 @@ class PaymentsController extends Controller
                     'Status' => 'Canceled'
                 ]);
 
-                return [
-                    'Message' => 'the payment not completed due to the some errors',
-                    'Code' => 3
-                ];
+
+                return response()->json([
+                    'Code' => 3,
+                    'Message' => 'the payment not completed due to the some errors'
+                ] , 200);
+
+
             }
             if ($paymentDetails['payment_status'] == 'partially_paid'|| $paymentDetails['payment_status'] == 'finished'){
 
@@ -178,11 +185,10 @@ class PaymentsController extends Controller
                     'UserTransactionHash' => $paymentDetails['payin_hash'],
                     'Status' => 'Paid'
                 ]);
-
-                return [
-                    'Message' => 'this payment has been finished successfully , the amount has been added to your wallet.',
+                return response()->json([
                     'Code' => 4,
-                ];
+                    'Message' => 'this payment has been finished successfully , the amount has been added to your wallet.'
+                ] , 200);
 
 
 
