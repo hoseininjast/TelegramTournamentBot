@@ -118,7 +118,7 @@ class PaymentsController extends Controller
     public function Check(Request $request)
     {
         $request->validate([
-            'PaymentID' => 'required|integer|exists:payments,PaymentID',
+            'PaymentID' => 'required|integer|exists:payments,id',
         ]);
         try {
 
