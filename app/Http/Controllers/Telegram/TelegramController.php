@@ -991,6 +991,7 @@ Ton-UQAlf5oyxlRyFNb_hk8czxMCZXeqXw24dseIodDwbC77EmZB
 
                     $this->CustomResponseWithPhoto("Welcome to Krypto Arena \n Please use below button to open new mini app🤝💸🌠" , $encodedKeyboard , 'https://kryptoarena.fun/images/Robot/Main.png' );
                 }
+
 /*
                 if (preg_match('/\/start\s([0-9]+)/' , $this->Data['message']['text']) ){
                     $ReferralID = preg_replace("/\/start\s/", "", $this->Data['message']['text']);
