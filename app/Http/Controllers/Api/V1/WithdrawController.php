@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\WithdrawUSDTJob;
 use App\Models\TelegramUsers;
 use App\Models\Withdraws;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -32,6 +34,7 @@ class WithdrawController extends Controller
             'Status' => 'Pending',
             'UserID' => $User->id,
         ]);
+        WithdrawUSDTJob::dispatch($Withdraw)->delay(Carbon::now()->addMinutes(1));
 
         return response()->json([
             'Data' => [

@@ -12,6 +12,7 @@ class UserPaymentHistory extends Model
         'Amount',
         'Currency',
         'Type',
+        'TransactionHash',
     ];
 
 
