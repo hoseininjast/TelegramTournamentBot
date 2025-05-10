@@ -34,7 +34,7 @@ class WithdrawController extends Controller
             'Status' => 'Pending',
             'UserID' => $User->id,
         ]);
-        WithdrawUSDTJob::dispatch($Withdraw)->delay(Carbon::now()->addMinutes(1));
+        WithdrawUSDTJob::dispatch($Withdraw->id)->delay(Carbon::now()->addMinutes(1));
 
         return response()->json([
             'Data' => [
