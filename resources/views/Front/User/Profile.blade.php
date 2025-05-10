@@ -288,7 +288,7 @@
                                             <h4>Personal Details</h4>
                                         </div>
                                         <div class="s-content-area">
-                                            <form action="{{route('Front.Profile.Update')}}" enctype="multipart/form-data" method="post">
+                                            <form >
                                                 @csrf
                                                 <input type="hidden" name="UserID" id="UserID">
                                                 <div class="form-group">
