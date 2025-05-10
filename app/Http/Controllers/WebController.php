@@ -16,8 +16,6 @@ class WebController extends Controller
     public function GotoDashboard()
     {
 
-        NotifyTelegramUsersJob::dispatch(76203510 , 'test');
-
         return redirect()->route('Dashboard.index');
     }
 }
