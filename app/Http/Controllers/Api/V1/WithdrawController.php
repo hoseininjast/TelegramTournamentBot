@@ -26,6 +26,7 @@ class WithdrawController extends Controller
         $User->update([
             'KAT' => $User->KAT - $request->Amount,
         ]);
+
         $Withdraw = Withdraws::create([
             'WithdrawID' => 'KAW' . rand(10000000, 99999999),
             'Amount' => $request->Amount,
@@ -34,7 +35,8 @@ class WithdrawController extends Controller
             'Status' => 'Pending',
             'UserID' => $User->id,
         ]);
-        WithdrawUSDTJob::dispatch($Withdraw->id)->delay(Carbon::now()->addMinutes(1));
+
+        WithdrawUSDTJob::dispatch($Withdraw->id);
 
         return response()->json([
             'Data' => [

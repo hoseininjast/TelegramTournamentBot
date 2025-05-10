@@ -26,7 +26,7 @@ class UserController extends Controller
     {
         $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
 
-        $ReferralUsers = TelegramUsers::where('ReferralID' , $User->id)->get();
+        $ReferralUsers = TelegramUsers::where('ReferralID' , $User->id)->get()->sortByDesc('created_at');
         $ReferralCount = $ReferralUsers->count();
         $ReferralIncome = $ReferralCount * 0.01;
 

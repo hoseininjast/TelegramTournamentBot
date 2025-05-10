@@ -22,7 +22,7 @@ class WithdrawUSDTJob implements ShouldQueue
     /**
      * Create a new job instance.
      */
-    private $WithdrawID  = null;
+    protected $WithdrawID  = null;
     public function __construct(int $WithdrawID)
     {
         $this->$WithdrawID = $WithdrawID;
