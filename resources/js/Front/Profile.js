@@ -217,12 +217,43 @@ function ChangeSections(Section) {
 
 }
 
-function ShowLoading(){
+function UpdateProfile(){
     Swal.fire({
         title: "Updating...",
         html: "Please wait a moment"
     });
-    Swal.showLoading()
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.Profile.Update' ),
+        data: {
+            UserID: User.id,
+            UserName: $('#UserName').val(),
+            WalletAddress: $('#WalletAddress').val(),
+        },
+        success: function (response) {
+            if(response.Data.Code == 200){
+                Swal.fire({
+                    icon: 'success',
+                    text: response.Data.Message,
+                });
+                window.location.reload();
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    text: 'please try again',
+                });
+            }
+        }
+    });
+
 }
 
 AffiliateButton.addEventListener("click", () =>
@@ -238,7 +269,7 @@ SettingButton.addEventListener("click", () =>
 );
 
 UpdateProfileButton.addEventListener("click", () =>
-    ShowLoading()
+    UpdateProfile()
 );
 
 

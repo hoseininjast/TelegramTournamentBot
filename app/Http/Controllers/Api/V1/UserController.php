@@ -203,4 +203,28 @@ class UserController extends Controller
 
     }
 
+    public function Update(Request $request)
+    {
+        $request->validate([
+            'UserID' => 'required|numeric|exists:telegram_users,id',
+            'UserName' => 'required|string|'.Rule::unique('telegram_users' , 'UserName')->ignore($request->UserID),
+            'WalletAddress' => 'nullable|string|regex:/^(0x)?[0-9a-fA-F]{40}$/',
+
+        ]);
+        $User = TelegramUsers::where('id' , $request->UserID)->first();
+
+        $User->update([
+            'UserName' => $request->UserName,
+            'WalletAddress' => $request->WalletAddress,
+        ]);
+
+
+        return response()->json([
+            'Data' => [
+                'Message' => 'Profile Updated successfully',
+                'Code' => 200,
+            ],
+        ] , 200);
+    }
+
 }
