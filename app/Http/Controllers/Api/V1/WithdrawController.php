@@ -15,7 +15,7 @@ class WithdrawController extends Controller
     public function Create(Request $request)
     {
         $request->validate([
-            'Amount' => 'required|numeric|min:2',
+            'Amount' => 'required|numeric|min:1',
             'PayingAddress' => 'required|string|regex:/^(0x)?(?i:[0-9a-f]){40}$/',
             'UserID' => 'required|integer|exists:telegram_users,id',
         ]);

@@ -329,7 +329,7 @@ function MakeWithdraw(){
     var WithdrawAmount = $('#WithdrawAmount').val();
     var PayingAddress = $('#PayingAddress').val();
 
-    if(WithdrawAmount < 3){
+    if(WithdrawAmount < 1){
         ShowAlert('error' , 'you must withdraw at least 2 KAT');
     }else{
         Swal.fire({
