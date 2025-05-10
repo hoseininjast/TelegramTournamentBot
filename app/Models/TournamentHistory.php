@@ -10,8 +10,6 @@ class TournamentHistory extends Model
     protected $fillable = [
         'TournamentID',
         'Winners',
-        'AwardsProof',
-        'Image',
     ];
     use HasFactory;
 

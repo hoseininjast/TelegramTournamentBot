@@ -334,6 +334,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#Championship').text(TournamentsWinned)
 
         $('#UserID').val(User.id)
+        $('#UserIDForPlato').val(User.id)
         $('#UserName').val(User.UserName)
         $('#PlatoID').val(User.PlatoID)
         $('#WalletAddress').val(User.WalletAddress)

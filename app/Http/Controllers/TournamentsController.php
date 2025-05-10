@@ -334,7 +334,6 @@ Match time will be announced soon.
     {
         $request->validate([
             'Winner' => 'required|array',
-            'Image' => 'nullable|file|image',
         ]);
 
         $Tournament = Tournaments::find($ID);
@@ -347,8 +346,8 @@ Match time will be announced soon.
             foreach ($request->Winner as $player) {
                 $User = TelegramUsers::find($player);
                 $Players[$key] = $User->id;
-                $Winners .= "Position ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1 ] ." \n";
-                $key++;
+                $Winners .= "Position ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1] ." \n";
+
 
                 UserPaymentHistory::create([
                     'UserID' => $User->id,
@@ -361,17 +360,12 @@ Match time will be announced soon.
                 $User->update([
                     'KAT' => $User->KAT + $Tournament->Awards[$key - 1 ]
                 ]);
-            }
-            if($request->hasFile('Image')){
-                $AttachmentAddress = $this->UploadImage($request->Image , 'TournamentsHistory');
-            }else{
-                $AttachmentAddress = null;
+                $key++;
             }
 
             TournamentHistory::create([
                 'TournamentID' => $Tournament->id,
                 'Winners' => $Players,
-                'Image' => $AttachmentAddress,
             ]);
             $Tournament->update([
                 'Status' => 'Finished'

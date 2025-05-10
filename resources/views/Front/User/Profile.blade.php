@@ -245,7 +245,7 @@
                                         <div class="s-content-area">
                                             <form action="{{route('Front.Profile.UpdatePlatform')}}" enctype="multipart/form-data" method="post">
                                                 @csrf
-                                                <input type="hidden" name="UserID" id="UserID">
+                                                <input type="hidden" name="UserID" id="UserIDForPlato">
                                                 <div class="form-group">
                                                     <label for="PlatoID"> Plato ID</label>
                                                     <input class="form-control" id="PlatoID" name="PlatoID" type="text" placeholder="Enter Your Plato ID">
