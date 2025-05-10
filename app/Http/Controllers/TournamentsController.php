@@ -13,6 +13,7 @@ use App\Models\TournamentHistory;
 use App\Models\TournamentPlans;
 use App\Models\Tournaments;
 use App\Models\User;
+use App\Models\UserPaymentHistory;
 use App\Models\UserTournaments;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
@@ -348,6 +349,18 @@ Match time will be announced soon.
                 $Players[$key] = $User->id;
                 $Winners .= "Position ". $this->numToWordForStages($key) ." : ". $User->PlatoID ." => $". $Tournament->Awards[$key - 1 ] ." \n";
                 $key++;
+
+                UserPaymentHistory::create([
+                    'UserID' => $User->id,
+                    'Description' => "Tournament Win : {$Tournament->Name}",
+                    'Amount' => $Tournament->Awards[$key - 1 ],
+                    'Currency' => 'KAT',
+                    'Type' => 'In',
+                ]);
+
+                $User->update([
+                    'KAT' => $User->KAT + $Tournament->Awards[$key - 1 ]
+                ]);
             }
             if($request->hasFile('Image')){
                 $AttachmentAddress = $this->UploadImage($request->Image , 'TournamentsHistory');
