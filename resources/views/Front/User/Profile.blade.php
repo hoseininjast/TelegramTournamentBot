@@ -305,7 +305,7 @@
                                                     <label for="ImageInput">Image</label>
                                                     <input type="file" accept="image/*"  class="form-control ImageInput" id="ImageInput" name="ImageInput">
                                                 </div>
-                                                <button type="submit" class=" mybtn mybtn-primary mybtn-pill-40 " id="UpdateProfileButton">Update</button>
+                                                <button type="button" class=" mybtn mybtn-primary mybtn-pill-40 " id="UpdateProfileButton">Update</button>
                                             </form>
 
                                         </div>
