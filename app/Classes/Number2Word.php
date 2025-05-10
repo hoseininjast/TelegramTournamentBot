@@ -5,40 +5,9 @@ namespace App\Classes;
 class Number2Word
 {
 
-    protected $digit1 = array(
-        0 => 'صفر',
-        1 => 'یک',
-        2 => 'دو',
-        3 => 'سه',
-        4 => 'چهار',
-        5 => 'پنج',
-        6 => 'شش',
-        7 => 'هفت',
-        8 => 'هشت',
-        9 => 'نه',
-    );
-    protected $digit1_5 = array(
-        1 => 'یازده',
-        2 => 'دوازده',
-        3 => 'سیزده',
-        4 => 'چهارده',
-        5 => 'پانزده',
-        6 => 'شانزده',
-        7 => 'هفده',
-        8 => 'هجده',
-        9 => 'نوزده',
-    );
-    protected $digit2 = array(
-        1 => 'ده',
-        2 => 'بیست',
-        3 => 'سی',
-        4 => 'چهل',
-        5 => 'پنجاه',
-        6 => 'شصت',
-        7 => 'هفتاد',
-        8 => 'هشتاد',
-        9 => 'نود'
-    );
+    protected $digit1 = array("0"=>"zero","1"=>"one","2"=>"two","3"=>"three","4"=>"four","5"=>"five","6"=>"six","7"=>"seven","8"=>"eight","9"=>"nine");
+    protected $digit1_5 = array("0"=>"ten","1"=>"eleven","2"=>"twelve","3"=>"thirteen","4"=>"fourteen","5"=>"fifteen","6"=>"sixteen","7"=>"seventeen","8"=>"eighteen","9"=>"nineteen");
+    protected $digit2 =array("1"=>"ten","2"=>"twenty","3"=>"thirty","4"=>"forty","5"=>"fifty","6"=>"sixty","7"=>"seventy","8"=>"eighty","9"=>"ninety");
     protected $digit3 = array(
         1 => 'صد',
         2 => 'دویست',
@@ -111,7 +80,7 @@ class Number2Word
         return $group_array;
     }
 
-    public function numberToWords($number) {
+   /* public function numberToWords($number) {
         $formated = $this->number_format($number, 0, '.', ',');
         $groups = explode(',', $formated);
 
@@ -129,61 +98,73 @@ class Number2Word
             }
         }
         return implode(' ' . $this->t['and'] . ' ', $parts);
-    }
+    }*/
 
     public function numToWordForStages($number) {
-        $unit = [
-            '',
-            'اول',
-            'دوم',
-            'سوم',
-            'چهارم',
-            'پنجم',
-            'ششم',
-            'هفتم',
-            'هشتم',
-            'نهم',
-            'دهم',
-        ];
-        $tens = [
-            '',
-            'ده',
-            'بیست',
-            'سی',
-            'چهل',
-            'پنجاه',
-            'شصت',
-            'هفتاد',
-            'هشتاد',
-            'نود',
-        ];
-        $special = [
-            'یازدهم',
-            'دوازدهم',
-            'سیزدهم',
-            'چهاردهم',
-            'پانزدهم',
-            'شانزدهم',
-            'هفدهم',
-            'هجدهم',
-            'نوزدهم',
-        ];
+        $units = array('', 'one', 'two', 'three', 'four',
+            'five', 'six', 'seven', 'eight', 'nine');
+
+        $tens = array('', 'ten', 'twenty', 'thirty', 'forty',
+            'fifty', 'sixty', 'seventy', 'eighty',
+            'ninety');
+
+        $special = array('eleven', 'twelve', 'thirteen',
+            'fourteen', 'fifteen', 'sixteen',
+            'seventeen', 'eighteen', 'nineteen');
+
         $words = '';
 
 
-        if ($number <= 10) {
-            $words .= $unit[$number];
+        if ($number < 10) {
+            $words .= $units[$number];
         } elseif ($number < 20) {
             $words .= $special[$number - 11];
         } else {
-            if($unit[$number % 10] != null){
-                $words .= $tens[(int)($number / 10)] . ' و ' . $unit[$number % 10];
-            }else{
-                $words .= $tens[(int)($number / 10)] . 'م';
-            }
+            $words .= $tens[(int)($number / 10)] . ' '
+                . $units[$number % 10];
         }
 
+
         return $words;
+    }
+
+    function numberToWords($number): string
+    {
+        $words = array(
+            0 => 'zero', 1 => 'one', 2 => 'two',
+            3 => 'three', 4 => 'four', 5 => 'five',
+            6 => 'six', 7 => 'seven', 8 => 'eight',
+            9 => 'nine', 10 => 'ten', 11 => 'eleven',
+            12 => 'twelve', 13 => 'thirteen',
+            14 => 'fourteen', 15 => 'fifteen',
+            16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
+            19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
+            40 => 'forty', 50 => 'fifty', 60 => 'sixty',
+            70 => 'seventy', 80 => 'eighty',
+            90 => 'ninety'
+        );
+
+        if ($number < 20) {
+            return $words[$number];
+        }
+
+        if ($number < 100) {
+            return $words[10 * floor($number / 10)] .
+                ' ' . $words[$number % 10];
+        }
+
+        if ($number < 1000) {
+            return $words[floor($number / 100)] . ' hundred '
+                . $this->numToWordsRec($number % 100);
+        }
+
+        if ($number < 1000000) {
+            return $this->numToWordsRec(floor($number / 1000)) .
+                ' thousand ' . $this->numToWordsRec($number % 1000);
+        }
+
+        return $this->numToWordsRec(floor($number / 1000000)) .
+            ' million ' . $this->numToWordsRec($number % 1000000);
     }
 
 

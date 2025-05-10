@@ -32,7 +32,8 @@
                                                 <th scope="row">{{$loop->iteration}}</th>
                                                 <td>{{$tournament->Name}}</td>
                                                 <td>{{$tournament->Game->Name}}</td>
-                                                <td>{{$tournament->Price}}</td>
+                                                <td>{{$tournament->Mode}}</td>
+                                                <td>${{$tournament->Price}}</td>
                                                 <td>{{$tournament->PlayerCount}}</td>
                                                 <td>{{$tournament->Status}}</td>
                                                 <td>
