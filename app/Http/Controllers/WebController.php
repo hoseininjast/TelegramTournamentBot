@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\NowPayment;
+use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\TelegramUsers;
 use Telegram\Bot\Api;
 
@@ -14,6 +15,9 @@ class WebController extends Controller
     }
     public function GotoDashboard()
     {
+
+        NotifyTelegramUsersJob::dispatch(76203510 , 'test');
+
         return redirect()->route('Dashboard.index');
     }
 }
