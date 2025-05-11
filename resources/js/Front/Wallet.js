@@ -298,9 +298,10 @@ function LoadTransactionTable(){
         success: function (response) {
 
             $('#TransactionTable').empty()
-            var key = 1;
+            var key = 0;
             $(response.Data.History).each(async function (index, History) {
                 let HistoryDate = moment(History.created_at).format("YY/M/D HH:mm");
+                key = index + 1;
                 if(History.TransactionHash != null){
                     var row = `<tr>
                                                             <td>`+key +`</td>
@@ -308,7 +309,7 @@ function LoadTransactionTable(){
                                                             <td>$`+History.Amount+`</td>
                                                             <td>`+ History.Type +`</td>
                                                             <td>`+ History.Currency +`</td>
-                                                            <td>`+ History.Description + ` <a href="`+History.TransactionHash + `" target="_blank"> PolygonScan</a> </td>
+                                                            <td>`+ History.Description + ` : <a href="`+History.TransactionHash + `" target="_blank">PolygonScan</a> </td>
                                                         </tr>`;
                 }else{
                     var row = `<tr>
@@ -322,7 +323,6 @@ function LoadTransactionTable(){
                 }
 
                 $('#TransactionTable').append(row);
-                key++;
             });
 
 

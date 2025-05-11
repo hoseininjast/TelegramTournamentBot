@@ -60,11 +60,11 @@ class UserController extends Controller
     public function UpdatePlatform(Request $request)
     {
         $request->validate([
-            'UserID' => 'required|numeric|exists:telegram_users,id',
+            'UserIDForPlato' => 'required|numeric|exists:telegram_users,id',
             'PlatoID' => 'required|string|'.Rule::unique('telegram_users' , 'PlatoID')->ignore($request->UserID),
 
         ]);
-        $User = TelegramUsers::where('id' , $request->UserID)->first();
+        $User = TelegramUsers::where('id' , $request->UserIDForPlato)->first();
 
         $User->update([
             'PlatoID' => $request->PlatoID,

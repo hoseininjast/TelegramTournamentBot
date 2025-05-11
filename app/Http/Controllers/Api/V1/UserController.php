@@ -13,6 +13,7 @@ use App\Models\UserPaymentHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use RealRashid\SweetAlert\Facades\Alert;
 use Telegram\Bot\Api;
 use Telegram\Bot\FileUpload\InputFile;
@@ -225,6 +226,40 @@ class UserController extends Controller
                 'Code' => 200,
             ],
         ] , 200);
+    }
+
+
+    public function UpdatePlatform(Request $request)
+    {
+        try{
+            $request->validate([
+                'UserID' => 'required|numeric|exists:telegram_users,id',
+                'PlatoID' => 'required|string|'.Rule::unique('telegram_users' , 'PlatoID')->ignore($request->UserID),
+
+            ]);
+
+            $User = TelegramUsers::where('id' , $request->UserID)->first();
+
+            $User->update([
+                'PlatoID' => $request->PlatoID,
+            ]);
+
+
+            return response()->json([
+                'Data' => [
+                    'Message' => 'Platforms Updated successfully',
+                    'Code' => 200,
+                ],
+            ] , 200);
+        }catch (ValidationException $exception){
+            return response()->json([
+                'Data' => [
+                    'Message' => 'selected PlatoID has already been taken.',
+                    'Code' => 300,
+                ],
+            ] , 200);
+        }
+
     }
 
 }

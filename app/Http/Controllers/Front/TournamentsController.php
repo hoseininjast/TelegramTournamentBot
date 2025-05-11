@@ -25,19 +25,19 @@ class TournamentsController extends Controller
 
     public function index()
     {
-        $Tournaments = Tournaments::all();
+        $Tournaments = Tournaments::all()->sortByDesc('id');
         return view('Dashboard.Tournaments.index')->with(['Tournaments' => $Tournaments]);
     }
 
     public function Open()
     {
-        $Tournaments = Tournaments::where('Status' , 'Pending')->get();
+        $Tournaments = Tournaments::where('Status' , 'Pending')->get()->sortByDesc('id');
         return view('Front.Tournaments.Open')->with(['Tournaments' => $Tournaments]);
     }
     public function List($GameID , $Mode)
     {
         $Game = Games::find($GameID);
-        $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , $Mode)->get();
+        $Tournaments = Tournaments::where('GameID' , $Game->id)->where('Mode' , $Mode)->get()->sortByDesc('id');
         return view('Front.Tournaments.index')->with(['Tournaments' => $Tournaments]);
     }
     public function Detail($TournamentID)

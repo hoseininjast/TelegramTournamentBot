@@ -11,6 +11,7 @@ import {init, initData, isTMA} from "@telegram-apps/sdk";
 
 
 const UpdateProfileButton = document.querySelector("#UpdateProfileButton");
+const UpdatePlatformButton = document.querySelector("#UpdatePlatformButton");
 
 const AffiliateButton = document.querySelector("#AffiliateButton");
 const PlatformButton = document.querySelector("#PlatformButton");
@@ -155,7 +156,6 @@ function LoadReferralPlans(){
                 }
 
 
-                console.log(ReferralIncomeCoins)
 
                 $("#ReferralIncome").html('<i class=" fa fa-coins text-warning mr-2" > </i>' + (ReferralIncomeCoins * 1000) );
 
@@ -244,11 +244,56 @@ function UpdateProfile(){
                     icon: 'success',
                     text: response.Data.Message,
                 });
-                window.location.reload();
+                setTimeout(
+                    function() {
+                        window.location.reload();
+                    }, 2000);
+
             }else{
                 Swal.fire({
                     icon: 'error',
-                    text: 'please try again',
+                    text: 'please try again' ,
+                });
+            }
+        }
+    });
+
+}
+
+function UpdatePlatform(){
+    Swal.fire({
+        title: "Updating...",
+        html: "Please wait a moment"
+    });
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.Profile.UpdatePlatform' ),
+        data: {
+            UserID: User.id,
+            PlatoID: $('#PlatoID').val(),
+        },
+        success: function (response) {
+            if(response.Data.Code == 200){
+                Swal.fire({
+                    icon: 'success',
+                    text: response.Data.Message,
+                });
+                setTimeout(
+                    function() {
+                        window.location.reload();
+                    }, 2000);
+            }else{
+                Swal.fire({
+                    icon: 'error',
+                    text: response.Data.Message ,
                 });
             }
         }
@@ -270,6 +315,10 @@ SettingButton.addEventListener("click", () =>
 
 UpdateProfileButton.addEventListener("click", () =>
     UpdateProfile()
+);
+
+UpdatePlatformButton.addEventListener("click", () =>
+    UpdatePlatform()
 );
 
 

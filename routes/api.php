@@ -39,6 +39,7 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
     Route::group(['prefix' => 'Profile' , 'as' => 'Profile.' ] , function (){
         Route::post('UpdateImage' , [\App\Http\Controllers\Api\V1\UserController::class , 'UpdateImage'])->name('UpdateImage');
         Route::post('Update' , [\App\Http\Controllers\Api\V1\UserController::class , 'Update'])->name('Update');
+        Route::post('UpdatePlatform' , [\App\Http\Controllers\Api\V1\UserController::class , 'UpdatePlatform'])->name('UpdatePlatform');
 
     });
 

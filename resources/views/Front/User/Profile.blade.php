@@ -243,9 +243,8 @@
                                             <h4>Platform Details</h4>
                                         </div>
                                         <div class="s-content-area">
-                                            <form action="{{route('Front.Profile.UpdatePlatform')}}" enctype="multipart/form-data" method="post">
-                                                @csrf
-                                                <input type="hidden" name="UserID" id="UserIDForPlato">
+                                            <form  >
+                                                <input type="hidden" name="UserIDForPlato" id="UserIDForPlato">
                                                 <div class="form-group">
                                                     <label for="PlatoID"> Plato ID</label>
                                                     <input class="form-control" id="PlatoID" name="PlatoID" type="text" placeholder="Enter Your Plato ID">
@@ -266,7 +265,7 @@
                                                     <input class="form-control" id="SupercellID" name="SupercellID" type="text" placeholder="clash of clans " disabled>
                                                 </div>
 
-                                                <button type="submit" class=" mybtn mybtn-primary mybtn-pill-40 " >Update</button>
+                                                <button type="button" id="UpdatePlatformButton" class=" mybtn mybtn-primary mybtn-pill-40 " >Update</button>
                                             </form>
 
                                         </div>

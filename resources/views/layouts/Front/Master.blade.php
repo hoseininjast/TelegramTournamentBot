@@ -115,8 +115,13 @@
 
 @if($errors->any())
     @foreach($errors->all() as $err)
+        @dd($err)
         <script>
-            ShowToast('error' , '{{$err}}')
+            Swal.fire({
+                icon: 'error',
+                title: "Something went wrong!",
+                text: '{{$err}}',
+            });
         </script>
     @endforeach
 @endif

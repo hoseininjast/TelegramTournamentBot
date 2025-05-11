@@ -22,28 +22,51 @@ class WithdrawController extends Controller
 
 
 
+
+
         $User = TelegramUsers::find($request->UserID);
-        $User->update([
-            'KAT' => $User->KAT - $request->Amount,
-        ]);
 
-        $Withdraw = Withdraws::create([
-            'WithdrawID' => 'KAW' . rand(10000000, 99999999),
-            'Amount' => $request->Amount,
-            'PayingAddress' => $request->PayingAddress,
-            'UserTransactionHash' => null,
-            'Status' => 'Pending',
-            'UserID' => $User->id,
-        ]);
+        if ($User->KAT == 0){
+            return response()->json([
+                'Data' => [
+                    'Message' => 'Your account balance is 0 and you cannot withdraw.',
+                    'Code' => 300,
+                ],
+            ] , 200);
+        }else{
+            if($User->KAT >= $request->Amount){
+                $User->update([
+                    'KAT' => $User->KAT - $request->Amount,
+                ]);
 
-        WithdrawUSDTJob::dispatch($Withdraw->id);
+                $Withdraw = Withdraws::create([
+                    'WithdrawID' => 'KAW' . rand(10000000, 99999999),
+                    'Amount' => $request->Amount,
+                    'PayingAddress' => $request->PayingAddress,
+                    'UserTransactionHash' => null,
+                    'Status' => 'Pending',
+                    'UserID' => $User->id,
+                ]);
 
-        return response()->json([
-            'Data' => [
-                'Message' => 'Withdraw request submitted successfully',
-                'Code' => 200,
-            ],
-        ] , 200);
+                WithdrawUSDTJob::dispatch($Withdraw->id);
+
+                return response()->json([
+                    'Data' => [
+                        'Message' => 'Withdraw request submitted successfully',
+                        'Code' => 200,
+                    ],
+                ] , 200);
+            }else{
+                return response()->json([
+                    'Data' => [
+                        'Message' => 'The requested amount is greater than your account balance, please try again.',
+                        'Code' => 400,
+                    ],
+                ] , 200);
+            }
+
+        }
+
 
 
 
