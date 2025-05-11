@@ -12,7 +12,6 @@
                                     <div class="image">
                                         <img src="{{$Tournament->Image}}" alt="">
                                     </div>
-                                    <button type="button" id="BackToDetailsButton" class="mybtn mybtn-info mybtn-pill-40 d-none" style="display: none">Back to Details</button>
 
                                     <div class="contant">
                                         <div class="mb-2">

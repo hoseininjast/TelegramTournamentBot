@@ -5,7 +5,6 @@ import {
 
 import {initData, isTMA} from '@telegram-apps/sdk';
 
-const BackToDetailsButton = document.querySelector("#BackToDetailsButton");
 
 const JoinTournamentButtons = document.querySelectorAll(".JoinButton");
 
@@ -138,10 +137,6 @@ JoinTournamentButtons.forEach((plan) => plan.addEventListener('click', (event) =
     JoinTournament(plan.getAttribute('data-TournamentID'))
 }));
 
-
-BackToDetailsButton.addEventListener("click", () =>
-    history.back()
-);
 
 
 
