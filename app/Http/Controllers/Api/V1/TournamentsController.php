@@ -56,11 +56,11 @@ class TournamentsController extends Controller
     {
         $request->validate([
             'TournamentID' => 'required|int|exists:tournaments,id',
-            'UserID' => 'required|int|exists:telegram_users,TelegramUserID',
+            'UserID' => 'required|int|exists:telegram_users,id',
         ]);
 
         $Tournaments = Tournaments::find($request->TournamentID);
-        $User = TelegramUsers::where('TelegramUserID' , $request->UserID)->first();
+        $User = TelegramUsers::where('id' , $request->UserID)->first();
 
         $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
 
@@ -141,11 +141,11 @@ class TournamentsController extends Controller
     {
         $request->validate([
             'TournamentID' => 'required|int|exists:tournaments,id',
-            'UserID' => 'required|int|exists:telegram_users,TelegramUserID',
+            'UserID' => 'required|int|exists:telegram_users,id',
         ]);
 
         $Tournaments = Tournaments::find($request->TournamentID);
-        $User = TelegramUsers::where('TelegramUserID' , $request->UserID)->first();
+        $User = TelegramUsers::where('id' , $request->UserID)->first();
 
         if($Tournaments->isJoined($User->id)){
             return response()->json([

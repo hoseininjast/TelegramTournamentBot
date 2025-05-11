@@ -32,9 +32,9 @@ class NotifyAllUsersAboutNewTournamentJob implements ShouldQueue
     public function handle(): void
     {
         $Tournament = $this->tournaments;
-        $Status = __('messages.Status.' . $Tournament->Status);
-        $Mode = __('messages.Mode.' . $Tournament->Mode);
-        $Type = __('messages.Type.' . $Tournament->Type);
+        $Status = $Tournament->Status;
+        $Mode = $Tournament->Mode;
+        $Type = $Tournament->Type;
         $adwards = '';
         foreach ($Tournament->Awards as $key => $award) {
             $adwards .= 'Position ' . $key + 1 . ' = $' .$award ."\n";
@@ -50,7 +50,7 @@ Name : {$Tournament->Name}
 Description : {$Tournament->Description}
 Type : {$Type}
 Mode : {$Mode}
- Entry  : $ {$Tournament->Price}
+Entry  : $ {$Tournament->Price}
 Players : {$Tournament->PlayerCount}
 Start Date : {$JalaliDate1}
 End Date : {$JalaliDate2}

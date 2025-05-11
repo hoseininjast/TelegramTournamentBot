@@ -1,18 +1,18 @@
 <?php
 return [
     'Type' => [
-        'Knockout' => 'حذفی',
-        'WorldCup' => 'ترکیبی',
-        'League' => 'لیگ',
+        'Knockout' => 'Knockout',
+        'WorldCup' => 'WorldCup',
+        'League' => 'League',
     ],
     'Mode' => [
-        'Free' => 'رایگان',
-        'Paid' => 'پولی',
+        'Free' => 'Free',
+        'Paid' => 'Paid',
     ],
     'Status' => [
-        'Pending' => 'در حال انتظار',
-        'Running' => 'در حال اجرا',
-        'Finished' => 'پایان یافته',
+        'Pending' => 'Pending',
+        'Running' => 'Running',
+        'Finished' => 'Finished',
     ],
     'Notifications' => [
         'Tournaments' => [

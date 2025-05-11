@@ -9,7 +9,33 @@ const BackToDetailsButton = document.querySelector("#BackToDetailsButton");
 
 const JoinTournamentButtons = document.querySelectorAll(".JoinButton");
 
+
+
+
+let TelegramUser;
 let User;
+
+function GetUser(UserID){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.User.Find' , UserID),
+        success: function (response) {
+            User = response.Data.User;
+        }
+    });
+
+}
+
+
+
 
 function CheckTournamentJoinStatus(TourID){
     $.ajaxSetup({
@@ -124,7 +150,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     if(isTMA()){
         initData.restore();
         const InitData = initData;
-        User = InitData.user();
+        TelegramUser = InitData.user();
+
+        GetUser(TelegramUser.id)
+
+
         var TourID = $('#TournamentID').val()
         CheckTournamentJoinStatus(TourID)
     }
