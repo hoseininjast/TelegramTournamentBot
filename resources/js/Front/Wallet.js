@@ -414,7 +414,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
     }else{
-        GetUser(76203510)
+   /*     GetUser(76203510)
         $('#ProfileUsername').text(User.UserName)
 
         const currentDate = moment(new Date(), 'YYYY-MM-DD');
@@ -424,7 +424,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ProfileImage').attr('src' , User.Image)
         LoadTransactionTable();
-        LoadWithdrawSection();
+        LoadWithdrawSection();*/
     }
 
 });

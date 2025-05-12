@@ -96,7 +96,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             window.history.back();
         });
     }else{
-        $.ajaxSetup({
+       /* $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -120,7 +120,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#NavbarCharge').html("<i class='fa fa-coins text-warning mr-1'></i>" + Charge);
         $('#NavbarKATCharge').html(User.KAT);
         $('#NavbarProfileImage').attr('src', ProfileImage);
-
+*/
     }
 
 

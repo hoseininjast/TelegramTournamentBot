@@ -395,7 +395,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         Swal.close()
 
     }else{
-        GetUser(76203510)
+      /*  GetUser(76203510)
         LoadReferralPlans()
 
         $('#ProfileUsername').text(User.UserName)
@@ -458,7 +458,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
         Swal.close()
-
+*/
     }
 
 });
