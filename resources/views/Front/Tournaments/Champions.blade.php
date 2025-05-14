@@ -55,12 +55,8 @@
                                 </div>
                                 <div class="right ">
                                     <div class="d-flex flex-column align-items-center">
-                                        <a href="{{route('Front.Profile.Show' ,$User->id )}}">
-                                            <img class="champion-image" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
-                                            <span class="text text-white"><img class="rounded-pill " width="15px" height="15px" src="{{asset('images/MainLogo.png')}}"  /> {{$User->UserName}}</span>
-
-                                        </a>
-
+                                        <img class="champion-image RedirectToProfile"  data-UserID="{{$User->id}}" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                        <span class="text text-white RedirectToProfile" data-UserID="{{$User->id}}" ><img class="rounded-pill " width="15px" height="15px" src="{{asset('images/MainLogo.png')}}"  /> {{$User->UserName}}</span>
                                     </div>
 
                                 </div>
@@ -96,12 +92,8 @@
                                 </div>
                                 <div class="right ">
                                     <div class="d-flex flex-column align-items-center">
-                                        <a href="{{route('Front.Profile.Show' ,$User->id )}}">
-                                            <img class="champion-image" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
-                                            <span class="text text-white"><img class="rounded-pill " width="15px" height="15px" src="{{asset('images/MainLogo.png')}}"  /> {{$User->UserName}}</span>
-
-                                        </a>
-
+                                        <img class="champion-image RedirectToProfile"  data-UserID="{{$User->id}}" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                        <span class="text text-white RedirectToProfile" data-UserID="{{$User->id}}" ><img class="rounded-pill " width="15px" height="15px" src="{{asset('images/MainLogo.png')}}"  /> {{$User->UserName}}</span>
                                     </div>
 
                                 </div>
