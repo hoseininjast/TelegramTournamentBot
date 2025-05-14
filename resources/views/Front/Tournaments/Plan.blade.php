@@ -93,7 +93,10 @@
                                             <img src="{{asset('Front/images/arcive/sa'. $loop->iteration + 3 .'.png')}}" alt="">
                                             <div class="content pl-5">
                                                 <div class="left2">
-                                                    <img class="champion-image" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+
+                                                    <a href="{{route('Front.Profile.Show' ,$User->id )}}">
+                                                        <img class="champion-image" src="{{$User->Image ? $User->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                    </a>
                                                 </div>
                                                 <div class="right2 vselement">
                                                     <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$User->PlatoID}}</span>
@@ -149,7 +152,10 @@
                                             <div class="left">
                                                 <div class="content">
                                                     <div class="left2">
-                                                        <img class="plan-image" src="{{$plan->Player1->Image ? $plan->Player1->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        <a href="{{route('Front.Profile.Show' ,$plan->Player1->id )}}">
+                                                            <img class="plan-image" src="{{$plan->Player1->Image ? $plan->Player1->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        </a>
+
                                                     </div>
                                                     <div class="right2 vselement pt-2">
                                                         <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player1->PlatoID}}</span>
@@ -166,7 +172,9 @@
                                             <div class="left">
                                                 <div class="content">
                                                     <div class="left2">
-                                                        <img class="plan-image" src="{{$plan->Player2->Image ? $plan->Player2->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        <a href="{{route('Front.Profile.Show' ,$plan->Player2->id )}}">
+                                                            <img class="plan-image" src="{{$plan->Player2->Image ? $plan->Player2->Image : asset('images/Users/DefaultProfile.png')}}" alt="">
+                                                        </a>
                                                     </div>
                                                     <div class="right2 vselement pt-2">
                                                         <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$plan->Player2->PlatoID}}</span>

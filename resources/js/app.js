@@ -1,8 +1,6 @@
 import './bootstrap';
 
-import { init, backButton ,closingBehavior,hapticFeedback , initData , isTMA ,requestFullscreen, isFullscreen  } from '@telegram-apps/sdk';
-import moment from "moment/moment.js";
-import {redirect} from "./utilities.js";
+import { init, backButton ,closingBehavior,hapticFeedback , initData , isTMA ,requestFullscreen  } from '@telegram-apps/sdk';
 
 let TelegramUser;
 let User;

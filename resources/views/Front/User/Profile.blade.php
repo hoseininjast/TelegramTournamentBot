@@ -296,6 +296,28 @@
                                                 </div>
 
                                                 <div class="form-group">
+                                                    <label for="KryptoArenaID">Krypto Arena ID</label>
+                                                    <input class="form-control" id="KryptoArenaID" name="KryptoArenaID" type="text" placeholder="Enter Your KryptoArena ID ">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="Bio">Bio</label>
+                                                    <textarea class="form-control" rows="5" placeholder="Type your Bio" name="Bio" id="Bio"></textarea>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="Country">Country (optional)</label>
+                                                    <input class="form-control" id="Country" name="Country" type="text" placeholder="Enter Your Country">
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label for="City">City (optional)</label>
+                                                    <input class="form-control" id="City" name="City" type="text" placeholder="Enter Your City ">
+                                                </div>
+
+
+                                                <div class="form-group">
                                                     <label for="WalletAddress">Polygon Wallet</label>
                                                     <input class="form-control" id="WalletAddress" name="WalletAddress" type="text" placeholder="Enter Your Polygon Wallet Address">
                                                 </div>
@@ -361,7 +383,7 @@
 @endsection
 
 @section('js')
-    @vite('resources/js/Front/Profile.js')
+    @vite('resources/js/Front/MyProfile.js')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js"></script>
     <script>

@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/Front/Profile.js',
+                'resources/js/Front/MyProfile.js',
                 'resources/js/Front/Champions.js',
                 'resources/js/Front/Wallet.js',
                 'resources/js/Front/Games.js',
@@ -16,7 +17,7 @@ export default defineConfig({
                 'resources/js/Front/Tournament.js',
                 'resources/js/Front/MyTournaments.js',
             ],
-            refresh: true,
+            refresh: false,
         }),
     ],
     /*

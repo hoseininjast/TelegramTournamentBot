@@ -63,6 +63,7 @@ class UserController extends Controller
                 'LastName' => $request->TelegramData['last_name'] ,
                 'UserName' => $request->TelegramData['username'] ,
                 'Image' => $request->TelegramData['photo_url'] ,
+                'Charge' => 1
             ]);
 
             if ($request->ReferralID){
@@ -210,6 +211,10 @@ class UserController extends Controller
             'UserID' => 'required|numeric|exists:telegram_users,id',
             'UserName' => 'required|string|'.Rule::unique('telegram_users' , 'UserName')->ignore($request->UserID),
             'WalletAddress' => 'nullable|string|regex:/^(0x)?[0-9a-fA-F]{40}$/',
+            'KryptoArenaID' => 'nullable|string|' . Rule::unique('telegram_users' , 'KryptoArenaID')->ignore($request->UserID),
+            'Bio' => 'nullable|string|max:255',
+            'Country' => 'nullable|string',
+            'City' => 'nullable|string',
 
         ]);
         $User = TelegramUsers::where('id' , $request->UserID)->first();
@@ -217,6 +222,10 @@ class UserController extends Controller
         $User->update([
             'UserName' => $request->UserName,
             'WalletAddress' => $request->WalletAddress,
+            'KryptoArenaID' => $request->KryptoArenaID,
+            'Bio' => $request->Bio,
+            'Country' => $request->Country,
+            'City' => $request->City,
         ]);
 
 

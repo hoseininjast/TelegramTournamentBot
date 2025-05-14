@@ -39,6 +39,7 @@ Route::group([ 'as' => 'Front.' ] , function (){
 
     });
 
+
     Route::group(['prefix' => 'Profile' , 'as' => 'Profile.' ] , function (){
         Route::get('index' , [\App\Http\Controllers\Front\UserController::class , 'index'])->name('index');
         Route::get('Wallet' , [\App\Http\Controllers\Front\UserController::class , 'Wallet'])->name('Wallet');

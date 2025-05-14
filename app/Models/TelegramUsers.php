@@ -15,13 +15,15 @@ class TelegramUsers extends Model
         'FirstName',
         'LastName',
         'UserName',
+        'KryptoArenaID',
         'Image',
+        'Bio',
+        'Country',
+        'City',
         'WalletAddress',
-        'TonWalletAddress',
         'Charge',
         'KAT',
         'PlatoID',
-        'PlatoScreenShot',
         'Status',
     ];
 
@@ -45,6 +47,18 @@ class TelegramUsers extends Model
         return $Tournaments;
 
     }
+    public function JoinedTournaments(): array
+    {
+        $JoinedTournaments = UserTournaments::where('UserID' , $this->id)->get();
+
+        $Tournaments = [];
+        foreach ($JoinedTournaments as $jt) {
+            $Tournaments[] = $jt->Tournament;
+        }
+
+        return $Tournaments;
+
+    }
 
     public function TournamentsWon()
     {
@@ -54,6 +68,20 @@ class TelegramUsers extends Model
         return TournamentHistory::all()->filter(function($tournament) {
             return in_array($this->id, $tournament->Winners) ? $tournament : null;
         });
+    }
+
+
+    public function TournamentsWonWithGame(int $GameID)
+    {
+
+        $W = TournamentHistory::whereHas('Tournament' , function ($q) use ($GameID) {
+            $q->where('GameID', '=', $GameID);
+        })->get();
+        return $W->filter(function($tournament) {
+            return in_array($this->id, $tournament->Winners) ? $tournament : null;
+        });
+
+
     }
 
 
@@ -78,6 +106,10 @@ class TelegramUsers extends Model
     public function ReferralPlanHistory()
     {
         return $this->hasMany(ReferralPlanHistory::class , 'UserID' , 'id');
+    }
+    public function PaymentHistory()
+    {
+        return $this->hasMany(UserPaymentHistory::class , 'UserID' , 'id');
     }
 
 

@@ -35,7 +35,7 @@ class UserController extends Controller
     public function Show($UserID)
     {
         $User = TelegramUsers::find($UserID);
-        return view('Front.User.Profile')->with(['User' => $User]);
+        return view('Front.User.ShowProfile')->with(['User' => $User]);
     }
     public function Update(Request $request)
     {
