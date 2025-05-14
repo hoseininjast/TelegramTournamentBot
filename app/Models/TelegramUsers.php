@@ -47,6 +47,20 @@ class TelegramUsers extends Model
         return $Tournaments;
 
     }
+    public function JoinedTournamentsWithGame($GameID)
+    {
+        $JoinedTournaments = UserTournaments::where('UserID' , $this->id)->get();
+
+        $Tournaments = [];
+        foreach ($JoinedTournaments as $jt) {
+            if($jt->Tournament->GameID == $GameID){
+                $Tournaments[] = $jt->Tournament;
+            }
+        }
+
+        return $Tournaments;
+
+    }
     public function JoinedTournaments(): array
     {
         $JoinedTournaments = UserTournaments::where('UserID' , $this->id)->get();

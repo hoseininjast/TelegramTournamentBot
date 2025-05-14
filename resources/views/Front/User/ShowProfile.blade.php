@@ -252,10 +252,13 @@
                                             <tbody>
                                             @foreach(\App\Models\Games::all() as $game)
                                                 @php
+                                                    $allTournamentsCount = $User->JoinedTournamentsWithGame($game->id)->count();
                                                     $JoinedTournaments = $User->TournamentsWonWithGame($game->id)->count();
-                                                    $allTournamentsCount = \App\Models\Tournaments::where('GameID' , $game->id)->count();
-                                                    $WinRatio = ($JoinedTournaments * 100) / $allTournamentsCount;
-
+                                                    if($JoinedTournaments != 0){
+                                                        $WinRatio = ($JoinedTournaments * 100) / $allTournamentsCount;
+                                                    }else{
+                                                        $WinRatio = 0;
+                                                    }
                                                 @endphp
                                                 <tr>
                                                     <td>
