@@ -203,4 +203,83 @@ class PaymentsController extends Controller
             ],200);
         }
     }
+
+
+    public function Transfer(Request $request)
+    {
+        $request->validate([
+            'UserID' => 'required|integer|exists:telegram_users,id',
+            'Amount' => 'required|numeric|min:2000',
+            'ReceiverUserID' => 'required|integer|exists:telegram_users,id',
+        ]);
+
+
+
+        $User = TelegramUsers::find($request->UserID);
+        $ReceiverUser = TelegramUsers::find($request->ReceiverUserID);
+
+        $Amount = $request->Amount;
+        $Fee = ($Amount / 100) * 10;
+        $Total = $Amount + $Fee;
+        $AmountToRemove = $Total / 1000;
+
+
+        if($User->Charge > $AmountToRemove){
+
+
+
+            $User->update([
+                'Charge' => $User->Charge - $AmountToRemove,
+            ]);
+
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => "Transfer KAC To : {$ReceiverUser->UserName}",
+                'Amount' => $Total,
+                'Type' => 'Transfer',
+            ]);
+
+
+
+            $ReceiverUser->update([
+                'Charge' => $ReceiverUser->Charge + $Amount,
+            ]);
+
+            UserPaymentHistory::create([
+                'UserID' => $ReceiverUser->id,
+                'Description' => "Receive KAC From : {$User->UserName}",
+                'Amount' => $Amount,
+                'Type' => 'In',
+            ]);
+
+
+            return response()->json([
+                'Data' => [
+                    'Message' => 'Transfer completed successfully.',
+                    'Code' => 1,
+                    'Status' => true,
+                ],
+            ] , 200);
+
+        }else{
+
+            return response()->json([
+                'Data' => [
+                    'Message' => 'You do not have enough KAC to transfer.',
+                    'Code' => 2,
+                    'Status' => false,
+                ],
+            ] , 200);
+
+
+
+
+        }
+
+
+
+
+    }
+
+
 }

@@ -55,8 +55,14 @@
                                         <a class="mybtn mybtn-primary disabled" disabled="" style="padding: 10px 115px;" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Swap</a>
 
                                     </div>
+
                                     <div class="col-12 mt-3">
                                         <a class="mybtn mybtn-primary" style="padding: 10px 85px;" id="pills-wt4-tab" data-toggle="pill" href="#pills-wt4" role="tab" aria-controls="pills-wt4" aria-selected="false">Transactions</a>
+
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <a class="mybtn mybtn-primary" style="padding: 10px 105px;" id="pills-wt5-tab" data-toggle="pill" href="#pills-wt5" role="tab" aria-controls="pills-wt5" aria-selected="false">Transfer</a>
 
                                     </div>
                                 </div>
@@ -456,6 +462,96 @@
 
                                         </div>
                                     </div>
+
+
+                                    <div class="tab-pane fade" id="pills-wt5" role="tabpanel" aria-labelledby="pills-wt5-tab">
+                                        <div class="dipo-box">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <div class="current-balance">
+                                                        <p>Current Balance</p>
+                                                        <h4>
+                                                            <span id="CurrentKACBalance">0</span> <span>KAC</span>
+                                                        </h4>
+                                                        <span class="t-sm">
+															1000 KAC = 1 USDT
+														</span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8">
+                                                    <div class="dipo_btc">
+                                                        <div class="header-area">
+                                                            <h4>Transfer KAC</h4>
+                                                            <p>
+                                                                you need to enter amount and Telegram UserName for internal transfer .
+                                                            </p>
+                                                        </div>
+                                                        <div class="form-area">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <form action="#">
+
+                                                                        <div class="form-group">
+                                                                            <label for="">Receiver UserName</label>
+                                                                            <div class="input-group mb-3">
+                                                                                <input type="text" class="form-control" id="ReceiverUserName" name="ReceiverUserName" placeholder="Receiver UserName" aria-label="Receiver UserName" aria-describedby="SearchUserForTransfer">
+                                                                                <button class="btn btn-outline-primary text-white" type="button" id="SearchUserForTransfer"><i class="fa fa-search"></i> Search</button>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div id="TransferStep2" style="display: none">
+
+
+
+
+                                                                            <div class="d-flex flex-column justify-content-center text-center ">
+                                                                                <input type="hidden" id="ReceiverUserID">
+                                                                                <input type="hidden" id="ReceiverUserUserNameVal">
+                                                                                <div class="col-12">
+                                                                                    <img src="" alt="User Image" id="ReceiverUserImage" class="rounded-pill" />
+                                                                                </div>
+                                                                                <div class="col-12 mt-3">
+                                                                                    <h4 id="ReceiverUserUserName"></h4>
+                                                                                </div>
+                                                                            </div>
+
+
+
+
+                                                                            <hr style="border: 1px solid white;" class="mt-5">
+                                                                            <div class="form-group mt-5">
+
+                                                                                <label for="">Amount</label>
+                                                                                <input type="text" id="TransferAmount" name="TransferAmount" class="input-field" placeholder="Amount" min="2000">
+
+                                                                                <span class="d-block mt-3">  Fee : <span id="TransferFee">0</span> KAC </span>
+                                                                                <span class="d-block"> Total : <span id="TotalAmount">0</span> KAC </span>
+                                                                            </div>
+
+
+
+                                                                            <button type="button" id="SubmitTransferButton" class="mybtn mybtn-success">Transfer</button>
+
+
+
+
+
+                                                                        </div>
+
+                                                                    </form>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="notice-area">
+                                                            <p><span>Transfer fee:</span> Your Transfer will also have 10% Fee for covering the transaction fee.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                 </div>
                             </div>

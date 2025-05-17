@@ -116,7 +116,7 @@ class UserController extends Controller
             'KATCharge' => 'required|numeric',
         ]);
         $User = TelegramUsers::find($ID);
-        
+
         $User->update([
             'Charge' => $request->Charge,
             'KAT' => $request->KATCharge,

@@ -66,12 +66,20 @@ class UserController extends Controller
                 'Charge' => 1
             ]);
 
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => "Register Reward",
+                'Amount' => 1,
+                'Type' => 'In',
+            ]);
+
             if ($request->ReferralID){
                 $RefferalUser = TelegramUsers::where('TelegramUserID' , $request->ReferralID)->first();
                 if($User->ReferralID == null && $RefferalUser->id != $User->id){
                     $User->update([
                         'ReferralID' => $RefferalUser->id
                     ]);
+
 
                     $ReferralPlanHistoryCount = ReferralPlanHistory::where('UserID' , $RefferalUser->id)->count();
                     if($ReferralPlanHistoryCount == 0){
@@ -82,6 +90,8 @@ class UserController extends Controller
                             $RefferalUser->update([
                                 'Charge' => $RefferalUser->Charge + $FirstStage->Award
                             ]);
+
+
 
                             UserPaymentHistory::create([
                                 'UserID' => $RefferalUser->id,
@@ -157,6 +167,33 @@ class UserController extends Controller
         ] , 200);
     }
 
+
+    public function Search(Request $request)
+    {
+        $request->validate([
+            'UserName' => 'required|string'
+        ]);
+
+        $User = TelegramUsers::where('UserName' , $request->UserName)->count();
+        if($User > 0){
+            $User = TelegramUsers::where('UserName' , $request->UserName)->first(['UserName' ,'id' ,'Image' ]);
+            return response()->json([
+                'Data' => [
+                    'User' => $User,
+                    'Message' => 'User Found',
+                    'Code' => 1
+                ],
+            ] , 200);
+        }else{
+            return response()->json([
+                'Data' => [
+                    'Message' => 'User Not Found',
+                    'Code' => 2
+                ],
+            ] , 200);
+        }
+
+    }
     public function UpdateImage(Request $request)
     {
         $request->validate([

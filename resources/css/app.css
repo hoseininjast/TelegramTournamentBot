@@ -599,3 +599,9 @@ body{
 .user-main-dashboard .erning-box{
     background-color: #070a28 !important;
 }
+
+
+#pills-wt5 > div > div > div.col-lg-8 > div > div.form-area > div > div > form > div:nth-child(1) > div > input{
+    border: unset;
+    background-color: #0b122e;
+}

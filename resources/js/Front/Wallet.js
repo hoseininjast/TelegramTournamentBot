@@ -29,6 +29,11 @@ const SubmitButton = document.querySelector("#SubmitButton");
 const MaxWithdrawButton = document.querySelector("#MaxWithdrawButton");
 
 
+const SearchUserForTransfer = document.querySelector("#SearchUserForTransfer");
+const SubmitTransferButton = document.querySelector("#SubmitTransferButton");
+const TransferAmountInput = document.querySelector("#TransferAmount");
+
+
 
 let Token = 'Polygon';
 let Amount = 1;
@@ -249,9 +254,52 @@ CheckStatusButton.addEventListener("click", () =>
 MaxWithdrawButton.addEventListener("click", () =>
     $('#WithdrawAmount').val(User.KAT)
 );
-
 SubmitButton.addEventListener("click", () =>
     MakeWithdraw()
+);
+SubmitTransferButton.addEventListener("click", () =>
+    MakeTransfer()
+);
+
+function CalculateFeeAndTotal(){
+    var Amount = $('#TransferAmount').val();
+    if(Amount == 0 || Amount == null){
+        $('#TransferFee').text(0).removeClass('text-danger').addClass('text-success')
+        $('#TotalAmount').text(0).removeClass('text-danger').addClass('text-success')
+    }else{
+        var Amount = parseInt(Amount)
+
+
+
+
+        if(Amount > (User.Charge * 1000 )){
+            ShowAlert('error' , 'You do not have enough KAC to transfer.');
+            var Fee =  ( (Amount / 100) * 10 );
+            var Total = Amount + Fee ;
+
+            $('#TransferFee').text(Fee).addClass('text-danger').removeClass('text-success')
+            $('#TotalAmount').text(Total).addClass('text-danger').removeClass('text-success')
+        }else{
+            var Fee =  ( (Amount / 100) * 10 );
+            var Total = Amount + Fee ;
+
+            $('#TransferFee').text(Fee).removeClass('text-danger').addClass('text-success')
+            $('#TotalAmount').text(Total).removeClass('text-danger').addClass('text-success')
+        }
+
+    }
+
+
+
+
+
+}
+TransferAmountInput.addEventListener("keyup", (element) =>
+    CalculateFeeAndTotal()
+);
+
+SearchUserForTransfer.addEventListener("click", () =>
+    SearchUserForTransfering()
 );
 
 TokenButtons.forEach((plan) => plan.addEventListener('click', (event) => {
@@ -337,6 +385,47 @@ function LoadWithdrawSection(){
 
 }
 
+function SearchUserForTransfering(){
+
+    var ReceiverUserName = $('#ReceiverUserName').val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.User.Search' ),
+        data: {
+          UserName:   ReceiverUserName
+        },
+        success: function (response) {
+            if(response.Data.Code == 1){
+                var ReceiverUser = response.Data.User;
+                $('#ReceiverUserID').val(ReceiverUser.id)
+                $('#ReceiverUserImage').attr('src', ReceiverUser.Image);
+                $('#ReceiverUserUserName').text(ReceiverUser.UserName)
+                $('#ReceiverUserUserNameVal').val(ReceiverUser.UserName)
+
+                $('#TransferStep2').show(400);
+
+            }else{
+                ShowAlert('error' , response.Data.Message);
+                $('#ReceiverUserID').empty()
+                $('#ReceiverUserUserNameVal').empty()
+                $('#ReceiverUserImage').attr('src', 'https://kryptoarena.fun/images/Users/DefaultProfile.png');
+                $('#ReceiverUserUserName').empty()
+                $('#TransferStep2').hide(400);
+            }
+        }
+    });
+
+}
+
 function MakeWithdraw(){
     var WithdrawAmount = $('#WithdrawAmount').val();
     var PayingAddress = $('#PayingAddress').val();
@@ -392,6 +481,78 @@ function MakeWithdraw(){
 
 
 }
+
+function MakeTransfer(){
+    var TransferAmount = $('#TransferAmount').val();
+    var ReceiverUserID = $('#ReceiverUserID').val();
+    var ReceiverUserUserName = $('#ReceiverUserUserNameVal').val();
+
+
+    var SenderBalance = parseFloat(User.Charge).toFixed(2) * 1000;
+    TransferAmount =  parseInt(TransferAmount)
+    var Fee = ( (TransferAmount / 100) * 10);
+    var NeededBalance = TransferAmount + Fee;
+
+    console.log(SenderBalance)
+    if(TransferAmount < 2000){
+        ShowAlert('error' , 'Your entered amount is under minimum , You must move at least 2000 KAC.');
+        return;
+    }
+    if(SenderBalance < NeededBalance){
+        ShowAlert('error' , 'You do not have enough KAC to transfer.');
+    }else{
+        Swal.fire({
+            title: "Are you sure?",
+            html: `
+    Are you sure to Transfer with this details?<br>
+    Amount : <b>`+TransferAmount+`</b> KAC <br>
+    Fee : <b>`+Fee+`</b> KAC <br>
+    Total : <b>`+NeededBalance+`</b> KAC <br>
+    Receiver User : <b>`+ReceiverUserUserName+`</b>
+  `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#6aff39",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes , Transfer Now !",
+            cancelButtonText: "No , Cancel !"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.showLoading();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    async: false,
+                    cache: false,
+                });
+                $.ajax({
+                    url: route('V1.Payment.Transfer'),
+                    data: {
+                        UserID: User.id,
+                        Amount: TransferAmount,
+                        ReceiverUserID: ReceiverUserID,
+                    },
+                    success: function (response) {
+                        if (response.Data.Code == 1 ) {
+                            ShowAlert('success' , response.Data.Message);
+                            setTimeout(
+                                function() {
+                                    window.location.reload();
+                                }, 2000);
+                        }else {
+                            ShowAlert('error' , response.Data.Message);
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+
+}
 window.addEventListener("DOMContentLoaded", async () => {
     if(isTMA()) {
         init();
@@ -411,10 +572,12 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ProfileImage').attr('src' , User.Image)
         LoadTransactionTable();
         LoadWithdrawSection();
+        var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
+        $('#CurrentKACBalance').text(Charge);
 
 
     }else{
-   /*     GetUser(76203510)
+        GetUser(76203510)
         $('#ProfileUsername').text(User.UserName)
 
         const currentDate = moment(new Date(), 'YYYY-MM-DD');
@@ -424,7 +587,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ProfileJoinDate').text(days + ' Days')
         $('#ProfileImage').attr('src' , User.Image)
         LoadTransactionTable();
-        LoadWithdrawSection();*/
+        LoadWithdrawSection();
+        var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
+        $('#CurrentKACBalance').text(Charge);
     }
 
 });
