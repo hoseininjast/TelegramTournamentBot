@@ -222,6 +222,7 @@ class PaymentsController extends Controller
         $Fee = ($Amount / 100) * 10;
         $Total = $Amount + $Fee;
         $AmountToRemove = $Total / 1000;
+        $AmountToAdd = $Amount / 1000;
 
 
         if($User->Charge > $AmountToRemove){
@@ -235,20 +236,20 @@ class PaymentsController extends Controller
             UserPaymentHistory::create([
                 'UserID' => $User->id,
                 'Description' => "Transfer KAC To : {$ReceiverUser->UserName}",
-                'Amount' => $Total,
+                'Amount' => $AmountToRemove,
                 'Type' => 'Transfer',
             ]);
 
 
 
             $ReceiverUser->update([
-                'Charge' => $ReceiverUser->Charge + $Amount,
+                'Charge' => $ReceiverUser->Charge + $AmountToAdd,
             ]);
 
             UserPaymentHistory::create([
                 'UserID' => $ReceiverUser->id,
                 'Description' => "Receive KAC From : {$User->UserName}",
-                'Amount' => $Amount,
+                'Amount' => $AmountToAdd,
                 'Type' => 'In',
             ]);
 
