@@ -1,10 +1,3 @@
-import {
-    ShowToast,
-    deleteSession,
-    setSession,
-    ReadSession, redirect, copyContent
-} from "../utilities.js";
-import moment from "moment/moment.js";
 
 import {init, initData, isTMA} from "@telegram-apps/sdk";
 
@@ -42,8 +35,6 @@ window.addEventListener("DOMContentLoaded", async () => {
         initData.restore();
         const InitData = initData;
         TelegramUser = InitData.user();
-
-    }else{
 
     }
 

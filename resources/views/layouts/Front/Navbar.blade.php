@@ -6,15 +6,15 @@
             <span>Tours</span>
         </a>
 
-        <a class="menu__item NavbarButtons" id="Navbar-MyTournaments" href="{{route('Front.Tournaments.MyTournaments')}}">
-           <i class="fa fa-chess mb-2"></i>
-            <span>My Tour</span>
+        <a class="menu__item NavbarButtons" id="Navbar-Search" href="{{route('Front.Profile.Search')}}">
+           <i class="fa fa-search mb-2"></i>
+            <span>Search</span>
         </a>
 
 
-        <a class="menu__item NavbarButtons" id="Navbar-Champions" href="{{route('Front.Tournaments.Champions')}}">
-           <i class="fa fa-trophy mb-2"></i>
-            <span>Champions</span>
+        <a class="menu__item NavbarButtons" id="Navbar-TaskAndInvite" href="{{route('Front.TaskAndInvite.index')}}">
+            <i class="fa fa-list-ul mb-2"></i>
+            <span>Task & Invite</span>
         </a>
 
         <a class="menu__item NavbarButtons" id="Navbar-Wallet" href="{{route('Front.Profile.Wallet')}}">

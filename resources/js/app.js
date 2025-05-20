@@ -1,6 +1,6 @@
 import './bootstrap';
 
-import { init, backButton ,closingBehavior,hapticFeedback , initData , isTMA ,requestFullscreen  } from '@telegram-apps/sdk';
+import { init, backButton ,closingBehavior,closeMiniApp,hapticFeedback , initData , isTMA ,requestFullscreen  } from '@telegram-apps/sdk';
 
 let TelegramUser;
 let User;
@@ -39,12 +39,12 @@ window.addEventListener("DOMContentLoaded", async () => {
     if(route().current('Front.Games') || route().current('Front.Tournaments.Detail') || route().current('Front.Tournaments.List') ){
         $('.NavbarButtons').removeClass('active')
         $('#Navbar-Tournaments').addClass('active')
-    }else if( route().current('Front.Tournaments.MyTournaments') ){
+    }else if( route().current('Front.Profile.Search') ){
         $('.NavbarButtons').removeClass('active')
-        $('#Navbar-MyTournaments').addClass('active')
-    }else if(route().current('Front.Tournaments.Champions') ){
+        $('#Navbar-Search').addClass('active')
+    }else if(route().current('Front.TaskAndInvite.index') ){
         $('.NavbarButtons').removeClass('active')
-        $('#Navbar-Champions').addClass('active')
+        $('#Navbar-TaskAndInvite').addClass('active')
     }else if(route().current('Front.Profile.Wallet') ){
         $('.NavbarButtons').removeClass('active')
         $('#Navbar-Wallet').addClass('active')
@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#NavbarProfileImage').attr('src', ProfileImage);
 
 
-        if(route().current('Front.Tournaments.Champions')){
+        if(route().current('Front.Profile.index')){
             backButton.unmount();
             backButton.hide();
             closingBehavior.mount();
@@ -92,6 +92,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         const off = backButton.onClick(() => {
             off();
             window.history.back();
+        });
+        const closing = closingBehavior.onClick(() => {
+            closeMiniApp();
         });
     }else{
        /* $.ajaxSetup({

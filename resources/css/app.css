@@ -605,3 +605,35 @@ body{
     border: unset;
     background-color: #0b122e;
 }
+
+.raffle-filter{
+    margin-top:50px;
+    background-image: url("https://kryptoarena.fun/Front/images/ui/BackgroundProfile-min.png");
+    background-repeat: no-repeat;
+    background-position: left;
+    background-size: cover;
+}
+
+.raffle-filter .search-area form input{
+    box-shadow: inset 0px 0px 7px 5px #00a2ff;
+    color: #ffffff;
+}
+
+
+.raffle-filter .search-area form input::placeholder{
+    color: #ffffff;
+}
+
+.raffle-filter .search-area form button{
+    color: #ffffff;
+}
+
+.raffles-section{
+    background: #0b122e;
+}
+
+.User-Image{
+    box-shadow: inset 0px 0px 4px 2px #00a2ff;
+    background: #013753;
+    padding: 10px;
+}

@@ -52,7 +52,12 @@
 
                                 <div class="row ">
                                     <div class="col-12 mt-3">
-                                        <a class="mybtn mybtn-primary disabled" disabled="" style="padding: 10px 115px;" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Swap</a>
+                                        <a class="mybtn mybtn-primary "  style="padding: 10px 115px;" id="pills-wt3-tab" data-toggle="pill" href="#pills-wt3" role="tab" aria-controls="pills-wt3" aria-selected="false">Swap</a>
+
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <a class="mybtn mybtn-primary" style="padding: 10px 105px;" id="pills-wt5-tab" data-toggle="pill" href="#pills-wt5" role="tab" aria-controls="pills-wt5" aria-selected="false">Transfer</a>
 
                                     </div>
 
@@ -61,10 +66,7 @@
 
                                     </div>
 
-                                    <div class="col-12 mt-3">
-                                        <a class="mybtn mybtn-primary" style="padding: 10px 105px;" id="pills-wt5-tab" data-toggle="pill" href="#pills-wt5" role="tab" aria-controls="pills-wt5" aria-selected="false">Transfer</a>
 
-                                    </div>
                                 </div>
 
 
@@ -299,136 +301,82 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="current-balance">
-                                                        <p>Current Balance</p>
+                                                        <p>Current KAT Balance</p>
                                                         <h4>
-                                                            0.00051 <span>BTC</span>
+                                                            <span id="SwapKATBalance"> 0</span> <span>KAT</span>
+                                                        </h4>
+                                                        <p>Current KAC Balance</p>
+                                                        <h4>
+                                                            <span id="SwapKACBalance"> 0</span> <span>KAC</span>
                                                         </h4>
                                                         <span class="t-sm">
-															1BTC = 39746.90 USD
+															1 KAT = 1000 KAC
 														</span>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-8">
                                                     <div class="dipo_btc">
                                                         <div class="header-area">
-                                                            <h4>Buy cryptocurrency directly to your Jugaro account</h4>
+                                                            <h4>Swap your KAT to KAC easily</h4>
                                                             <p>
-                                                                Once payment is completed, your cryptocurrency will be available in your Jugaro
-                                                                a																unt within minutes
+                                                                Once payment is completed, your KAC will be available in your Wallet
                                                             </p>
                                                         </div>
-                                                        <div class="crypto-info">
-                                                            <h5>1. Choose the crypto you wish to buy, enter the amount, and choose your
-                                                                favorite payment method.</h5>
+                                                        <div class="form-area">
                                                             <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Buy</label>
-                                                                        <select name="" id="" class="input-field" placeholder="Amount">
-                                                                            <option value="">BTC</option>
-                                                                            <option value="">CTO</option>
-                                                                            <option value="">YOK</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group">
-                                                                        <label for="">Payment Methods</label>
-                                                                        <select name="" id="" class="input-field" placeholder="Amount">
-                                                                            <option value="">VISA</option>
-                                                                            <option value="">MASTER</option>
-                                                                            <option value="">DABIT</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="form-group-2">
-                                                                        <label for="">Amount</label>
-                                                                        <div class="select-payment-area">
-                                                                            <input type="text" value="434">
-                                                                            <select name="" id="">
-                                                                                <option value="">BTC</option>
-                                                                                <option value="">CTO</option>
-                                                                                <option value="">YOK</option>
-                                                                            </select>
+                                                                <div class="col-md-12">
+                                                                    <form action="#">
+
+                                                                        <div class="form-group mt-5">
+
+                                                                            <label for="SwapAmount">Amount</label>
+                                                                            <input type="text" id="SwapAmount" name="SwapAmount" class="input-field" placeholder="Amount" min="1" step="1">
+
+                                                                            <span class="d-block mt-3">  Fee : <span id="SwapFee">0</span> KAT </span>
+                                                                            <span class="d-block"> Total : <span id="SwapTotalAmount">0</span> KAT </span>
+                                                                            <span class="d-block"> Received KAC : <span id="ReceivedKACAmount">0</span> KAC </span>
                                                                         </div>
-                                                                    </div>
+
+                                                                        <button type="button" id="SubmitSwapButton" class="mybtn mybtn-success">Swap</button>
+
+
+                                                                    </form>
+
                                                                 </div>
                                                             </div>
-                                                            <h5 class="mt-5">2. Choose the best offer from our payment partners, and complete
-                                                                your purchase.</h5>
-                                                            <div class="table-responsive">
-                                                                <table class="table">
+                                                        </div>
+                                                        <div class="notice-area">
+                                                            <p><span>Swap fee:</span> Your Swap will also have Fee for covering the transaction fee , you can see our fee prices in the below table</p>
+                                                            <div style="font-size: 13px !important;">
+                                                                <table class="table table text-white table-bordered text-center">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>Channels</th>
-                                                                        <th>Arrival Time</th>
-                                                                        <th>You will get</th>
-                                                                        <th>Rate ( Fee Included)</th>
-                                                                        <th>Trade</th>
+                                                                        <th>Amount</th>
+                                                                        <th>Percent</th>
                                                                     </tr>
                                                                     </thead>
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <img src="assets/images/chanel-logo.png" alt="">
-                                                                        </td>
-                                                                        <td>5-15 mins</td>
-                                                                        <td>0.003091 BTC</td>
-                                                                        <td>39254.59 USD</td>
-                                                                        <td><a href="#" class="mybtn2">BUY</a></td>
-                                                                    </tr>
+                                                                    <tbody >
+                                                                        <tr>
+                                                                            <td>$0 - $10</td>
+                                                                            <td>6%</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td>$11 - $50</td>
+                                                                            <td>3%</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td>$51 - ∞</td>
+                                                                            <td>1%</td>
+                                                                        </tr>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -444,11 +392,11 @@
                                                         <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Date</th>
+                                                            <th>Description</th>
                                                             <th>Amount</th>
                                                             <th>Type</th>
                                                             <th>Currency</th>
-                                                            <th>Description</th>
+                                                            <th>Date</th>
                                                         </tr>
                                                         </thead>
                                                         <tbody id="TransactionTable">

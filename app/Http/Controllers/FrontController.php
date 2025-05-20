@@ -16,11 +16,11 @@ class FrontController extends Controller
 {
     public function index()
     {
-        return redirect()->route('Front.Tournaments.Champions');
+        return redirect()->route('Front.Profile.index');
     }
     public function Test()
     {
-        return redirect()->route('Front.Tournaments.Champions');
+        return redirect()->route('Front.Profile.index');
     }
     public function Games()
     {

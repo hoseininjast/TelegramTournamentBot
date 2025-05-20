@@ -27,7 +27,7 @@ class UserController extends Controller
     {
         $User = TelegramUsers::where('TelegramUserID', $UserID)->first();
 
-        $ReferralUsers = TelegramUsers::where('ReferralID' , $User->id)->get();
+        $ReferralUsers = TelegramUsers::where('ReferralID' , $User->id)->orderByDesc('id')->get();
         $ReferralCount = $ReferralUsers->count();
         $ReferralIncome = $ReferralCount * 0.01;
 
@@ -181,6 +181,36 @@ class UserController extends Controller
                 'Data' => [
                     'User' => $User,
                     'Message' => 'User Found',
+                    'Code' => 1
+                ],
+            ] , 200);
+        }else{
+            return response()->json([
+                'Data' => [
+                    'Message' => 'User Not Found',
+                    'Code' => 2
+                ],
+            ] , 200);
+        }
+
+    }
+
+
+    public function SearchAll(Request $request)
+    {
+        $request->validate([
+            'UserName' => 'required|string'
+        ]);
+
+        $Users = TelegramUsers::where('UserName' , 'like' , '%'.$request->UserName.'%')->where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->count();
+
+        if($Users > 0){
+            $Users = TelegramUsers::where('UserName' , 'like' , '%'.$request->UserName.'%')->where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->get();
+
+            return response()->json([
+                'Data' => [
+                    'Users' => $Users,
+                    'Message' => 'Users Found',
                     'Code' => 1
                 ],
             ] , 200);

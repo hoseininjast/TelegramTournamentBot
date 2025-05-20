@@ -283,4 +283,84 @@ class PaymentsController extends Controller
     }
 
 
+
+    public function Swap(Request $request)
+    {
+        $request->validate([
+            'UserID' => 'required|integer|exists:telegram_users,id',
+            'Amount' => 'required|numeric|min:1',
+        ]);
+
+
+
+        $User = TelegramUsers::find($request->UserID);
+
+        $Amount = $request->Amount;
+
+        $FeePercent = null;
+        if($Amount <= 10){
+            $FeePercent = 6;
+        }else if($Amount > 10 && $Amount <= 50){
+            $FeePercent = 3;
+        }else if($Amount > 50 ){
+            $FeePercent = 1;
+        }
+
+
+        $Fee = ($Amount / 100) * $FeePercent;
+        $Total = $Amount ;
+        $AmountToRemove = $Total;
+        $AmountToAdd = ($Amount * 1000) - ($Fee * 1000);
+
+
+        if($User->KAT >= $AmountToRemove){
+
+
+
+            $User->update([
+                'Charge' => $User->Charge + $Amount,
+                'KAT' => $User->KAT - $AmountToRemove,
+            ]);
+
+            UserPaymentHistory::create([
+                'UserID' => $User->id,
+                'Description' => "Swap {$AmountToRemove} KAT To {$AmountToAdd} KAC",
+                'Amount' => $AmountToRemove,
+                'Type' => 'Swap',
+                'Currency' => 'KAT',
+            ]);
+
+
+
+
+
+            return response()->json([
+                'Data' => [
+                    'Message' => 'Swap completed successfully.',
+                    'Code' => 1,
+                    'Status' => true,
+                ],
+            ] , 200);
+
+        }else{
+
+            return response()->json([
+                'Data' => [
+                    'Message' => 'You do not have enough KAT to Swap.',
+                    'Code' => 2,
+                    'Status' => false,
+                ],
+            ] , 200);
+
+
+
+
+        }
+
+
+
+
+    }
+
+
 }

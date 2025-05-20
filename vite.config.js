@@ -10,6 +10,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/Front/Profile.js',
                 'resources/js/Front/MyProfile.js',
+                'resources/js/Front/TaskAndInvite.js',
                 'resources/js/Front/Champions.js',
                 'resources/js/Front/Wallet.js',
                 'resources/js/Front/Games.js',

@@ -28,6 +28,14 @@ class UserController extends Controller
     {
         return view('Front.User.Profile');
     }
+    public function Search()
+    {
+        return view('Front.User.Search');
+    }
+    public function TaskAndInvite()
+    {
+        return view('Front.User.TaskAndInvite');
+    }
     public function Wallet()
     {
         return view('Front.User.Wallet');

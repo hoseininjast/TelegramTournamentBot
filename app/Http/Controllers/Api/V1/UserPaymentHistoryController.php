@@ -17,7 +17,7 @@ class UserPaymentHistoryController extends Controller
         ]);
 
         $User = TelegramUsers::find($request->UserID);
-        $History = UserPaymentHistory::where('UserID' , $User->id)->get();
+        $History = UserPaymentHistory::where('UserID' , $User->id)->orderByDesc('id')->get();
 
         return response()->json([
             'Data' => [

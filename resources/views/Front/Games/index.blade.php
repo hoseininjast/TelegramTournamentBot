@@ -16,6 +16,18 @@
                     </div>
                     <div class="col-xl-6 col-lg-8">
                         <div class="t-t-s-nav">
+
+                            <div class="row mb-5">
+                                <div class="col-6">
+                                    <a  href="{{route('Front.Tournaments.MyTournaments')}}" class="mybtn mybtn-primary mybtn-pill-35">My Tours</a>
+                                </div>
+                                <div class="col-6">
+                                    <a  href="{{route('Front.Tournaments.Champions')}}" class="mybtn mybtn-warning mybtn-pill-25">Champions</a>
+                                </div>
+
+                            </div>
+
+
                             <div class="row">
                                 <div class="col-6">
                                     <a  href="{{route('Front.Tournaments.Open')}}" class="mybtn mybtn-warning mybtn-pill-25">Open Tours</a>

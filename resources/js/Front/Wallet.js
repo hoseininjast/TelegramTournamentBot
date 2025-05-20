@@ -35,6 +35,11 @@ const TransferAmountInput = document.querySelector("#TransferAmount");
 
 
 
+const SwapAmount = document.querySelector("#SwapAmount");
+const SubmitSwapButton = document.querySelector("#SubmitSwapButton");
+
+
+
 let Token = 'Polygon';
 let Amount = 1;
 let PaymentID = null;
@@ -260,6 +265,9 @@ SubmitButton.addEventListener("click", () =>
 SubmitTransferButton.addEventListener("click", () =>
     MakeTransfer()
 );
+SubmitSwapButton.addEventListener("click", () =>
+    MakeSwap()
+);
 
 function CalculateFeeAndTotal(){
     var Amount = $('#TransferAmount').val();
@@ -294,8 +302,15 @@ function CalculateFeeAndTotal(){
 
 
 }
+
+
+
 TransferAmountInput.addEventListener("keyup", (element) =>
     CalculateFeeAndTotal()
+);
+
+SwapAmount.addEventListener("keyup", (element) =>
+    CalculateFeeAndTotalForSwap()
 );
 
 SearchUserForTransfer.addEventListener("click", () =>
@@ -353,20 +368,20 @@ function LoadTransactionTable(){
                 if(History.TransactionHash != null){
                     var row = `<tr>
                                                             <td>`+key +`</td>
-                                                            <td>`+HistoryDate+`</td>
+                                                            <td>`+ History.Description + ` : <a href="`+History.TransactionHash + `" target="_blank">PolygonScan</a> </td>
                                                             <td>$`+History.Amount+`</td>
                                                             <td>`+ History.Type +`</td>
                                                             <td>`+ History.Currency +`</td>
-                                                            <td>`+ History.Description + ` : <a href="`+History.TransactionHash + `" target="_blank">PolygonScan</a> </td>
+                                                            <td>`+HistoryDate+`</td>
                                                         </tr>`;
                 }else{
                     var row = `<tr>
                                                             <td>`+key +`</td>
-                                                            <td>`+HistoryDate+`</td>
+                                                            <td>`+ History.Description+`</td>
                                                             <td>$`+History.Amount+`</td>
                                                             <td>`+ History.Type +`</td>
                                                             <td>`+ History.Currency +`</td>
-                                                            <td>`+ History.Description+`</td>
+                                                            <td>`+ HistoryDate+`</td>
                                                         </tr>`;
                 }
 
@@ -381,6 +396,8 @@ function LoadTransactionTable(){
 function LoadWithdrawSection(){
 
     $('#CurrentKATBalance').text(User.KAT);
+    $('#SwapKATBalance').text(User.KAT);
+    $('#SwapKACBalance').text(User.Charge * 1000);
     $('#PayingAddress').val(User.WalletAddress);
 
 }
@@ -553,6 +570,146 @@ function MakeTransfer(){
 
 
 }
+
+
+function CalculateFeeAndTotalForSwap(){
+    var Amount = $('#SwapAmount').val();
+    if(Amount == 0 || Amount == null){
+        $('#SwapFee').text(0).removeClass('text-danger').addClass('text-success')
+        $('#SwapTotalAmount').text(0).removeClass('text-danger').addClass('text-success')
+        $('#ReceivedKACAmount').text(0).removeClass('text-danger').addClass('text-success')
+    }else{
+        var Amount = parseInt(Amount)
+
+        var FeePercent = null;
+        if(Amount <= 10){
+            FeePercent = 6;
+        }else if(Amount > 10 && Amount <= 50){
+            FeePercent = 3;
+        }else if(Amount > 50 ){
+            FeePercent = 1;
+        }
+
+
+
+        if(Amount > (User.KAT )){
+            ShowAlert('error' , 'You do not have enough KAT to Swap.');
+            var Fee =  ( (Amount / 100) * FeePercent );
+            Fee = parseFloat(Fee).toFixed(2)
+            var Total = Amount  ;
+            var ReceivedKAC = (Amount * 1000) - (Fee * 1000);
+
+
+            $('#SwapFee').text(Fee).addClass('text-danger').removeClass('text-success')
+            $('#SwapTotalAmount').text(Total).addClass('text-danger').removeClass('text-success')
+            $('#ReceivedKACAmount').text(ReceivedKAC).addClass('text-danger').removeClass('text-success')
+        }else{
+            var Fee =  ( (Amount / 100) * FeePercent );
+            Fee = parseFloat(Fee).toFixed(2)
+            var Total = Amount  ;
+            var ReceivedKAC = (Amount * 1000) - (Fee * 1000);
+
+
+
+            $('#SwapFee').text(Fee).removeClass('text-danger').addClass('text-success')
+            $('#SwapTotalAmount').text(Total).removeClass('text-danger').addClass('text-success')
+            $('#ReceivedKACAmount').text(ReceivedKAC).removeClass('text-danger').addClass('text-success')
+
+        }
+
+    }
+
+
+
+
+
+}
+
+
+function MakeSwap(){
+    var Amount = $('#SwapAmount').val();
+    Amount = parseInt(Amount)
+
+    var SenderBalance = parseInt(User.KAT)
+
+
+    var FeePercent = null;
+    if(Amount <= 10){
+        FeePercent = 6;
+    }else if(Amount > 10 && Amount <= 50){
+        FeePercent = 3;
+    }else if(Amount > 50 ){
+        FeePercent = 1;
+    }
+
+    var Fee =  ( (Amount / 100) * FeePercent );
+    Fee = parseFloat(Fee).toFixed(2)
+    var Total = Amount  ;
+    var ReceivedKAC = (Amount * 1000) - (Fee * 1000);
+
+
+
+    var NeededBalance = Amount ;
+
+    if(Amount < 1){
+        ShowAlert('error' , 'Your entered amount is under minimum , You must Swap at least 1 KAT.');
+        return;
+    }
+    if(SenderBalance < NeededBalance){
+        ShowAlert('error' , 'You do not have enough KAT to SWAP.');
+    }else{
+        Swal.fire({
+            title: "Are you sure?",
+            html: `
+    Are you sure to Swap with this details?<br>
+    Amount : <b>`+Amount+`</b> KAT <br>
+    Fee : <b>`+Fee+`</b> KAT <br>
+    Total : <b>`+Total+`</b> KAT <br>
+    Received KAC : <b>`+ReceivedKAC+`</b> KAC
+  `,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#6aff39",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes , Swap Now !",
+            cancelButtonText: "No , Cancel !"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.showLoading();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: 'POST',
+                    async: false,
+                    cache: false,
+                });
+                $.ajax({
+                    url: route('V1.Payment.Swap'),
+                    data: {
+                        UserID: User.id,
+                        Amount: Amount,
+                    },
+                    success: function (response) {
+                        if (response.Data.Code == 1 ) {
+                            ShowAlert('success' , response.Data.Message);
+                            setTimeout(
+                                function() {
+                                    window.location.reload();
+                                }, 2000);
+                        }else {
+                            ShowAlert('error' , response.Data.Message);
+                        }
+
+                    }
+                });
+            }
+        });
+    }
+
+
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
     if(isTMA()) {
         init();
