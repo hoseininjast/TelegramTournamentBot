@@ -185,6 +185,47 @@ class PaymentsController extends Controller
                     'UserTransactionHash' => $paymentDetails['payin_hash'],
                     'Status' => 'Paid'
                 ]);
+
+
+
+                $DepositCount = Payments::where('UserID' , $User->id)->where('Status' , 'Paid')->count();
+
+                if($DepositCount == 1){
+                    $Deposit = Payments::where('UserID' , $User->id)->where('Status' , 'Paid')->first();
+                    if($Deposit->FiatAmount > 3){
+                        $Bonus = 20;
+                        $BonusAmount = ($payments->FiatAmount / 100) * $Bonus;
+                        $User->update([
+                            'Charge' => $User->Charge + $BonusAmount,
+                        ]);
+                    }
+
+                }elseif($DepositCount == 2){
+                    $Deposit = Payments::where('UserID' , $User->id)->where('Status' , 'Paid')->skip(1)->first();
+                    if($Deposit->FiatAmount > 6){
+                        $Bonus = 30;
+                        $BonusAmount = ($payments->FiatAmount / 100) * $Bonus;
+                        $User->update([
+                            'Charge' => $User->Charge + $BonusAmount,
+                        ]);
+                    }
+
+
+                }elseif($DepositCount == 3){
+                    $Deposit = Payments::where('UserID' , $User->id)->where('Status' , 'Paid')->skip(2)->first();
+                    if($Deposit->FiatAmount > 9){
+                        $Bonus = 40;
+                        $BonusAmount = ($payments->FiatAmount / 100) * $Bonus;
+                        $User->update([
+                            'Charge' => $User->Charge + $BonusAmount,
+                        ]);
+                    }
+
+                }
+
+
+
+
                 return response()->json([
                     'Code' => 4,
                     'Message' => 'this payment has been finished successfully , the amount has been added to your wallet.'

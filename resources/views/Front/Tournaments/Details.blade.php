@@ -95,6 +95,50 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="RewardsDiv mb-5 text-center">
+
+                            <h4 class="pt-4 pb-4">
+                                The percentage of your money growth if you win
+                            </h4>
+
+                            @foreach($Tournament->Awards as $key => $award)
+                                @php
+                                    $words = array(1 => 'First', 2 => 'Second',
+           3 => 'Third', 4 => 'Fourth', 5 => 'Fifth',
+           6 => 'Sixth', 7 => 'Seventh', 8 => 'Eighth',
+           9 => 'Ninth');
+                                @endphp
+                                @if($key <= 2)
+                                    <div class="RewardItem">
+                                        <img width="100" height="100" src="{{asset('Front/images/prize/'. $key + 1 .'.png')}}" alt="">
+                                        <div class="RewardItemDetails">
+                                            <span>Entry : <b> ${{number_format($Tournament->Price)}}</b></span>
+                                            <span>{{$words[$key + 1]}} Prize : <b>${{number_format($award)}}</b></span>
+                                            <span>Growth : <b>{{ number_format((($award - $Tournament->Price) * 100) / ($Tournament->Price) , 0)  }}%</b></span>
+                                            <span>profit : <b>${{ number_format($award - $Tournament->Price)  }}</b></span>
+                                        </div>
+
+                                    </div>
+                                @else
+                                    <div class="RewardItem">
+                                        <img width="100" height="100" src="{{asset('Front/images/prize/3.png')}}" alt="">
+                                        <div class="RewardItemDetails">
+                                            <span>Entry : <b> ${{number_format($Tournament->Price)}}</b></span>
+                                            <span>{{$words[$key + 1]}} Prize : <b>${{number_format($award)}}</b></span>
+                                            <span>Growth : <b>{{ ($award * 100) / ($key + 1)  }}%</b></span>
+                                            <span>profit : <b>${{ number_format($award - $Tournament->Price)  }}</b></span>
+                                        </div>
+
+                                    </div>
+                                @endif
+
+                            @endforeach
+
+
+
+
+                        </div>
                         <div class="stf">
                             <div class="left">
                                 <h4>{{$Tournament->Players()->count()}} People Joined</h4>
@@ -142,20 +186,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="turnaments-info">
-                        <h4>Prize</h4>
-                        <div class="row">
-                            @foreach($Tournament->Awards as $key => $award)
-                                <div class="col-4">
-                                    <div class="single-prize">
-                                        <img src="{{asset('Front/images/prize/'. $key + 1 .'.png')}}" alt="">
-                                        <span>${{number_format($award)}}</span>
-                                    </div>
-                                </div>
-                            @endforeach
-
-                        </div>
-                        <br>
-                        <br>
                         <h4>
                             Description :
                         </h4>

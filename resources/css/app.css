@@ -637,3 +637,23 @@ body{
     background: #013753;
     padding: 10px;
 }
+
+
+.RewardsDiv{
+    border: 1px solid #00a2ff;
+    border-radius: 10px;
+}
+
+.RewardItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 1px solid #007bff;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+.RewardItemDetails{
+    display: flex;
+    flex-direction: column;
+}
