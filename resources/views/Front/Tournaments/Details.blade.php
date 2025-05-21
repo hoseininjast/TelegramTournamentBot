@@ -115,7 +115,7 @@
                                         <div class="RewardItemDetails">
                                             <span>Entry : <b> ${{number_format($Tournament->Price)}}</b></span>
                                             <span>{{$words[$key + 1]}} Prize : <b>${{number_format($award)}}</b></span>
-                                            <span>Growth : <b>{{ number_format((($award - $Tournament->Price) * 100) / ($Tournament->Price) , 0)  }}%</b></span>
+                                            <span>Growth : <b> @if($Tournament->Price == 0) {{ number_format((($award - $Tournament->Price) * 100)  , 0)  }}% @else {{ number_format((($award - $Tournament->Price) * 100) / ($Tournament->Price) , 0)  }}% @endif </b></span>
                                             <span>profit : <b>${{ number_format($award - $Tournament->Price)  }}</b></span>
                                         </div>
 
