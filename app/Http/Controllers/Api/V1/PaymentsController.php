@@ -338,7 +338,7 @@ class PaymentsController extends Controller
 
         $Amount = $request->Amount;
 
-        $FeePercent = null;
+        $FeePercent = 6;
         if($Amount <= 10){
             $FeePercent = 6;
         }else if($Amount > 10 && $Amount <= 50){
@@ -359,7 +359,7 @@ class PaymentsController extends Controller
 
 
             $User->update([
-                'Charge' => $User->Charge + $Amount,
+                'Charge' => $User->Charge + $AmountToAdd,
                 'KAT' => $User->KAT - $AmountToRemove,
             ]);
 
