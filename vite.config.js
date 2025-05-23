@@ -8,6 +8,7 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/Front/Search.js',
                 'resources/js/Front/Profile.js',
                 'resources/js/Front/MyProfile.js',
                 'resources/js/Front/TaskAndInvite.js',
