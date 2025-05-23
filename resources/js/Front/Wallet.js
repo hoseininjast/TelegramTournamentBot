@@ -131,7 +131,8 @@ async function CreateInvoice() {
                     var PaymentAddress = "https://metamask.app.link/send/"+response.Data.pay_address+"@137?value=" + response.Data.pay_amount +"e18";
                     $('#PaymentButton').attr('href' , PaymentAddress).show(400);
                 }else if(Token == 'USDTPOL'){
-                    var PaymentAddress = "https://metamask.app.link/send/0xc2132D05D31c914a87C6611C10748AEb04B58e8F@137/transfer?address="+ response.Data.pay_address +"&uint256=" + response.Data.pay_amount;
+                    var PaymentAmountUSDT = parseFloat(response.Data.pay_amount).toFixed(6);
+                    var PaymentAddress = "https://metamask.app.link/send/0xc2132D05D31c914a87C6611C10748AEb04B58e8F@137/transfer?address="+ response.Data.pay_address +"&uint256=" + PaymentAmountUSDT;
                     $('#PaymentButton').attr('href' , PaymentAddress).show(400);
                 }else if(Token == 'TON'){
                     var PaymentAddress = "https://app.tonkeeper.com/transfer/"+ response.Data.pay_address +"?amount=" + response.Data.pay_amount;
