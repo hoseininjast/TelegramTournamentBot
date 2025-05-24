@@ -251,7 +251,6 @@ function LoadTasks(){
                                                     <span class="text-warning">task is open and you can start it</span>
                                                 </div>
                                             <span>`+ Task.Description +`</span>
-                                            <a href="{{route('Front.Profile.Wallet')}}" class="btn btn-primary btn-sm btn-block mt-2">Start</a>
 
                                         </div>
                                     </div>`;
