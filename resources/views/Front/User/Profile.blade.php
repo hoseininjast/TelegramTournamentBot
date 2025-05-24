@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="content">
                                     <h4 id="TotalGames">0</h4>
-                                    <span>Total Games</span>
+                                    <span>Total Match</span>
                                 </div>
                             </div>
 

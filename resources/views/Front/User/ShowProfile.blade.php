@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="content">
                                     <h4 id="TotalGames">{{$User->TotalGames()}}</h4>
-                                    <span>Total Games</span>
+                                    <span>Total Match</span>
                                 </div>
                             </div>
 
