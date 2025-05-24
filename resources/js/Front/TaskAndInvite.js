@@ -190,12 +190,13 @@ function LoadTasks(){
             var Tasks = response.Data.Tasks;
 
             var LastCategory = '';
-
+            var CompletePlanText = '';
 
             $(Tasks).each(async function (index, Task) {
                 var TaskStatus = await CheckTaskStatus(Task.id);
                 if(LastCategory != Task.Category){
                     LastCategory = Task.Category;
+                    lockNewRows = false;
                     if(index == 0){
                         let about = ` <div class="about">
                                         <h4>`+ Task.Category  +` Tasks</h4>
@@ -210,6 +211,7 @@ function LoadTasks(){
 
 
                 }
+
                 if(TaskStatus == true){
                     let row = ` <div class="rank-area">
                                         <div class="top-area">
@@ -269,7 +271,7 @@ function LoadTasks(){
                                         </div>
                                         <div class="bottom-area">
                                               <div class="text-center">
-                                                <span class="text-warning">you must complete previous plan!</span>
+                                                <span class="text-warning">you must complete previous task!</span>
                                             </div>
                                             <span>`+ Task.Description +`</span>
 

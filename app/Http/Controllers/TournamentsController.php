@@ -8,6 +8,7 @@ use App\Jobs\NotifyAllTelegramUsersJob;
 use App\Jobs\NotifyAllUsersAboutNewTournamentJob;
 use App\Jobs\NotifyTelegramUsersJob;
 use App\Models\Games;
+use App\Models\Tasks;
 use App\Models\TelegramUsers;
 use App\Models\TournamentHistory;
 use App\Models\TournamentPlans;
@@ -15,6 +16,7 @@ use App\Models\Tournaments;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
 use App\Models\UserStars;
+use App\Models\UserTasks;
 use App\Models\UserTournaments;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
@@ -367,6 +369,66 @@ Match time will be announced soon.
                         'UserID' => $User->id,
                         'TournamentID' => $Tournament->id,
                     ]);
+
+                    $UserStars = $User->Stars()->count();
+                    if($UserStars >= 3 && $UserStars < 6){
+
+                        $Task = Tasks::where('TaskID' , 'Star1')->first();
+                        $UserTask = UserTasks::create([
+                            'TaskID' => $Task->id,
+                            'UserID' => $User->id,
+                        ]);
+                        $User->update([
+                            'Charge' => $User->Charge + 3,
+                        ]);
+
+                        UserPaymentHistory::create([
+                            'UserID' => $User->id,
+                            'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                            'Amount' => 3,
+                            'Type' => 'In',
+                        ]);
+
+
+
+                    }elseif($UserStars >= 6 && $UserStars <9){
+                        $Task = Tasks::where('TaskID' , 'Star2')->first();
+                        $UserTask = UserTasks::create([
+                            'TaskID' => $Task->id,
+                            'UserID' => $User->id,
+                        ]);
+                        $User->update([
+                            'Charge' => $User->Charge + 6,
+                        ]);
+
+                        UserPaymentHistory::create([
+                            'UserID' => $User->id,
+                            'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                            'Amount' => 6,
+                            'Type' => 'In',
+                        ]);
+
+                    }elseif($UserStars >= 9){
+                        $Task = Tasks::where('TaskID' , 'Star3')->first();
+                        $UserTask = UserTasks::create([
+                            'TaskID' => $Task->id,
+                            'UserID' => $User->id,
+                        ]);
+                        $User->update([
+                            'Charge' => $User->Charge + 9,
+                        ]);
+
+                        UserPaymentHistory::create([
+                            'UserID' => $User->id,
+                            'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                            'Amount' => 9,
+                            'Type' => 'In',
+                        ]);
+
+
+                    }
+
+
                 }
 
 

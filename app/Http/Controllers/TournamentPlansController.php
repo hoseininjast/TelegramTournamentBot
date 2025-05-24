@@ -5,9 +5,13 @@ namespace App\Http\Controllers;
 use App\Classes\Number2Word;
 use App\Jobs\NotifyTelegramUsersAboutTournamentJob;
 use App\Jobs\NotifyTelegramUsersJob;
+use App\Models\Tasks;
+use App\Models\TelegramUsers;
 use App\Models\TournamentPlans;
 use App\Models\Tournaments;
 use App\Models\User;
+use App\Models\UserPaymentHistory;
+use App\Models\UserTasks;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Telegram\Bot\Api;
@@ -117,6 +121,76 @@ You will be notified once the schedule for the next match in the app is determin
                 NotifyTelegramUsersJob::dispatch($User2 ,$text);
             }
         }
+
+
+
+        $Winner = TelegramUsers::find($TournamentPlan->WinnerID);
+        $Matchs = TournamentPlans::where('WinnerID' , $Winner->id)->count();
+
+        if($Matchs >= 10 && $Matchs < 24){
+
+
+            $Task = Tasks::where('TaskID' , 'Match1')->first();
+            $UserTask = UserTasks::create([
+                'TaskID' => $Task->id,
+                'UserID' => $Winner->id,
+            ]);
+
+            $Winner->update([
+                'Charge' => $Winner->Charge + 1,
+            ]);
+
+            UserPaymentHistory::create([
+                'UserID' => $Winner->id,
+                'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                'Amount' => 1,
+                'Type' => 'In',
+            ]);
+
+
+        }elseif($Matchs >= 25 && $Matchs < 49){
+
+
+            $Task = Tasks::where('TaskID' , 'Match2')->first();
+            $UserTask = UserTasks::create([
+                'TaskID' => $Task->id,
+                'UserID' => $Winner->id,
+            ]);
+
+            $Winner->update([
+                'Charge' => $Winner->Charge + 2.5,
+            ]);
+
+            UserPaymentHistory::create([
+                'UserID' => $Winner->id,
+                'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                'Amount' => 2.5,
+                'Type' => 'In',
+            ]);
+
+        }elseif($Matchs >= 50){
+
+
+            $Task = Tasks::where('TaskID' , 'Match3')->first();
+            $UserTask = UserTasks::create([
+                'TaskID' => $Task->id,
+                'UserID' => $Winner->id,
+            ]);
+
+            $Winner->update([
+                'Charge' => $Winner->Charge + 5,
+            ]);
+
+            UserPaymentHistory::create([
+                'UserID' => $Winner->id,
+                'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                'Amount' => 5,
+                'Type' => 'In',
+            ]);
+
+        }
+
+
 
 
 

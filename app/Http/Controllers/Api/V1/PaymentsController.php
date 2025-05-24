@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Api\V1;
 use App\Classes\NowPayment;
 use App\Http\Controllers\Controller;
 use App\Models\Payments;
+use App\Models\Tasks;
 use App\Models\TelegramUsers;
 use App\Models\UserPaymentHistory;
+use App\Models\UserTasks;
 use Illuminate\Http\Request;
 
 class PaymentsController extends Controller
@@ -198,6 +200,22 @@ class PaymentsController extends Controller
                         $User->update([
                             'Charge' => $User->Charge + $BonusAmount,
                         ]);
+
+
+                        $Task = Tasks::where('TaskID' , 'Deposit1')->first();
+                        $UserTask = UserTasks::create([
+                            'TaskID' => $Task->id,
+                            'UserID' => $User->id,
+                        ]);
+
+                        UserPaymentHistory::create([
+                            'UserID' => $User->id,
+                            'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                            'Amount' => $BonusAmount,
+                            'Type' => 'In',
+                        ]);
+
+
                     }
 
                 }elseif($DepositCount == 2){
@@ -208,6 +226,18 @@ class PaymentsController extends Controller
                         $User->update([
                             'Charge' => $User->Charge + $BonusAmount,
                         ]);
+                        $Task = Tasks::where('TaskID' , 'Deposit2')->first();
+                        $UserTask = UserTasks::create([
+                            'TaskID' => $Task->id,
+                            'UserID' => $User->id,
+                        ]);
+                        UserPaymentHistory::create([
+                            'UserID' => $User->id,
+                            'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                            'Amount' => $BonusAmount,
+                            'Type' => 'In',
+                        ]);
+
                     }
 
 
@@ -219,6 +249,21 @@ class PaymentsController extends Controller
                         $User->update([
                             'Charge' => $User->Charge + $BonusAmount,
                         ]);
+
+                        $Task = Tasks::where('TaskID' , 'Deposit3')->first();
+                        $UserTask = UserTasks::create([
+                            'TaskID' => $Task->id,
+                            'UserID' => $User->id,
+                        ]);
+
+                        UserPaymentHistory::create([
+                            'UserID' => $User->id,
+                            'Description' => 'Task Finished => ' . $Task->Category .' : ' . $Task->Name,
+                            'Amount' => $BonusAmount,
+                            'Type' => 'In',
+                        ]);
+
+
                     }
 
                 }
