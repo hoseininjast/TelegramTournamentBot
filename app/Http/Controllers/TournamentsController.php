@@ -14,6 +14,7 @@ use App\Models\TournamentPlans;
 use App\Models\Tournaments;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
+use App\Models\UserStars;
 use App\Models\UserTournaments;
 use Carbon\Carbon;
 use Hekmatinasser\Verta\Verta;
@@ -360,6 +361,15 @@ Match time will be announced soon.
                 $User->update([
                     'KAT' => $User->KAT + $Tournament->Awards[$key - 1 ]
                 ]);
+
+                if($key == 1){
+                    UserStars::create([
+                        'UserID' => $User->id,
+                        'TournamentID' => $Tournament->id,
+                    ]);
+                }
+
+
                 $key++;
             }
 

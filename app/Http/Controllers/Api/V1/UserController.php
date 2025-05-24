@@ -37,6 +37,7 @@ class UserController extends Controller
         return response()->json([
             'Data' => [
                 'User' => $User,
+                'Stars' => $User->Stars()->count(),
                 'ReferralUsers' => $ReferralUsers,
                 'ReferralCount' => $ReferralCount,
                 'ReferralIncome' => $ReferralIncome,

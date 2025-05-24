@@ -22,6 +22,7 @@ const SettingButton = document.querySelector("#SettingButton");
 
 let TelegramUser;
 let User;
+let Stars;
 let ReferralCount;
 let TournamentsJoined;
 let TournamentsWinned;
@@ -41,6 +42,7 @@ function GetUser(UserID){
         url: route('V1.User.Find' , UserID),
         success: function (response) {
             User = response.Data.User;
+            Stars = response.Data.Stars;
             ReferralCount = response.Data.ReferralCount;
             TournamentsJoined = response.Data.TournamentsJoined;
             TournamentsWinned = response.Data.TournamentsWinned;
@@ -225,7 +227,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ReferralCount').text(ReferralCount)
         $('#TournamentsJoined').text(TournamentsJoined)
         $('#TournamentsWinned').text(TournamentsWinned)
-        $('#Championship').text(TournamentsWinned)
+        $('#Stars').text(Stars)
 
         $('#UserID').val(User.id)
         $('#UserIDForPlato').val(User.id)
