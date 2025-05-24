@@ -70,4 +70,10 @@ Route::group(['prefix' => 'V1' , 'as' => 'V1.'] , function (){
     });
 
 
+    Route::group(['prefix' => 'Tasks' , 'as' => 'Tasks.' ] , function (){
+        Route::get('List' , [\App\Http\Controllers\Api\V1\TasksController::class , 'List'])->name('List');
+        Route::post('Check' , [\App\Http\Controllers\Api\V1\TasksController::class , 'Check'])->name('Check');
+    });
+
+
 });

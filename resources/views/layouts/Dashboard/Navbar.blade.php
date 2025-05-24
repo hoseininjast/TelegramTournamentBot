@@ -113,6 +113,24 @@
                     </li>
 
                     <li>
+                        <a href="#Tasks" data-bs-toggle="collapse">
+                            <i class="mdi mdi-list-status"></i>
+                            <span> Tasks </span>
+                            <span class="menu-arrow"></span>
+                        </a>
+                        <div class="collapse" id="Tasks">
+                            <ul class="nav-second-level">
+                                <li>
+                                    <a href="{{route('Dashboard.Tasks.index')}}">All</a>
+                                </li>
+                                <li>
+                                    <a href="{{route('Dashboard.Tasks.Add')}}">Add</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li>
                         <a href="#Telegram" data-bs-toggle="collapse">
                             <i class="mdi mdi-card-account-details"></i>
                             <span> Telegram </span>

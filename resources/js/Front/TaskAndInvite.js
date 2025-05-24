@@ -171,6 +171,129 @@ function LoadReferralPlans(){
 }
 
 
+function LoadTasks(){
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.Tasks.List' ),
+        success: function (response) {
+            $('#TasksDiv').empty()
+            var lockNewRows = false;
+            var Tasks = response.Data.Tasks;
+
+            var LastCategory = '';
+
+
+            $(Tasks).each(async function (index, Task) {
+                var TaskStatus = await CheckTaskStatus(Task.id);
+                if(LastCategory != Task.Category){
+                    LastCategory = Task.Category;
+                    if(index == 0){
+                        let about = ` <div class="about">
+                                        <h4>`+ Task.Category  +` Tasks</h4>
+                                    </div>`;
+                        $('#TasksDiv').append(about)
+                    }else{
+                        let about = ` <div class="about mt-5">
+                                        <h4>`+ Task.Category  +` Tasks</h4>
+                                    </div>`;
+                        $('#TasksDiv').append(about)
+                    }
+
+
+                }
+                if(TaskStatus == true){
+                    let row = ` <div class="rank-area">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <img src="`+ Task.Image +`" alt="plan image">
+                                            </div>
+                                            <div class="right text-center">
+                                                <p><span>`+ Task.Name +`</span></p>
+                                                <p>Condition : <span>`+ Task.Condition +` people</span></p>
+                                                <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i> `+ Task.Reward +` </span></p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                             <div class="progress">
+                                                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"> <div>Done <i class="fa fa-check text-warning"></i></div> </div>
+                                            </div>
+                                            <span>`+ Task.Description +`</span>
+                                        </div>
+                                    </div>`;
+                    $('#TasksDiv').append(row);
+                }else{
+                    if(lockNewRows == false){
+
+                        let row = ` <div class="rank-area">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <img src="`+ Task.Image +`" alt="plan image">
+                                            </div>
+                                            <div class="right text-center">
+                                                <p><span>`+ Task.Name +`</span></p>
+                                                <p>Condition : <span>`+ Task.Condition +` people</span></p>
+                                                <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i> `+ Task.Reward +` </span></p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                             <div class="text-center">
+                                                    <span class="text-warning">task is open and you can start it</span>
+                                                </div>
+                                            <span>`+ Task.Description +`</span>
+                                            <a href="{{route('Front.Profile.Wallet')}}" class="btn btn-primary btn-sm btn-block mt-2">Start</a>
+
+                                        </div>
+                                    </div>`;
+                        $('#TasksDiv').append(row);
+                        lockNewRows = true;
+                    }else{
+                        let row = ` <div class="rank-area">
+                                        <div class="top-area">
+                                            <div class="left">
+                                                <img src="`+ Task.Image +`" alt="plan image">
+                                            </div>
+                                            <div class="right text-center">
+                                                <p><span>`+ Task.Name +`</span></p>
+                                                <p>Condition : <span>`+ Task.Condition +` people</span></p>
+                                                <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i> `+ Task.Reward +` </span></p>
+                                            </div>
+                                        </div>
+                                        <div class="bottom-area">
+                                              <div class="text-center">
+                                                <span class="text-warning">you must complete previous plan!</span>
+                                            </div>
+                                            <span>`+ Task.Description +`</span>
+
+                                        </div>
+                                    </div>`;
+                        $('#TasksDiv').append(row);
+
+
+                    }
+
+
+                }
+
+
+
+
+            });
+
+        }
+    });
+
+}
+
+
 
 
 
@@ -190,6 +313,39 @@ async function CheckReferralPlanHistory(PlanID) {
         url: route('V1.ReferralPlan.Check' , UserID),
         data: {
             ReferralPlanID: PlanID,
+            UserID: User.id
+        },
+        success: function (response) {
+            if(response.Data.Code == 200){
+                functionresponse =  true;
+            }else{
+                functionresponse =  false;
+            }
+        }
+    });
+
+    return functionresponse;
+
+}
+
+
+
+async function CheckTaskStatus(TaskID) {
+
+    var functionresponse = true;
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'POST',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.Tasks.Check' , UserID),
+        data: {
+            TaskID: TaskID,
             UserID: User.id
         },
         success: function (response) {
@@ -240,6 +396,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
         GetUser(TelegramUser.id)
         LoadReferralPlans()
+        LoadTasks()
 
 
         var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=' + TelegramUser.id;
@@ -288,6 +445,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         if(App_ENV == 'local'){
             GetUser(76203510)
             LoadReferralPlans()
+            LoadTasks()
 
 
             var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=76203510';

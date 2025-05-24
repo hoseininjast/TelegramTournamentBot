@@ -370,11 +370,23 @@ function LoadTransactionTable(){
                 if(History.TransactionHash != null){
                     var row = `<tr>
                                                             <td>`+key +`</td>
-                                                            <td>`+ History.Description + ` : <a href="`+History.TransactionHash + `" target="_blank">PolygonScan</a> </td>
+                                                            <td>`+ History.Description + ` : <a href="https://polygonscan.com/tx/`+History.TransactionHash + `" class="text-warning" target="_blank"> <i class="fa fa-link"></i> PolygonScan</a> </td>
                                                             <td>$`+History.Amount+`</td>
                                                             <td>`+ History.Type +`</td>
                                                             <td>`+ History.Currency +`</td>
                                                             <td>`+HistoryDate+`</td>
+                                                        </tr>`;
+                }else if(History.Type == 'Transfer'){
+                    var Description = History.Description;
+                    var ReciverID = Description.replace('Transfer KAC To : ' , '');
+                    var NewDescription = Description.replace(' : '+ ReciverID , '');
+                    var row = `<tr>
+                                                            <td>`+key +`</td>
+                                                            <td>`+ NewDescription + ` : <a href="`+ route('Front.Profile.ShowByUsername' , ReciverID) + `" class="text-info" > <i class="fa fa-user"></i> `+ ReciverID+`</a> </td>
+                                                            <td>$`+History.Amount+`</td>
+                                                            <td>`+ History.Type +`</td>
+                                                            <td>`+ History.Currency +`</td>
+                                                            <td>`+ HistoryDate+`</td>
                                                         </tr>`;
                 }else{
                     var row = `<tr>

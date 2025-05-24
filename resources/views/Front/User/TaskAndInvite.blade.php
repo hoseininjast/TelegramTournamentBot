@@ -139,70 +139,11 @@
                             <div class="user-main-dashboard">
 
                                 <aside>
-                                    <div class="about">
-                                        <h4>Deposit Tasks</h4>
-                                        <p>on your deposit you will get a bonus charge.</p>
+
+                                    <div id="TasksDiv">
 
                                     </div>
-                                    <div id="ReferralPlansDiv">
-                                        <div class="rank-area">
-                                            <div class="top-area">
-                                                <div class="left">
-                                                    <img src="{{asset('images/Rank/Bronze.png')}}" alt="plan image">
-                                                </div>
-                                                <div class="right text-center">
-                                                    <p><span>First Deposit</span></p>
-                                                    <p>Condition : <span>You must at least deposit $3</span></p>
-                                                    <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i>20% Bonus </span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-area">
-                                                <div class="text-center">
-                                                    <span class="text-warning">task is open and you can start it</span>
-                                                </div>
-                                                <span>on your first deposit you will get 20% bonus</span>
-
-                                                <a href="{{route('Front.Profile.Wallet')}}" class="btn btn-primary btn-sm btn-block mt-2">Start</a>
-
-                                            </div>
-                                        </div>
-                                        <div class="rank-area">
-                                            <div class="top-area">
-                                                <div class="left">
-                                                    <img src="{{asset('images/Rank/Silver.png')}}" alt="plan image">
-                                                </div>
-                                                <div class="right text-center">
-                                                    <p><span>Second Deposit</span></p>
-                                                    <p>Condition : <span>You must at least deposit $6</span></p>
-                                                    <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i>30% Bonus </span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-area">
-                                                <div class="text-center">
-                                                    <span class="text-warning">you must complete previous task!</span>
-                                                </div>
-                                                <span>on your second deposit you will get 30% bonus</span>
-                                            </div>
-                                        </div>
-                                        <div class="rank-area">
-                                            <div class="top-area">
-                                                <div class="left">
-                                                    <img src="{{asset('images/Rank/Bronze.png')}}" alt="plan image">
-                                                </div>
-                                                <div class="right text-center">
-                                                    <p><span>Third Deposit</span></p>
-                                                    <p>Condition : <span>You must at least deposit $9</span></p>
-                                                    <p>Reward : <span> <i class="fa fa-coins text-warning mr-1"></i>40% Bonus </span></p>
-                                                </div>
-                                            </div>
-                                            <div class="bottom-area">
-                                                <div class="text-center">
-                                                    <span class="text-warning">you must complete previous task!</span>
-                                                </div>
-                                                <span>on your third deposit you will get 40% bonus</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                   
 
 
 

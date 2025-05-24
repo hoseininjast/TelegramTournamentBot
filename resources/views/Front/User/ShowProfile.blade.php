@@ -386,7 +386,7 @@
                                         @if($history->TransactionHash)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{$history->Description}} : <a href="{{$history->TransactionHash}}" target="_blank">PolygonScan</a> </td>
+                                                <td>{{$history->Description}} : <a href="https://polygonscan.com/tx/{{$history->TransactionHash}}" class="text-warning" target="_blank"> <i class="fa fa-link"></i> PolygonScan</a> </td>
                                                 <td>${{$history->Amount}}</td>
                                                 <td>{{$history->Type}}</td>
                                                 <td>{{$history->Currency}}</td>

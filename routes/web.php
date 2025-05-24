@@ -45,6 +45,7 @@ Route::group([ 'as' => 'Front.' ] , function (){
         Route::get('Search' , [\App\Http\Controllers\Front\UserController::class , 'Search'])->name('Search');
         Route::get('Wallet' , [\App\Http\Controllers\Front\UserController::class , 'Wallet'])->name('Wallet');
         Route::get('Show/{UserID}' , [\App\Http\Controllers\Front\UserController::class , 'Show'])->name('Show');
+        Route::get('ShowByUsername/{UserName}' , [\App\Http\Controllers\Front\UserController::class , 'ShowByUsername'])->name('ShowByUsername');
         Route::post('Update' , [\App\Http\Controllers\Front\UserController::class , 'Update'])->name('Update');
         Route::post('UpdatePlatform' , [\App\Http\Controllers\Front\UserController::class , 'UpdatePlatform'])->name('UpdatePlatform');
 
@@ -108,6 +109,16 @@ Route::group(['prefix' => 'Dashboard' , 'as' => 'Dashboard.' , 'middleware' => [
         Route::put('Update/{ID}' , [\App\Http\Controllers\ReferralPlanController::class , 'Update'])->name('Update');
         Route::post('Create' , [\App\Http\Controllers\ReferralPlanController::class , 'Create'])->name('Create');
         Route::delete('Delete/{id}' , [\App\Http\Controllers\ReferralPlanController::class , 'Delete'])->name('Delete');
+
+    });
+
+    Route::group( ['prefix' => 'Tasks' , 'as' => 'Tasks.' , 'middleware' => 'isOwner'] ,function (){
+        Route::get('index' , [\App\Http\Controllers\TasksController::class , 'index'])->name('index');
+        Route::get('Add' , [\App\Http\Controllers\TasksController::class , 'Add'])->name('Add');
+        Route::get('Edit/{ID}' , [\App\Http\Controllers\TasksController::class , 'Edit'])->name('Edit');
+        Route::put('Update/{ID}' , [\App\Http\Controllers\TasksController::class , 'Update'])->name('Update');
+        Route::post('Create' , [\App\Http\Controllers\TasksController::class , 'Create'])->name('Create');
+        Route::delete('Delete/{id}' , [\App\Http\Controllers\TasksController::class , 'Delete'])->name('Delete');
 
     });
 
