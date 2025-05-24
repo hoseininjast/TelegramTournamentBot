@@ -89,6 +89,15 @@
                                     <span>Total Tours</span>
                                 </div>
                             </div>
+                            <div class="g-p-t-single-counter">
+                                <div class="img">
+                                    <img src="{{asset('Front/images/gamer/c2.png')}}" alt="">
+                                </div>
+                                <div class="content">
+                                    <h4 id="TournamentsWinned">{{$User->TournamentsWon()->count()}}</h4>
+                                    <span>Won Tours </span>
+                                </div>
+                            </div>
 
                             <div class="g-p-t-single-counter">
                                 <div class="img">
@@ -102,22 +111,15 @@
 
                             <div class="g-p-t-single-counter">
                                 <div class="img">
-                                    <img src="{{asset('Front/images/gamer/c2.png')}}" alt="">
+                                    <img src="{{asset('Front/images/gamer/a2.png')}}" alt="">
                                 </div>
                                 <div class="content">
-                                    <h4 id="TournamentsWinned">{{$User->TournamentsWon()->count()}}</h4>
-                                    <span>Win Ratio</span>
+                                    <h4 id="TotalGames">{{$User->TotalWinGame()}}</h4>
+                                    <span>Won Match</span>
                                 </div>
                             </div>
-                            <div class="g-p-t-single-counter">
-                                <div class="img">
-                                    <img src="{{asset('Front/images/gamer/c3.png')}}" alt="">
-                                </div>
-                                <div class="content">
-                                    <h4 id="ReferralCount">{{$User->Referrals()->count()}}</h4>
-                                    <span>User's invited</span>
-                                </div>
-                            </div>
+
+
                         </div>
 
                     </div>

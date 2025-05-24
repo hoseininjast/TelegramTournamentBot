@@ -135,6 +135,10 @@ class TelegramUsers extends Model
     {
         return TournamentPlans::where('Player1ID' , $this->id)->orWhere('Player2ID' , $this->id)->count();
     }
+    public function TotalWinGame()
+    {
+        return TournamentPlans::where('WinnerID' , $this->id)->count();
+    }
 
 
 }
