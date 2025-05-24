@@ -98,10 +98,15 @@ class TelegramUsers extends Model
 
     }
 
-
-    public function WinnerPositionInTournament(Tournaments $Tournament)
+    public function Stars()
     {
-        $History = $Tournament->History;
+        return $this->hasMany(UserStars::class , 'UserID' , 'id');
+    }
+
+
+    public function WinnerPositionInTournament(TournamentHistory $Tournament)
+    {
+        $History = $Tournament;
         return array_keys($History->Winners, $this->id);
         /*        // get player position in the game
         $D = TournamentHistory::find(6);

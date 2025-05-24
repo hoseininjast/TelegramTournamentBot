@@ -39,8 +39,8 @@
                         </div>
                         <div class="right">
                             <div class="player-wrapper">
-                                <span>Championship</span>
-                                <h6 id="Championship">{{$User->TournamentsWon()->count()}}</h6>
+                                <span>Stars</span>
+                                <h6 id="Championship">{{$User->Stars()->count()}}</h6>
                             </div>
                             <ul>
                                 <li>
