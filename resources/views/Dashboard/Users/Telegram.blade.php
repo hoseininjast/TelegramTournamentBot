@@ -23,6 +23,7 @@
                                             <th>PlatoID</th>
                                             <th>Wallet</th>
                                             <th>Tournaments</th>
+                                            <th>Matchs</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -54,6 +55,14 @@
                                                     </div>
                                                     <div class="">
                                                         win's : {{$user->TournamentsWon()->count()}}
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="">
+                                                        total : {{$user->TotalGames()}}
+                                                    </div>
+                                                    <div class="">
+                                                        win's : {{$user->TotalWinGame()}}
                                                     </div>
                                                 </td>
                                                 <td >
