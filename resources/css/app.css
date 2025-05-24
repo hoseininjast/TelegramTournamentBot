@@ -639,6 +639,21 @@ body{
     color: #ffffff;
 }
 
+
+.GiftTransferAmount{
+    color: #ffffff;
+    background: #013753;
+    border: 1px solid #007bff;
+}
+.GiftTransferAmount:focus{
+    color: #ffffff;
+    background: #013753;
+    border: 1px solid #007bff;
+}
+.GiftTransferAmount::placeholder{
+    color: #ffffff;
+}
+
 .raffle-filter .search-area form button{
     color: #ffffff;
 }

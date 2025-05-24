@@ -9,6 +9,7 @@ use App\Models\ReferralPlan;
 use App\Models\ReferralPlanHistory;
 use App\Models\TelegramUserRewards;
 use App\Models\TelegramUsers;
+use App\Models\TournamentPlans;
 use App\Models\UserPaymentHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -34,10 +35,13 @@ class UserController extends Controller
         $TournamentsJoined = $User->Tournaments()->count();
         $TournamentsWinned = $User->TournamentsWon()->count();
 
+        $TotalGames = TournamentPlans::where('Player1ID' , $User->id)->orWhere('Player2ID' , $User->id)->count();
+
         return response()->json([
             'Data' => [
                 'User' => $User,
                 'Stars' => $User->Stars()->count(),
+                'TotalGames' => $TotalGames,
                 'ReferralUsers' => $ReferralUsers,
                 'ReferralCount' => $ReferralCount,
                 'ReferralIncome' => $ReferralIncome,

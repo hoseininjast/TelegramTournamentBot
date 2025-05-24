@@ -75,9 +75,21 @@
                                 </div>
                                 <div class="content">
                                     <h4 id="TournamentsJoined">0</h4>
-                                    <span>Total Match</span>
+                                    <span>Total Tours</span>
                                 </div>
                             </div>
+
+                            <div class="g-p-t-single-counter">
+                                <div class="img">
+                                    <img src="{{asset('Front/images/gamer/a1.png')}}" alt="">
+                                </div>
+                                <div class="content">
+                                    <h4 id="TotalGames">0</h4>
+                                    <span>Total Games</span>
+                                </div>
+                            </div>
+
+
                             <div class="g-p-t-single-counter">
                                 <div class="img">
                                     <img src="{{asset('Front/images/gamer/c2.png')}}" alt="">

@@ -29,6 +29,9 @@ let TournamentsJoined;
 let TournamentsWinned;
 
 
+const App_ENV = import.meta.env.VITE_APP_ENV;
+
+
 function GetUser(UserID){
     $.ajaxSetup({
         headers: {
@@ -282,25 +285,26 @@ window.addEventListener("DOMContentLoaded", async () => {
         Swal.close()
 
     }else{
-        GetUser(76203510)
-        LoadReferralPlans()
+        if(App_ENV == 'local'){
+            GetUser(76203510)
+            LoadReferralPlans()
 
 
-        var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=76203510';
+            var ReferralLink = 'https://t.me/krypto_arena_bot?startapp=76203510';
 
-        $('#ReferralCountinTable').text(ReferralCount)
-        $('#MyInviteLink').text(ReferralLink)
-
-
-
-        $(ReferralUsers).each(async function (index, User) {
+            $('#ReferralCountinTable').text(ReferralCount)
+            $('#MyInviteLink').text(ReferralLink)
 
 
-            let key = index + 1;
-            let startTime = moment(User.created_at).format("YY/M/D");
-            let Name = User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName;
-            let Image = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
-            let row = `<tr>
+
+            $(ReferralUsers).each(async function (index, User) {
+
+
+                let key = index + 1;
+                let startTime = moment(User.created_at).format("YY/M/D");
+                let Name = User.UserName ? User.UserName : User.FirstName + ' ' + User.LastName;
+                let Image = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
+                let row = `<tr>
                                             <td>`+ key  +`</td>
                                             <td><a href="`+ route('Front.Profile.Show' , User.id)+`"><img style='width: 30px;height: 30px' class="rounded-pill" src="`+ Image +`" alt="user profile" > </a></td>
                                             <td>`+ Name  +`</td>
@@ -309,24 +313,25 @@ window.addEventListener("DOMContentLoaded", async () => {
                                         </tr>`;
 
 
-            $('#ReferralHistoryTable').append(row);
+                $('#ReferralHistoryTable').append(row);
 
-        });
-
-
+            });
 
 
 
-        ReferralidCopyIcon.addEventListener("click", () =>
-            copyContent(ReferralLink)
-        );
-
-        MyInviteLink.addEventListener("click", () =>
-            copyContent(ReferralLink)
-        );
 
 
-        Swal.close()
+            ReferralidCopyIcon.addEventListener("click", () =>
+                copyContent(ReferralLink)
+            );
+
+            MyInviteLink.addEventListener("click", () =>
+                copyContent(ReferralLink)
+            );
+
+
+            Swal.close()
+        }
     }
 
 });

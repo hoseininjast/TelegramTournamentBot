@@ -12,7 +12,29 @@ const FinishedStatusButton = document.querySelector("#StatusFinished");
 let User;
 
 
+const App_ENV = import.meta.env.VITE_APP_ENV;
 
+
+
+
+function GetUser(UserID){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        type: 'GET',
+        async: false,
+        cache: false,
+    });
+
+    $.ajax({
+        url: route('V1.User.Find' , UserID),
+        success: function (response) {
+            User = response.Data.User;
+        }
+    });
+
+}
 
 
 function GetTournaments(Mode){
@@ -130,6 +152,10 @@ window.addEventListener("DOMContentLoaded", async () => {
         initData.restore();
         const InitData = initData;
         User = InitData.user();
+    }else{
+        if(App_ENV == 'local'){
+            GetUser(76203510)
+        }
     }
 });
 

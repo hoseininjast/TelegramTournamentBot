@@ -131,5 +131,10 @@ class TelegramUsers extends Model
         return $this->hasMany(UserPaymentHistory::class , 'UserID' , 'id');
     }
 
+    public function TotalGames()
+    {
+        return TournamentPlans::where('Player1ID' , $this->id)->orWhere('Player2ID' , $this->id)->count();
+    }
+
 
 }

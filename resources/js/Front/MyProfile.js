@@ -23,9 +23,13 @@ const SettingButton = document.querySelector("#SettingButton");
 let TelegramUser;
 let User;
 let Stars;
+let TotalGames;
 let ReferralCount;
 let TournamentsJoined;
 let TournamentsWinned;
+
+
+const App_ENV = import.meta.env.VITE_APP_ENV;
 
 
 function GetUser(UserID){
@@ -43,6 +47,7 @@ function GetUser(UserID){
         success: function (response) {
             User = response.Data.User;
             Stars = response.Data.Stars;
+            TotalGames = response.Data.TotalGames;
             ReferralCount = response.Data.ReferralCount;
             TournamentsJoined = response.Data.TournamentsJoined;
             TournamentsWinned = response.Data.TournamentsWinned;
@@ -193,7 +198,8 @@ window.addEventListener("DOMContentLoaded", async () => {
         $('#ReferralCount').text(ReferralCount)
         $('#TournamentsJoined').text(TournamentsJoined)
         $('#TournamentsWinned').text(TournamentsWinned)
-        $('#Championship').text(TournamentsWinned)
+        $('#Stars').text(Stars)
+        $('#TotalGames').text(TotalGames)
 
         $('#UserID').val(User.id)
         $('#UserName').val(User.UserName)
@@ -214,41 +220,45 @@ window.addEventListener("DOMContentLoaded", async () => {
         Swal.close()
 
     }else{
-        GetUser(76203510)
+        if(App_ENV == 'local'){
+            GetUser(76203510)
 
-        $('#ProfileUsername').text(User.UserName)
+            $('#ProfileUsername').text(User.UserName)
 
-        const currentDate = moment(new Date(), 'YYYY-MM-DD');
-        var endDate = moment(User.created_at, "YYYY-MM-DD");
-        var days = currentDate.diff(endDate, 'days')
-
-
-        $('#ProfileJoinDate').text(days + ' Days')
-        $('#ReferralCount').text(ReferralCount)
-        $('#TournamentsJoined').text(TournamentsJoined)
-        $('#TournamentsWinned').text(TournamentsWinned)
-        $('#Stars').text(Stars)
-
-        $('#UserID').val(User.id)
-        $('#UserIDForPlato').val(User.id)
-        $('#UserName').val(User.UserName)
+            const currentDate = moment(new Date(), 'YYYY-MM-DD');
+            var endDate = moment(User.created_at, "YYYY-MM-DD");
+            var days = currentDate.diff(endDate, 'days')
 
 
+            $('#ProfileJoinDate').text(days + ' Days')
+            $('#ReferralCount').text(ReferralCount)
+            $('#TournamentsJoined').text(TournamentsJoined)
+            $('#TournamentsWinned').text(TournamentsWinned)
+            $('#Stars').text(Stars)
+            $('#TotalGames').text(TotalGames)
 
-        $('#KryptoArenaID').val(User.KryptoArenaID)
-        $('#Bio').val(User.Bio)
-        $('#Country').val(User.Country)
-        $('#City').val(User.City)
+
+            $('#UserID').val(User.id)
+            $('#UserIDForPlato').val(User.id)
+            $('#UserName').val(User.UserName)
 
 
 
+            $('#KryptoArenaID').val(User.KryptoArenaID)
+            $('#Bio').val(User.Bio)
+            $('#Country').val(User.Country)
+            $('#City').val(User.City)
 
-        $('#PlatoID').val(User.PlatoID)
-        $('#WalletAddress').val(User.WalletAddress)
 
 
 
-        Swal.close()
+            $('#PlatoID').val(User.PlatoID)
+            $('#WalletAddress').val(User.WalletAddress)
+
+
+
+            Swal.close()
+        }
     }
 
 });

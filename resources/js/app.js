@@ -5,6 +5,9 @@ import { init, backButton ,closingBehavior,closeMiniApp,hapticFeedback , initDat
 let TelegramUser;
 let User;
 
+const App_ENV = import.meta.env.VITE_APP_ENV;
+
+
 
 function GetUser(ReferralID = null){
     $.ajaxSetup({
@@ -97,31 +100,32 @@ window.addEventListener("DOMContentLoaded", async () => {
             closeMiniApp();
         });
     }else{
-       /* $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: 'GET',
-            async: false,
-            cache: false,
-        });
+       if(App_ENV == 'local'){
+           $.ajaxSetup({
+               headers: {
+                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+               },
+               type: 'GET',
+               async: false,
+               cache: false,
+           });
 
-        $.ajax({
-            url: route('V1.User.Find' , '76203510'),
-            success: function (response) {
-                User = response.Data.User;
-            }
-        });
+           $.ajax({
+               url: route('V1.User.Find' , '76203510'),
+               success: function (response) {
+                   User = response.Data.User;
+               }
+           });
 
-        var ProfileImage = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
+           var ProfileImage = User.Image ? User.Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png';
 
 
-        var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
-        $('#NavbarUsername').html( User.UserName);
-        $('#NavbarCharge').html("<i class='fa fa-coins text-warning mr-1'></i>" + Charge);
-        $('#NavbarKATCharge').html(User.KAT);
-        $('#NavbarProfileImage').attr('src', ProfileImage);
-*/
+           var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
+           $('#NavbarUsername').html( User.UserName);
+           $('#NavbarCharge').html("<i class='fa fa-coins text-warning mr-1'></i>" + Charge);
+           $('#NavbarKATCharge').html(User.KAT);
+           $('#NavbarProfileImage').attr('src', ProfileImage);
+       }
     }
 
 

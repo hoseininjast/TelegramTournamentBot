@@ -23,8 +23,9 @@
                                             <p id="ProfileJoinDate"> {{\Carbon\Carbon::parse($User->created_at)->diffInDays()}} Days</p>
 
                                             <div class="d-flex justify-content-around">
-                                                <button href="#" class="mybtn mybtn-primary mybtn-pill-30" onclick="ShowComingSoon()"> <i class="fa fa-user-plus"></i> Follow</button>
-                                                <button class="mybtn mybtn-primary mybtn-pill-20" onclick="ShowComingSoon()"> <i class="fa fa-envelope"></i> Message</button>
+                                                <button href="#" class="mybtn mybtn-primary mybtn-pill-10" onclick="ShowComingSoon()"> <i class="fa fa-user-plus"></i> Follow</button>
+                                                <button class="mybtn mybtn-primary mybtn-pill-10" onclick="ShowComingSoon()"> <i class="fa fa-envelope"></i> Message</button>
+                                                <button class="mybtn mybtn-primary mybtn-pill-25" id="GiftButton" data-toggle="modal" data-target="#GiftModal"> <i class="fa-solid fa-hand-holding-heart"></i> Gift</button>
 
 
                                             </div>
@@ -85,9 +86,20 @@
                                 </div>
                                 <div class="content">
                                     <h4 id="TournamentsJoined">{{$User->Tournaments()->count()}}</h4>
-                                    <span>Total Match</span>
+                                    <span>Total Tours</span>
                                 </div>
                             </div>
+
+                            <div class="g-p-t-single-counter">
+                                <div class="img">
+                                    <img src="{{asset('Front/images/gamer/a1.png')}}" alt="">
+                                </div>
+                                <div class="content">
+                                    <h4 id="TotalGames">{{$User->TotalGames()}}</h4>
+                                    <span>Total Games</span>
+                                </div>
+                            </div>
+
                             <div class="g-p-t-single-counter">
                                 <div class="img">
                                     <img src="{{asset('Front/images/gamer/c2.png')}}" alt="">
@@ -360,11 +372,12 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Date</th>
+                                        <th>Description</th>
                                         <th>Amount</th>
                                         <th>Type</th>
                                         <th>Currency</th>
-                                        <th>Description</th>
+                                        <th>Date</th>
+
                                     </tr>
                                     </thead>
                                     <tbody id="">
@@ -373,20 +386,22 @@
                                         @if($history->TransactionHash)
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{\Carbon\Carbon::parse($history->created_at)->format('Y/M/d')}}</td>
+                                                <td>{{$history->Description}} : <a href="{{$history->TransactionHash}}" target="_blank">PolygonScan</a> </td>
                                                 <td>${{$history->Amount}}</td>
                                                 <td>{{$history->Type}}</td>
                                                 <td>{{$history->Currency}}</td>
-                                                <td>{{$history->Description}} : <a href="{{$history->TransactionHash}}" target="_blank">PolygonScan</a> </td>
+                                                <td>{{\Carbon\Carbon::parse($history->created_at)->format('Y/M/d')}}</td>
+
                                             </tr>
                                         @else
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td>{{\Carbon\Carbon::parse($history->created_at)->format('Y/M/d')}}</td>
+                                                <td>{{$history->Description}}</td>
                                                 <td>${{$history->Amount}}</td>
                                                 <td>{{$history->Type}}</td>
                                                 <td>{{$history->Currency}}</td>
-                                                <td>{{$history->Description}}</td>
+                                                <td>{{\Carbon\Carbon::parse($history->created_at)->format('Y/M/d')}}</td>
+
                                             </tr>
                                         @endif
 
@@ -439,6 +454,57 @@
             </div>
         </div>
     </section>
+
+    <div class="modal" id="GiftModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Gift</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-column justify-content-center text-center ">
+                        <input type="hidden" id="ReceiverUserID" value="{{$User->id}}">
+                        <input type="hidden" id="ReceiverUserUserNameVal" value="{{$User->UserName}}">
+                        <div class="col-12">
+                            <img width="100" src="{{$User->Image ? $User->Image : 'https://kryptoarena.fun/images/Users/DefaultProfile.png' }}" alt="User Image" id="ReceiverUserImage" class="rounded-pill" />
+                        </div>
+                        <div class="col-12 mt-3">
+                            <h4 id="ReceiverUserUserName">{{$User->UserName}}</h4>
+                        </div>
+                    </div>
+
+
+
+
+                    <hr style="border: 1px solid white;" >
+                    <div class="form-group mt-5">
+
+                        <label for="">Amount</label>
+                        <input type="text" id="TransferAmount" name="TransferAmount" class="form-control GiftTransferAmount" placeholder="Enter KAC Amount" min="2000">
+
+                        <span class="d-block mt-3">  Fee : <span id="TransferFee">0</span> KAC </span>
+                        <span class="d-block"> Total : <span id="TotalAmount">0</span> KAC </span>
+
+                        <span class="d-block"> min transfer is 2000 KAC </span>
+
+
+                    </div>
+
+
+
+                    <button type="button" id="SubmitTransferButton" class="mybtn mybtn-success mybtn-pill-90">Transfer</button>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 
 
     <!-- User Main Content Area End -->

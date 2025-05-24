@@ -49,6 +49,7 @@ const TonAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
 const USDTPOLAddress = '0xBa0B19631E0233e1E4Ee16c16c03519FAFfE3E7b';
 const USDTTONAddress = 'UQCdkjHiAApGpT63O_6A1dttQ6B2o9FliiPuQoFnZJWyevmT';
 
+const App_ENV = import.meta.env.VITE_APP_ENV;
 
 
 
@@ -511,7 +512,6 @@ function MakeTransfer(){
     var Fee = ( (TransferAmount / 100) * 10);
     var NeededBalance = TransferAmount + Fee;
 
-    console.log(SenderBalance)
     if(TransferAmount < 2000){
         ShowAlert('error' , 'Your entered amount is under minimum , You must move at least 2000 KAC.');
         return;
@@ -735,19 +735,22 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 
     }else{
-        GetUser(76203510)
-        $('#ProfileUsername').text(User.UserName)
+        if(App_ENV == 'local'){
+            GetUser(76203510)
+            $('#ProfileUsername').text(User.UserName)
 
-        const currentDate = moment(new Date(), 'YYYY-MM-DD');
-        var endDate = moment(User.created_at, "YYYY-MM-DD");
-        var days = currentDate.diff(endDate, 'days')
+            const currentDate = moment(new Date(), 'YYYY-MM-DD');
+            var endDate = moment(User.created_at, "YYYY-MM-DD");
+            var days = currentDate.diff(endDate, 'days')
 
-        $('#ProfileJoinDate').text(days + ' Days')
-        $('#ProfileImage').attr('src' , User.Image)
-        LoadTransactionTable();
-        LoadWithdrawSection();
-        var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
-        $('#CurrentKACBalance').text(Charge);
+            $('#ProfileJoinDate').text(days + ' Days')
+            $('#ProfileImage').attr('src' , User.Image)
+            LoadTransactionTable();
+            LoadWithdrawSection();
+            var Charge = parseFloat(User.Charge).toFixed(2) * 1000;
+            $('#CurrentKACBalance').text(Charge);
+        }
+
     }
 
 });
