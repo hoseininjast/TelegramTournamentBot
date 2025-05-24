@@ -47,11 +47,9 @@
                             <div class="s-a-b">
                                 <div class="left ChampionLeft">
                                     <img src="{{asset('Front/images/arcive/sa'. $loop->iteration + 3 .'.png')}}" alt="">
-                                    <h6>{{$champion['WinCount']}} Wins</h6>
-                                    <div class="vselement">
-                                        <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$User->PlatoID}}</span>
-                                        <span class="text text-white pt-2"><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{$User->UserName}}">{{$User->UserName}}</a></span>
-                                    </div>
+                                    <h6>Stars : {{$champion['Stars']}} <i class="fa fa-star text-warning"></i></h6>
+                                    <h6>Tours : {{$champion['WinCount']}} <i class="fa fa-trophy text-secondry"></i></h6>
+
                                 </div>
                                 <div class="right ">
                                     <div class="d-flex flex-column align-items-center">
@@ -84,9 +82,8 @@
                             <div class="s-a-b">
                                 <div class="left ChampionLeft">
                                     <img src="{{asset('Front/images/arcive/sa'. $loop->iteration + 3 .'.png')}}" alt="">
-                                    <h6>{{$User->referrals_count}} Inviters</h6>
+                                    <h6>Invite : {{$User->referrals_count}} <i class="fa fa-user "></i> </h6>
                                     <div class="vselement">
-                                        <span class="text text-white"><img class="PlatoIcon" src="{{asset('images/Plato.png')}}" /> {{$User->PlatoID}}</span>
                                         <span class="text text-white pt-2"><i class="fab fa-telegram telegramIcon"></i> <a href="https://t.me/{{$User->UserName}}">{{$User->UserName}}</a></span>
                                     </div>
                                 </div>

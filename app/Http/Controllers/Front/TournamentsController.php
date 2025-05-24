@@ -57,11 +57,12 @@ class TournamentsController extends Controller
 
     public function Champions()
     {
-
+        /*Best inviters*/
         $MostReferrals = TelegramUsers::where('UserName' , 'not like' , '%KryptoArenaFreePosition%')->has('Referrals')->withCount('Referrals')->get()->sortByDesc('referrals_count');
         $MostReferrals = $MostReferrals->take(10);
+        /*END Best inviters*/
 
-
+        /*Champions*/
         $Champions = TournamentHistory::all();
         $Data = [];
         $key = 0;
@@ -72,23 +73,27 @@ class TournamentsController extends Controller
             }
         }
 
+
         $occurrences = array_count_values($Data);
         $FinalChampions = [];
         foreach ($occurrences as $championid => $wincount) {
+            $User = TelegramUsers::find($championid);
             $FinalChampions[] = [
                 'ChampionID' => $championid,
-                'WinCount' => $wincount
+                'WinCount' => $wincount,
+                'Stars' => $User->Stars()->count()
             ];
         }
 
-        $this->aasort($FinalChampions ,'WinCount' );
+        $this->aasort($FinalChampions ,'Stars' );
 
         $FinalChampions = array_slice($FinalChampions, 0, 10);
+        /*END Champions*/
 
 
 
 
-        /*Best inviters*/
+
 
         return view('Front.Tournaments.Champions')->with(['Champions' => $FinalChampions , 'MostReferrals' => $MostReferrals]);
     }

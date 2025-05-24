@@ -189,6 +189,9 @@ body{
 .mybtn-pill-10{
     padding: 10px 10px;
 }
+.mybtn-pill-15{
+    padding: 10px 15px;
+}
 
 .mybtn-pill-20{
     padding: 10px 20px;
@@ -228,6 +231,18 @@ body{
 }
 .mybtn-pill-100{
     padding: 10px 100px;
+}
+.mybtn-pill-110{
+    padding: 10px 110px;
+}
+.mybtn-pill-115{
+    padding: 10px 115px;
+}
+.mybtn-pill-120{
+    padding: 10px 120px;
+}
+.mybtn-pill-130{
+    padding: 10px 130px;
 }
 
 

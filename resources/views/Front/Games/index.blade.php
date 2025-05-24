@@ -18,11 +18,11 @@
                         <div class="t-t-s-nav">
 
                             <div class="row mb-5">
-                                <div class="col-6">
-                                    <a  href="{{route('Front.Tournaments.MyTournaments')}}" class="mybtn mybtn-primary mybtn-pill-35">My Tours</a>
+                                <div class="col-12">
+                                    <a  href="{{route('Front.Tournaments.MyTournaments')}}" class="mybtn mybtn-primary mybtn-pill-115"> <i class="fas fa-chess"></i> My Tours</a>
                                 </div>
-                                <div class="col-6">
-                                    <a  href="{{route('Front.Tournaments.Champions')}}" class="mybtn mybtn-warning mybtn-pill-25">Champions</a>
+                                <div class="col-12 mt-5">
+                                    <a  href="{{route('Front.Tournaments.Champions')}}" class="mybtn mybtn-warning mybtn-pill-100"><i class="fas fa-ranking-star"></i> Leaderboard</a>
                                 </div>
 
                             </div>
@@ -30,10 +30,10 @@
 
                             <div class="row">
                                 <div class="col-6">
-                                    <a  href="{{route('Front.Tournaments.Open')}}" class="mybtn mybtn-warning mybtn-pill-25">Open Tours</a>
+                                    <a  href="{{route('Front.Tournaments.Open')}}" class="mybtn mybtn-warning mybtn-pill-10"> <i class="fas fa-spinner"></i> Open Tours</a>
                                 </div>
                                 <div class="col-6">
-                                    <a  href="{{route('Front.TimeTable')}}" class="mybtn mybtn-primary mybtn-pill-30">Time Table</a>
+                                    <a  href="{{route('Front.TimeTable')}}" class="mybtn mybtn-primary mybtn-pill-15"><i class="fa fa-calendar"></i> Time Table</a>
                                 </div>
                             </div>
 
@@ -55,10 +55,10 @@
                         <div class="t-t-s-nav">
                             <div class="row">
                                 <div class="col-6">
-                                    <button id="LoadGamesFree" type="button" class="mybtn mybtn-warning mybtn-pill">Free</button>
+                                    <button id="LoadGamesFree" type="button" class="mybtn mybtn-warning mybtn-pill"> <i class="fa-solid fa-comments"></i> Free</button>
                                 </div>
                                 <div class="col-6">
-                                    <button id="LoadGamesPaid" type="button" class="mybtn mybtn-primary mybtn-pill">Paid</button>
+                                    <button id="LoadGamesPaid" type="button" class="mybtn mybtn-primary mybtn-pill"> <i class="fa-solid fa-comments-dollar"></i> Paid</button>
                                 </div>
                             </div>
 
